@@ -1,0 +1,221 @@
+body {
+    min-width: 543px;
+    background-image: url('Temporadas/Janeiro 2022/Thumb_Jan_2022.jpg');
+}
+.background {
+    animation: backgroundAnimated 20s linear infinite;
+}
+
+/* --------- Topnav ---------- */
+
+#banner {
+    border: 5px solid;
+    border-color: white;
+
+    animation: topnavAnimate 1.5s linear ;
+}
+.topnav {
+    border-radius: 20px;
+    overflow: hidden;
+    background: url(Temporadas/WinterBackground.jpg);
+}
+.topnav a {
+    border: 2px solid;
+    border-color: black;
+
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+#winter {
+    transition: all ease-out 0.3s;
+}
+#winter:hover {
+    background-color: rgba(194, 205, 216);
+    font-weight: bolder;
+    color: black;
+} 
+#spring {
+    transition: all ease-out 0.3s;
+}
+#spring:hover {
+    background-color: rgb(61, 247, 117);
+    font-weight: bolder;
+    color: rgb(163, 165, 42);
+    cursor: initial;
+}
+#summer {
+    transition: all ease-out 0.3s;
+}
+#summer:hover {
+    background-color: yellow;
+    font-weight: bolder;
+    color: red;
+    cursor: initial;
+}
+#fall {
+    transition: all ease-out 0.3s;
+}
+#fall:hover {
+    background-color: brown;
+    font-weight: bolder;
+    color: orange;
+    cursor: initial;
+}
+.topnav a.active, #phoneIcon {
+    background-color: white;
+    color: black;
+}
+.topnav .icon {
+    display: none;
+}
+@media screen and (max-width: 770px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    } 
+       
+}
+@media screen and (max-width: 770px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }    
+}
+@media screen and (max-width: 770px) {
+    #home {
+        border-radius: 20px 0px 0px 0px;
+    }
+    #phoneIcon {
+        border-radius: 0px 20px 0px 0px;
+    }
+    #fall {
+        border-radius: 0px 0px 20px 20px;
+    }
+    
+}
+/* ----------------------------------- */
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+}
+
+#Guides {
+    padding-bottom: 20px;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.726);
+    border: 3px solid;
+    border-radius: 10px;
+    border-color: black;
+
+    animation: FadeIn 2s linear;
+}
+
+.yearPaste {
+    cursor: pointer;
+    width: 150px;
+
+    transition: all ease-out 0.5s;
+}
+.yearPaste:hover {
+    transform: scale(1.4);
+}
+.SeasonPaste {
+    width: 100px;
+
+    transition: all ease-out 0.5s;
+}
+.SeasonPaste:hover {
+    transform: translateY(-50px) scale(1.3);
+}
+
+.seasons {
+    display: none;
+
+    transition: all ease-out 0.5s;
+}
+.seasons:hover {
+    transform: scale(1.1);
+}
+
+#year2022 input[type="checkbox"] {
+    display: none;
+}
+#year2023 input[type="checkbox"] {
+    display: none;
+}
+
+#year2022 input[type="checkbox"]:checked + div{
+    display: flex;
+    animation: rotateMenu 400ms ease-in-out forwards;
+    transform-origin: top center;
+} 
+#year2023 input[type="checkbox"]:checked + div{
+    display: flex;
+    animation: rotateMenu 400ms ease-in-out forwards;
+    transform-origin: top center;
+} 
+
+#years {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+@keyframes rotateMenu {
+    0% {
+        transform: rotateX(-90deg)
+    }
+    70% {
+        transform: rotateX(20deg) 
+    }
+    100% {
+        transform: rotateX(0deg) 
+    }
+}
+@keyframes backgroundAnimated {
+    0% {
+        background-position: left top;
+    }
+    50% {
+        background-position: right bottom;
+    }
+    100% {
+        background-position: left top;
+    }
+}
+@keyframes topnavAnimate {
+    from {
+        margin-left: 200%;
+        width: 300%
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+@keyframes FadeIn {
+    from {
+        margin-top: 200%;
+        opacity: 0;
+    }
+    to {
+        margin-top: 0%;
+        opacity: 1;
+    }
+}
