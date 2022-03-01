@@ -225,6 +225,9 @@ a {
     }
 }
 
+.drive {
+    display: none;
+}
 .driveLink {
     z-index: 1;
     position: fixed;
