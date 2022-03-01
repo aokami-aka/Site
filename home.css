@@ -1,6 +1,12 @@
+html {
+    scroll-behavior: smooth;
+  }
+
 body {
     min-width: 543px;
-    background-image: url('Temporadas/Janeiro 2022/Thumb_Jan_2022.jpg');
+    background-image: url('Temporadas/Home_BG.jpg');
+
+    font-family: cursive;
 }
 .background {
     animation: backgroundAnimated 20s linear infinite;
@@ -46,7 +52,6 @@ body {
     background-color: rgb(61, 247, 117);
     font-weight: bolder;
     color: rgb(163, 165, 42);
-    cursor: initial;
 }
 #summer {
     transition: all ease-out 0.3s;
