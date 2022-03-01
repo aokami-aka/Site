@@ -246,25 +246,6 @@ a {
 .driveLink:hover {
     transform: scale(1.3);
 }
-#drive {
-    opacity: 0;
-
-    position: fixed;
-    bottom: 40px;
-    left:32px;
-
-    background-color: white;
-    padding: 10px;
-    border: 2px solid;
-    border-top-right-radius: 20px;
-
-    transition: all ease-out 0.5s;
-}
-.drive:hover #drive {
-    opacity: 1;
-
-    transform: translateX(135px);
-}
 
 @media screen and (max-width: 770px) {
     .drive {
