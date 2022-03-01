@@ -1,0 +1,1025 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+/* ------ Background do site --------- */
+body {
+    background-image: url('Thumb_Abr_2022.jpg');
+    min-width: 543px;
+
+    font-family: cursive;
+}
+.background {
+    animation: backgroundAnimated 500s linear infinite;
+}
+/* ---------------------------- */
+
+/* ------ Links ------- */
+a {
+    text-decoration: none;
+    color: purple;
+
+}
+a:hover {
+    font-weight: bold;
+}
+/* -------------------- */
+
+/* --------- Topnav ---------- */
+#banner {
+    border: 5px solid;
+    border-color: white;
+
+    animation: topnavAnimate 1.5s linear;
+}
+.topnav {
+    border-radius: 20px;
+    overflow: hidden;
+    background: url(../../SpringBackground.jpg);
+    background-position: bottom;
+    background-size: cover;
+}
+.topnav a {
+    border: 2px solid;
+    border-color: black;
+
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+#winter {
+    transition: all ease-out 0.3s;
+}
+#winter:hover {
+    background-color: rgba(194, 205, 216);
+    font-weight: bolder;
+    color: black;
+    cursor: pointer;
+}
+#spring {
+    background-color: rgb(61, 247, 117);
+    font-weight: bolder;
+    color: rgb(163, 165, 42);
+    cursor: initial;
+}
+#summer {
+    transition: all ease-out 0.3s;
+}
+#summer:hover {
+    background-color: yellow;
+    font-weight: bolder;
+    color: red;
+    cursor: initial;
+}
+#fall {
+    transition: all ease-out 0.3s;
+}
+#fall:hover {
+    background-color: brown;
+    font-weight: bolder;
+    color: orange;
+    cursor: initial;
+}
+.topnav a.active, #phoneIcon {
+    background-color: white;
+    color: black;
+}
+.topnav .icon {
+    display: none;
+}
+@media screen and (max-width: 973px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    } 
+       
+}
+@media screen and (max-width: 973px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }    
+}
+@media screen and (max-width: 973px) {
+    #home {
+        border-radius: 20px 0px 0px 0px;
+    }
+    #phoneIcon {
+        border-radius: 0px 20px 0px 0px;
+    }
+    #fall {
+        border-radius: 0px 0px 20px 20px;
+    }
+    
+}
+/* ----------------------------------- */
+
+/* Estréias -------------------------- */
+.Estréias {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.726);
+    border: 3px solid;
+    border-radius: 10px;
+    border-color: black;
+
+    animation: FadeIn 0.5s linear;
+}
+#estreiasTitle {
+    text-align: center;
+    padding-bottom: 10px;
+
+    border: 3px solid;
+    border-color: black;
+    border-top:hidden ; border-left: hidden; border-right: hidden;
+}
+
+/* Continuações ------------------------ */
+.Continuacoes {
+    background-color: rgba(168, 167, 167, 0.726);
+    border: 3px solid;
+    border-radius: 10px;
+    border-color: black;
+}
+#continuacoesTitle {
+    text-align: center;
+    padding-bottom: 10px;
+
+    border: 3px solid;
+    border-color: black;
+    border-top:hidden ; border-left: hidden; border-right: hidden;
+}
+
+/* Título do anime -------------------- */
+.animeTitle {
+    text-align: center;
+}
+#paripi {
+    margin: 10px;
+    
+    background-color: rgba(46, 75, 155, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(248, 83, 248);
+}
+#paripi p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgba(83, 190, 248);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#paripi iframe {
+    border: 5px solid;
+    border-color: rgba(83, 190, 248);
+    border-radius: 25px;
+}
+#paripiThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: white;
+
+    width: 350px;
+    margin: auto;
+}
+#aoashi {
+    margin: 10px;
+    
+    background-color: rgba(218, 208, 64, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(27, 172, 47);
+}
+#aoashi p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#aoashi iframe {
+    border: 5px solid;
+    border-color: rgb(43, 43, 43);
+    border-radius: 25px;
+}
+#aoashiThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(48, 48, 48);
+
+    width: 350px;
+    margin: auto;
+}
+#kawaii {
+    margin: 10px;
+    
+    background-color: rgba(241, 229, 115, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(20, 5, 87);
+}
+#kawaii p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#kawaii iframe {
+    border: 5px solid;
+    border-color: rgb(255, 102, 242);
+    border-radius: 25px;
+}
+#kawaiiThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(233, 24, 181);
+
+    width: 350px;
+    margin: auto;
+}
+#summertime {
+    margin: 10px;
+    
+    background-color: rgba(196, 192, 163, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(11, 68, 190);
+}
+#summertime p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#summertime iframe {
+    border: 5px solid;
+    border-color: rgb(246, 248, 117);
+    border-radius: 25px;
+}
+#summertimeThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(245, 225, 112);
+
+    width: 350px;
+    margin: auto;
+}
+#aharen {
+    margin: 10px;
+    
+    background-color: rgba(238, 234, 206, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(1, 8, 26);
+}
+#aharen p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(19, 155, 53);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#aharen iframe {
+    border: 5px solid;
+    border-color: rgb(255, 255, 248);
+    border-radius: 25px;
+}
+#aharenThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(255, 253, 242);
+
+    width: 350px;
+    margin: auto;
+}
+#dance {
+    margin: 10px;
+    
+    background-color: rgba(255, 255, 255, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(0, 118, 187);
+}
+#dance p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(172, 12, 73);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#dance iframe {
+    border: 5px solid;
+    border-color: rgb(218, 218, 21);
+    border-radius: 25px;
+}
+#danceThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 189, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#gaikotsu {
+    margin: 10px;
+    
+    background-color: rgba(9, 4, 73, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(0, 187, 178);
+}
+#gaikotsu p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(172, 12, 73);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#gaikotsu iframe {
+    border: 5px solid;
+    border-color: rgb(218, 218, 21);
+    border-radius: 25px;
+}
+#gaikotsuThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 189, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#kakkou {
+    margin: 10px;
+    
+    background-color: rgba(151, 236, 41, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(88, 2, 24);
+}
+#kakkou p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(136, 84, 104);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#kakkou iframe {
+    border: 5px solid;
+    border-color: rgb(218, 218, 21);
+    border-radius: 25px;
+}
+#kakkouThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 189, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#koiwa {
+    margin: 10px;
+    
+    background-image: linear-gradient(rgba(127, 56, 101, 0.719),rgba(250, 211, 221, 0.719));
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(255, 0, 0);
+}
+#koiwa p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(221, 176, 26);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#koiwa iframe {
+    border: 5px solid;
+    border-color: rgb(113, 21, 218);
+    border-radius: 25px;
+}
+#koiwaThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(163, 25, 218);
+
+    width: 350px;
+    margin: auto;
+}
+#kunoichi {
+    margin: 10px;
+    
+    background-image: radial-gradient(circle,rgba(44, 160, 229,0.719),rgba(238, 39, 65,0.719),rgba(255, 255, 255,0.719));
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(255, 0, 0);
+}
+#kunoichi p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(189, 26, 221);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#kunoichi iframe {
+    border: 5px solid;
+    border-color: rgb(218, 21, 21);
+    border-radius: 25px;
+}
+#kunoichiThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 25, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#rimekimi {
+    margin: 10px;
+    
+    background-image: linear-gradient(rgba(48, 40, 77,0.719),rgba(212, 141, 119, 0.719));
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(255, 0, 221);
+}
+#rimekimi p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(39, 0, 71);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#rimekimi iframe {
+    border: 5px solid;
+    border-color: rgb(113, 21, 218);
+    border-radius: 25px;
+}
+#rimekimiThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 167, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#onipan {
+    margin: 10px;
+    
+    background-image: radial-gradient(circle,rgba(233, 106, 205, 0.719),rgba(255, 255, 255,0.719));
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(255, 0, 149);
+}
+#onipan p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(26, 192, 221);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#onipan iframe {
+    border: 5px solid;
+    border-color: rgb(218, 215, 21);
+    border-radius: 25px;
+}
+#onipanThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 215, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#shachiku {
+    margin: 10px;
+    
+    background-color: rgba(194, 143, 100, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(92, 20, 2);
+}
+#shachiku p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(108, 4, 134);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#shachiku iframe {
+    border: 5px solid;
+    border-color: rgb(218, 215, 21);
+    border-radius: 25px;
+}
+#shachikuThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(218, 215, 25);
+
+    width: 350px;
+    margin: auto;
+}
+#spy {
+    margin: 10px;
+    
+    background-color: rgba(142, 171, 156, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(221, 224, 9);
+}
+#spy p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#spy iframe {
+    border: 5px solid;
+    border-color: rgb(218, 215, 21);
+    border-radius: 25px;
+}
+#spyThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(236, 91, 205);
+
+    width: 350px;
+    margin: auto;
+}
+#game {
+    margin: 10px;
+    
+    background-color: rgba(142, 171, 156, 0.719);
+
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(221, 224, 9);
+}
+#game p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#game iframe {
+    border: 5px solid;
+    border-color: rgb(218, 21, 21);
+    border-radius: 25px;
+}
+#gameThumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(236, 3, 3);
+
+    width: 350px;
+    margin: auto;
+}
+
+
+
+
+#kingdom4 {
+    margin: 10px;
+    
+    background-color: rgba(60, 64, 66, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(69, 52, 100);
+}
+#kingdom4 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(69, 52, 100);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#kingdom4 iframe {
+    border: 5px solid;
+    border-color: rgb(69, 52, 100);
+    border-radius: 25px;
+}
+#kingdom4Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: red;
+
+    width: 350px;
+    margin: auto;
+}
+#build2 {
+    margin: 10px;
+    
+    background-color: rgba(32, 32, 32, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(0, 146, 61);
+}
+#build2 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(52, 100, 77);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#build2 iframe {
+    border: 5px solid;
+    border-color: rgb(255, 0, 0);
+    border-radius: 25px;
+}
+#build2Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: red;
+
+    width: 350px;
+    margin: auto;
+}
+#date4 {
+    margin: 10px;
+    
+    background-color: rgba(111, 40, 129, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(66, 4, 85);
+}
+#date4 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(71, 217, 243);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#date4 iframe {
+    border: 5px solid;
+    border-color: rgb(36, 0, 168);
+    border-radius: 25px;
+}
+#date4Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(20, 0, 201);
+
+    width: 350px;
+    margin: auto;
+}
+#honzuki3 {
+    margin: 10px;
+    
+    background-color: rgba(64, 185, 16, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(7, 80, 177);
+}
+#honzuki3 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(2, 24, 121);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#honzuki3 iframe {
+    border: 5px solid;
+    border-color: rgb(168, 165, 0);
+    border-radius: 25px;
+}
+#honzuki3Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(201, 181, 0);
+
+    width: 350px;
+    margin: auto;
+}
+#kaguya3 {
+    margin: 10px;
+    
+    background-color: rgba(236, 97, 178, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(7, 143, 177);
+}
+#kaguya3 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(121, 99, 2);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#kaguya3 iframe {
+    border: 5px solid;
+    border-color: rgb(255, 0, 0);
+    border-radius: 25px;
+}
+#kaguya3Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(255, 0, 0);
+
+    width: 350px;
+    margin: auto;
+}
+#komi2 {
+    margin: 10px;
+    
+    background-color: rgba(101, 7, 156, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(58, 2, 90);
+}
+#komi2 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#komi2 iframe {
+    border: 5px solid;
+    border-color: rgb(55, 1, 66);
+    border-radius: 25px;
+}
+#komi2Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(47, 0, 56);
+
+    width: 350px;
+    margin: auto;
+}
+#machikado2 {
+    margin: 10px;
+    
+    background-color: rgba(255, 255, 255, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(90, 2, 36);
+}
+#machikado2 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(238, 174, 37);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#machikado2 iframe {
+    border: 5px solid;
+    border-color: rgb(207, 4, 146);
+    border-radius: 25px;
+}
+#machikado2Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(236, 57, 212);
+
+    width: 350px;
+    margin: auto;
+}
+#tate2 {
+    margin: 10px;
+    
+    background-color: rgba(54, 84, 53, 0.719);
+    border: 5px solid;
+    border-radius: 5px;
+    border-color: rgb(116, 86, 78);
+}
+#tate2 p {
+    padding: 10px;
+    border: 3px solid;
+    border-color: rgb(238, 174, 37);
+    border-radius: 50px;
+
+    background-color: rgba(248, 196, 117, 0.719);
+
+    margin: 10px;
+    font-size: 24px;
+}
+#tate2 iframe {
+    border: 5px solid;
+    border-color: rgb(11, 24, 65);
+    border-radius: 25px;
+}
+#tate2Thumb {
+    border: 5px solid;
+    border-radius: 20px;
+    border-color: rgb(11, 24, 65);
+
+    width: 350px;
+    margin: auto;
+}
+
+
+.grid-thumb {
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.source {
+    width: 100px;
+    vertical-align: middle;
+
+    transition: all ease-out 0.5s;
+}
+.Studio {
+    height: 60px;
+    vertical-align:middle;
+
+    transition: all ease-out 0.5s;
+}
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+
+    text-align: center;
+}
+.source:hover, .Studio:hover {
+    transform: scale(1.2);
+}
+
+@media screen and (max-width: 1300px) {
+    ul {
+        flex-direction: column;
+        text-align: center;
+    } 
+}
+@media screen and (max-width: 1088px) {
+    .grid-thumb {
+        display: flex;
+        flex-direction: column;
+    }
+    .Estréias p, .Continuacoes p{
+        text-align: center;
+    }
+    body {
+        font-family: 'Courier New', monospace;
+    }
+}
+
+.to-top {    
+  background: white;
+  position: fixed;
+  bottom: 16px;
+  right:32px;
+  width:60px;
+  height:60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:32px;
+  color:#1f1f1f;
+  text-decoration: none;
+  box-shadow: 5px 3px 3px black;
+  opacity:0;
+  pointer-events: none;
+  transition: all .4s;
+}
+.to-top.active {
+  bottom:32px;
+  pointer-events: auto;
+  opacity:1;
+}
+
+@keyframes backgroundAnimated {
+    0% {
+        background-position: left top;
+    }
+    50% {
+        background-position: right bottom;
+    }
+    100% {
+        background-position: left top;
+    }
+}
+@keyframes topnavAnimate {
+    from {
+        margin-left: 200%;
+        width: 300%
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
