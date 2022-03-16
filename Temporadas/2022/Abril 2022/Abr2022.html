@@ -7,6 +7,7 @@
     <title>Abril 2022</title>
     <link href="Abr2022.css" rel="stylesheet" type="text/css"/>    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
     <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
   
     <!-- SEO -->
@@ -35,6 +36,16 @@
         
 </head>
 <body>
+
+    <div class="player-ctrl">
+
+        <!-- Play Button -->
+        <a id="podcast-play" onclick="pauseShow()"><i id="volumeoff" class="ion-android-volume-up"></i></a>
+        
+        <!-- Pause Button -->
+        <a id="podcast-pause" onclick="playShow()" style="display:none;"><i id="volumeup" class="ion-android-volume-off"></i></a>
+        
+    </div>
     
     <audio id="BackgroundMusic" autoplay="" loop>
         <source src="https://docs.google.com/uc?export=download&id=1F7gXuow64Mxt3LGDmpy7GVEwpCDvNZOq">
@@ -1433,6 +1444,29 @@
     <script>
         var audio = document.getElementById("BackgroundMusic");
         audio.volume = 0.03;
+    </script>
+
+    <script>
+        var podcastAudio = document.getElementById('BackgroundMusic');
+
+        var playBtn = document.getElementById('podcast-pause');
+
+        var pauseBtn = document.getElementById('podcast-play');
+
+        // Play audio & mostra pause btn
+        var playShow = function() {
+        podcastAudio.play();
+        playBtn.style.display = "none";
+        pauseBtn.style.display = "block";
+        };
+
+        // Pause audio & mostra play btn
+        var pauseShow = function() {
+        podcastAudio.pause();
+        playBtn.style.display = "block";
+        pauseBtn.style.display = "none";
+        };
+        
     </script>
 
     <script src="../../../main.js"></script>
