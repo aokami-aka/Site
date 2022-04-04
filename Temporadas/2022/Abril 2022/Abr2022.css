@@ -126,23 +126,6 @@ a:hover {
 }
 /* ----------------------------------- */
 
-/* .player-ctrl {
-    position: fixed;
-    top: 5%;
-    right: 5%;
-
-    background-color: rgb(2, 88, 48);
-    border-radius: 100%;
-
-    opacity: 70%;
-  }
-  #volumeoff, #volumeup {
-    font-size: 30px;
-    color: rgb(87, 250, 174);
-    cursor: pointer;
-    padding: 10px 10px;
-  } */
-
 /* Playlist Music -----------------------------------------------------------------------------------*/
 
 *,:after,:before{box-sizing:border-box}
