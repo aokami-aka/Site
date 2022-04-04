@@ -7,7 +7,10 @@
     <title>Abril 2022</title>
     <link href="Abr2022.css" rel="stylesheet" type="text/css"/>    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
+    <link rel="stylesheet" href="https://emilcarlsson.se/assets/variables.scss">
     <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
   
     <!-- SEO -->
@@ -37,19 +40,114 @@
 </head>
 <body>
 
-    <div class="player-ctrl">
+    <!-- <div class="player-ctrl">
 
-        <!-- Play Button -->
+        -- Play Button >
         <a id="podcast-play" onclick="pauseShow()"><i id="volumeoff" class="ion-android-volume-up"></i></a>
         
-        <!-- Pause Button -->
+        -- Pause Button >
         <a id="podcast-pause" onclick="playShow()" style="display:none;"><i id="volumeup" class="ion-android-volume-off"></i></a>
         
-    </div>
+    </div> -->
     
-    <audio id="BackgroundMusic" autoplay="" loop>
+    <!--<audio id="BackgroundMusic" autoplay="" loop>
         <source src="https://docs.google.com/uc?export=download&id=1F7gXuow64Mxt3LGDmpy7GVEwpCDvNZOq">
-    </audio>
+    </audio>-->
+
+    <!--  Audio Playlist   -->
+
+    <div class="mhn-player">
+        <div class="album-art"></div>
+        <div class="play-list">
+            <a href="#" class="play"
+                data-id="1"
+                data-album="96Neko"
+                data-artist="Paripi Koumei"
+                data-title="Kibun Joujou ￪￪"
+                data-albumart="Estréias/Paripi Koumei.png"
+                data-url="Music/Kibun Joujou ￪￪.mp3"></a>
+        
+            <!--<a href="#" class="play"
+                data-id="2"
+                data-album="QUEENDOM"
+                data-artist="Paripi Koumei"
+                data-title="Chitty Chitty Bang Bang"
+                data-albumart="Estréias/Paripi Koumei.png"
+                data-url=""></a>-->
+        
+            <a href="#" class="play"
+                data-id="3"
+                data-album="TrySail"
+                data-artist="Aharen-san wa hakarenai"
+                data-title="Hanarenai Kyori"
+                data-albumart="Estréias/aharen-san wa hakarenai.png"
+                data-url="Music/Hanarenai Kyori.mp3"></a>
+        
+            <a href="#" class="play"
+                data-id="4"
+                data-album="Hakoniwa Lily"
+                data-artist="Aharen-san wa hakarenai"
+                data-title="Kyori-kan"
+                data-albumart="Estréias/aharen-san wa hakarenai.png"
+                data-url="Music/Kyori-kan.mp3"></a>
+        
+            <a href="#" class="play"
+                data-id="5"
+                data-album=""
+                data-artist="Healer Girl"
+                data-title="Feel You, Heal You"
+                data-albumart="Estréias/Healer Girl.jpg"
+                data-url="Music/Feel You, Heal You.mp3"></a>
+        
+            <a href="#" class="play"
+                data-id="6"
+                data-album=""
+                data-artist="Healer Girl"
+                data-title="Believe like Singing"
+                data-albumart="Estréias/Healer Girl.jpg"
+                data-url="Music/Believe like Singing.mp3"></a>
+        
+            <!--<a href="#" class="play"
+                data-id="7"
+                data-album="V"
+                data-artist="Maroon 5"
+                data-title="Sugar"
+                data-albumart="http://media.fanfire.com/images/product/large/MAR/MAR61934.jpg"
+                data-url="http://mp3light.net/assets/songs/393000-393999/393398-sugar-maroon-5-sugar-sugar-maroon.mp3"></a>
+        
+            <a href="#" class="play"
+                data-id="8"
+                data-album="Meteora"
+                data-artist="Linkin Park"
+                data-title="Numb"
+                data-albumart="https://upload.wikimedia.org/wikipedia/en/6/64/MeteoraLP.jpg"
+                data-url="http://serveurftpnascar.free.fr/%20-%20Linkin%20Park%20-%20Numb.mp3"></a>-->
+        </div>
+        <div class="audio"></div>
+        <div class="current-info">
+            <div class="song-artist"></div>
+            <div class="song-album"></div>
+            <div class="song-title"></div>
+        </div>
+        <div class="controls">
+        <a href="#" class="toggle-play-list"><i class="fa fa-list-ul"></i></a>
+        <div class="duration clearfix">
+            <span class="pull-left play-position"></span>
+            <span class="pull-right"><span class="play-current-time">00:00</span> / <span class="play-total-time">00:00</span></span>
+        </div>
+        <div class="progress"><div class="bar"></div></div>
+        <div class="action-button">
+            <a href="#" class="prev"><i class="fa fa-step-backward"></i></a>
+            <a href="#" class="play-pause"><i class="fa fa-pp"></i></a>
+            <a href="#" class="stop"><i class="fa fa-refresh"></i></a>
+            <a href="#" class="next"><i class="fa fa-step-forward"></i></a>
+            <input type="range" class="volume" min="0" max="1" step="0.1" value="0.5" data-css="0.5">
+        </div>
+        
+        </div>
+        </div>
+
+    <!-------------------------------------------------------------------------------------------------------------------->
     <body class="background">
     
     <a href="#" class="to-top">
@@ -1450,7 +1548,7 @@
         audio.volume = 0.03;
     </script>
 
-    <script>
+    <!--<script>
         var podcastAudio = document.getElementById('BackgroundMusic');
 
         var playBtn = document.getElementById('podcast-pause');
@@ -1470,7 +1568,13 @@
         playBtn.style.display = "block";
         pauseBtn.style.display = "none";
         };
-    </script>
+    </script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/15af25ac7b.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://enscrollplugin.com/releases/enscroll-0.6.1.min.js"></script>
+    <script src="Abr2022.js"></script>
 
     <script src="../../../main.js"></script>
 
