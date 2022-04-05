@@ -157,7 +157,7 @@ a:hover {
 	width: 360px;;
 	height:500px;
 	padding:15px;
-	position:absolute;
+	position:fixed;
 	background-image: url(https://media.istockphoto.com/photos/green-metallic-rough-and-noise-glitter-art-foil-texture-polished-picture-id1201729727?k=20&m=1201729727&s=170667a&w=0&h=ebuZdcMQbTWtffgwmdWmeoOfn8CixgtoG0t9jq-9Cig=);
     opacity: 0.2;
 	box-shadow:0 16px 28px 0 rgba(0,0,0,.22),0 25px 55px 0 rgba(0,0,0,.21);
@@ -174,6 +174,9 @@ a:hover {
 }
 .mhn-player:hover{
     opacity: 1;
+}
+.album-art:hover {
+    cursor: move;
 }
 .mhn-player .album-art{
 	width:330px;
