@@ -270,3 +270,13 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+// ------------------- Topnav Function --------------------------------------------------------------------------------------------------------------------------------
+function myFunction() {
+	var x = document.getElementById("banner");
+	if (x.className == "topnav") {
+		x.className += " responsive";
+	} else {
+		x.className = "topnav";
+	}
+} 
