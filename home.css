@@ -23,7 +23,9 @@ body {
 .topnav {
     border-radius: 20px;
     overflow: hidden;
-    background: url(Temporadas/WinterBackground.jpg);
+    background: url(Temporadas/SpringBackground.jpg);
+    background-position: bottom;
+    background-size: cover;
 }
 .topnav a {
     border: 2px solid;
@@ -234,7 +236,7 @@ a {
     bottom: 16px;
     left:32px;
 
-    width: 15%;
+    width: 8%;
 
     background-color: white;
     border: 2px solid;
@@ -244,7 +246,7 @@ a {
     transition: all ease-out 0.5s;
 }
 .driveLink:hover {
-    transform: scale(1.5);
+    transform: scale(1.3);
 }
 
 @media screen and (max-width: 770px) {
