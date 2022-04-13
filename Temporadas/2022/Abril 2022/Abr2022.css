@@ -469,12 +469,12 @@ a:hover {
 .volume[data-css="1"]::-webkit-slider-runnable-track{background-size:100% 100%}
 .volume[data-css="1"]::-moz-range-track{background-size:100% 100%}
 
-@media screen and (max-width: 973px) {
+/* @media screen and (max-width: 973px) {
     .mhn-player {
         display: none;
     }
     
-}
+} */
 
 /* Estréias -------------------------- */
 .Estréias {
