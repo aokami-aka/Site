@@ -19,8 +19,6 @@ var Audio = {
 	init:function(){
 		this.info.init();
 		this.player();
-		this.scrollbar();
-        
 	}, 
 	formatTime:function(secs){
 		var hr,min,sec;
@@ -222,17 +220,9 @@ var Audio = {
 		if(curr && next){
 			next.click();
 		}
-	},
-	scrollbar:function(){
-		if(typeof $.fn.enscroll !== 'undefined'){
-			$('.play-list').enscroll({
-				showOnHover:true,
-				verticalTrackClass:'track',
-				verticalHandleClass:'handle'
-			});
-		}
 	}
 }
+
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // ------------------------- Drag Function ---------------------------------------------------------------------------------------------------------------------------
