@@ -70,7 +70,6 @@ a:hover {
     background-color: yellow;
     font-weight: bolder;
     color: red;
-    cursor: initial;
 }
 #fall {
     transition: all ease-out 0.3s;
