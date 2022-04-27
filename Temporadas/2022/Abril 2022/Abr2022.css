@@ -91,7 +91,6 @@ a:hover {
     background-color: yellow;
     font-weight: bolder;
     color: red;
-    cursor: initial;
 }
 #fall {
     transition: all ease-out 0.3s;
@@ -468,13 +467,6 @@ a:hover {
 .volume[data-css="0.9"]::-moz-range-track{background-size:90% 100%}
 .volume[data-css="1"]::-webkit-slider-runnable-track{background-size:100% 100%}
 .volume[data-css="1"]::-moz-range-track{background-size:100% 100%}
-
-/* @media screen and (max-width: 973px) {
-    .mhn-player {
-        display: none;
-    }
-    
-} */
 
 /* Estréias -------------------------- */
 .Estréias {
