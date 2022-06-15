@@ -190,6 +190,9 @@ a:hover {
     top: 15%;
 
 }
+#drag {
+    display: block;
+}
 .mhn-player:hover{
     opacity: 1;
 }
@@ -1267,6 +1270,19 @@ ul {
     }
 }
 
+#mp3ShowDisable {
+    cursor: pointer;
+    position: fixed;
+    bottom: 100px;
+    right: 32px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#1f1f1f;
+    box-shadow: 5px 3px 3px black;
+    transition: all .4s;
+}
 .to-top {    
   background: white;
   position: fixed;
@@ -1292,7 +1308,7 @@ ul {
   opacity:1;
 }
 
-button {
+#link {
     margin-top: 10px;
     margin-left: 10px;
 
@@ -1317,7 +1333,7 @@ button {
 
     transition: all ease-out 0.5s;
     }
- button:hover {
+ #link:hover {
     border-top-color: #8f9606;
     background: #969606;
     color: rgb(255, 0, 0);
