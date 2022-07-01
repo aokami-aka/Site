@@ -8,224 +8,9 @@ window.addEventListener("scroll", () => {
   }
 })
 
-// ------------------------- Music Player -------------------------------------------------------------------------------------------------- 
-$(function(){
-	Audio.init();
-});
 
-var intval;
-var autoplay;
-var Audio = {
-	init:function(){
-		this.info.init();
-		this.player();
-	}, 
-	formatTime:function(secs){
-		var hr,min,sec;
-		hr  = Math.floor(secs / 3600);
-		min = Math.floor((secs - (hr * 3600))/60);
-		sec = Math.floor(secs - (hr * 3600) - (min * 60));
 
-		min = min>9?min:'0'+min;
-		sec = sec>9?sec:'0'+sec;
-		return min+':'+sec;
-	},
-	info:{
-		init:function(){
-			$('.play-list .play').each(function(){
-				var album,albumart,artist,title;
-				album=$(this).data('album');
-				albumart=$(this).data('albumart');
-				artist=$(this).data('artist');
-				title=$(this).data('title');
-
-				album=album?'<span class="album">'+album+'</span>':'Artista desconhecido';
-				albumart=albumart?'<img src="'+albumart+'">':'';
-				artist=artist?'<span class="song-artist">'+artist+'</span>':'Anime desconhecido';
-				title=title?'<div class="song-title">'+title+'</div>':'Nome desconhecido';
-
-				$(this).html('<div class="album-thumb pull-left">'+albumart+'</div><div class="songs-info pull-left">'+title+'<div class="songs-detail">'+artist+' - '+album+'</div></div></div>');
-			});
-		},
-		load:function(id,album,artist,title,albumart,mp3){
-			var currentTrack, totalTrack;
-			totalTrack = $('.play-list>a').length;
-			currentTrack = $('.play-list a').index($('.play-list .active'))+1;
-			$('.play-position').text(currentTrack+' / '+totalTrack);
-			albumart=albumart?'<img src="'+albumart+'">':''; 
-			album=album?album:'Artista desconhecido';
-			title=title?title:'Nome desconhecido';
-			artist=artist?artist:'Anime desconhecido';
-			$('.album-art').html(albumart);
-			$('.current-info .song-album').html('<i class="fas fa-microphone-alt"></i> '+album);
-			$('.current-info .song-title').html('<i class="fas fa-music"></i> '+title);
-			$('.current-info .song-artist').html('<i class="fas fa-video"></i> '+artist);
-			if(mp3)
-			$('.audio').html('<audio class="music" data-id="'+id+'" src="'+mp3+'"></audio>');
-		}
-	},
-	player:function(){
-		var id, album, artist, albumart, title, mp3;
-		$('.play-list .play').each(function(){
-			$(this).on('click',function(e){
-				e.preventDefault();
-				$(this).siblings().removeClass('active');
-				$(this).addClass('active');
-				clearInterval(intval);
-				id = $(this).data('id');
-				album = $(this).data('album');
-				artist = $(this).data('artist');
-				albumart = $(this).data('albumart');
-				title = $(this).data('title');
-				mp3 = $(this).data('url');
-				Audio.info.load(id,album,artist,title,albumart,mp3);
-				Audio.play($('.music'));
-				$('.music').prop('volume',$('.volume').val());
-				Audio.playlist.hide();
-			});
-		});
-		$('.play-pause').on('click',function(e){
-			e.preventDefault();
-			if($('.audio').is(':empty')){
-				$('.play-list a:first-child').click();
-			}else{
-				var music = $('.music')[0];
-				if(music.paused){
-					setInterval(intval);
-					Audio.play($('.music'));
-					$(this).addClass('active');
-				}else{
-					clearInterval(intval);
-					Audio.pause($('.music'));
-					$(this).removeClass('active');
-				}
-			}
-		});
-
-		$('.stop').on('click',function(e){
-			e.preventDefault();
-			clearInterval(intval);
-			Audio.stop($('.music'));
-			$('.music')[0].currentTime=0;
-			$('.progress .bar').css('width',0);
-		});
-		$('.volume').on('change',function(){
-			var vol, css;
-			vol = $(this).val();
-			$(this).attr('data-css',vol);
-			$('.music').prop('volume',vol);
-		});
-		$('.prev').on('click',function(e){
-			var index, firstIndex;
-			e.preventDefault();
-			index = $('.play-list a').length - $('.play-list a').index();
-			firstIndex = $('.play-list a').length - $('.play-list a').index($('.play-list a.active'));
-			if(index==firstIndex){
-				$('.play-list a:last-child').click();
-			}else{
-				Audio.prev();
-			}
-		});
-		$('.next').on('click',function(e){
-			var index, lastIndex;
-			e.preventDefault();
-			index = $('.play-list a').length;
-			lastIndex = $('.play-list a').index($('.play-list a.active'))+1;
-			if(index==lastIndex){
-				$('.play-list a:first-child').click();
-			}else{
-				Audio.next();
-			}
-		});
-		$('.toggle-play-list').on('click',function(e){
-			e.preventDefault();
-			var toggle = $(this);
-			if(toggle.hasClass('active')){
-				Audio.playlist.hide();
-			}else{
-				Audio.playlist.show();
-			}
-		});
-	},
-	playlist:{
-		show:function(){
-			$('.play-list').fadeIn(500);
-			$('.toggle-play-list').addClass('active');
-			$('.album-art').addClass('blur');
-		},
-		hide:function(){
-			$('.play-list').fadeOut(500);
-			$('.toggle-play-list').removeClass('active');
-			$('.album-art').removeClass('blur');
-		}
-	},
-	play:function(e){
-		var bar, current, total;
-		e.trigger('play').bind('ended',function(){
-			$('.next').click();
-		});
-		intval = setInterval(function(){
-		current = e[0].currentTime;
-		$('.play-current-time').text(Audio.formatTime(current));
-
-		bar = (current/e[0].duration)*100;
-		$('.progress .bar').css('width',bar+'%');
-		
-		},1000);
-
-		var totalDur = setInterval(function(t){
-			if($('.audio .music')[0].readyState>0){
-				total = e[0].duration;
-				$('.play-total-time').text(Audio.formatTime(total));
-				clearInterval(totalDur);
-			}
-		}, 1000);
-		$('.play-pause').addClass('active');
-	},
-	pause:function(e){
-		e.trigger('pause');
-		$('.play-pause').removeClass('active');
-	},
-	stop:function(e){
-		e.trigger('pause').prop('currentTime',0);
-		$('.play-pause').removeClass('active');
-	},
-	mute:function(e){
-		prop('muted',!e.prop('muted'));
-	},
-	volumeUp:function(e){
-		var volume = e.prop('volume')+0.2;
-		if(volume >1){
-			volume = 1;
-		}
-		e.prop('volume',volume);
-	},
-	volumeDown:function(e){
-		var volume = e.prop('volume')-0.2;
-		if(volume <0){
-			volume = 0;
-		}
-		e.prop('volume',volume);
-	},
-	prev:function(){
-		var curr = $('.music').data('id');
-		var prev = $('a[data-id="'+curr+'"]').prev();
-		if(curr && prev){
-			prev.click();
-		}
-	},
-	next:function(){
-		var curr = $('.music').data('id');
-		var next = $('a[data-id="'+curr+'"]').next();
-		if(curr && next){
-			next.click();
-		}
-	}
-}
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// ------------------------- Drag Function ---------------------------------------------------------------------------------------------------------------------------
+// // ------------------------- Drag Function ---------------------------------------------------------------------------------------------------------------------------
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("drag"));
@@ -288,3 +73,80 @@ function ShowHidden(el) {
 	else
 		document.getElementById(el).style.display = 'none';
 }
+
+$(document).ready(function(){
+
+// ----------------------------- Mp3 Player ----------------------------------------------------
+  var playlist = [{
+      title:"Beyond Selves",
+      artist:"Void_Chords",
+      mp3:"https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Beyond%20selves.mp3?raw=true",
+      poster: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/rwby.webp?raw=true"
+    },{
+      title:"Awake",
+      artist:"Saori Hayami",
+      mp3:"https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Awake.mp3?raw=true",
+      poster: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/rwby.webp?raw=true"
+    },{
+      title:"Daten",
+      artist:"Creepy Nuts",
+      mp3:"https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Daten.mp3?raw=true",
+      poster: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta.webp?raw=true"
+  }]
+  
+  var cssSelector = {
+    jPlayer: "#jquery_jplayer",
+    cssSelectorAncestor: ".music-player"
+  };
+  
+  var options = {
+    swfPath: "https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/jquery.jplayer/Jplayer.swf",
+    supplied: "ogv, m4v, oga, mp3",
+    volumechange: function(event) {
+      $( ".volume-level" ).slider("value", event.jPlayer.options.volume);
+    },
+    timeupdate: function(event) {
+      $( ".progress" ).slider("value", event.jPlayer.status.currentPercentAbsolute);
+    }
+  };
+  
+  var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
+  var PlayerData = $(cssSelector.jPlayer).data("jPlayer");
+  
+  
+  // Create the volume slider control
+  $( ".volume-level" ).slider({
+     animate: "fast",
+		max: 1,
+		range: "min",
+		step: 0.01,
+		value : $.jPlayer.prototype.options.volume,
+		slide: function(event, ui) {
+			$(cssSelector.jPlayer).jPlayer("option", "muted", false);
+			$(cssSelector.jPlayer).jPlayer("option", "volume", ui.value);
+		}
+  });
+  
+  // Create the progress slider control
+  $( ".progress" ).slider({
+		animate: "fast",
+		max: 100,
+		range: "min",
+		step: 0.1,
+		value : 0,
+		slide: function(event, ui) {
+			var sp = PlayerData.status.seekPercent;
+			if(sp > 0) {
+				// Move the play-head to the value and factor in the seek percent.
+				$(cssSelector.jPlayer).jPlayer("playHead", ui.value * (100 / sp));
+			} else {
+				// Create a timeout to reset this slider to zero.
+				setTimeout(function() {
+					 $( ".progress" ).slider("value", 0);
+				}, 0);
+			}
+		}
+	});
+
+  
+});
