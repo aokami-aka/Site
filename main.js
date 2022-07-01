@@ -92,7 +92,12 @@ $(document).ready(function(){
       artist:"Creepy Nuts",
       mp3:"https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Daten.mp3?raw=true",
       poster: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta.webp?raw=true"
-  }]
+  },{
+	title:"Mizukagami no Sekai",
+	artist:"Horiuchi Marina",
+	mp3:"https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Mizukagami%20no%20Sekai.mp3?raw=true",
+	poster: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Hataraku%20Maou-sama!!%202_01.webp?raw=true"
+}]
   
   var cssSelector = {
     jPlayer: "#jquery_jplayer",
