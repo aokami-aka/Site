@@ -1050,6 +1050,9 @@ ul {
 }
 
 /*------------------------------------- mp3 player ---------------------------- */
+#dragheader {
+    cursor: move;
+}
 .music-player {
   position: fixed;
   top: 10%;
