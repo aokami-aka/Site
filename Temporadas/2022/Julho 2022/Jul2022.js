@@ -46,6 +46,37 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yurei%20Deco.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/1,000,000,000,000,000,000,000,000%20Love.mp3?raw=true",
             url: "https://open.spotify.com/track/7r7AFeFqZHVxa85ffesTAY?si=c2279ad29a504e0b",
+          },
+
+          {
+            name: "story",
+            artist: "Mayu Maeshima",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Isekai%20Ojisan.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Story.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0M0v61x8lN3rDLbmTnlYBg?si=y0aaTG-bQoGGUxDmfjD93w",
+          },
+          {
+            name: "Ichibanboshi Sonority",
+            artist: "Yuka Iguchi",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Isekai%20Ojisan_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Ichibanboshi%20Sonority.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2pEoqcvCSXliNrd8peAUiP?si=T6L6DYbPR4y6aOWc8E-VQg",
+          },
+
+          {   // Kanojo Okarishimasu 2
+            name: "Himitsu Koigokoro",
+            artist: "Chico With Honeyworks",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Kanojo,%20Okarishimasu%202.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Himitsu%20Koigokoro.mp3?raw=true",
+            url: "https://open.spotify.com/track/532a4qwtCf56E6qjiAn2EE?si=32a6b655bf5c42f1",
+          },
+
+          {   // Overlord IV
+            name: "No Man´s Dawn",
+            artist: "Mayu Maeshima",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Overlord%20IV_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/No%20Man%C2%B4s%20Dawn.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0M0v61x8lN3rDLbmTnlYBg?si=y0aaTG-bQoGGUxDmfjD93w",
           }
         ],
         currentTrack: null,
