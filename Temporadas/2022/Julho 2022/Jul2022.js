@@ -48,7 +48,7 @@ new Vue({
             url: "https://open.spotify.com/track/7r7AFeFqZHVxa85ffesTAY?si=c2279ad29a504e0b",
           },
 
-          {
+          {   // Isekai Ojisan
             name: "story",
             artist: "Mayu Maeshima",
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Isekai%20Ojisan.webp?raw=true",
@@ -61,6 +61,14 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Isekai%20Ojisan_01.webp?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Ichibanboshi%20Sonority.mp3?raw=true",
             url: "https://open.spotify.com/artist/2pEoqcvCSXliNrd8peAUiP?si=T6L6DYbPR4y6aOWc8E-VQg",
+          },
+
+          {   // Yofukashi no Uta
+            name: "Daten",
+            artist: "Creepy Nuts",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Daten.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA",
           },
 
           {   // Kanojo Okarishimasu 2
