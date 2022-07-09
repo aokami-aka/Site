@@ -67,7 +67,14 @@ new Vue({
             name: "Daten",
             artist: "Creepy Nuts",
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta.webp?raw=true",
-            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Daten.mp3?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Yofukashi%20no%20Uta.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA",
+          },
+          {  
+            name: "Yofukashi no Uta",
+            artist: "Creepy Nuts",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta_02.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Yofukashi%20no%20Uta.mp3?raw=true",
             url: "https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA",
           },
 
