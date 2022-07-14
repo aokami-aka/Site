@@ -1,1314 +1,313 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julho 2022</title>
+new Vue({
+    el: "#app",
+    data() {
+      return {
+        audio: null,
+        circleLeft: null,
+        barWidth: null,
+        duration: null,
+        currentTime: null,
+        isTimerPlaying: false,
+        tracks: [
+          {         // Lycoris Recoil
+            artist: "ClariS",
+            name: "Alive",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Lycoris%20Recoil.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Alive.mp3?raw=true",
+            url: "https://open.spotify.com/track/5cBmwNnKGLPRCQWzFS0r0Y?si=5812e6d2146641f7",
+          },
+          {             
+            artist: "Sayuri",
+            name: "Hana no Tou",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Lycoris%20Recoil_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Hana%20no%20Tou.mp3?raw=true",
+            url: "https://open.spotify.com/track/1yt4wO7dKCwsfjch8SN9aU?si=0a764c19f75d48a5",
+          },
 
-    <link href="Jul2022.css" rel="stylesheet" type="text/css"/>    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
+          {         // Engage Kiss
+            artist: "Halca",
+            name: "Darekare Scramble",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Engage%20Kiss.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/darekare%20scramble.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2xOEM6pRUsLhlx2PzaQuK2?si=dUnp_oXwSO-Bv5UGGYlCJQ",
+          },
+          {
+            artist: "Akari Nanao",
+            name: "Hen'ai Nou",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Engage%20Kiss_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Ren'ai%20nou.mp3?raw=true",
+            url: "https://open.spotify.com/artist/06jSjpC81wzjoUoE61Fhdn?si=JfANAOFzTradFRJPUGYRYA",
+          },
+
+          {         //  RWBY         
+            name: "Beyond Selves",
+            artist: "Voice_chords",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/rwby.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Beyond%20selves.mp3?raw=true",
+            url: "https://open.spotify.com/track/0yhDRfvMNnEzSTyGvfu5ds?si=b0f86d9ccbf34048",
+          },
+          {
+            name: "Awake",
+            artist: "Saori Hayami",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/rwby.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Awake.mp3?raw=true",
+            url: "https://open.spotify.com/artist/32UDgij5Tm7EtyRRCC1JTN?si=9B1_DqDwTJeo8R5QfyHmWg",
+          },
+
+          {     //  Yurei Deco
+            name: "1,000,000 Love",
+            artist: "Clammbon",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yurei%20Deco.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/1,000,000,000,000,000,000,000,000%20Love.mp3?raw=true",
+            url: "https://open.spotify.com/track/7r7AFeFqZHVxa85ffesTAY?si=c2279ad29a504e0b",
+          },
+          {
+            name: "Aimuin Love",
+            artist: "Hack and Berry",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yurei%20Deco_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Aimuin%20Love.mp3?raw=true",
+            url: "",
+          },
+
+          {   // Isekai Ojisan
+            name: "story",
+            artist: "Mayu Maeshima",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Isekai%20Ojisan.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Story.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0M0v61x8lN3rDLbmTnlYBg?si=y0aaTG-bQoGGUxDmfjD93w",
+          },
+          {
+            name: "Ichibanboshi Sonority",
+            artist: "Yuka Iguchi",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Isekai%20Ojisan_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Ichibanboshi%20Sonority.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2pEoqcvCSXliNrd8peAUiP?si=T6L6DYbPR4y6aOWc8E-VQg",
+          },
+
+          {   // Kumishou Musume
+            name: "Mirai no hero-tachi e",
+            artist: "Shou Takeyaki",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Kumichou%20Musume%20to%20Sewagakari.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Mirai%20no%20Hero-tachi%20e.mp3?raw=true",
+            url: "https://www.youtube.com/channel/UCmAutZSvFH5mkR9OoPtpOmQ",
+          },
+          {   
+          name: "Kaerimichi no Iro",
+          artist: "Shou Takeyaki",
+          cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Kumichou%20Musume%20to%20Sewagakari_01.webp?raw=true",
+          source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Kaerimichi%20no%20Iro.mp3?raw=true",
+          url: "",
+          },
+
+          {   // Bucchigire
+            name: "Danzai Democracy",
+            artist: "name-less",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Bucchigire!_02.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Danzai%20Democracy.mp3?raw=true",
+            url: "https://open.spotify.com/artist/05bI1rBSrKztoBYlHYYdH5?si=lcwpKPEGTuGkd9MD0IKYQg",
+          },
+
+          {   // Yofukashi no Uta
+            name: "Daten",
+            artist: "Creepy Nuts",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Yofukashi%20no%20Uta.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA",
+          },
+          {  
+            name: "Yofukashi no Uta",
+            artist: "Creepy Nuts",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yofukashi%20no%20Uta_02.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Yofukashi%20no%20Uta.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA",
+          },
+
+          {   // Kanojo Okarishimasu 2
+            name: "Himitsu Koigokoro",
+            artist: "Chico With Honeyworks",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Kanojo,%20Okarishimasu%202.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Himitsu%20Koigokoro.mp3?raw=true",
+            url: "https://open.spotify.com/track/532a4qwtCf56E6qjiAn2EE?si=32a6b655bf5c42f1",
+          },
+          {
+            name: "Ienai",
+            artist: "Asmi",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Kanojo,%20Okarishimasu%202_02.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Ienai.mp3?raw=true",
+            url: "https://open.spotify.com/artist/3UY1KK0iXeC0mpaK0ltFza?si=kwhtoaVOQ6ifLl1YvTJjMA",
+
+          },
+
+          {   // Overlord IV
+            name: "Hollow Hunger",
+            artist: "OxT",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Overlord%20IV.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Hollow%20Hunger.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2qaq1aaJNXMlqsdS50FDrW?si=vnKQ1smzSfqngUBubUe-3A",
+          },
+          {   
+            name: "No Man´s Dawn",
+            artist: "Mayu Maeshima",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Overlord%20IV_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/No%20Man%C2%B4s%20Dawn.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0M0v61x8lN3rDLbmTnlYBg?si=y0aaTG-bQoGGUxDmfjD93w",
+          },
+
+          {   // Shadows House 2
+            name: "Shall We Dance?",
+            artist: "ReoNa",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/SHADOWS%20HOUSE%202.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Shall%20we%20Dance.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2SIBY7Jwq1kYng12Zguo3C?si=OJiQnNqJRYK2BcARdV_eQQ",
+          },
+
+          {   // Dr stone: ryuzui
+            name: "Good Morning [New] World!",
+            artist: "Burnout Syndromes",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Dr.%20STONE%20Ryusui.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Good%20Morning%20%5BNew%5D%20World!.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0Oazwl71qoHvXnbSxv0wOT?si=6YvzfD16QBK7CsCuro4AJA",
+          },
+
+          {   // Hataraku maou-sama 2
+            name: "With",
+            artist: "Kuribayashi Minami",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Hataraku%20Maou-sama!!%202.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/With.mp3?raw=true",
+            url: "https://open.spotify.com/artist/30BCjoPxESjwGjuUgMtLwG?si=Od2ez0Q0TlWCTvZWeJKQbw",
+          },
+          {   
+            name: "Mizukagami no Sekai",
+            artist: "Horiuchi Marina",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Hataraku%20Maou-sama!!%202_01.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Mizukagami%20no%20Sekai.mp3?raw=true",
+            url: "https://open.spotify.com/artist/1vE4dMMMMjFIwC1eEMTmhP?si=sxGAMcY4SkGruE_T4QQewQ",
+          },
+        ],
+        currentTrack: null,
+        currentTrackIndex: 0,
+        transitionName: null
+      };
+    },
+    methods: {
+      play() {
+        if (this.audio.paused) {
+          this.audio.play();
+          this.isTimerPlaying = true;
+        } else {
+          this.audio.pause();
+          this.isTimerPlaying = false;
+        }
+      },
+      generateTime() {
+        let width = (100 / this.audio.duration) * this.audio.currentTime;
+        this.barWidth = width + "%";
+        this.circleLeft = width + "%";
+        let durmin = Math.floor(this.audio.duration / 60);
+        let dursec = Math.floor(this.audio.duration - durmin * 60);
+        let curmin = Math.floor(this.audio.currentTime / 60);
+        let cursec = Math.floor(this.audio.currentTime - curmin * 60);
+        if (durmin < 10) {
+          durmin = "0" + durmin;
+        }
+        if (dursec < 10) {
+          dursec = "0" + dursec;
+        }
+        if (curmin < 10) {
+          curmin = "0" + curmin;
+        }
+        if (cursec < 10) {
+          cursec = "0" + cursec;
+        }
+        this.duration = durmin + ":" + dursec;
+        this.currentTime = curmin + ":" + cursec;
+      },
+      updateBar(x) {
+        let progress = this.$refs.progress;
+        let maxduration = this.audio.duration;
+        let position = (x - 50) - progress.offsetLeft;
+        let percentage = (100 * position) / progress.offsetWidth;
+        if (percentage > 100) {
+          percentage = 100;
+        }
+        if (percentage < 0) {
+          percentage = 0;
+        }
+        this.barWidth = percentage + "%";
+        this.circleLeft = percentage + "%";
+        this.audio.currentTime = (maxduration * percentage) / 100;
+        this.audio.play();
+      },
+      clickProgress(e) {
+        this.isTimerPlaying = true;
+        this.audio.pause();
+        this.updateBar(e.pageX);
+      },
+      prevTrack() {
+        this.transitionName = "scale-in";
+        this.isShowCover = false;
+        if (this.currentTrackIndex > 0) {
+          this.currentTrackIndex--;
+        } else {
+          this.currentTrackIndex = this.tracks.length - 1;
+        }
+        this.currentTrack = this.tracks[this.currentTrackIndex];
+        this.resetPlayer();
+      },
+      nextTrack() {
+        this.transitionName = "scale-out";
+        this.isShowCover = false;
+        if (this.currentTrackIndex < this.tracks.length - 1) {
+          this.currentTrackIndex++;
+        } else {
+          this.currentTrackIndex = 0;
+        }
+        this.currentTrack = this.tracks[this.currentTrackIndex];
+        this.resetPlayer();
+      },
+      resetPlayer() {
+        this.barWidth = 0;
+        this.circleLeft = 0;
+        this.audio.currentTime = 0;
+        this.audio.src = this.currentTrack.source;
+        setTimeout(() => {
+          if(this.isTimerPlaying) {
+            this.audio.play();
+          } else {
+            this.audio.pause();
+          }
+        }, 300);
+      },
+      favorite() {
+        this.tracks[this.currentTrackIndex].favorited = !this.tracks[
+          this.currentTrackIndex
+        ].favorited;
+      }
+    },
+    created() {
+      let vm = this;
+      this.currentTrack = this.tracks[0];
+      this.audio = new Audio();
+      this.audio.src = this.currentTrack.source;
+      this.audio.ontimeupdate = function() {
+        vm.generateTime();
+      };
+      this.audio.onloadedmetadata = function() {
+        vm.generateTime();
+      };
+      this.audio.onended = function() {
+        vm.nextTrack();
+        this.isTimerPlaying = true;
+      };
   
-    <!-- SEO -->
-    <meta name="description" content="Abril 2022">
-    <meta name="keywords" content="Abril"/>
-  
-    <link rel="alternate" href="" hreflang="pt-br" />
-    <meta name="robots" content="index, follow">
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:url" content="https://animeguides.vercel.app/Temporadas/2022/Abril%202022/Jul2022.html" />
-    <meta property="og:title" content="Julho 2022" />
-    <meta property="og:image" content="https://animeguides.vercel.app/Temporadas/2022/Abril%202022/SPY x FAMILY_thumb.png" />
-    <meta property="og:description" content="Animes da temporada de Julho de 2022" />
-    <meta name="theme-color" content="yellow">
-  
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta name="format-detection" content="telephone=no">
-    <!-- SEO -->
-        
-</head>
-<body>
-    <body class="background">
-    
-    <div id="mp3ShowDisable">
-        <img title="Mostrar/Esconder player" onclick="ShowHidden('drag')" src="../../../IconMp3.png"> 
-    </div>
-
-    <a href="#" class="to-top">
-        <i class="fa fa-arrow-up"></i>
-    </a>
-
-        <!-- ----------- Topnav ------------ -->
-    <div class="topnav" id="banner">
-        <a href="../../../index.html" class="active" id="home"><i class="fa fa-home"></i>&nbspPágina inicial</a>
-        <a href="../Janeiro 2022/Jan2022.html" id="winter"><i class="far fa-snowflake"></i>&nbspJaneiro 2022</a>
-        <a href="../Abril 2022/Abr2022.html" id="spring"><i class="fa fa-leaf"></i>&nbspAbril 2022</a>
-        <a id="summer"><i class="fas fa-sun"></i>&nbspJulho 2022</a>
-        <a id="fall"><i class="fab fa-pagelines"></i>&nbspOutubro 2022</a>
-
-        <a href="javascript:void(0);" class="icon" id="phoneIcon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </div>
-
-    <a href="#continuacoes"><button id="link">Continuações</button></a>
-
-    <!------------------------------------- Music Player -------------------------------------------->
-    <div id="drag" ref="ActualPosition">
-        <div class="wrapper" id="app">
-            <div class="player">
-                <div class="player__top" >
-                    <div class="player-cover">
-                        <transition-group :name="transitionName">
-                            <div class="player-cover__item" v-if="$index === currentTrackIndex" :style="{ backgroundImage: `url(${track.cover})` }"  v-for="(track, $index) in tracks" :key="$index"></div>
-                        </transition-group>
-                    </div>
-                    <div class="player-controls">
-                        <a :href="currentTrack.url" target="_blank" class="player-controls__item">
-                            <svg class="icon">
-                                <use xlink:href="#icon-link"></use>
-                            </svg>
-                        </a>
-                        <div class="player-controls__item" @click="prevTrack">
-                            <svg class="icon">
-                                <use xlink:href="#icon-prev"></use>
-                            </svg>
-                        </div>
-                        <div class="player-controls__item" @click="nextTrack">
-                            <svg class="icon">
-                                <use xlink:href="#icon-next"></use>
-                            </svg>
-                        </div>
-                        <div class="player-controls__item -xl js-play" @click="play">
-                            <svg class="icon">
-                                <use xlink:href="#icon-pause" v-if="isTimerPlaying"></use>
-                                <use xlink:href="#icon-play" v-else></use>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress" ref="progress">
-                    <div class="progress__top">
-                        <div class="album-info" v-if="currentTrack">
-                            <br>
-                            <div class="album-info__name">{{ currentTrack.name }}</div>
-                            <div class="album-info__track">{{ currentTrack.artist }}</div>
-                        </div>
-                        <div class="progress__duration">{{ duration }}</div>
-                    </div>
-                    <div class="progress__bar" @click="clickProgress">
-                        <div class="progress__current" :style="{ width : barWidth }"></div>
-                    </div>
-                    <div class="progress__time">{{ currentTime }}</div>
-                </div>
-                <div v-cloak></div>
-            </div>
-        </div>
-    
-        <svg xmlns="http://www.w3.org/2000/svg" hidden xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-                <symbol id="icon-pause" viewBox="0 0 32 32">
-                    <title>icon-pause</title>
-                    <path d="M16 0.32c-8.64 0-15.68 7.040-15.68 15.68s7.040 15.68 15.68 15.68 15.68-7.040 15.68-15.68-7.040-15.68-15.68-15.68zM16 29.216c-7.296 0-13.216-5.92-13.216-13.216s5.92-13.216 13.216-13.216 13.216 5.92 13.216 13.216-5.92 13.216-13.216 13.216z"></path>
-                    <path d="M16 32c-8.832 0-16-7.168-16-16s7.168-16 16-16 16 7.168 16 16-7.168 16-16 16zM16 0.672c-8.448 0-15.328 6.88-15.328 15.328s6.88 15.328 15.328 15.328c8.448 0 15.328-6.88 15.328-15.328s-6.88-15.328-15.328-15.328zM16 29.568c-7.488 0-13.568-6.080-13.568-13.568s6.080-13.568 13.568-13.568c7.488 0 13.568 6.080 13.568 13.568s-6.080 13.568-13.568 13.568zM16 3.104c-7.104 0-12.896 5.792-12.896 12.896s5.792 12.896 12.896 12.896c7.104 0 12.896-5.792 12.896-12.896s-5.792-12.896-12.896-12.896z"></path>
-                    <path d="M12.16 22.336v0c-0.896 0-1.6-0.704-1.6-1.6v-9.472c0-0.896 0.704-1.6 1.6-1.6v0c0.896 0 1.6 0.704 1.6 1.6v9.504c0 0.864-0.704 1.568-1.6 1.568z"></path>
-                    <path d="M19.84 22.336v0c-0.896 0-1.6-0.704-1.6-1.6v-9.472c0-0.896 0.704-1.6 1.6-1.6v0c0.896 0 1.6 0.704 1.6 1.6v9.504c0 0.864-0.704 1.568-1.6 1.568z"></path>
-                </symbol>
-                <symbol id="icon-play" viewBox="0 0 32 32">
-                    <title>icon-play</title>
-                    <path d="M21.216 15.168l-7.616-5.088c-0.672-0.416-1.504 0.032-1.504 0.832v10.176c0 0.8 0.896 1.248 1.504 0.832l7.616-5.088c0.576-0.416 0.576-1.248 0-1.664z"></path>
-                    <path d="M13.056 22.4c-0.224 0-0.416-0.064-0.608-0.16-0.448-0.224-0.704-0.672-0.704-1.152v-10.176c0-0.48 0.256-0.928 0.672-1.152s0.928-0.224 1.344 0.064l7.616 5.088c0.384 0.256 0.608 0.672 0.608 1.088s-0.224 0.864-0.608 1.088l-7.616 5.088c-0.192 0.16-0.448 0.224-0.704 0.224zM13.056 10.272c-0.096 0-0.224 0.032-0.32 0.064-0.224 0.128-0.352 0.32-0.352 0.576v10.176c0 0.256 0.128 0.48 0.352 0.576 0.224 0.128 0.448 0.096 0.64-0.032l7.616-5.088c0.192-0.128 0.288-0.32 0.288-0.544s-0.096-0.416-0.288-0.544l-7.584-5.088c-0.096-0.064-0.224-0.096-0.352-0.096z"></path>
-                    <path d="M16 0.32c-8.64 0-15.68 7.040-15.68 15.68s7.040 15.68 15.68 15.68 15.68-7.040 15.68-15.68-7.040-15.68-15.68-15.68zM16 29.216c-7.296 0-13.216-5.92-13.216-13.216s5.92-13.216 13.216-13.216 13.216 5.92 13.216 13.216-5.92 13.216-13.216 13.216z"></path>
-                    <path d="M16 32c-8.832 0-16-7.168-16-16s7.168-16 16-16 16 7.168 16 16-7.168 16-16 16zM16 0.672c-8.448 0-15.328 6.88-15.328 15.328s6.88 15.328 15.328 15.328c8.448 0 15.328-6.88 15.328-15.328s-6.88-15.328-15.328-15.328zM16 29.568c-7.488 0-13.568-6.080-13.568-13.568s6.080-13.568 13.568-13.568c7.488 0 13.568 6.080 13.568 13.568s-6.080 13.568-13.568 13.568zM16 3.104c-7.104 0-12.896 5.792-12.896 12.896s5.792 12.896 12.896 12.896c7.104 0 12.896-5.792 12.896-12.896s-5.792-12.896-12.896-12.896z"></path>
-                </symbol>
-                <symbol id="icon-link" viewBox="0 0 32 32">
-                    <title>link</title>
-                    <path d="M23.584 17.92c0 0.864 0 1.728 0 2.56 0 1.312 0 2.656 0 3.968 0 0.352 0.032 0.736-0.032 1.12 0.032-0.16 0.032-0.288 0.064-0.448-0.032 0.224-0.096 0.448-0.16 0.64 0.064-0.128 0.128-0.256 0.16-0.416-0.096 0.192-0.192 0.384-0.32 0.576 0.096-0.128 0.16-0.224 0.256-0.352-0.128 0.16-0.288 0.32-0.48 0.48 0.128-0.096 0.224-0.16 0.352-0.256-0.192 0.128-0.352 0.256-0.576 0.32 0.128-0.064 0.256-0.128 0.416-0.16-0.224 0.096-0.416 0.16-0.64 0.16 0.16-0.032 0.288-0.032 0.448-0.064-0.256 0.032-0.512 0.032-0.768 0.032-0.448 0-0.896 0-1.312 0-1.472 0-2.976 0-4.448 0-1.824 0-3.616 0-5.44 0-1.568 0-3.104 0-4.672 0-0.736 0-1.44 0-2.176 0-0.128 0-0.224 0-0.352-0.032 0.16 0.032 0.288 0.032 0.448 0.064-0.224-0.032-0.448-0.096-0.64-0.16 0.128 0.064 0.256 0.128 0.416 0.16-0.192-0.096-0.384-0.192-0.576-0.32 0.128 0.096 0.224 0.16 0.352 0.256-0.16-0.128-0.32-0.288-0.48-0.48 0.096 0.128 0.16 0.224 0.256 0.352-0.128-0.192-0.256-0.352-0.32-0.576 0.064 0.128 0.128 0.256 0.16 0.416-0.096-0.224-0.16-0.416-0.16-0.64 0.032 0.16 0.032 0.288 0.064 0.448-0.032-0.256-0.032-0.512-0.032-0.768 0-0.448 0-0.896 0-1.312 0-1.472 0-2.976 0-4.448 0-1.824 0-3.616 0-5.44 0-1.568 0-3.104 0-4.672 0-0.736 0-1.44 0-2.176 0-0.128 0-0.224 0.032-0.352-0.032 0.16-0.032 0.288-0.064 0.448 0.032-0.224 0.096-0.448 0.16-0.64-0.064 0.128-0.128 0.256-0.16 0.416 0.096-0.192 0.192-0.384 0.32-0.576-0.096 0.128-0.16 0.224-0.256 0.352 0.128-0.16 0.288-0.32 0.48-0.48-0.128 0.096-0.224 0.16-0.352 0.256 0.192-0.128 0.352-0.256 0.576-0.32-0.128 0.064-0.256 0.128-0.416 0.16 0.224-0.096 0.416-0.16 0.64-0.16-0.16 0.032-0.288 0.032-0.448 0.064 0.48-0.064 0.96-0.032 1.44-0.032 0.992 0 1.952 0 2.944 0 1.216 0 2.432 0 3.616 0 1.056 0 2.112 0 3.168 0 0.512 0 1.024 0 1.536 0 0 0 0 0 0.032 0 0.448 0 0.896-0.192 1.184-0.48s0.512-0.768 0.48-1.184c-0.032-0.448-0.16-0.896-0.48-1.184s-0.736-0.48-1.184-0.48c-0.64 0-1.28 0-1.92 0-1.408 0-2.816 0-4.224 0-1.44 0-2.848 0-4.256 0-0.672 0-1.344 0-2.016 0-0.736 0-1.472 0.192-2.112 0.576s-1.216 0.96-1.568 1.6c-0.384 0.64-0.544 1.376-0.544 2.144 0 0.672 0 1.376 0 2.048 0 1.28 0 2.56 0 3.84 0 1.504 0 3.040 0 4.544 0 1.408 0 2.848 0 4.256 0 0.992 0 1.952 0 2.944 0 0.224 0 0.448 0 0.64 0 0.864 0.224 1.76 0.768 2.464 0.16 0.192 0.288 0.384 0.48 0.576s0.384 0.352 0.608 0.512c0.32 0.224 0.64 0.384 1.024 0.512 0.448 0.16 0.928 0.224 1.408 0.224 0.16 0 0.32 0 0.48 0 0.896 0 1.792 0 2.72 0 1.376 0 2.784 0 4.16 0 1.536 0 3.040 0 4.576 0 1.312 0 2.656 0 3.968 0 0.768 0 1.536 0 2.336 0 0.416 0 0.832-0.032 1.248-0.128 1.504-0.32 2.784-1.6 3.104-3.104 0.128-0.544 0.128-1.056 0.128-1.568 0-0.608 0-1.184 0-1.792 0-1.408 0-2.816 0-4.224 0-0.256 0-0.512 0-0.768 0-0.448-0.192-0.896-0.48-1.184s-0.768-0.512-1.184-0.48c-0.448 0.032-0.896 0.16-1.184 0.48-0.384 0.384-0.576 0.768-0.576 1.248v0z"></path>
-                    <path d="M32 11.232c0-0.8 0-1.568 0-2.368 0-1.248 0-2.528 0-3.776 0-0.288 0-0.576 0-0.864 0-0.896-0.768-1.696-1.696-1.696-0.8 0-1.568 0-2.368 0-1.248 0-2.528 0-3.776 0-0.288 0-0.576 0-0.864 0-0.448 0-0.896 0.192-1.184 0.48s-0.512 0.768-0.48 1.184c0.032 0.448 0.16 0.896 0.48 1.184s0.736 0.48 1.184 0.48c0.8 0 1.568 0 2.368 0 1.248 0 2.528 0 3.776 0 0.288 0 0.576 0 0.864 0-0.576-0.576-1.12-1.12-1.696-1.696 0 0.8 0 1.568 0 2.368 0 1.248 0 2.528 0 3.776 0 0.288 0 0.576 0 0.864 0 0.448 0.192 0.896 0.48 1.184s0.768 0.512 1.184 0.48c0.448-0.032 0.896-0.16 1.184-0.48 0.352-0.256 0.544-0.64 0.544-1.12v0z"></path>
-                    <path d="M15.040 21.888c0.16-0.16 0.288-0.288 0.448-0.448 0.384-0.384 0.8-0.8 1.184-1.184 0.608-0.608 1.184-1.184 1.792-1.792 0.704-0.704 1.44-1.44 2.176-2.176 0.8-0.8 1.568-1.568 2.368-2.368s1.6-1.6 2.4-2.4c0.736-0.736 1.504-1.504 2.24-2.24 0.64-0.64 1.248-1.248 1.888-1.888 0.448-0.448 0.896-0.896 1.344-1.344 0.224-0.224 0.448-0.416 0.64-0.64 0 0 0.032-0.032 0.032-0.032 0.32-0.32 0.48-0.768 0.48-1.184s-0.192-0.896-0.48-1.184c-0.32-0.288-0.736-0.512-1.184-0.48-0.512 0.032-0.928 0.16-1.248 0.48-0.16 0.16-0.288 0.288-0.448 0.448-0.384 0.384-0.8 0.8-1.184 1.184-0.608 0.608-1.184 1.184-1.792 1.792-0.704 0.704-1.44 1.44-2.176 2.176-0.8 0.8-1.568 1.568-2.368 2.368s-1.6 1.6-2.4 2.4c-0.736 0.736-1.504 1.504-2.24 2.24-0.64 0.64-1.248 1.248-1.888 1.888-0.448 0.448-0.896 0.896-1.344 1.344-0.224 0.224-0.448 0.416-0.64 0.64 0 0-0.032 0.032-0.032 0.032-0.32 0.32-0.48 0.768-0.48 1.184s0.192 0.896 0.48 1.184c0.32 0.288 0.736 0.512 1.184 0.48 0.48 0 0.928-0.16 1.248-0.48v0z"></path>
-                </symbol>
-                <symbol id="icon-next" viewBox="0 0 32 32">
-                    <title>next</title>
-                    <path d="M2.304 18.304h14.688l-4.608 4.576c-0.864 0.864-0.864 2.336 0 3.232 0.864 0.864 2.336 0.864 3.232 0l8.448-8.48c0.864-0.864 0.864-2.336 0-3.232l-8.448-8.448c-0.448-0.448-1.056-0.672-1.632-0.672s-1.184 0.224-1.632 0.672c-0.864 0.864-0.864 2.336 0 3.232l4.64 4.576h-14.688c-1.248 0-2.304 0.992-2.304 2.272s1.024 2.272 2.304 2.272z"></path>
-                <path d="M29.696 26.752c1.248 0 2.304-1.024 2.304-2.304v-16.928c0-1.248-1.024-2.304-2.304-2.304s-2.304 1.024-2.304 2.304v16.928c0.064 1.28 1.056 2.304 2.304 2.304z"></path>
-                </symbol>
-                <symbol id="icon-prev" viewBox="0 0 32 32">
-                    <title>prev</title>
-                    <path d="M29.696 13.696h-14.688l4.576-4.576c0.864-0.864 0.864-2.336 0-3.232-0.864-0.864-2.336-0.864-3.232 0l-8.448 8.48c-0.864 0.864-0.864 2.336 0 3.232l8.448 8.448c0.448 0.448 1.056 0.672 1.632 0.672s1.184-0.224 1.632-0.672c0.864-0.864 0.864-2.336 0-3.232l-4.608-4.576h14.688c1.248 0 2.304-1.024 2.304-2.304s-1.024-2.24-2.304-2.24z"></path>
-                    <path d="M2.304 5.248c-1.248 0-2.304 1.024-2.304 2.304v16.928c0 1.248 1.024 2.304 2.304 2.304s2.304-1.024 2.304-2.304v-16.928c-0.064-1.28-1.056-2.304-2.304-2.304z"></path>
-                </symbol>
-            </defs>
-        </svg>
-    </div>
-    <!-------------------------------------------------------------------------------------------------->
-
-    <!------------------- Estréias -------------------->
-    <div class="Estréias">
-        <h1 id="estreiasTitle">- Estréias -</h1> 
-
-        <!----------------- Lycoris Recoil ------------------------------------------------------------------>
-        <div id="lycoris">
-            <h1 class="animeTitle">Lycoris Recoil</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Lycoris Recoil.jpg" alt="Lycoris Recoil" id="lycorisThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> A história se passa no café Lyco-Reco, um lugar aconchegante onde deliciosas comidas são servidas e os clientes podem pedir o que quiserem, seja conselhos amorosos, lições comerciais ou até mesmo teorias de conspiração sobre zumbis e monstros gigantes.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> 
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/8899" target="_blank">Adachi Shingo </a>(<i>Primeiro trabalho</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/1303" target="_blank"><img loading="lazy" src="../../../Estúdios/A1-pictures.png" class="Studio"></a> (<i>Kaguya-sama, Eighty Six, SAO</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 02/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <b>Primeiras impressões:</b> Ok, isso foi de 0 a 100 MUITO rápido, o trailer faz ele parecer mais genérico do que ele realmente é.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17097" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/50709" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/lycoris-recoil" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/VxR_BYPG7v4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Alive<br><a href="https://open.spotify.com/track/5cBmwNnKGLPRCQWzFS0r0Y?si=5812e6d2146641f7" target="_blank">ClariS</a></p>
-                    </li> 
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/rvu_s7Vp4KE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>  
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/WIKKyrGGaDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Hana no Tou<br><a href="https://open.spotify.com/track/1yt4wO7dKCwsfjch8SN9aU?si=0a764c19f75d48a5&nd=1" target="_blank">Sayuri</a></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Engage Kiss ------------------------------------------------------------------>
-        <div id="engage">
-            <h1 class="animeTitle">Engage Kiss</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Engage Kiss.png" alt="Engage Kiss" id="engageThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>A mineração de um novo recurso energético resultou em um surto de "desastres D" por demônios na cidade. As empresas militares privadas (PMCs) são encarregadas de lidar com esses incidentes. O protagonista Shuu dirige um pequeno PMC. Uma garota demônio chamada Kisara trabalha por contrato no escritório de Shuu e está constantemente preocupada com ele. 
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Comédia, Romance
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/28248" target="_blank">Tanaka Tomoya </a>(<i>Visual prison</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/1303" target="_blank"><img loading="lazy" src="../../../Estúdios/A1-pictures.png" class="Studio"></a> (<i>Kaguya-sama, Eighty Six, SAO</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 03/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <b>Primeiras impressões:</b> Minha nossa, esse é o anime mais anime que já vi, é uma mistura de SAO, Tate no yuusha, konosuna, Moriarty, Megamente, jujutsu, takt Op., Fate, pesadelo na cozinha, boleto: the animation, mirai nikki, minha nossa que farofa, amei.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17284" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/51417" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/engage-kiss" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/svO_bBAoWsc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Darekare Scramble<br><a href="https://open.spotify.com/artist/2xOEM6pRUsLhlx2PzaQuK2?si=Fh_-Zd6cS5KLZ4Wls1nolQ" target="_blank">Halca</a></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/PyzxyUCRj6Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/mpMNoBwbRns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Ren`ai Nou<br><a href="https://open.spotify.com/artist/06jSjpC81wzjoUoE61Fhdn?si=JfANAOFzTradFRJPUGYRYA" target="_blank">Akari Nanao</a></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- RWBY ------------------------------------------------------------------>
-         <div id="rwby">
-            <h1 class="animeTitle">RWBY: Hyosetsu Teikoku</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/rwby.webp" alt="RWBY" id="rwbyThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>A história faz referência a contos de fadas, acompanhando Ruby, Weiss, Yang e Blake em aventuras para receber o reconhecimento como caçadoras e ajudarem na luta contra os Grimms, mostrando seu treinamento na Academia Beacon e o consequente envolvimento em conflitos muito maiores.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/7992" target="_blank">Suzuki Toshimasa </a>(<i>Heroic Age, Egao no Daika</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/792" target="_blank"><img loading="lazy" src="../../../Estúdios/Shaft.png" class="Studio"></a> (<i>Madoka Magica, Bishounen Tanteidan, Monogatari Series</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 03/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: O trailer está lindo, torcer para a produção não derreter.<br>Edit: ele derreteu.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17277" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/51381" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/rwby-ice-queendom" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/q9xeulrtgyg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer</b><br>Chitty Chitty Bang Bang<br><a href="https://open.spotify.com/artist/7n5AyMXmeRYTxEjG8JaLuS?si=BNC6PnN_QEqlvW15ivEDmQ" target="_blank">QUEENDOM</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/QIaCdthw5qM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- YUREI DECO ------------------------------------------------------------------>
-        <div id="yurei">
-            <h1 class="animeTitle">YUREI DECO</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Yurei Deco.jpg" alt="YUREI DECO" id="yureiThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> A história acompanha Berry, uma jovem comum que acaba descobrindo a existência de um clube de detetives paranormais onde todos os membros estão “socialmente mortos” e vivem unicamente no mundo digital de Tom Sawyer.<br>&emsp;Ao lado de sua nova amiga, Berry passa a explorar os segredos daquele mundo e se envolver cada vez mais em verdades que podem mudar para sempre sua visão de tudo.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ficção Científica
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/12515" target="_blank">Shimoyama Tomohisa </a>(<i>Primeiro trabalho</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/48093" target="_blank"><img loading="lazy" src="../../../Estúdios/Science Saru.jpg" class="Studio"></a> (<i>Heike monogatari, Eizouken, Devilman: Crybaby</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 03/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: A única coisa que pode estragar tudo aqui é o roteiro (roteirista de bubble), se ele trabalhar direito podemos ter um grande anime aqui.
-                <br><br>
-                <b>Primeiras impressões: </b>Temos aqui potencialmente o sonny boy desse ano, porém menos denso, 1000 críticas sociais por segundo com direito a referência a golpe do pix e metaverso, galera de TI e programação vão amar as referências dele.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17207" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/51092" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/yurei-deco" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/6X21ZeS2IQ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abetura</b><br>1,000,000,000,000,000,000 LOVE<br><a href="https://open.spotify.com/artist/1gpNGL4WHSegm0WXj2j1m0?si=yuMVCCroRNq5Mx4U5jkBfA" target="_blank">Clammbon</a></p>
-                    </li> 
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/IGWxJIwu3CA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>  
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Isekai Ojisan ------------------------------------------------------------------>
-        <div id="ojisan">
-            <h1 class="animeTitle">Isekai Ojisan</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Isekai Ojisan.webp" alt="Isekai Ojisan" id="ojisanThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Durante 17 anos o tio de Takafumi esteve em coma, até que em um determinado dia finalmente acordou.<br>&emsp;Se apenas esse evento já não fosse inesperado o bastante, Takafumi descobre que durante o tempo em que seu tio esteve desacordado ele, na verdade, havia sido transportado para outro mundo.<br>&emsp;Agora dividindo o quarto com seu tio que é literalmente mágico, Takafumi precisa ajudá-lo a se adaptar a duas décadas de diferença, principalmente quando estamos falando de videogames e tecnologias, já que seu tio é completamente viciado nisso.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Comédia, Fantasia
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/19926" target="_blank">Kawai Shigeki </a>(<i>Primeiro trabalho</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/64925" target="_blank"><img loading="lazy" src="../../../Estúdios/Atelier Pontdarc.jpg" class="Studio"></a> (<i>Ganbare Douki-chan</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 06/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Japonês é um ser criativo, se viajem para outro mundo está saturando, bora fazer gente voltando do mundo de volta, genial. ('__')
-                <br><br>
-                <b>Primeiras impressões: </b>Minha nossa, nunca mais confio em trailer, até mesmo em divulgar coisa boa a Netflix é ruim, chorei de rir nesse negoço, ele pega tudo de ruim dos isekai e faz piada com tudo isso e 1001 referências a jogos, sim, isekai e bom na mesma frase, fim do mundo confirmado.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16389" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/49220" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.netflix.com/br/title/81499847" target="_blank"><img loading="lazy" src="../../../Estúdios/netflix.png" alt="CR" class="source" style="height: 100px; width:130px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/NFS7ZvqOO_A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>story<br><a href="https://open.spotify.com/artist/0M0v61x8lN3rDLbmTnlYBg?si=-YpOXc1BRTulTFW97DycWQ" target="_blank">Mayu Maeshima</a></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/UcePA8oFwe8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li> 
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/2djDsTQLyjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Trailer 2</b><!--<br>Kibun Joujou ￪￪<br>96Neko---></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Isekai Meikyuu de Harem wo ------------------------------------------------------------------>
-        <div id="isekai">
-            <h1 class="animeTitle">Isekai Meikyuu de Harem wo</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Isekai Meikyuu de Harem wo.png" alt="Isekai Meikyuu de Harem wo" id="isekaiThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Lutando com a vida e a sociedade, o estudante do ensino médio Michio Kaga vagueia pela Internet e chega a um site estranho. O site, com várias perguntas e um sistema baseado em pontos, permite criar habilidades para um personagem. Ao completar seu personagem, Kaga foi transportado para um mundo de fantasia.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação, Fantasia, Aventura, Ecchi, Harem, Romance
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/3537" target="_blank">Tatsuwa Naoyuki </a>(<i>Nisekoi, Kyochuu Rettou</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/35245" target="_blank"><img loading="lazy" src="../../../Estúdios/Passione.jpg" class="Studio"></a> (<i>Higurashi(2020), Mieruko-chan, Ishuzoku Reviewers</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 06/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Aquele famoso hentai disfarçado, se o twitter atacar um anime aleatório e não falar desse então eu desisto de entender eles.
-                <br><br>
-                <b>impressões iniciais: </b>Eita, sekisu bixo.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/15918" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/44524" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/harem-in-the-labyrinth-of-another-world?skip_wall=1" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/q9xeulrtgyg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer</b><br>Chitty Chitty Bang Bang<br><a href="https://open.spotify.com/artist/7n5AyMXmeRYTxEjG8JaLuS?si=BNC6PnN_QEqlvW15ivEDmQ" target="_blank">QUEENDOM</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/9wgtphu-7mI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li> 
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Kumichou Musume to Sewagakari ---------------------------------------------------------------------->
-        <div id="kumichou">
-            <h1 class="animeTitle">Kumichou Musume to Sewagakari</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Kumichou Musume to Sewagakari.jpg" alt="Kumichou Musume to Sewagakari" id="kumichouThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> A história acompanha Kirishima Tooru, um membro da Yakuza que adquiriu o título de "Demônio de Sakuragi" após cometer vários atos de violência descontrolado.<br>&emsp;Como última medida para tentar mantê-lo sob controle, seu chefe o encarregou de uma importante missão. Ser a babá de sua filha pequena.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Comédia, Slice of life
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/4797" target="_blank">Kawasaki Itsurou </a>(<i>B: the begining Sucession, Pokémon: origins</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/1006" target="_blank"><img loading="lazy" src="../../../Estúdios/Feel.png" class="Studio"></a> (<i>Bokutachi no remake, Island, Kiss x Sis</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 07/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <b>Primeiras impressões: </b>Muito mais bonito doq eu esperava, vai ser gostoso e fofo e com direito a bastante pedrada no coração.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16611" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/49776" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/the-yakuzas-guide-to-babysitting" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/KWXryj9OypQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Mirai no Hero-tachi e<br>Takeyaki Shou</p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/d5GsPNNg5aM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/K_13ALbcAV4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kaerimichi no Iro<br>Haru Shibuya</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-            <br><br>
-
-        <!----------------- Bucchigire! ------------------------------------------------------------------>
-        <div id="bucchigire">
-            <h1 class="animeTitle">Bucchigire!</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Bucchigire!_02.webp" alt="Bucchigire!" id="bucchigireThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> A história se passa no período feudal japonês onde os samurais são a principal ordem do país. Após o súbito massacre do renomado esquadrão Shinsengumi, onde apenas um membro sobreviveu, foi decidido que 7 criminosos irão substituir o grupo.<br>&emsp;Para manter a paz em Kyoto, começa então uma missão secreta para alterar a história enquanto buscam encontrar o responsável pelo crime.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Histórico
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/9318" target="_blank">Hirakawa Tetsuo </a>(<i>Hori-san to Miyamura-kun, Zero Kara Hajimeru Mahou no Sho</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/47325" target="_blank"><img loading="lazy" src="../../../Estúdios/Geno.jpg" class="Studio"></a> (<i>Pet, Golden Kamuy</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 08/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Ou isso vai ser bom, ou um lixo, como é temática feudal irei estar com meu pano pronto pra passar.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17278" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/51371" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/shine-on-bakumatsu-bad-boys" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/Abit0k2bk2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Ichiban Hikare! -Bucchigire!-<br><a href="https://open.spotify.com/artist/2ayMogRmamCnzMAk4YiFAz?si=aDqRIddES1mR2_ZkhHJUuA" target="_blank">Takanori Nishikawa</a></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/vIKWTRIUhr0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li> 
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/ZeyaZYOSp9k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Danzai Democracy<br><a href="https://open.spotify.com/artist/05bI1rBSrKztoBYlHYYdH5?si=lcwpKPEGTuGkd9MD0IKYQg" target="_blank">Name-less</a></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Yofukashi no Uta ------------------------------------------------------------------>
-        <div id="Yofukashi">
-            <h1 class="animeTitle">Yofukashi no Uta</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Yofukashi no Uta.webp" alt="Yofukashi no Uta" id="YofukashiThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> A história acompanha Kou, um jovem que abandonou a escola e passou a perambular pelas ruas a noite após sentir que sua vida não tinha sentido.<br>&emsp;Certo dia ele conhece Nazuma, uma misteriosa garota que diz ser capaz de acabar com sua insônia e lhe dar um pouco de descanso. Entretanto, Kou acaba descobrindo que Nazuma é uma vampira e decide se transformar em um também, já que o mundo noturno é muito mais interessante.<br>&emsp;Porém, Nazuma diz que a única forma dele se transformar é se apaixonando por ela.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Romance, Sobrenatural, Vampiros
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/11721" target="_blank">Itamura Tomoyuki </a>(<i>Vanitas no carte, Monogatari</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/35233" target="_blank"><img loading="lazy" src="../../../Estúdios/LidenFilms.png" class="Studio"></a> (<i>Tokyo revengers, Tribe Nine, Build Divide</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 08/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Pelo visto esse diretor amou temática de vampiro, continue assim.
-                <br><br>
-                <b>Primeiras impressões: </b>Diretor de vanitas fazendo milagre aqui, sem ele não teria metade do brilho que isso tem, o visual disso é lindo, a história achei ok, vamo ver como vai daqui para frente.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16971" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/50346" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><!--<a target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 50%;"></a>--></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/AwXRPWmgLbU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Daten<br><a href="https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA" target="_blank">Creepy Nuts</a></p>
-                    </li> 
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/ukO-ZdWS3j8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>  
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Hoshi no Samidare ------------------------------------------------------------------>
-        <div id="hoshi">
-            <h1 class="animeTitle">Hoshi no Samidare</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Hoshi no Samidare.jpg" alt="Hoshi no Samidare" id="hoshiThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Yuuhi era um simples universitário como outro qualquer… Até o dia em que aparece um lagarto em seu quarto pedindo para que salve “o mundo da aniquilação vil”. Sem que haja tempo de recusar o pedido, é dado ao Yuuhi um anel e poder, e ele terá de enfrentar o primeiro inimigo! Yuuhi não é páreo para o inimigo e a sua morte estava certa, mas quem aparece para salvá-lo é a sua vizinha, a jovem Samidare! Começa aqui a história que paira no liame entre o cotidiano pacífico e um mundo cheio de mistérios!
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação, Fantasia
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/3684" target="_blank">Nakanishi Nobuaki </a>(<i>Mangirl!</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/39009" target="_blank"><img loading="lazy" src="../../../Estúdios/NAZ.png" class="Studio"></a> (<i>ID: invaded, Infinite Dendrogan, Hajimete no Gal</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 09/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Este será aqueles casos de uma obra com história muito boa colocado em uma produção bem fraca, aqui teremos apenas história, não esperem animação.
-                <br><br>
-                <b>Primeiras impressões: </b>PowerPoint: the "animation".
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17150" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/50891" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/lucifer-and-the-biscuit-hammer" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/q9xeulrtgyg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer</b><br>Chitty Chitty Bang Bang<br><a href="https://open.spotify.com/artist/7n5AyMXmeRYTxEjG8JaLuS?si=BNC6PnN_QEqlvW15ivEDmQ" target="_blank">QUEENDOM</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/85yfx-0jVpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li> 
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Kuro no Shoukanshi ------------------------------------------------------------------>
-        <div id="kuro">
-            <h1 class="animeTitle">Kuro no Shoukanshi</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Kuro no Shoukanshi.png" alt="Kuro no Shoukanshi" id="kuroThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Acordando em um lugar estranho sem memória de sua vida passada, Kelvin descobre que ele trocou suas memórias em troca de habilidades poderosas. Indo para outro mundo como um invocador com seu primeiro seguidor sendo a própria deusa que o trouxe!
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação, Fantasia
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/2149" target="_blank">Hiraike Yoshimasa </a>(<i>Otaku ni Koi, Nyako Days</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/1043" target="_blank"><img loading="lazy" src="../../../Estúdios/Satelight.png" class="Studio"></a> (<i>Sakugan, Somali to Mori</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 09/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Nem lançou ainda, mas já digo, chato.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17204" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/51064" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/black-summoner" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/q9xeulrtgyg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer</b><br>Chitty Chitty Bang Bang<br><a href="https://open.spotify.com/artist/7n5AyMXmeRYTxEjG8JaLuS?si=BNC6PnN_QEqlvW15ivEDmQ" target="_blank">QUEENDOM</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/iMP1wnOwTf4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li> 
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Fuuto Tantei ------------------------------------------------------------------>
-        <div id="fuuto">
-            <h1 class="animeTitle">Fuuto Tantei</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Estréias/Fuuto Tantei.jpg" alt="Fuuto Tantei" id="fuutoThumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Através de um dispositivo USB chamado de “Gaia Memories”, criminosos da cidade de Fuuto se transformam em monstros e criam o caos.<br>&emsp;Entretanto, tudo isso muda quando Shoutarou Hidari consegue um Gaia Memories e decide colocar um fim a todas as ondas que crimes que vinham perturbando a paz da cidade.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação, Drama, Mistério, Sobrenatural
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/1766" target="_blank">Kabashima Yousuke </a>(<i>Primeiro trabalho</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/59227" target="_blank"><img loading="lazy" src="../../../Estúdios/Kai.png" class="Studio"></a> (<i>Gaikotsu Kishi-sama, Uma musume, 7 Seeds</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 31/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Se não tiver faísca é flopp.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16186" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/48649" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 50%;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/q9xeulrtgyg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer</b><br>Chitty Chitty Bang Bang<br><a href="https://open.spotify.com/artist/7n5AyMXmeRYTxEjG8JaLuS?si=BNC6PnN_QEqlvW15ivEDmQ" target="_blank">QUEENDOM</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/Tt1XP12wi2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>   
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/yJ8SqCij9_E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Kibun Joujou ￪￪<br>96Neko</p>
-                    </li>--> 
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <br><br>
-
-    <div class="Continuacoes">
-        <a id="anchor" name="continuacoes"><h1 id="continuacoesTitle">- Continuações -</h1></a> 
-
-        <br>
-        <!----------------- Kanojo, Okarishimasu 2 ----------------------------------------------------------------------------->
-        <div id="kanojo2">
-            <h1 class="animeTitle">Kanojo, Okarishimasu 2</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/Kanojo, Okarishimasu 2_02.png" alt="Kanojo, Okarishimasu 2" id="kanojo2Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>Depois de ser rejeitado pela sua ex-namorada, Kazuya Kinoshita decide entrar em um aplicativo para celular que permite alugar uma namorada. Em sua primeira pesquisa, ele encontra Chizuru Mizuhara, uma garota linda e aparentemente perfeita.<br>&emsp;Mesmo desconfiado de algumas avaliações negativas sobre a garota, Kazuya decide assumir o risco e contratar Chizuru, para aos poucos ir descobrindo que ela tem uma personalidade bem diferente da mostrada no inicio de seu encontro.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Comédia, Romance
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/15951" target="_blank">Koga Kazuomi </a>(<i>Ganbare, Douki-chan</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/917" target="_blank"><img loading="lazy" src="../../../Estúdios/TMS entertainment.png" class="Studio"></a> (<i>Dr.Stone, Fruits Basket</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 01/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/15743" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/42963" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/rent-a-girlfriend" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/8rrZ4Kn9XlY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Himitsu Koigokoro<br><a href="https://open.spotify.com/artist/7qpGWSiolU9E5WbkvTaMDd?si=yFWyOI5xSECg2urM710Uiw">Chico with Honeyworks</a></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/nIa0mUDj3I0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li> 
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/8cQCn63acJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b></p>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Youkoso Jitsuryoku 2 ----------------------------------------------------------------------------->
-        <div id="Youkoso2">
-            <h1 class="animeTitle">Youkoso Jitsuryoku 2</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/Youkoso Jitsuryoku 2_02.webp" alt="Youkoso Jitsuryoku 2" id="Youkoso2Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>Kiyotaka Ayanokoji acaba de se matricular na escola onde se diz que 100% dos alunos vão para a faculdade ou encontram emprego. Mas ele acaba na classe 1-D, que está cheia de todas as crianças problemáticas da escola. Além disso, todos os meses, a escola concede pontos aos alunos com um valor em dinheiro de 100.000 ienes, e as aulas empregam uma política de laissez-faire na qual falar, dormir e até sabotagem são permitidos durante a aula. Um mês depois, Ayanokoji, Horikita e os alunos da Classe D descobrem a verdade do sistema em vigor dentro de sua escola...
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Drama, Psicológico
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/19328" target="_blank">Nishouji Yoshihito</a> (<i>Koro-sensei Quest!, Shichisei no Subaru</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/27220" target="_blank"><img loading="lazy" src="../../../Estúdios/Lerche.png" class="Studio"></a> (<i>Hanako-kun, Given, Ansatsu</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 04/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/17208" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/51096" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/classroom-of-the-elite" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/5hdilH9bG6I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Dance in the Game<br><a href="https://open.spotify.com/artist/56TyClNQ0oVZLhK2V9KhA6?si=cIi9tdvlSdyQKjx6RDCNAg" target="_blank">ZAQ</a></p>
-                    </li> 
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/F7gdycBQukA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/NZaSmoeRj2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b><br>Hito Shibai<br>Fushigami Mai</p>
-                    </li> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Overlord IV ----------------------------------------------------------------------------->
-        <div id="overlord4">
-            <h1 class="animeTitle">Overlord IV</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/Overlord IV.jpg" alt="Overlord IV" id="overlord4Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>Na noite em que seu MMORPG favorito está programado para ser encerrado, o jogador veterano Momonga permanece conectado até o relógio chegar a zero. A tela fica escura por apenas alguns momentos antes de ele se encontrar completamente imerso no mundo online de Yggdrasil. Deixado com todos os poderes devastadores de seu personagem, domínio total sobre seus NPCs leais, e com nada melhor para fazer... Momonga decide tentar dominar o mundo.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação, Fantasia
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/6476" target="_blank">Itou Naoyuki</a> (<i>No Guns Life, Overlord</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/731" target="_blank"><img loading="lazy" src="../../../Estúdios/Madhouse_studio.png" class="Studio"></a> (<i>Sonny boy, No Guns Life</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 05/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16296" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/48895" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/overlord" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/xa-30y7GImM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Abertura</b><br>Hollow Hunger<br><a href="https://open.spotify.com/artist/2qaq1aaJNXMlqsdS50FDrW?si=72bQ4GZgSxOU09BKz4PdgA">OxT</a></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/mX1rbYoU52o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/tNYQjEyTO6s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Trailer 3</b></p>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- MADE IN ABYSS 2 ----------------------------------------------------------------------------->
-        <div id="abyss2">
-            <h1 class="animeTitle">MADE IN ABYSS 2</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/MADE IN ABYSS 2.jpg" alt="MADE IN ABYSS 2" id="abyss2Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>Na história, um enorme buraco surgiu na Terra dando a oportunidade de se explorar um mundo completamente novo. Riko, uma garota que vive em uma cidade a beira desse abismo, sonha em ser uma exploradora, assim como sua mãe. Em um certo dia, ela encontra um robô em forma de garoto, que decide a ajudar a chegar até o mais fundo dos andares do abismo, para que assim possa encontrar alguma pista da sua mãe desaparecida.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Aventura, Drama, Fantasia
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/4327" target="_blank">Kojima Masayuki </a>(<i>Black Bullet, Monster</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/2950" target="_blank"><img loading="lazy" src="../../../Estúdios/kinema_citrus.png" class="Studio"></a> (<i>Tate no yuusha, Plastic memories, Black Bullet</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 06/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Estou curioso em como seremos traumatizados novamente nessa temp.
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/15359" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/41084" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><!--<a href="https://www.crunchyroll.com/pt-br/dr-stone" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a>--></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/EwbHVNLPM4g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Teaser</b><br>Gold<br><a href="https://open.spotify.com/artist/0k7JZhYS35IewiKNHW7KMj?si=vg9VsQsxQ1yAQ7ocska2EQ">EGOIST</a></p>
-                    </li>-->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/BpWKU1rm1Pk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer 1</b></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/lsDt6xQQxYY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Trailer 2</b></p>
-                    </li> 
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- SHADOWS HOUSE 2 ----------------------------------------------------------------------------->
-        <div id="shadows2">
-            <h1 class="animeTitle">SHADOWS HOUSE 2</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/SHADOWS HOUSE 2.png" alt="SHADOWS HOUSE 2" id="shadows2Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>A história acompanha uma empregada chamada Emilyko, que por mais que se pareça exatamente como uma garota comum, em verdade, é uma boneca animada. Ela serve a família Shadow, onde os membros são sombras misteriosas que vagam pela casa. Sua função é estar ao lado de Kate Shadow, e aprender tudo o que puder para servir adequadamente sua mestra.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Slice of life, Sobrenatural
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/33240" target="_blank">Oohashi Kazuki</a> (<i>Shadows House</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/54910" target="_blank"><img loading="lazy" src="../../../Estúdios/Cloverworks.png" class="Studio"></a> (<i>Akebi-chan, Sono Bisque doll, Horimiya</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 09/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16629" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/49782" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/shadows-house" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/pYoCk6Ffmfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer 1</b><br>Gold<br><a href="https://open.spotify.com/artist/0k7JZhYS35IewiKNHW7KMj?si=vg9VsQsxQ1yAQ7ocska2EQ">EGOIST</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/e1PCOhrEE0w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/8cQCn63acJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b></p>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Dr. STONE: Ryusui ---------------------------------------------------------------------------------->
-        <div id="stone2">
-            <h1 class="animeTitle">Dr. STONE: Ryusui</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/Dr. STONE Ryusui.jpg" alt="Dr. STONE: Ryusui" id="stone2Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Episódio original servindo como uma ponte para a terceira temporada.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Aventura, Ficção Científica
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/35837" target="_blank">??? </a>(<i></i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/917" target="_blank"><img loading="lazy" src="../../../Estúdios/TMS entertainment.png" class="Studio"></a> (<i>Kanojo, Okarishimasu; Fruits Basket</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 10/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 1
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16164" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/50612" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/dr-stone" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/xR0mAOlclHg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer</b><!--<br>Gold<br><a href="https://open.spotify.com/artist/0k7JZhYS35IewiKNHW7KMj?si=vg9VsQsxQ1yAQ7ocska2EQ">EGOIST</a>--></p>
-                    </li>
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/I1raNUriVU0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Teaser</b></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/MEGBF9stDy0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Abertura</b><br>Good Morning [New] World!<br><a href="https://open.spotify.com/artist/2SIBY7Jwq1kYng12Zguo3C?si=OJiQnNqJRYK2BcARdV_eQQ" target="_blank">Burnout Sindromes</a></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Hataraku Maou-sama!! 2 ----------------------------------------------------------------------------->
-        <div id="hataraku2">
-            <h1 class="animeTitle">Hataraku Maou-sama!! 2</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/Hataraku Maou-sama!! 2.jpg" alt="Hataraku Maou-sama!! 2" id="hataraku2Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse:</b> Depois de ter sido derrotado pelo grande herói, um Rei Demônio decide fugir para uma outra dimensão e acaba indo parar na Terra, mas, diferente do que imaginava, seus poderes são quase inexistente ali, o forçando a ter que assumir uma forma comum.<br>&emsp;Alguns anos depois, e agora conhecido como Satou Mao, o Rei Demônio se esforça muito para… Trabalhar em uma lanchonete?
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Comédia, Fantasia, Romance
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/11638" target="_blank">Chikushi Daisuke </a>(<i>Isekai Cheat Magician</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/39884" target="_blank"><img loading="lazy" src="../../../Estúdios/3Hz.png" class="Studio"></a> (<i>Healer Girl, Black Fox, SAO alternative</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 14/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: -----
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16104" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/48413" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/the-devil-is-a-part-timer" target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/j2MJ1tfIyrY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer 1</b><!--<br>Gold<br><a href="https://open.spotify.com/artist/0k7JZhYS35IewiKNHW7KMj?si=vg9VsQsxQ1yAQ7ocska2EQ">EGOIST</a>--></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/w8cicProunA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer 2</b></p>
-                    </li> 
-                    <!--<li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/8cQCn63acJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Encerramento</b></p>
-                    </li> -->
-                </ul>
-            </div>
-        </div>
-
-        <br><br>
-        <!----------------- Dungeon ni Deai 4 ----------------------------------------------------------------------------->
-        <div id="dungeon4">
-            <h1 class="animeTitle">Dungeon ni Deai 4</h1>
-            <div class="grid-thumb">
-                <!-- Thumb ----->
-                <img loading="lazy" src="Continuações/Dungeon ni Deai 4.jpg" alt="Dungeon ni Deai 4" id="dungeon4Thumb">
-                <!-- Sinopse -------->
-                <p class="info"><b>Sinopse: </b>A história acompanha Bell, um aventureiro subestimado por todos por ser um novato inexperiente, entretanto, aos poucos, Bell vai mostrado uma enorme aptidão como aventureiro, enfrentando desafios cada vez mais difíceis no complexo sistema de labirintos conhecido como Dungeon.
-                <br><br>
-                <!-- Gênero -------------->
-                <b>Gênero:</b> Ação, Aventura, Comédia, Fantasia
-                <br><br>
-                <!-- Diretor ------------------->
-                <b>Diretor:</b> <a href="https://anidb.net/creator/1794" target="_blank">Tachibana Hideki</a> (<i>Dungeon ni deai</i>)
-                <br>
-                <!-- Estúdio ------------------------->
-                <b>Estúdio: </b><a href="https://anidb.net/creator/720" target="_blank"><img loading="lazy" src="../../../Estúdios/J.C.Staff.png" class="Studio"></a> (<i>Virgin Road, Dungeon ni Deai, Edens Zero</i>)
-                <br><br>
-                <!-- Data ----------------------------------------->
-                <b>Estréia:</b> 23/07
-                <br>
-                <!-- Episódios ------------------------------------------->
-                <b>Episódios:</b> 12
-                <br><br>
-                <!-- Comentários ------------------------------------------------->
-                <b>Comentários: </b>V: Bem q o diretor da primeira temp podia voltar ;-;
-                <br><br>
-                <!-- AniDB e MAL do anime ------------------------------------------------>
-                <a href="https://anidb.net/anime/16032" target="_blank"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/47164" target="_blank"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a target="_blank"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 40%;"></a></p>
-            </div>
-
-                <br><br>
-
-            <div id="orientTrailers">
-                <p style="text-align: center;"><b>Vídeos</b></p>
-
-                <br><br>
-                <!-- Lista de Trailers ----------------------------------------------------------------->
-                <ul class="trailer">
-                    <!-- <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/pYoCk6Ffmfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientTrailer"><b>Trailer 1</b><br>Gold<br><a href="https://open.spotify.com/artist/0k7JZhYS35IewiKNHW7KMj?si=vg9VsQsxQ1yAQ7ocska2EQ">EGOIST</a></p>
-                    </li> -->
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/RglcGT_IoX0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientOP"><b>Trailer</b></p>
-                    </li>
-                    <li>
-                        <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/1Z_0xP-bS4Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <p id="orientED"><b>Trailer 2</b></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
-    <script src="Jul2022.js"></script>
-    <script src="../../../main.js"></script>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9107034052351414"
-     crossorigin="anonymous"></script>
-
-     <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-9107034052351414"
-     data-ad-slot="7233739561"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9107034052351414"
-     crossorigin="anonymous"></script>
-
-</body>
-</html>
+      // this is optional (for preload covers)
+      for (let index = 0; index < this.tracks.length; index++) {
+        const element = this.tracks[index];
+        let link = document.createElement('link');
+        link.rel = "prefetch";
+        link.href = element.cover;
+        link.as = "image"
+        document.head.appendChild(link)
+      }
+    }
+  });
