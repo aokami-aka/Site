@@ -61,6 +61,13 @@ new Vue({
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/1,000,000,000,000,000,000,000,000%20Love.mp3?raw=true",
             url: "https://open.spotify.com/track/7r7AFeFqZHVxa85ffesTAY?si=c2279ad29a504e0b",
           },
+          {
+            name: "Aimuin Love",
+            artist: "Hack and Berry",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Yurei%20Deco_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Aimuin%20Love.mp3?raw=true",
+            url: "",
+          },
 
           {   // Isekai Ojisan
             name: "story",
@@ -84,13 +91,13 @@ new Vue({
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Mirai%20no%20Hero-tachi%20e.mp3?raw=true",
             url: "https://www.youtube.com/channel/UCmAutZSvFH5mkR9OoPtpOmQ",
           },
-          // {   
-          //   name: "Kaerimichi no Iro",
-          //   artist: "Shou Takeyaki",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Kumichou%20Musume%20to%20Sewagakari_01.webp?raw=true",
-          //   source: "",
-          //   url: "",
-          // },
+          {   
+          name: "Kaerimichi no Iro",
+          artist: "Shou Takeyaki",
+          cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Kumichou%20Musume%20to%20Sewagakari_01.webp?raw=true",
+          source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Kaerimichi%20no%20Iro.mp3?raw=true",
+          url: "",
+          },
 
           {   // Bucchigire
             name: "Danzai Democracy",
@@ -132,6 +139,13 @@ new Vue({
           },
 
           {   // Overlord IV
+            name: "Hollow Hunger",
+            artist: "OxT",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Overlord%20IV.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Hollow%20Hunger.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2qaq1aaJNXMlqsdS50FDrW?si=vnKQ1smzSfqngUBubUe-3A",
+          },
+          {   
             name: "No Man´s Dawn",
             artist: "Mayu Maeshima",
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Continua%C3%A7%C3%B5es/Overlord%20IV_01.webp?raw=true",
