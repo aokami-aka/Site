@@ -49,7 +49,7 @@ new Vue({
           {
             name: "Awake",
             artist: "Saori Hayami",
-            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/rwby.webp?raw=true",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/rwby_02.webp?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Awake.mp3?raw=true",
             url: "https://open.spotify.com/artist/32UDgij5Tm7EtyRRCC1JTN?si=9B1_DqDwTJeo8R5QfyHmWg",
           },
