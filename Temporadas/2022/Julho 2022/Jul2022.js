@@ -122,6 +122,22 @@ new Vue({
             url: "https://open.spotify.com/artist/0pWR7TsFhvSCnbmHDjWgrE?si=ikCNQF5WSdeNcwT0jrMiMA",
           },
 
+          {   // Hoshi no Samidare
+            name: "Gyoukou",
+            artist: "Half Time Old",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Hoshi%20no%20Samidare.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Gyoukou.mp3?raw=true",
+            url: "https://open.spotify.com/track/4l4OxhHdAZuVcjoCHapPwk?si=2e706185272c4939",
+          },
+
+          {   // Kuro no Shoukanshi
+            name: "Ataman Naka Dead End",
+            artist: "Retbear",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Kuro%20no%20Shoukanshi.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Ataman%20Chu%20Dead%20End.mp3?raw=true",
+            url: "https://open.spotify.com/track/1muALek1dLnnpVzZzDEHfC?si=7262954b41c042c7",
+          },
+
           {   // Kanojo Okarishimasu 2
             name: "Himitsu Koigokoro",
             artist: "Chico With Honeyworks",
