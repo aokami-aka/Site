@@ -57,8 +57,7 @@ a:hover {
 .topnav {
     border-radius: 20px;
     overflow: hidden;
-    background: url(../../SummerBackground.jfif);
-    background-position:left;
+    background: url(../../SummerBackground.gif);
     background-size: cover;
 }
 .topnav a {
@@ -104,7 +103,7 @@ a:hover {
     background-color: brown;
     font-weight: bolder;
     color: orange;
-    cursor: initial;
+    cursor: pointer;
 }
 .topnav a.active, #phoneIcon {
     background-color: white;
