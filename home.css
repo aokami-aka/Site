@@ -23,8 +23,7 @@ body {
 .topnav {
     border-radius: 20px;
     overflow: hidden;
-    background: url(Temporadas/SpringBackground.jpg);
-    background-position: bottom;
+    background: url(Temporadas/SpringBackground.gif);
     background-size: cover;
 }
 .topnav a {
@@ -70,7 +69,7 @@ body {
     background-color: brown;
     font-weight: bolder;
     color: orange;
-    cursor: initial;
+    cursor: pointer;
 }
 .topnav a.active, #phoneIcon {
     background-color: white;
