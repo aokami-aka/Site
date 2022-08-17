@@ -15,7 +15,6 @@
     <link href="home.css" rel="stylesheet" type="text/css" />    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-    <link rel="shortcut icon" href="favicon.png">
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KWH7PBTY"></script>
@@ -34,6 +33,22 @@
 
     <link rel="alternate" href="" hreflang="pt-br" />
     <meta name="robots" content="index, follow">
+    
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://animeguides.vercel.app",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                     "urlTemplate": "https://animeguides.vercel.app/search?q={Guias}"
+                },
+                "query-input": "required name=Guias"
+            }
+         }
+    </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="og:url" content="https://animeguides.vercel.app" />
