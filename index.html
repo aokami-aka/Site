@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guias de temporada</title>
+    <title>AnimeGuides - Guias de Temporada</title>
 
     <link href="home.css" rel="stylesheet" type="text/css" />    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
@@ -29,30 +29,74 @@
     </script>
 
     <!-- SEO -->
-    <meta name="description" content="Guia apresentando os animes lançados semanalmente durante as temporadas do ano">
-    <meta name="keywords" content="Guias"/>
+    <link rel= "canonical" href= "https://animeguides.vercel.app"/>
+    <meta name="description" content="Guias acompanhando aos lançamentos dos animes semanais, com suas respectivas informações e datas de lançamento junto com outras informações.">
+    <meta name="keywords" content="Guias, anime, temporada, 2022, primavera, verão, outono, inverno"/>
     <meta name="thumbnail" content="https://raw.githubusercontent.com/aokami-aka/Site/main/favicon.png" />
 
     <link rel="alternate" href="" hreflang="pt-br" />
     <meta name="robots" content="index, follow">
-        
+    
+    <!-- <script type="application/ld+json">
+        {
+            "@context":"https://schema.org",
+            "@graph": [
+                {
+                    "@type":"WebSite",
+                    "@id":"https://animeguides.vercel.app",
+                    "url":"https://animeguides.vercel.app/",
+                    "name":"AnimeGuides",
+                    "description":"Guias sobre os lançamentos semanais de animes e suas temporadas",
+                    "potentialAction": [
+                        {
+                            "@type":"SearchAction",
+                            "target": {
+                                "@type":"EntryPoint",
+                                "urlTemplate":"https://animeguides.vercel.app/?s={search_term_string}"},
+                            "query-input":"required name=search_term_string"}],
+                    "inLanguage":"pt-BR"},
+                {
+                    "@type":"CollectionPage",
+                    "@id":"https://animeguides.vercel.app",
+                    "url":"https://animeguides.vercel.app",
+                    "name":"AnimeGuides - Guias de temporada",
+                    "isPartOf": {
+                        "@id":"https://animeguides.vercel.app"},
+                    "breadcrumb": {
+                        "@id":"https://animeguides.vercel.app"},
+                    "inLanguage":"pt-BR","potentialAction": [ 
+                        {
+                            "@type":"ReadAction","target": [
+                                "https://animeguides.vercel.app"]}]},
+                {
+                    "@type":"BreadcrumbList",
+                    "@id":"https://animeguides.vercel.app",
+                    "itemListElement": [
+                        {
+                            "@type":"ListItem",
+                            "position":1,
+                            "name":"Início",
+                            "item":"https://animeguides.vercel.app"},
+                        {
+                            "@type":"ListItem",
+                            "position":2,
+                            "name":"Guia da Temporada"}]}]}
+    </script> -->
     <script type="application/ld+json">
         {
-            "@context": "https://schema.org/",
+            "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "animeguides",
             "url": "https://animeguides.vercel.app",
             "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://animeguides.vercel.app/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                     "urlTemplate": "https://animeguides.vercel.app/search?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
             }
-        }
+         }
     </script>
-    
-     <script type="application/ld+json">
-        {"@context":"http://schema.org","@type":"Organization","url":"https://animeguides.vercel.app","name":"animeguides","logo":{"@type":"ImageObject","url":"favicon.png","width":343,"height":100}}
-     </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="og:url" content="https://animeguides.vercel.app" />
@@ -71,27 +115,27 @@
     <meta name="format-detection" content="telephone=no">
     <!-- SEO -->
 
+    <!-- ----------- Topnav ------------ -->
+    <nav>
+        <div class="topnav" id="banner">
+            <a class="active" id="home"><i class="fa fa-home"></i>&nbspPágina inicial</a>
+            <a href="Temporadas/2022/Janeiro 2022/Jan2022.html" id="winter"><i class="far fa-snowflake"></i>&nbspJaneiro 2022</a>
+            <a href="Temporadas/2022/Abril 2022/Abr2022.html" id="spring"><i class="fa fa-leaf"></i>&nbspAbril 2022</a>
+            <a href="Temporadas/2022/Julho 2022/Jul2022.html" id="summer"><i class="fas fa-sun"></i>&nbspJulho 2022</a>
+            <a href="Temporadas/2022/Outubro 2022/Out2022.html" id="fall"><i class="fab fa-pagelines"></i>&nbspOutubro 2022</a>
+
+            <a href="javascript:void(0);" class="icon" id="phoneIcon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </nav>
+
 </head>
-<body>
+<body class="background">
      <!-- Google Tag Manager (noscript) -->
      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FBP6NK"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-
-    <body class="background">
-
-    <!-- ----------- Topnav ------------ -->
-    <div class="topnav" id="banner">
-        <a class="active" id="home"><i class="fa fa-home"></i>&nbspPágina inicial</a>
-        <a href="Temporadas/2022/Janeiro 2022/Jan2022.html" id="winter"><i class="far fa-snowflake"></i>&nbspJaneiro 2022</a>
-        <a href="Temporadas/2022/Abril 2022/Abr2022.html" id="spring"><i class="fa fa-leaf"></i>&nbspAbril 2022</a>
-        <a href="Temporadas/2022/Julho 2022/Jul2022.html" id="summer"><i class="fas fa-sun"></i>&nbspJulho 2022</a>
-        <a href="Temporadas/2022/Outubro 2022/Out2022.html" id="fall"><i class="fab fa-pagelines"></i>&nbspOutubro 2022</a>
-
-        <a href="javascript:void(0);" class="icon" id="phoneIcon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </div>
 
     <div id="Guides">
         <div id="years">
@@ -108,7 +152,6 @@
                     <a href="Temporadas/2022/Outubro 2022/Out2022.html"><img src="folders/folder icon_fall.png" alt="Outubro 2022" class="SeasonPaste"><br>Outubro 2022</a>
                 </div>
             </div>
-            
             <!-- <div id="year2023">
                 <label for="2023"><img src="folders/folder icon_2023.png" alt="2023" class="yearPaste"></label>
                 <input type="checkbox" id="2023" name="group">
