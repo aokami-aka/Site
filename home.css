@@ -14,6 +14,15 @@ body {
 
 /* --------- Topnav ---------- */
 
+h1 img {
+    display: block;
+    margin: auto;
+
+    width: 100px;
+
+    animation: FadeIn 1s linear;
+}
+
 #banner {
     border: 5px solid;
     border-color: white;
@@ -78,7 +87,7 @@ body {
 .topnav .icon {
     display: none;
 }
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 882px) {
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
         float: right;
@@ -86,7 +95,7 @@ body {
     } 
        
 }
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 882px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
         position: absolute;
@@ -99,7 +108,7 @@ body {
         text-align: left;
     }    
 }
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 882px) {
     #home {
         border-radius: 20px 0px 0px 0px;
     }
@@ -177,9 +186,8 @@ a {
 
 #years {
     text-align: center;
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 @keyframes rotateMenu {
@@ -247,9 +255,19 @@ a {
     transform: scale(1.3);
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 882px) {
     .drive {
         display:block;
     }
 
+}
+
+@media screen and (max-width: 882px) {
+    #years {
+        display: grid;
+        text-align: center;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    
 }
