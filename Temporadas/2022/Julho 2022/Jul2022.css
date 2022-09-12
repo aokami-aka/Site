@@ -48,6 +48,14 @@ a:hover {
 /* -------------------- */
 
 /* --------- Topnav ---------- */
+h1 img {
+    display: block;
+    margin: auto;
+
+    width: 100px;
+
+    animation: FadeIn 1s linear;
+}
 #banner {
     border: 5px solid;
     border-color: white;
@@ -106,6 +114,7 @@ a:hover {
     cursor: pointer;
 }
 .topnav a.active, #phoneIcon {
+    height: 60px;
     background-color: white;
     color: black;
 }
