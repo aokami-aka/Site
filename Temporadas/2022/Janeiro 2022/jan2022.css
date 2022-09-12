@@ -26,6 +26,15 @@ a:hover {
 /* -------------------- */
 
 /* --------- Topnav ---------- */
+h1 img {
+    display: block;
+    margin: auto;
+
+    width: 100px;
+
+    animation: FadeIn 1s linear;
+}
+
 #banner {
     border: 5px solid;
     border-color: white;
