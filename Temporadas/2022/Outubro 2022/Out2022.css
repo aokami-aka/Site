@@ -20,7 +20,7 @@ body {
 
 ::-webkit-scrollbar-track{
 
-	border: 5px solid rgb(251, 255, 0);
+	border: 5px solid rgb(134, 24, 24);
 	background-color: #000000;
 }
 
@@ -32,7 +32,7 @@ body {
 
 ::-webkit-scrollbar-thumb
 {
-	background-color: #ff2600;
+	background-color: #ff960d;
 	border-radius: 10px;
 }
 
