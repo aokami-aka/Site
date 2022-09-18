@@ -26,6 +26,15 @@ a:hover {
 /* -------------------- */
 
 /* --------- Topnav ---------- */
+h1 {
+    text-align: center;
+    
+    background-color: rgba(204, 200, 200, 0.705);
+    border: 4px solid purple;
+    padding: 5px;
+    border-radius: 60%;
+    border-style: inset;
+    }
 h1 img {
     display: block;
     margin: auto;
