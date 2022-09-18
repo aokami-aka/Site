@@ -48,6 +48,23 @@ a:hover {
 /* -------------------- */
 
 /* --------- Topnav ---------- */
+h1 {
+    text-align: center;
+    
+    background-color: rgba(204, 200, 200, 0.705);
+    border: 4px solid purple;
+    padding: 5px;
+    border-radius: 60%;
+    border-style: inset;
+    }
+    h1 img {
+    display: block;
+    margin: auto;
+    
+    width: 100px;
+    
+    animation: FadeIn 1s linear;
+    }
 h1 img {
     display: block;
     margin: auto;
@@ -113,10 +130,15 @@ h1 img {
     color: orange;
     cursor: pointer;
 }
+.topnav a.active, #home {
+    border-radius: 15px 0px 0px 15px;
+  }
 .topnav a.active, #phoneIcon {
-    height: 60px;
     background-color: white;
     color: black;
+}
+#phoneIcon {
+    height: 63px;
 }
 .topnav .icon {
     display: none;
@@ -144,10 +166,10 @@ h1 img {
 }
 @media screen and (max-width: 973px) {
     #home {
-        border-radius: 20px 0px 0px 0px;
+        border-radius: 15px 0px 0px 15px;
     }
     #phoneIcon {
-        border-radius: 0px 20px 0px 0px;
+        border-radius: 0px 15px 0px 0px;
     }
     #fall {
         border-radius: 0px 0px 20px 20px;
@@ -957,7 +979,7 @@ ul {
 #mp3ShowDisable {
     cursor: pointer;
     position: fixed;
-    bottom: 100px;
+    bottom: 170px;
     right: 32px;
     border-radius: 100%;
     display: flex;
@@ -969,6 +991,19 @@ ul {
 
     z-index: 5;
 }
+#continue img{
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 100px;
+    right: 32px;
+    border-radius: 100%;
+    box-shadow: 3px 3px 3px black;
+    transition: all .4s;
+  
+    z-index: 5;
+  }
 .to-top {    
   background: white;
   position: fixed;
@@ -994,39 +1029,6 @@ ul {
   opacity:1;
 }
 
-#link {
-    margin-top: 10px;
-    margin-left: 10px;
-
-    border-top: 1px solid #000000;
-    background: #beae03;
-    background: -webkit-linear-gradient(top, #f8fc03, #938c01);
-    background: -moz-linear-gradient(top, #fc6f03, #d77300);
-    background: -o-linear-gradient(top, #03fc6f, #035906);
-    padding: 10.5px 21px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-    color: rgb(255, 0, 0);
-    font-size: 18px;
-    text-decoration: none;
-    vertical-align: middle;
-    font-family: cursive;
-
-    transition: all ease-out 0.5s;
-    }
- #link:hover {
-    border-top-color: #8f9606;
-    background: #969606;
-    color: rgb(255, 0, 0);
-
-    transform: scaleX(200%);
-    margin-left: 90px;
-}
 #anchor {
     text-decoration: none;
     color: #000000;
