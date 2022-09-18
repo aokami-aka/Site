@@ -56,15 +56,19 @@
 </head>
 <body class="background">
     
-    <div id="mp3ShowDisable">
-        <img title="Mostrar/Esconder player" onclick="ShowHidden('drag')" src="../../../IconMp3.png"> 
+    <div id="buttons">
+        <div id="mp3ShowDisable">
+            <img title="Mostrar/Esconder player" onclick="ShowHidden('drag')" src="../../../IconMp3.png"> 
+        </div>
+
+        <div id="continue">
+            <a href="#continuacoes"><img title="Ír para as continuações" src="Continuações/continueButton.webp"></a>
+        </div>
+
+        <a href="#" class="to-top">
+            <i class="fa fa-arrow-up"></i>
+        </a>
     </div>
-
-    <a href="#" class="to-top">
-        <i class="fa fa-arrow-up"></i>
-    </a>
-
-    <a href="#continuacoes"><button id="link">Continuações</button></a>
 
     <!------------------------------------- Music Player -------------------------------------------->
     <div id="drag" ref="ActualPosition">
