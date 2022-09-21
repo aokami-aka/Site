@@ -22,7 +22,7 @@ html {
 /* ------ Background do site --------- */
 body {
   background-image: url('Thumb_Out_2022.jpg');
-  min-width: 600px;
+  min-width: 991px;
 
   font-family: cursive;
 }
