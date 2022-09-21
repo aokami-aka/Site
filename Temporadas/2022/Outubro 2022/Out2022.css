@@ -2,19 +2,22 @@
   box-sizing: border-box;
 }
 
+
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
 }
 
 /* ------ Background do site --------- */
 body {
   background-image: url('Thumb_Out_2022.jpg');
-  min-width: 543px;
+  min-width: 470px;
 
   font-family: cursive;
 }
 .background {
-  animation: backgroundAnimated 500s linear infinite;
+  animation: backgroundAnimated 80s linear infinite;
 }
 /* ---------------------------- */
 
