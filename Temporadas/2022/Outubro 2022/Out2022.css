@@ -11,6 +11,8 @@ html {
   section {
     width: 95%;
     margin: auto;
+
+    zoom: 10%;
   }
   
 }
