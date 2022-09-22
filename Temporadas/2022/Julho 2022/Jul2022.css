@@ -14,7 +14,7 @@ body {
     font-family: cursive;
 }
 .background {
-    animation: backgroundAnimated 500s linear infinite;
+    animation: backgroundAnimated 1500s linear infinite;
 }
 /* ---------------------------- */
 
@@ -46,7 +46,9 @@ a:hover {
     font-weight: bold;
 }
 /* -------------------- */
-
+section {
+    zoom: 80%;
+}
 /* --------- Topnav ---------- */
 h1 {
     text-align: center;
