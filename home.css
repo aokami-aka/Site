@@ -1,15 +1,18 @@
 html {
-    scroll-behavior: smooth;
-  }
+    scroll-behavior: smooth;       
+    }
 
 body {
-    min-width: 543px;
     background-image: url('Temporadas/Home_BG.jpg');
 
     font-family: cursive;
 }
 .background {
-    animation: backgroundAnimated 20s linear infinite;
+    animation: backgroundAnimated 250s linear infinite;
+}
+
+html {
+    zoom: 80%;
 }
 
 /* --------- Topnav ---------- */
