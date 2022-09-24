@@ -9,13 +9,132 @@ new Vue({
         currentTime: null,
         isTimerPlaying: false,
         tracks: [
-          {         // Lycoris Recoil
-            artist: "ClariS",
-            name: "Alive",
-            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Estr%C3%A9ias/Lycoris%20Recoil.jpg?raw=true",
+          {         // Tensei Shitara Ken Deshita
+            artist: "Kyoudan & The Akeboshi Rockets",
+            name: "Tensei Shitara Ken deshita",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Alive.mp3?raw=true",
-            url: "https://open.spotify.com/track/5cBmwNnKGLPRCQWzFS0r0Y?si=5812e6d2146641f7",
-          }
+            url: "https://open.spotify.com/artist/5STm6pQxk2nHd7JVcQCBoa?si=2W03ZtdQRzuN28WJCpBzqg",
+          },//,{     // Tensei Shitara Ken Deshita
+          //   artist: "Maon Kurosaki",
+          //   name: "more＜STRONGLY",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita_02.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/4SLTgwsFXbomwbNjsAvs3E?si=kFDnabUuS2qJdzL3dRt1-g",
+          // },
+          // {     // Uchi no Shishou
+          //   artist: "GARNiDELiA",
+          //   name: "Genai Yuugi",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Uchi%20no%20Shishou%20wa%20Shippo%20ga%20Nai.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/7MIbdLkqD1qQE35LSISIM6?si=vZVFJqBDRpGVtfmR0lbgEA",
+          // }, {    // Uchi no Shishou
+          //   artist: "Hinano",
+          //   name: "Virginia",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Uchi%20no%20Shishou%20wa%20Shippo%20ga%20Nai_03.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/5YWTfW6V637AZqljGfrWoI?si=jf5vMS3BRCeBiJw1GSzVgg",
+
+          // },
+          // {     // Kokyu no Karazu
+          //   artist: "Ziyoou-vachi",
+          //   name: "MYSTERIOUS",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu.jpg?raw=true",
+          //   source: "",
+          //   url: "",
+          // },{   // Kokyu no Karazu
+          //   artist: "krage",
+          //   name: "Natsu no Yuki",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu_02.png?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/35jRIUtWCUITFLfjhYwkFx?si=0dg4QciYQD2mjQn5jeMZEg",
+          // },
+          // {   // Mobile Suit Gundam: Suisei no Majo
+          //   artist: "YOASOBI",
+          //   name: "Shukufuku",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo.jfif?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/64tJ2EAv1R6UaZqc4iOCyj?si=7up_KnQaTQSdEH8OooAYIA",
+          // }, {  // Mobile Suit Gundam: Suisei no Majo
+          //   artist: "",
+          //   name: "",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo_01.jpg?raw=true",
+          //   source: "",
+          //   url: "",
+          // },
+          // {   // C danchi
+          //   artist: "",
+          //   name: "",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/C%20Danshi.jpg?raw=true",
+          //   source: "",
+          //   url: "",
+          // },{   // C danchi
+          //   artist: "",
+          //   name: "",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/C%20Danshi_01.jpg?raw=true",
+          //   source: "",
+          //   url: "",
+          // },
+          // {     // Shinobi no itoki
+          //   artist: "Humbreaders",
+          //   name: "Hikari",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Shinobi%20no%20Ittoki.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/32k7rSC70F3C7qif9Pgavi?si=Ht3bFjWnSoyVhW6xjtcD1Q",
+          // }, {      // Shinobi no itoki
+          //   artist: "hockrockb",
+          //   name: "Oboetate",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Shinobi%20no%20Ittoki_02.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/56pKIRNnzK6xCW508ohOo3?si=czUrIiVLT5aAz2gcZz3dKA",
+          // },
+          // {     // Do it yourself
+          //   artist: "Katajou DIY-bu!!",
+          //   name: "Dokidoki Idea wo Yoroshiku!",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/do%20it%20Yourself!.webp?raw=true",
+          //   source: "",
+          //   url: "",
+          // }, {      // Do it yourself
+          //   artist: "",
+          //   name: "",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/do%20it%20Yourself!_01.png?raw=true",
+          //   source: "",
+          //   url: "",
+          // },
+          // {     // Blue Lock
+          //   artist: "UNISON SQUARE GARDEN",
+          //   name: "Chaos wo Kiwamaru",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/449AEgfeOxqAuRn0uX6l3u?si=SkJZnzc8TpGW35z6OYWCXw",
+          // }, {      // Blue Lock
+          //   artist: "Shingo Nakamura",
+          //   name: "WINNER",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK_02.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/58zz0VTpGNHn7MGTlW2cxQ?si=aWlwHobXTZqp3af9RTsmeQ",
+          // },
+          // {     // Chainsawman
+          //   artist: "Kenshi Yonezu",
+          //   name: "KICK BACK",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsaw%20man.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/1snhtMLeb2DYoMOcVbb8iB?si=9J1_FX5xQYygvaorO2MhMw",
+          // },
+          // {     // 4-nin
+          //   artist: "NACHERRY",
+          //   name: "Eclipse",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku.jpg?raw=true",
+          //   source: "",
+          //   url: "https://open.spotify.com/artist/2eTqjdLK1BCOgC7aYJgq6Y?si=8FvB4INLSTC3bivy8jw2_g",
+          // }, {      // 4-nin
+          //   artist: "",
+          //   name: "",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku_02.jpg?raw=true",
+          //   source: "",
+          //   url: "",
+          // }
+
         ],
         currentTrack: null,
         currentTrackIndex: 0,
@@ -58,7 +177,7 @@ new Vue({
       updateBar(x) {
         let progress = this.$refs.progress;
         let maxduration = this.audio.duration;
-        let position = (x - 50) - progress.offsetLeft;
+        let position = x - progress.offsetLeft;
         let percentage = (100 * position) / progress.offsetWidth;
         if (percentage > 100) {
           percentage = 100;
