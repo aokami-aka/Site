@@ -1030,7 +1030,6 @@ opacity:1;
 
 /*------------------------------------- mp3 player ---------------------------- */
 #drag {
-  display: none;
   position: fixed;
   left: 50px;
   top: 90px;
@@ -1041,7 +1040,7 @@ opacity:1;
   z-index: 100;
 }
 #drag:hover {
-  /* cursor: move; */
+  cursor: move;
   opacity: 1;
 }
 
@@ -1297,7 +1296,6 @@ opacity:1;
   position:initial;
   height: 6px;
   width: 100%;
-  cursor: pointer;
   background-color: brown;
   display: inline-block;
   border-radius: 10px;
