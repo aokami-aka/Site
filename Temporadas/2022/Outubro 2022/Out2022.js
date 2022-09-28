@@ -9,13 +9,13 @@ new Vue({
         currentTime: null,
         isTimerPlaying: false,
         tracks: [
-          {         // Tensei Shitara Ken Deshita
-            artist: "Kyoudan & The Akeboshi Rockets",
-            name: "Tensei Shitara Ken deshita",
-            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita.jpg?raw=true",
-            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Alive.mp3?raw=true",
-            url: "https://open.spotify.com/artist/5STm6pQxk2nHd7JVcQCBoa?si=2W03ZtdQRzuN28WJCpBzqg",
-          },//,{     // Tensei Shitara Ken Deshita
+          // {         // Tensei Shitara Ken Deshita
+          //   artist: "Kyoudan & The Akeboshi Rockets",
+          //   name: "Tensei Shitara Ken deshita",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita.jpg?raw=true",
+          //   source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Alive.mp3?raw=true",
+          //   url: "https://open.spotify.com/artist/5STm6pQxk2nHd7JVcQCBoa?si=2W03ZtdQRzuN28WJCpBzqg",
+          //},{     // Tensei Shitara Ken Deshita
           //   artist: "Maon Kurosaki",
           //   name: "more＜STRONGLY",
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita_02.jpg?raw=true",
@@ -133,7 +133,15 @@ new Vue({
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku_02.jpg?raw=true",
           //   source: "",
           //   url: "",
-          // }
+          // },
+          {       //Spy x family 2
+            artist: "BUMP OF CHICKEN",
+            name: "SOUVENIR",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/spy%20x%20family%202.jfif?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Souvenir.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0hSFeqPehe7FtCNWuQ6Bsy?si=QfTnda0mSG2VcKKQ54AAqw",
+
+          }
 
         ],
         currentTrack: null,
