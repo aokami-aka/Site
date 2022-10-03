@@ -22,20 +22,20 @@ new Vue({
           //   source: "",
           //   url: "https://open.spotify.com/artist/4SLTgwsFXbomwbNjsAvs3E?si=kFDnabUuS2qJdzL3dRt1-g",
           // },
-          // {     // Uchi no Shishou
-          //   artist: "GARNiDELiA",
-          //   name: "Genai Yuugi",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Uchi%20no%20Shishou%20wa%20Shippo%20ga%20Nai.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/7MIbdLkqD1qQE35LSISIM6?si=vZVFJqBDRpGVtfmR0lbgEA",
-          // }, {    // Uchi no Shishou
-          //   artist: "Hinano",
-          //   name: "Virginia",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Uchi%20no%20Shishou%20wa%20Shippo%20ga%20Nai_03.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/5YWTfW6V637AZqljGfrWoI?si=jf5vMS3BRCeBiJw1GSzVgg",
+          {     // Uchi no Shishou
+            artist: "GARNiDELiA",
+            name: "Genai Yuugi",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Uchi%20no%20Shishou%20wa%20Shippo%20ga%20Nai.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Gen'ai%20Yuugi.mp3?raw=true",
+            url: "https://open.spotify.com/artist/7MIbdLkqD1qQE35LSISIM6?si=vZVFJqBDRpGVtfmR0lbgEA",
+          }, { 
+            artist: "Hinano",
+            name: "Virginia",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Uchi%20no%20Shishou%20wa%20Shippo%20ga%20Nai_03.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Virginia.mp3?raw=true",
+            url: "https://open.spotify.com/artist/5YWTfW6V637AZqljGfrWoI?si=jf5vMS3BRCeBiJw1GSzVgg",
 
-          // },
+          },
           // {     // Kokyu no Karazu
           //   artist: "Ziyoou-vachi",
           //   name: "MYSTERIOUS",
@@ -49,13 +49,13 @@ new Vue({
           //   source: "",
           //   url: "https://open.spotify.com/artist/35jRIUtWCUITFLfjhYwkFx?si=0dg4QciYQD2mjQn5jeMZEg",
           // },
-          // {   // Mobile Suit Gundam: Suisei no Majo
-          //   artist: "YOASOBI",
-          //   name: "Shukufuku",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo.jfif?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/64tJ2EAv1R6UaZqc4iOCyj?si=7up_KnQaTQSdEH8OooAYIA",
-          // }, {  // Mobile Suit Gundam: Suisei no Majo
+          {   // Mobile Suit Gundam: Suisei no Majo
+            artist: "YOASOBI",
+            name: "Shukufuku",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo.jfif?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/The_Blessing.mp3?raw=true",
+            url: "https://open.spotify.com/artist/64tJ2EAv1R6UaZqc4iOCyj?si=7up_KnQaTQSdEH8OooAYIA",
+          }, //{  // Mobile Suit Gundam: Suisei no Majo
           //   artist: "",
           //   name: "",
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo_01.jpg?raw=true",
@@ -140,7 +140,32 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/spy%20x%20family%202.jfif?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Souvenir.mp3?raw=true",
             url: "https://open.spotify.com/artist/0hSFeqPehe7FtCNWuQ6Bsy?si=QfTnda0mSG2VcKKQ54AAqw",
-
+          }, {
+            artist: "Yama",
+            name: "Shikisai",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/spy%20x%20family%202_01.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Color.mp3?raw=true",
+            url: "https://open.spotify.com/artist/7kOrrFIBIBc8uCu2zbxbLv?si=AjO_lz32QuOgEfI_ySOkvg",
+          },
+          {       // Boku no Hero 6
+            artist: "SUPER BEAVER",
+            name: "Hitamuki",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/boku%20no%20hero%206.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Hitamuki.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0SMhG4gXGD4gzLMMz08cQU?si=8_ArI4LxToucx-xMvs0XgA",
+          },
+          {       // Golden Kamuy 4
+            artist: "ALI",
+            name: "NEVER SAY GOODBYE",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/golden%20kamui%204.jfif?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/never_say_goodbye.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2Qqrew4ZcEwf9NY7UqWGfU?si=a7giZCBgQseDbmUWrT2HiQ",
+          }, {
+            artist: "THE SPELLBOUND",
+            name: "Subete ga Soko ni Arimasu You ni",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/golden%20kamui%204_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/subete_ga_soko_ni_arimasu_y%C5%8D_ni.mp3?raw=true",
+            url: "https://open.spotify.com/artist/1urc1bS4D4upX4Mb9kLnMb?si=gSkavx5BTYKuDkZvo2Ti3g",
           }
 
         ],
@@ -153,6 +178,7 @@ new Vue({
       play() {
         if (this.audio.paused) {
           this.audio.play();
+          this.audio.volume = 0.25;
           this.isTimerPlaying = true;
         } else {
           this.audio.pause();
