@@ -528,7 +528,10 @@ border: 5px solid;
 border-radius: 20px;
 border-color: rgb(204, 220, 243);
 
-width: 800px;
+width: 500px;
+height: 500px;
+
+object-fit: cover;
 margin: auto;
 } 
 
