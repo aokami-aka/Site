@@ -166,6 +166,19 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/golden%20kamui%204_02.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/subete_ga_soko_ni_arimasu_y%C5%8D_ni.mp3?raw=true",
             url: "https://open.spotify.com/artist/1urc1bS4D4upX4Mb9kLnMb?si=gSkavx5BTYKuDkZvo2Ti3g",
+          },
+          {       // Mob Psycho 3
+            artist: "Mob Choir",
+            name: "1",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Mob%20Psycho%203.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/1.mp3?raw=true",
+            url: "https://open.spotify.com/artist/5HZsYhRCMH3zR0yndRcLVw?si=X6HtZ9jLSC2XGNFBjjmqxA",
+          }, {
+            artist: "Mob Choir",
+            name: "Cobalt",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Mob%20Psycho%203_01.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Cobalt.mp3?raw=true",
+            url: "https://open.spotify.com/artist/5HZsYhRCMH3zR0yndRcLVw?si=X6HtZ9jLSC2XGNFBjjmqxA",
           }
 
         ],
