@@ -72,6 +72,9 @@ width: 100px;
 
 animation: FadeIn 1s linear;
 }
+h2 {
+  cursor: pointer;
+}
 #banner {
   border: 5px solid;
   border-color: white;
@@ -530,8 +533,10 @@ border: 5px solid;
 border-radius: 20px;
 border-color: rgb(204, 220, 243);
 
-width: 800px;
+height: 450px;
+width: 450px;
 margin: auto;
+object-fit: cover;
 } 
 
 #doit {
