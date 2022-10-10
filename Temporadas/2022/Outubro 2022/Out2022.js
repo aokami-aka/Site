@@ -55,13 +55,13 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo.jfif?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/The_Blessing.mp3?raw=true",
             url: "https://open.spotify.com/artist/64tJ2EAv1R6UaZqc4iOCyj?si=7up_KnQaTQSdEH8OooAYIA",
-          }, //{  // Mobile Suit Gundam: Suisei no Majo
-          //   artist: "",
-          //   name: "",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo_01.jpg?raw=true",
-          //   source: "",
-          //   url: "",
-          // },
+          },{ // Mobile Suit Gundam: Suisei no Majo
+            artist: "Shiyui",
+            name: "Kimi yo Kedakaku Are",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Mobile%20Suit%20Gundam%20Suisei%20no%20Majo_01.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Kimiyo%20kedakakuare.mp3?raw=true",
+            url: "https://open.spotify.com/track/0rlYL6IQIwLZwYIguyy3l0?si=70f4750a622c4a1e",
+          },
           // {   // C danchi
           //   artist: "",
           //   name: "",
@@ -152,6 +152,12 @@ new Vue({
             name: "Hitamuki",
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/boku%20no%20hero%206.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Hitamuki.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0SMhG4gXGD4gzLMMz08cQU?si=8_ArI4LxToucx-xMvs0XgA",
+          }, {   
+            artist: "Kiro Akiyama",
+            name: "SKETCH",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/boku%20no%20hero%206_01.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Sketch.webm?raw=true",
             url: "https://open.spotify.com/artist/0SMhG4gXGD4gzLMMz08cQU?si=8_ArI4LxToucx-xMvs0XgA",
           },
           {       // Golden Kamuy 4
