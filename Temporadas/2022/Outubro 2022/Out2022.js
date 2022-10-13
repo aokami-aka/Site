@@ -9,19 +9,19 @@ new Vue({
         currentTime: null,
         isTimerPlaying: false,
         tracks: [
-          // {         // Tensei Shitara Ken Deshita
-          //   artist: "Kyoudan & The Akeboshi Rockets",
-          //   name: "Tensei Shitara Ken deshita",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita.jpg?raw=true",
-          //   source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Julho%202022/Music/Alive.mp3?raw=true",
-          //   url: "https://open.spotify.com/artist/5STm6pQxk2nHd7JVcQCBoa?si=2W03ZtdQRzuN28WJCpBzqg",
-          //},{     // Tensei Shitara Ken Deshita
-          //   artist: "Maon Kurosaki",
-          //   name: "more＜STRONGLY",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita_02.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/4SLTgwsFXbomwbNjsAvs3E?si=kFDnabUuS2qJdzL3dRt1-g",
-          // },
+          {         // Tensei Shitara Ken Deshita
+            artist: "Kyoudan & The Akeboshi Rockets",
+            name: "Tensei Shitara Ken deshita",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Tensei%20shitara%20Ken%20Deshita%20.mp3?raw=true",
+            url: "https://open.spotify.com/artist/5STm6pQxk2nHd7JVcQCBoa?si=2W03ZtdQRzuN28WJCpBzqg",
+          },{     
+            artist: "Maon Kurosaki",
+            name: "more＜STRONGLY",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/moreSTRONGLY.mp3?raw=true",
+            url: "https://open.spotify.com/artist/4SLTgwsFXbomwbNjsAvs3E?si=kFDnabUuS2qJdzL3dRt1-g",
+          },
           {     // Uchi no Shishou
             artist: "GARNiDELiA",
             name: "Genai Yuugi",
@@ -42,13 +42,14 @@ new Vue({
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu.jpg?raw=true",
           //   source: "",
           //   url: "",
-          // },{   // Kokyu no Karazu
-          //   artist: "krage",
-          //   name: "Natsu no Yuki",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu_02.png?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/35jRIUtWCUITFLfjhYwkFx?si=0dg4QciYQD2mjQn5jeMZEg",
-          // },
+          // 
+          {   
+            artist: "krage",
+            name: "Natsu no Yuki",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu_02.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Natsu%20no%20Yuki.mp3?raw=true",
+            url: "https://open.spotify.com/artist/35jRIUtWCUITFLfjhYwkFx?si=0dg4QciYQD2mjQn5jeMZEg",
+          },
           {   // Mobile Suit Gundam: Suisei no Majo
             artist: "YOASOBI",
             name: "Shukufuku",
@@ -81,7 +82,7 @@ new Vue({
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Shinobi%20no%20Ittoki.jpg?raw=true",
           //   source: "",
           //   url: "https://open.spotify.com/artist/32k7rSC70F3C7qif9Pgavi?si=Ht3bFjWnSoyVhW6xjtcD1Q",
-          // }, {      // Shinobi no itoki
+          // }, {      
           //   artist: "hockrockb",
           //   name: "Oboetate",
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Shinobi%20no%20Ittoki_02.jpg?raw=true",
@@ -94,9 +95,9 @@ new Vue({
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/do%20it%20Yourself!.webp?raw=true",
           //   source: "",
           //   url: "",
-          // }, {      // Do it yourself
-          //   artist: "",
-          //   name: "",
+          // }, {      
+          //   artist: "Dubladores",
+          //   name: "Tsuzuku Hanashi",
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/do%20it%20Yourself!_01.png?raw=true",
           //   source: "",
           //   url: "",
@@ -107,20 +108,26 @@ new Vue({
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK.jpg?raw=true",
           //   source: "",
           //   url: "https://open.spotify.com/artist/449AEgfeOxqAuRn0uX6l3u?si=SkJZnzc8TpGW35z6OYWCXw",
-          // }, {      // Blue Lock
+          // }, {     
           //   artist: "Shingo Nakamura",
           //   name: "WINNER",
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK_02.jpg?raw=true",
           //   source: "",
           //   url: "https://open.spotify.com/artist/58zz0VTpGNHn7MGTlW2cxQ?si=aWlwHobXTZqp3af9RTsmeQ",
           // },
-          // {     // Chainsawman
-          //   artist: "Kenshi Yonezu",
-          //   name: "KICK BACK",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsaw%20man.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/1snhtMLeb2DYoMOcVbb8iB?si=9J1_FX5xQYygvaorO2MhMw",
-          // },
+          {     // Chainsawman
+            artist: "Kenshi Yonezu",
+            name: "KICK BACK",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsaw%20man.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/KICK%20BACK.mp3?raw=true",
+            url: "https://open.spotify.com/artist/1snhtMLeb2DYoMOcVbb8iB?si=9J1_FX5xQYygvaorO2MhMw",
+          }, {
+            artist: "Vaundy",
+            name: "Chainsaw Blood",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsaw%20man_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/CHAINSAW%20BLOOD.mp3?raw=true",
+            url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
+          },
           // {     // 4-nin
           //   artist: "NACHERRY",
           //   name: "Eclipse",
