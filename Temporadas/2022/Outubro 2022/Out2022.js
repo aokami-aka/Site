@@ -128,6 +128,19 @@ new Vue({
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/CHAINSAW%20BLOOD.mp3?raw=true",
             url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
           },
+          {      // Urusei Yatsura
+            artist: "Minami, SAKURAmoti",
+            name: "Aiue",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/URUSEI%20YATSURA.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Aiue.mp3?raw=true",
+            url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
+          }, //{
+          //   artist: "Minami, SAKURAmoti",
+          //   name: "Aiue",
+          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/URUSEI%20YATSURA.jpeg?raw=true",
+          //   source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Aiue.mp3?raw=true",
+          //   url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
+          // }
           // {     // 4-nin
           //   artist: "NACHERRY",
           //   name: "Eclipse",
