@@ -36,14 +36,13 @@ new Vue({
             url: "https://open.spotify.com/artist/5YWTfW6V637AZqljGfrWoI?si=jf5vMS3BRCeBiJw1GSzVgg",
 
           },
-          // {     // Kokyu no Karazu
-          //   artist: "Ziyoou-vachi",
-          //   name: "MYSTERIOUS",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu.jpg?raw=true",
-          //   source: "",
-          //   url: "",
-          // 
-          {   
+          {     // Kokyu no Karazu
+            artist: "Ziyoou-vachi",
+            name: "MYSTERIOUS",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/mysterious.mp3?raw=true",
+            url: "https://open.spotify.com/artist/35jRIUtWCUITFLfjhYwkFx?si=0dg4QciYQD2mjQn5jeMZEg",
+          }, {   
             artist: "krage",
             name: "Natsu no Yuki",
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Kokyu%20no%20Karasu_02.png?raw=true",
@@ -108,13 +107,13 @@ new Vue({
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK.jpg?raw=true",
           //   source: "",
           //   url: "https://open.spotify.com/artist/449AEgfeOxqAuRn0uX6l3u?si=SkJZnzc8TpGW35z6OYWCXw",
-          // }, {     
-          //   artist: "Shingo Nakamura",
-          //   name: "WINNER",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK_02.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/58zz0VTpGNHn7MGTlW2cxQ?si=aWlwHobXTZqp3af9RTsmeQ",
-          // },
+          {     
+            artist: "Shingo Nakamura",
+            name: "WINNER",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/winner.mp3?raw=true",
+            url: "https://open.spotify.com/artist/58zz0VTpGNHn7MGTlW2cxQ?si=aWlwHobXTZqp3af9RTsmeQ",
+          },
           {     // Chainsawman
             artist: "Kenshi Yonezu",
             name: "KICK BACK",
@@ -141,13 +140,13 @@ new Vue({
           //   source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Aiue.mp3?raw=true",
           //   url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
           // }
-          // {     // 4-nin
-          //   artist: "NACHERRY",
-          //   name: "Eclipse",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/2eTqjdLK1BCOgC7aYJgq6Y?si=8FvB4INLSTC3bivy8jw2_g",
-          // }, {      // 4-nin
+          {     // 4-nin
+            artist: "NACHERRY",
+            name: "Eclipse",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/eclipse.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2eTqjdLK1BCOgC7aYJgq6Y?si=8FvB4INLSTC3bivy8jw2_g",
+          }, //{      // 4-nin
           //   artist: "",
           //   name: "",
           //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku_02.jpg?raw=true",
