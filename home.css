@@ -140,14 +140,14 @@ a {
 }
 
 #Guides {
+    margin: auto;
+    max-width: 85%;
     padding-bottom: 20px;
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.726);
     border: 3px solid;
     border-radius: 10px;
     border-color: black;
-
-    animation: FadeIn 2s linear;
 }
 
 .yearPaste {
@@ -161,45 +161,57 @@ a {
 }
 .SeasonPaste {
     width: 100px;
+    padding: 10px;
 
     transition: all ease-out 0.5s;
 }
+
 .SeasonPaste:hover {
     transform: translateY(-50px) scale(1.3);
 }
 
 .seasons {
-    display: none;
-
+    display: flex;
+    flex-direction: row;
     transition: all ease-out 0.5s;
 }
+
+@media screen and (max-width: 610px) {
+    .seasons {
+        display: flex;
+        flex-direction: column;
+    }
+    .SeasonPaste {
+        padding: 0px;
+    }
+}
+
 .seasons:hover {
     transform: scale(1.1);
 }
 
-#year2022 input[type="checkbox"] {
-    display: none;
-}
-#year2023 input[type="checkbox"] {
-    display: none;
-}
-
-#year2022 input[type="checkbox"]:checked + div{
-    display: flex;
-    animation: rotateMenu 400ms ease-in-out forwards;
-    transform-origin: top center;
-} 
-#year2023 input[type="checkbox"]:checked + div{
-    display: flex;
-    animation: rotateMenu 400ms ease-in-out forwards;
-    transform-origin: top center;
-} 
-
 #years {
+    padding: 10px;
+    margin-top: 10px;
     text-align: center;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
 }
+@media screen and (max-width: 610px){
+    
+}
+
+summary{
+    padding: 20px;
+    margin: auto;
+    list-style: none;
+    outline: none;
+} 
+img {
+    margin: auto;
+    display: block;
+} 
 
 @keyframes rotateMenu {
     0% {
@@ -242,43 +254,4 @@ a {
         margin-top: 0%;
         opacity: 1;
     }
-}
-
-.drive {
-    display: none;
-}
-.driveLink {
-    z-index: 1;
-    position: fixed;
-    bottom: 16px;
-    left:32px;
-
-    width: 8%;
-
-    background-color: white;
-    border: 2px solid;
-    border-radius: 100%;
-
-    animation: FadeIn 2s linear;
-    transition: all ease-out 0.5s;
-}
-.driveLink:hover {
-    transform: scale(1.3);
-}
-
-@media screen and (max-width: 882px) {
-    .drive {
-        display:block;
-    }
-
-}
-
-@media screen and (max-width: 882px) {
-    #years {
-        display: grid;
-        text-align: center;
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
-    
 }
