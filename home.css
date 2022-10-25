@@ -38,7 +38,8 @@ h1 img {
 .topnav {
     border-radius: 20px;
     overflow: hidden;
-    background: url(Temporadas/SpringBackground.gif);
+    background: url(Temporadas/FallBackground.gif);
+    background-position: center;
     background-size: cover;
 }
 .topnav a {
