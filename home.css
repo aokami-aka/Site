@@ -10,11 +10,6 @@ body {
 .background {
     animation: backgroundAnimated 250s linear infinite;
 }
-
-html {
-    zoom: 80%;
-}
-
 /* --------- Topnav ---------- */
 h1 {
     text-align: center;
@@ -199,7 +194,11 @@ a {
     justify-items: center;
 }
 @media screen and (max-width: 610px){
-    
+    #years {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 }
 
 summary{
@@ -253,5 +252,50 @@ img {
     to {
         margin-top: 0%;
         opacity: 1;
+    }
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+    /* //For Tablets */
+    html {
+        zoom: 85%;
+    }
+}
+    
+@media screen and (min-width: 768px) {
+    /* //For Laptops */
+    html {
+        zoom: 80%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    /* //For Large Laptops */
+    html {
+        zoom: 80%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    /* //For Big TV's (HD Screens)  */
+    html {
+        zoom: 80%;
+    }
+}
+
+
+@media screen and (min-width: 1920px) {
+    /* //For Projectors or Higher Resolution Screens (Full HD) */
+    html {
+        zoom: 85%;
+    }
+}
+@media screen and (min-width: 3840px) {
+    /* //For 4K Displays (Ultra HD) */
+    html {
+        zoom: 200%;
     }
 }
