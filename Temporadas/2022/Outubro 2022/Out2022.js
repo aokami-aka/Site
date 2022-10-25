@@ -101,13 +101,13 @@ new Vue({
           //   source: "",
           //   url: "",
           // },
-          // {     // Blue Lock
-          //   artist: "UNISON SQUARE GARDEN",
-          //   name: "Chaos wo Kiwamaru",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK.jpg?raw=true",
-          //   source: "",
-          //   url: "https://open.spotify.com/artist/449AEgfeOxqAuRn0uX6l3u?si=SkJZnzc8TpGW35z6OYWCXw",
-          {     
+          {     // Blue Lock
+            artist: "UNISON SQUARE GARDEN",
+            name: "Chaos wo Kiwamaru",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Chaos%20Ga%20Kiwamaru.mp3?raw=true",
+            url: "https://open.spotify.com/artist/449AEgfeOxqAuRn0uX6l3u?si=SkJZnzc8TpGW35z6OYWCXw",
+          }, {     
             artist: "Shingo Nakamura",
             name: "WINNER",
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/BLUELOCK_02.jpg?raw=true",
@@ -126,6 +126,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsaw%20man_02.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/CHAINSAW%20BLOOD.mp3?raw=true",
             url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
+          }, {
+            artist: "Ano",
+            name: "Chu, Tayousei.",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_03.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Chu%2C%20Tayousei.mp3?raw=true",
+            url: "https://open.spotify.com/artist/7Il739Q5W4yJUYC3hfnX6z?si=9Xc-YrrMTVa6I7kB6_nBKA",
           },
           {      // Urusei Yatsura
             artist: "Minami, SAKURAmoti",
@@ -133,13 +139,13 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/URUSEI%20YATSURA.jpeg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Aiue.mp3?raw=true",
             url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
-          }, //{
-          //   artist: "Minami, SAKURAmoti",
-          //   name: "Aiue",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/URUSEI%20YATSURA.jpeg?raw=true",
-          //   source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Aiue.mp3?raw=true",
-          //   url: "https://open.spotify.com/track/3lUOzabhWYyRImRszpJGOU?si=0a5867cf69274873",
-          // }
+          }, {
+            artist: "Maisondes",
+            name: "Tokyo Shandy Rendezvous",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/URUSEI%20YATSURA_01.jfif?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Tokyo%20Shandy%20Rendezvous.mp3?raw=true",
+            url: "https://open.spotify.com/artist/7LTiBdByoaUd329wCpmMcM?si=7-mzmDDVQuGh08PLmXiHmg",
+          },
           {     // 4-nin
             artist: "NACHERRY",
             name: "Eclipse",
@@ -204,6 +210,39 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Mob%20Psycho%203_01.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Cobalt.mp3?raw=true",
             url: "https://open.spotify.com/artist/5HZsYhRCMH3zR0yndRcLVw?si=X6HtZ9jLSC2XGNFBjjmqxA",
+          },
+          {       // Iruma-kun 3
+            artist: "Fantastics from Exile Tribe",
+            name: "Girigiri Ride It Out",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Mairimashita!%20Iruma-kun%203.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Girigiri%20Ride%20It%20Out.mp3?raw=true",
+            url: "https://open.spotify.com/artist/162Ols90jU4CctXQz15NxS?si=q1pqo6TPQFCrl0jJzp_mUw",
+          }, {
+            artist: "Kameda Seiji",
+            name: "Nabebugyou",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Mairimashita!%20Iruma-kun%203_01.jfif?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Hot%20Pot%20Commander.mp3?raw=true",
+            url: "https://open.spotify.com/artist/4gxF6fznAjW2jjDzjZrOka?si=zvcqgfF0Qx6HYevJFcYrkw",
+          },
+          {       // bleach
+            artist: "Kitani Tatsuya",
+            name: "Scar",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Bleach.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Scar.mp3.webm?raw=true",
+            url: "https://open.spotify.com/artist/7mvhRvEAHiCTQHUnH7fgnv?si=FFAn-U4pT8OiCuwca-lgJg",
+          }, {
+            artist: "SennaRin",
+            name: "Saihate",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/Bleach_01.png?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Saihate.mp3?raw=true",
+            url: "https://open.spotify.com/artist/05Thl0cxDfoKilfQ5Hwo7D?si=PmgUGkC8SMSxQzW8T5X6tQ",
+          },
+          {
+            artist: "Hikaru Utada",
+            name: "Pink Blood",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Continua%C3%A7%C3%B5es/fumetsu%20no%20anata%20e%202.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Pink%20Blood.mp3?raw=true",
+            url: "https://open.spotify.com/artist/7lbSsjYACZHn1MSDXPxNF2?si=wlyo9RVvSjmztj7h4-rK8A",
           }
 
         ],
