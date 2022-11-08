@@ -3,12 +3,13 @@ html {
     }
 
 body {
-    background-image: url('Temporadas/Home_BG.jpg');
+    background-image: url('Temporadas/Home_BG_720p.jpg');
 
     font-family: cursive;
 }
 .background {
     animation: backgroundAnimated 250s linear infinite;
+    background-attachment: fixed;
 }
 /* --------- Topnav ---------- */
 h1 {
@@ -293,10 +294,14 @@ img {
     html {
         zoom: 85%;
     }
+    body {
+        background-image: url('Temporadas/Home_BG_1080p.jpg');
+    }
 }
 @media screen and (min-width: 3840px) {
     /* //For 4K Displays (Ultra HD) */
     html {
         zoom: 200%;
     }
+    
 }
