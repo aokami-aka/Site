@@ -1525,9 +1525,6 @@ opacity:1;
     html {
         zoom: 85%;
     }
-    body {
-        background-image: url('Temporadas/Home_BG_1080p.jpg');
-    }
 }
 @media screen and (min-width: 3840px) {
     /* //For 4K Displays (Ultra HD) */
