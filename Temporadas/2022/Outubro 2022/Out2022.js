@@ -131,13 +131,14 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/eclipse.mp3?raw=true",
             url: "https://open.spotify.com/artist/2eTqjdLK1BCOgC7aYJgq6Y?si=8FvB4INLSTC3bivy8jw2_g",
-          }, //{      // 4-nin
-          //   artist: "",
-          //   name: "",
-          //   cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/4-nin%20wa%20Sorezore%20Uso%20wo%20Tsuku_02.jpg?raw=true",
-          //   source: "",
-          //   url: "",
-          // },
+          }, 
+          {      // Arknights
+            artist: "ReoNa",
+            name: "Alive",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/arknights.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/alive.mp3?raw=true",
+            url: "https://open.spotify.com/track/4HkMETY0zKUblZVAX22YUD?si=VFotaRAcRiyffHKOxYnPVg&utm_source=copy-link",
+          },
           {       //Spy x family 2
             artist: "BUMP OF CHICKEN",
             name: "SOUVENIR",
