@@ -111,6 +111,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_06.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/In%20the%20Backroom.mp3?raw=true",
             url: "https://open.spotify.com/artist/43XkWaoCS0wKjuMJrWFgoa?si=4J4j9dMfTDSRAVI27P-zNA",
+          }, {
+            artist: "Kanaria",
+            name: "Dainou-teki na Rendezvous",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_07.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Dainou-teki%20na%20Rendezvous.mp3?raw=true",
+            url: "https://open.spotify.com/artist/1k5LyiTCRzPjORzcgHqJxF?si=lUKJcHXARRaiuMYgD41Tkg",
           },
           {      // Urusei Yatsura
             artist: "Minami, SAKURAmoti",
