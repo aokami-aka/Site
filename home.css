@@ -192,13 +192,13 @@ a {
     margin-top: 10px;
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-items: center;
 }
 @media screen and (max-width: 610px){
     #years {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
     }
 }
