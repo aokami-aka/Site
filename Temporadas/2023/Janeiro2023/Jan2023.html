@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6"/>
+    <title>AnimeGuides - Janeiro 2023</title>
+
+    <link href="Jan2023.css" rel="stylesheet" type="text/css"/>    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
+  
+    <!-- SEO -->
+    <!-- <link rel= "canonical" href= "https://animeguides.vercel.app/Temporadas/2023/Outubro%202022/Out2022.html"/> -->
+    <meta name="description" content="Informações sobre os lançamentos e continuações da temporada de Janeiro de 2023">
+    <meta name="keywords" content="Janeiro, Inverno, Hero, Academia, chainsawman, Bleach, Blue, Lock, Gundam, Mob, Psycho, Spy, Family"/>
+  
+    <link rel="alternate" href="" hreflang="pt-br" />
+    <meta name="robots" content="index, follow">
+    
+
+   <!-- Facebook Meta Tags -->
+  <!-- <meta property="og:url" content="https://animeguides.vercel.app/Temporadas/2022/Outubro%202022/Out2022.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AnimeGuides - Janeiro 2023">
+  <meta property="og:description" content="Informações sobre os lançamentos de Janeiro de 2023">
+  <meta property="og:image" content="https://animeguides.vercel.app/Temporadas/OpenGraphs/ogOut2022.png">
+  <meta name="theme-color" content="lightblue"> -->
+
+  <!-- Twitter Meta Tags -->
+  <!-- <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="animeguides.vercel.app">
+  <meta property="twitter:url" content="https://animeguides.vercel.app/Temporadas/2022/Outubro%202022/Out2022.html">
+  <meta name="twitter:title" content="AnimeGuides - Outubro 2022">
+  <meta name="twitter:description" content="Informações sobre os lançamentos de Outubro de 2022">
+  <meta name="twitter:image" content="https://animeguides.vercel.app/Temporadas/OpenGraphs/ogOut2022.png"> -->
+    <!-- SEO -->
+
+    <h1 id="title"><img src="../../../favicon.png" alt="AnimeGuides">Janeiro 2023</h1>
+
+    <!-- ----------- Topnav ------------ -->
+    <nav>
+        <div class="topnav" id="banner">
+            <a href="../../../index.html" class="active" id="home"><i class="fa fa-home"></i>&nbspPágina inicial</a>
+            <a id="winter"><i class="far fa-snowflake"></i>&nbspJaneiro 2023</a>
+            <a href="../../2022/Abril 2022/Abr2022.html" id="spring"><i class="fa fa-leaf"></i>&nbspAbril 2022</a>
+            <a href="../../2022/Julho 2022/Jul2022.html" id="summer"><i class="fas fa-sun"></i>&nbspJulho 2022</a>
+            <a href="../../2022/Outubro 2022/Out2022.html" id="fall"><i class="fab fa-pagelines"></i>&nbspOutubro 2022</a>
+
+            <a href="javascript:void(0);" class="icon" id="phoneIcon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </nav> 
+</head>
+<body class="background">
+    
+    <div id="buttons">
+        <div id="mp3ShowDisable">
+            <img title="Mostrar/Esconder player" onclick="ShowHidden('drag')" alt="botão mp3" src="../../../IconMp3.png"> 
+        </div>
+
+        <div id="continue">
+            <a href="#continuacoes"><img title="Ír para as continuações" alt="continuações" src="Continuações/continueButton.webp"></a>
+        </div>
+
+        <a href="#" class="to-top">
+            <i class="fa fa-arrow-up"></i>
+        </a>
+    </div>
+
+    <!------------------------------------- Music Player -------------------------------------------->
+    <div id="drag" ref="ActualPosition">
+        <div class="wrapper" id="app">
+            <div class="player">
+                <div class="player__top" >
+                    <div class="player-cover">
+                        <transition-group :name="transitionName">
+                            <div class="player-cover__item" v-if="$index === currentTrackIndex" :style="{ backgroundImage: `url(${track.cover})` }"  v-for="(track, $index) in tracks" :key="$index"></div>
+                        </transition-group>
+                    </div>
+                    <div class="player-controls">
+                        <a :href="currentTrack.url" target="_blank" class="player-controls__item">
+                            <svg class="icon">
+                                <use xlink:href="#icon-link"></use>
+                            </svg>
+                        </a>
+                        <div class="player-controls__item" @click="prevTrack">
+                            <svg class="icon">
+                                <use xlink:href="#icon-prev"></use>
+                            </svg>
+                        </div>
+                        <div class="player-controls__item" @click="nextTrack">
+                            <svg class="icon">
+                                <use xlink:href="#icon-next"></use>
+                            </svg>
+                        </div>
+                        <div class="player-controls__item -xl js-play" @click="play">
+                            <svg class="icon">
+                                <use xlink:href="#icon-pause" v-if="isTimerPlaying"></use>
+                                <use xlink:href="#icon-play" v-else></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress" ref="progress">
+                    <div class="progress__top">
+                        <div class="album-info" v-if="currentTrack">
+                            <br>
+                            <div class="album-info__name">{{ currentTrack.name }}</div>
+                            <div class="album-info__track">{{ currentTrack.artist }}</div>
+                        </div>
+                        <div class="progress__duration">{{ duration }}</div>
+                    </div>
+                    <div class="progress__bar">
+                        <div class="progress__current" :style="{ width : barWidth }"></div>
+                    </div>
+                    <div class="progress__time">{{ currentTime }}</div>
+                </div>
+                <div v-cloak></div>
+            </div>
+        </div>
+    
+        <svg xmlns="http://www.w3.org/2000/svg" hidden xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <symbol id="icon-pause" viewBox="0 0 32 32">
+                    <title>icon-pause</title>
+                    <path d="M16 0.32c-8.64 0-15.68 7.040-15.68 15.68s7.040 15.68 15.68 15.68 15.68-7.040 15.68-15.68-7.040-15.68-15.68-15.68zM16 29.216c-7.296 0-13.216-5.92-13.216-13.216s5.92-13.216 13.216-13.216 13.216 5.92 13.216 13.216-5.92 13.216-13.216 13.216z"></path>
+                    <path d="M16 32c-8.832 0-16-7.168-16-16s7.168-16 16-16 16 7.168 16 16-7.168 16-16 16zM16 0.672c-8.448 0-15.328 6.88-15.328 15.328s6.88 15.328 15.328 15.328c8.448 0 15.328-6.88 15.328-15.328s-6.88-15.328-15.328-15.328zM16 29.568c-7.488 0-13.568-6.080-13.568-13.568s6.080-13.568 13.568-13.568c7.488 0 13.568 6.080 13.568 13.568s-6.080 13.568-13.568 13.568zM16 3.104c-7.104 0-12.896 5.792-12.896 12.896s5.792 12.896 12.896 12.896c7.104 0 12.896-5.792 12.896-12.896s-5.792-12.896-12.896-12.896z"></path>
+                    <path d="M12.16 22.336v0c-0.896 0-1.6-0.704-1.6-1.6v-9.472c0-0.896 0.704-1.6 1.6-1.6v0c0.896 0 1.6 0.704 1.6 1.6v9.504c0 0.864-0.704 1.568-1.6 1.568z"></path>
+                    <path d="M19.84 22.336v0c-0.896 0-1.6-0.704-1.6-1.6v-9.472c0-0.896 0.704-1.6 1.6-1.6v0c0.896 0 1.6 0.704 1.6 1.6v9.504c0 0.864-0.704 1.568-1.6 1.568z"></path>
+                </symbol>
+                <symbol id="icon-play" viewBox="0 0 32 32">
+                    <title>icon-play</title>
+                    <path d="M21.216 15.168l-7.616-5.088c-0.672-0.416-1.504 0.032-1.504 0.832v10.176c0 0.8 0.896 1.248 1.504 0.832l7.616-5.088c0.576-0.416 0.576-1.248 0-1.664z"></path>
+                    <path d="M13.056 22.4c-0.224 0-0.416-0.064-0.608-0.16-0.448-0.224-0.704-0.672-0.704-1.152v-10.176c0-0.48 0.256-0.928 0.672-1.152s0.928-0.224 1.344 0.064l7.616 5.088c0.384 0.256 0.608 0.672 0.608 1.088s-0.224 0.864-0.608 1.088l-7.616 5.088c-0.192 0.16-0.448 0.224-0.704 0.224zM13.056 10.272c-0.096 0-0.224 0.032-0.32 0.064-0.224 0.128-0.352 0.32-0.352 0.576v10.176c0 0.256 0.128 0.48 0.352 0.576 0.224 0.128 0.448 0.096 0.64-0.032l7.616-5.088c0.192-0.128 0.288-0.32 0.288-0.544s-0.096-0.416-0.288-0.544l-7.584-5.088c-0.096-0.064-0.224-0.096-0.352-0.096z"></path>
+                    <path d="M16 0.32c-8.64 0-15.68 7.040-15.68 15.68s7.040 15.68 15.68 15.68 15.68-7.040 15.68-15.68-7.040-15.68-15.68-15.68zM16 29.216c-7.296 0-13.216-5.92-13.216-13.216s5.92-13.216 13.216-13.216 13.216 5.92 13.216 13.216-5.92 13.216-13.216 13.216z"></path>
+                    <path d="M16 32c-8.832 0-16-7.168-16-16s7.168-16 16-16 16 7.168 16 16-7.168 16-16 16zM16 0.672c-8.448 0-15.328 6.88-15.328 15.328s6.88 15.328 15.328 15.328c8.448 0 15.328-6.88 15.328-15.328s-6.88-15.328-15.328-15.328zM16 29.568c-7.488 0-13.568-6.080-13.568-13.568s6.080-13.568 13.568-13.568c7.488 0 13.568 6.080 13.568 13.568s-6.080 13.568-13.568 13.568zM16 3.104c-7.104 0-12.896 5.792-12.896 12.896s5.792 12.896 12.896 12.896c7.104 0 12.896-5.792 12.896-12.896s-5.792-12.896-12.896-12.896z"></path>
+                </symbol>
+                <symbol id="icon-link" viewBox="0 0 32 32">
+                    <title>link</title>
+                    <path d="M23.584 17.92c0 0.864 0 1.728 0 2.56 0 1.312 0 2.656 0 3.968 0 0.352 0.032 0.736-0.032 1.12 0.032-0.16 0.032-0.288 0.064-0.448-0.032 0.224-0.096 0.448-0.16 0.64 0.064-0.128 0.128-0.256 0.16-0.416-0.096 0.192-0.192 0.384-0.32 0.576 0.096-0.128 0.16-0.224 0.256-0.352-0.128 0.16-0.288 0.32-0.48 0.48 0.128-0.096 0.224-0.16 0.352-0.256-0.192 0.128-0.352 0.256-0.576 0.32 0.128-0.064 0.256-0.128 0.416-0.16-0.224 0.096-0.416 0.16-0.64 0.16 0.16-0.032 0.288-0.032 0.448-0.064-0.256 0.032-0.512 0.032-0.768 0.032-0.448 0-0.896 0-1.312 0-1.472 0-2.976 0-4.448 0-1.824 0-3.616 0-5.44 0-1.568 0-3.104 0-4.672 0-0.736 0-1.44 0-2.176 0-0.128 0-0.224 0-0.352-0.032 0.16 0.032 0.288 0.032 0.448 0.064-0.224-0.032-0.448-0.096-0.64-0.16 0.128 0.064 0.256 0.128 0.416 0.16-0.192-0.096-0.384-0.192-0.576-0.32 0.128 0.096 0.224 0.16 0.352 0.256-0.16-0.128-0.32-0.288-0.48-0.48 0.096 0.128 0.16 0.224 0.256 0.352-0.128-0.192-0.256-0.352-0.32-0.576 0.064 0.128 0.128 0.256 0.16 0.416-0.096-0.224-0.16-0.416-0.16-0.64 0.032 0.16 0.032 0.288 0.064 0.448-0.032-0.256-0.032-0.512-0.032-0.768 0-0.448 0-0.896 0-1.312 0-1.472 0-2.976 0-4.448 0-1.824 0-3.616 0-5.44 0-1.568 0-3.104 0-4.672 0-0.736 0-1.44 0-2.176 0-0.128 0-0.224 0.032-0.352-0.032 0.16-0.032 0.288-0.064 0.448 0.032-0.224 0.096-0.448 0.16-0.64-0.064 0.128-0.128 0.256-0.16 0.416 0.096-0.192 0.192-0.384 0.32-0.576-0.096 0.128-0.16 0.224-0.256 0.352 0.128-0.16 0.288-0.32 0.48-0.48-0.128 0.096-0.224 0.16-0.352 0.256 0.192-0.128 0.352-0.256 0.576-0.32-0.128 0.064-0.256 0.128-0.416 0.16 0.224-0.096 0.416-0.16 0.64-0.16-0.16 0.032-0.288 0.032-0.448 0.064 0.48-0.064 0.96-0.032 1.44-0.032 0.992 0 1.952 0 2.944 0 1.216 0 2.432 0 3.616 0 1.056 0 2.112 0 3.168 0 0.512 0 1.024 0 1.536 0 0 0 0 0 0.032 0 0.448 0 0.896-0.192 1.184-0.48s0.512-0.768 0.48-1.184c-0.032-0.448-0.16-0.896-0.48-1.184s-0.736-0.48-1.184-0.48c-0.64 0-1.28 0-1.92 0-1.408 0-2.816 0-4.224 0-1.44 0-2.848 0-4.256 0-0.672 0-1.344 0-2.016 0-0.736 0-1.472 0.192-2.112 0.576s-1.216 0.96-1.568 1.6c-0.384 0.64-0.544 1.376-0.544 2.144 0 0.672 0 1.376 0 2.048 0 1.28 0 2.56 0 3.84 0 1.504 0 3.040 0 4.544 0 1.408 0 2.848 0 4.256 0 0.992 0 1.952 0 2.944 0 0.224 0 0.448 0 0.64 0 0.864 0.224 1.76 0.768 2.464 0.16 0.192 0.288 0.384 0.48 0.576s0.384 0.352 0.608 0.512c0.32 0.224 0.64 0.384 1.024 0.512 0.448 0.16 0.928 0.224 1.408 0.224 0.16 0 0.32 0 0.48 0 0.896 0 1.792 0 2.72 0 1.376 0 2.784 0 4.16 0 1.536 0 3.040 0 4.576 0 1.312 0 2.656 0 3.968 0 0.768 0 1.536 0 2.336 0 0.416 0 0.832-0.032 1.248-0.128 1.504-0.32 2.784-1.6 3.104-3.104 0.128-0.544 0.128-1.056 0.128-1.568 0-0.608 0-1.184 0-1.792 0-1.408 0-2.816 0-4.224 0-0.256 0-0.512 0-0.768 0-0.448-0.192-0.896-0.48-1.184s-0.768-0.512-1.184-0.48c-0.448 0.032-0.896 0.16-1.184 0.48-0.384 0.384-0.576 0.768-0.576 1.248v0z"></path>
+                    <path d="M32 11.232c0-0.8 0-1.568 0-2.368 0-1.248 0-2.528 0-3.776 0-0.288 0-0.576 0-0.864 0-0.896-0.768-1.696-1.696-1.696-0.8 0-1.568 0-2.368 0-1.248 0-2.528 0-3.776 0-0.288 0-0.576 0-0.864 0-0.448 0-0.896 0.192-1.184 0.48s-0.512 0.768-0.48 1.184c0.032 0.448 0.16 0.896 0.48 1.184s0.736 0.48 1.184 0.48c0.8 0 1.568 0 2.368 0 1.248 0 2.528 0 3.776 0 0.288 0 0.576 0 0.864 0-0.576-0.576-1.12-1.12-1.696-1.696 0 0.8 0 1.568 0 2.368 0 1.248 0 2.528 0 3.776 0 0.288 0 0.576 0 0.864 0 0.448 0.192 0.896 0.48 1.184s0.768 0.512 1.184 0.48c0.448-0.032 0.896-0.16 1.184-0.48 0.352-0.256 0.544-0.64 0.544-1.12v0z"></path>
+                    <path d="M15.040 21.888c0.16-0.16 0.288-0.288 0.448-0.448 0.384-0.384 0.8-0.8 1.184-1.184 0.608-0.608 1.184-1.184 1.792-1.792 0.704-0.704 1.44-1.44 2.176-2.176 0.8-0.8 1.568-1.568 2.368-2.368s1.6-1.6 2.4-2.4c0.736-0.736 1.504-1.504 2.24-2.24 0.64-0.64 1.248-1.248 1.888-1.888 0.448-0.448 0.896-0.896 1.344-1.344 0.224-0.224 0.448-0.416 0.64-0.64 0 0 0.032-0.032 0.032-0.032 0.32-0.32 0.48-0.768 0.48-1.184s-0.192-0.896-0.48-1.184c-0.32-0.288-0.736-0.512-1.184-0.48-0.512 0.032-0.928 0.16-1.248 0.48-0.16 0.16-0.288 0.288-0.448 0.448-0.384 0.384-0.8 0.8-1.184 1.184-0.608 0.608-1.184 1.184-1.792 1.792-0.704 0.704-1.44 1.44-2.176 2.176-0.8 0.8-1.568 1.568-2.368 2.368s-1.6 1.6-2.4 2.4c-0.736 0.736-1.504 1.504-2.24 2.24-0.64 0.64-1.248 1.248-1.888 1.888-0.448 0.448-0.896 0.896-1.344 1.344-0.224 0.224-0.448 0.416-0.64 0.64 0 0-0.032 0.032-0.032 0.032-0.32 0.32-0.48 0.768-0.48 1.184s0.192 0.896 0.48 1.184c0.32 0.288 0.736 0.512 1.184 0.48 0.48 0 0.928-0.16 1.248-0.48v0z"></path>
+                </symbol>
+                <symbol id="icon-next" viewBox="0 0 32 32">
+                    <title>next</title>
+                    <path d="M2.304 18.304h14.688l-4.608 4.576c-0.864 0.864-0.864 2.336 0 3.232 0.864 0.864 2.336 0.864 3.232 0l8.448-8.48c0.864-0.864 0.864-2.336 0-3.232l-8.448-8.448c-0.448-0.448-1.056-0.672-1.632-0.672s-1.184 0.224-1.632 0.672c-0.864 0.864-0.864 2.336 0 3.232l4.64 4.576h-14.688c-1.248 0-2.304 0.992-2.304 2.272s1.024 2.272 2.304 2.272z"></path>
+                    <path d="M29.696 26.752c1.248 0 2.304-1.024 2.304-2.304v-16.928c0-1.248-1.024-2.304-2.304-2.304s-2.304 1.024-2.304 2.304v16.928c0.064 1.28 1.056 2.304 2.304 2.304z"></path>
+                  </symbol>
+                <symbol id="icon-prev" viewBox="0 0 32 32">
+                    <title>prev</title>
+                    <path d="M29.696 13.696h-14.688l4.576-4.576c0.864-0.864 0.864-2.336 0-3.232-0.864-0.864-2.336-0.864-3.232 0l-8.448 8.48c-0.864 0.864-0.864 2.336 0 3.232l8.448 8.448c0.448 0.448 1.056 0.672 1.632 0.672s1.184-0.224 1.632-0.672c0.864-0.864 0.864-2.336 0-3.232l-4.608-4.576h24.688c1.248 0 2.304-1.024 2.304-2.304s-1.024-2.24-2.304-2.24z"></path>
+                    <path d="M2.304 5.248c-1.248 0-2.304 1.024-2.304 2.304v16.928c0 1.248 1.024 2.304 2.304 2.304s2.304-1.024 2.304-2.304v-16.928c-0.064-1.28-1.056-2.304-2.304-2.304z"></path>
+                </symbol>
+            </defs>
+        </svg>
+    </div>
+    <!-------------------------------------------------------------------------------------------------->
+    <section>
+        <!------------------- Estréias -------------------->
+        <div class="Estréias">
+            <h2 id="estreiasTitle" onclick="ShowHidden('Estreias-Container')">- Estréias -</h2> 
+            <div id="Estreias-Container">
+
+            
+                <!----------------- Koori Zokusei Danshi to Cool ------------------------------------------------------------------>
+                <div id="koori">
+                    <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('kooriCard')">Koori Zokusei Danshi to Cool na Douryou Joshi<br><i class="english">The Ice Guy and His Cool Female Colleague</i></h2>
+                    <div id="kooriCard">
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container">
+                                <div class="mySlides1 fade">
+                                    <div class="numbertext">1 / 2</div>
+                                    <img loading="lazy" src="Estréias/Koori Zokusei Danshi to Cool na Douryou Joshi.jpg" alt="Koori Zokusei Danshi to Cool 1" id="kooriThumb">
+                                </div>
+
+                                <div class="mySlides1 fade">
+                                    <div class="numbertext">2 / 2</div>
+                                    <img loading="lazy" src="Estréias/Koori Zokusei Danshi to Cool na Douryou Joshi_02.jpeg" alt="Koori Zokusei Danshi to Cool 2" id="kooriThumb">
+                                </div>
+
+                                <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+                            </div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse:</b> Himuro-kun é um descendente vivo da Mulher Neve do folclore japonês. Mas sempre que ele está perto de sua excêntrica, mas gentil colega, Fuyutsuki-san, ele congela totalmente! Apesar da tempestade de neve de amor que reina em seu coração, e sua completa falta de noção, ele dará um passo à frente ou permanecerá congelado no lugar?
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero:</b> Comédia, Romance, Slice of life, sobrenatural
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor:</b> <a href="https://anidb.net/creator/11047" target="_blank" rel="noreferrer noopener">Mankyuu </a>(<i>Idolmaster Series</i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a href="https://anidb.net/creator/44519" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Zero-G.png" class="Studio" alt="estúdio"></a> (<i>Rikei ga koi, Tenkuu Shipan, Grand Blue</i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia:</b> 04/01
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios:</b> 12
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b>V: Representação profunda dos otakus com sua primeira paixão.
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a href="https://anidb.net/anime/17473" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/52173" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><!--<a href="https://www.crunchyroll.com/pt-br/lycoris-recoil" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a>--></p>
+                        </div>
+
+                            <br><br>
+
+                        <div id="orientTrailers">
+                            <p style="text-align: center;"><b>Vídeos</b></p>
+
+                            <br><br>
+                            <!-- Lista de Trailers ----------------------------------------------------------------->
+                            <ul class="trailer">
+                                <!-- <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/QuYwsDJF6hA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientTrailer"><b>Abertura</b><br>Tensei Shitara Ken deshita<br><a href="https://open.spotify.com/artist/1zPnpAM7fGFr7pl8OSNvak?si=A8JeTv0yT8q5tiWPyiCx7g" target="_blank" rel="noreferrer noopener">Kishida Kyoudan & The Akeboshi Rockets</a></p>
+                                </li> -->
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/cXwFpqQn7u8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientOP"><b>Trailer</b></p>
+                                </li>  
+                                <!-- <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/ve06vhaxft0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientED"><b>Encerramento</b><br>more＜STRONGLY<br><a href="https://open.spotify.com/track/5qodMWuc9osE51ZwfFQuKY?si=f485ea042c3648c0" target="_blank" rel="noreferrer noopener">Maon Kurosaki</a></p>
+                                </li>  -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
+                <!----------------- Sugar Apple Fairy Tail ------------------------------------------------------------------>
+                <div id="sugar">
+                    <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('sugarCard')">Sugar Apple Fairy Tail</h2>
+                    <div id="sugarCard">
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container">
+                                <div class="mySlides2 fade">
+                                    <div class="numbertext">1 / 2</div>
+                                    <img loading="lazy" src="Estréias/sugar apple.jpg" alt="Sugar Apple Fairy Tail 1" id="sugarThumb">
+                                </div>
+
+                                <div class="mySlides2 fade">
+                                    <div class="numbertext">2 / 2</div>
+                                    <img loading="lazy" src="Estréias/sugar apple_02.jpeg" alt="Sugar Apple Fairy Tail 2" id="sugarThumb">
+                                </div>
+
+                                <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+                            </div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse:</b> Em um mundo onde as fadas são compradas e vendidas pelo maior lance, os humanos não são tão amigáveis ​​com o povo feérico. Mas amizade é exatamente o que Anne Halford busca com Challe, sua nova fada guarda-costas, embora ele não goste muito da ideia. <br>&emsp;Como seu novo mestre, Anne o incumbe de escoltá-la por uma área particularmente perigosa, mas com um guarda-costas relutante e ansioso para escapar de uma vida de servidão, ela terá que lidar com muito mais do que esperava...
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero:</b> Aventura, Fantasia, Romance
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor:</b> <a href="https://anidb.net/creator/85380" target="_blank" rel="noreferrer noopener">Suzuki Youhei </a>(<i>Maiko-san, Planet with, Shimoneta</i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a href="https://anidb.net/creator/720" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/J.C.Staff.png" class="Studio" alt="estúdio"></a> (<i>Dungeon ni deai, Blue Reflection Ray, To aru series</i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia:</b> 06/01
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios:</b> 12
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b>V: Clube das Winx ao contrário.
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a href="https://anidb.net/anime/16827" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/49980" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 50%;"></a></p>
+                        </div>
+
+                            <br><br>
+
+                        <div id="orientTrailers">
+                            <p style="text-align: center;"><b>Vídeos</b></p>
+
+                            <br><br>
+                            <!-- Lista de Trailers ----------------------------------------------------------------->
+                            <ul class="trailer">
+                                <!-- <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/QuYwsDJF6hA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientTrailer"><b>Abertura</b><br>Tensei Shitara Ken deshita<br><a href="https://open.spotify.com/artist/1zPnpAM7fGFr7pl8OSNvak?si=A8JeTv0yT8q5tiWPyiCx7g" target="_blank" rel="noreferrer noopener">Kishida Kyoudan & The Akeboshi Rockets</a></p>
+                                </li> -->
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/4bfaiGioJkM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientOP"><b>Trailer</b></p>
+                                </li>  
+                                <!-- <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/ve06vhaxft0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientED"><b>Encerramento</b><br>more＜STRONGLY<br><a href="https://open.spotify.com/track/5qodMWuc9osE51ZwfFQuKY?si=f485ea042c3648c0" target="_blank" rel="noreferrer noopener">Maon Kurosaki</a></p>
+                                </li>  -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
+                <!----------------- Nokemono-tachi no Yoru ------------------------------------------------------------------>
+                <div id="nokemono">
+                    <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('nokemonoCard')">Nokemono-tachi no Yoru<br><i class="english">The tale of outcasts</i></h2>
+                    <div id="nokemonoCard">
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container">
+                                <div class="mySlides3 fade">
+                                    <div class="numbertext">1 / 2</div>
+                                    <img loading="lazy" src="Estréias/nakemono-tachi.jpg" alt="Nokemono-tachi no Yoru 1" id="nokemonoThumb">
+                                </div>
+
+                                <div class="mySlides3 fade">
+                                    <div class="numbertext">2 / 2</div>
+                                    <img loading="lazy" src="Estréias/nakemono-tachi_01.jpg" alt="Nokemono-tachi no Yoru 2" id="nokemonoThumb" style="width: 450px; height: 635px; object-fit: cover; object-position: center;">
+                                </div>
+
+                                <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
+                            </div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse:</b> O demônio ao seu lado é a sua salvação. A garota ao seu lado é seu passatempo.  Seu encontro no final do século XIX no Império Britânico começa a história de uma busca por algum lugar para pertencer. Para seus companheiros párias, esse demônio e essa garota sussurram seu conto na escuridão da noite.
+                                
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero:</b> Fantasia
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor:</b> <a href="https://anidb.net/creator/2172" target="_blank" rel="noreferrer noopener">Yamamoto Yasutaka </a>(<i>Nekopara, Noblesse</i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a href="https://anidb.net/creator/778" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Ashi_Productions.jpg" class="Studio" alt="estúdio"></a> (<i>ultra maniac, offside</i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia:</b> 86/01
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios:</b> 12
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b>V: A bela e a fera de baixo orçamento.
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a href="https://anidb.net/anime/17488" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/52274" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 50%;"></a></p>
+                        </div>
+
+                            <br><br>
+
+                        <div id="orientTrailers">
+                            <p style="text-align: center;"><b>Vídeos</b></p>
+
+                            <br><br>
+                            <!-- Lista de Trailers ----------------------------------------------------------------->
+                            <ul class="trailer">
+                                <!-- <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/QuYwsDJF6hA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientTrailer"><b>Abertura</b><br>Tensei Shitara Ken deshita<br><a href="https://open.spotify.com/artist/1zPnpAM7fGFr7pl8OSNvak?si=A8JeTv0yT8q5tiWPyiCx7g" target="_blank" rel="noreferrer noopener">Kishida Kyoudan & The Akeboshi Rockets</a></p>
+                                </li> -->
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/3zpT2oLo_PU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientOP"><b>Trailer 1</b></p>
+                                </li>  
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/dSQ1oBUuoGA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientED"><b>Trailer 2</b><!--<br>more＜STRONGLY<br><a href="https://open.spotify.com/track/5qodMWuc9osE51ZwfFQuKY?si=f485ea042c3648c0" target="_blank" rel="noreferrer noopener">Maon Kurosaki</a>--></p>
+                                </li>  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="Continuacoes">
+            <a id="anchor" name="continuacoes"><h2 id="continuacoesTitle" onclick="ShowHidden('Continuacoes-Container')">- Continuações -</h2></a> 
+            <div id="Continuacoes-Container">
+
+                <br>
+                <!----------------- Boku no Hero Academia 6 ----------------------------------------------------------------------------->
+                <div id="bnh6">
+                    <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('bnh6Card')">Boku no Hero Academia 6</h2>
+                    <div id="bnh6Card">
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container">
+                                <div class="mySlides13 fade">
+                                    <div class="numbertext">1 / 3</div>
+                                    <img loading="lazy" src="Continuações/boku no hero 6.jpg" alt="Boku no Hero Academia 6 1" id="bnh6Thumb">
+                                </div>
+
+                                <div class="mySlides13 fade">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img loading="lazy" src="Continuações/boku no hero 6_01.jpg" alt="Boku no Hero Academia 6 2" id="bnh6Thumb">
+                                </div>
+
+                                <div class="mySlides13 fade">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img loading="lazy" src="Continuações/boku no hero 6_03.jpeg" alt="Boku no Hero Academia 6 3" id="bnh6Thumb">
+                                </div>
+
+                                <a class="prev" onclick="plusSlides(-1, 12)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1, 12)">&#10095;</a>
+                            </div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse: </b>Com Bakugo e Todoroki, Deku está fazendo seu trabalho-estudo no escritório do herói número um, Endeavor. Enquanto isso, Tomura Shigaraki, da Liga dos Vilões, apodera-se do Exército de Libertação Metahumano, expande sua influência e agora deseja um novo poder para destruir tudo.
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero:</b> Ação, Comédia, Shounen
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor:</b> <a href="https://myanimelist.net/people/23577/Masahiro_Mukai" target="_blank" rel="noreferrer noopener"> Mukai Masahiro </a>(<i>Boku no hero, Trickster</i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a href="https://anidb.net/creator/755" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Bones.png" class="Studio" alt="estúdio"></a> (<i>Vanitas, Boku no hero, Bungo Stray Dogs</i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia:</b> 01/10
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios:</b> 24
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b>V: Torço para que pelo menos não tenham apenas uma marmita de orçamento nessa temporada.
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a href="https://anidb.net/anime/16793" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/49918" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a href="https://www.crunchyroll.com/pt-br/my-hero-academia" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px;"></a></p>
+                        </div>
+
+                            <br><br>
+
+                        <div id="orientTrailers">
+                            <p style="text-align: center;"><b>Vídeos</b></p>
+
+                            <br><br>
+                            <!-- Lista de Trailers ----------------------------------------------------------------->
+                            <ul class="trailer">
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/6BrHcmH3Gyk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientTrailer"><b>Abertura</b><br>Hitamuki<br><a href="https://open.spotify.com/artist/0SMhG4gXGD4gzLMMz08cQU?si=8_ArI4LxToucx-xMvs0XgA">SUPER BEAVER</a></p>
+                                </li> 
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/WxCJMYbGtzA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientOP"><b>Trailer</b></p>
+                                </li> 
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/IinvpMBoPSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientED"><b>Encerramento</b><br>SKETCH<br><a href="https://open.spotify.com/artist/0JROVv4P85ZVPFbaJIqAty?si=XXL7SiygTzyV0ofR0bYS1w" target="_blank" rel="noreferrer noopener">Kiro Akiyama</a></p>
+                                </li>  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src="Jan2023.js"></script>
+    <script src="../../../main.js"></script>
+    <script src="../../../main2.js"></script>
+
+    <!------- AD ------->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9107034052351414"
+     crossorigin="anonymous"></script>
+
+     <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-9107034052351414"
+     data-ad-slot="7233739561"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9107034052351414"
+     crossorigin="anonymous"></script>
+
+</body>
+</html>

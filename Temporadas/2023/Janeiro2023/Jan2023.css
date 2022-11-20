@@ -1,0 +1,964 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  zoom: 80%;
+}
+
+/* ------ Background do site --------- */
+body {
+  background-image: url('Thumb_Jan_2023.jpg');
+  min-width: 600px;
+
+  font-family: cursive;
+}
+.background {
+  animation: backgroundAnimated 500s linear infinite;
+}
+/* ---------------------------- */
+
+
+/* --- Scroll Design ---*/
+::-webkit-scrollbar-track{
+
+border: 5px solid rgb(44, 234, 218);
+background-color: #ffffff;
+}
+
+::-webkit-scrollbar
+{
+width: 15px;
+background-color: #6dff6d;
+}
+
+::-webkit-scrollbar-thumb
+{
+background-color: #0d96ff;
+border-radius: 10px;
+}
+/* ------------------------- */
+
+
+/* ------ Links ------- */
+a {
+  text-decoration: none;
+  color: purple;
+
+}
+a:hover {
+  font-weight: bold;
+}
+/* -------------------- */
+
+
+/* --------- Topnav ---------- */
+h1 {
+text-align: center;
+
+background-color: rgba(204, 200, 200, 0.705);
+border: 4px solid purple;
+padding: 5px;
+border-radius: 60%;
+border-style: inset;
+}
+h1 img {
+display: block;
+margin: auto;
+
+width: 100px;
+
+animation: FadeIn 1s linear;
+}
+h2 {
+  cursor: pointer;
+}
+#banner {
+  border: 5px solid;
+  border-color: white;
+
+  animation: topnavAnimate 1.5s linear;
+}
+.topnav {
+  border-radius: 20px;
+  overflow: hidden;
+  background: url(../../WinterBackground.gif);
+  background-position: center;
+  background-size: cover;
+}
+.topnav a {
+  border: 2px solid;
+  border-color: black;
+
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 17px;
+}
+#winter {
+  background-color: rgba(194, 205, 216);
+  font-weight: bolder;
+  color: black;
+  cursor: initial;
+}
+#spring {
+  transition: all ease-out 0.3s;
+}
+#spring:hover {
+  background-color: rgb(61, 247, 117);
+  font-weight: bolder;
+  color: rgb(163, 165, 42);
+  cursor: pointer;
+}
+#summer {
+  transition: all ease-out 0.3s;
+}
+#summer:hover {
+  background-color: yellow;
+  font-weight: bolder;
+  color: red;
+  cursor: pointer;
+}
+#fall {
+  transition: all ease-out 0.3s;
+}
+#fall:hover {
+  background-color: brown;
+  font-weight: bolder;
+  color: orange;
+  cursor: pointer;
+}
+.topnav a.active, #home {
+  border-radius: 15px 0px 0px 15px;
+}
+.topnav a.active, #phoneIcon {
+  background-color: white;
+  color: black;
+}
+#phoneIcon {
+  height: 63px;
+}
+.topnav .icon {
+  display: none;
+}
+/* ----------------------------------- */
+
+
+section {
+  width: 98%;
+  margin: auto;
+}
+
+/* ------ Sections ------ */
+  /* ---------- SlideShow ----------------- */
+
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  width: 450px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: #c4f6ff;
+  font-weight: bold;
+  font-size: 35px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 50% 0% 0% 50%;
+}
+.prev {
+   border-radius: 0% 50% 50% 0%;
+}
+
+/* On hover, add a grey background color */
+.prev:hover, .next:hover {
+  background-color: rgb(0, 175, 245);
+  color: lightorange;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #c4f6ff;
+  font-size: 25px;
+  padding: 8px 12px;
+  position: absolute;
+  left: 40%;
+  top: 0;
+  margin: auto;
+  border-radius: 0% 0% 100% 100%;
+  transition: 0.5s ease;
+
+  background-color: rgb(0, 175, 245);
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+/* --------------------------------------------- */
+    /* -------------------Estréias -------------------------- */
+.Estréias {
+  margin-top: 50px;
+  background-color: rgba(255, 255, 255, 0.726);
+  border: 3px solid;
+  border-radius: 10px;
+  border-color: black;
+
+  animation: FadeIn 0.5s linear;
+}
+#estreiasTitle {
+  text-align: center;
+  padding-bottom: 20px;
+  font-size: 40px;
+
+  border: 3px solid;
+  border-color: black;
+  border-top:hidden ; border-left: hidden; border-right: hidden;
+}
+  /* -------------------------------------------------------- */
+  /* -------------------- Continuações ------------------------ */
+.Continuacoes {
+  background-color: rgba(168, 167, 167, 0.726);
+  border: 3px solid;
+  border-radius: 10px;
+  border-color: black;
+}
+#continuacoesTitle {
+  text-align: center;
+  padding-bottom: 20px;
+  font-size: 40px;
+
+  border: 3px solid;
+  border-color: black;
+  border-top:hidden ; border-left: hidden; border-right: hidden;
+}
+  /* ---------------------------------------------------------------- */
+/* --------------------------- */
+
+
+/* Título do anime -------------------- */
+.animeTitle {
+  text-align: center;
+  font-size: 30px;
+}
+.english {
+  color: rgb(88, 87, 87);
+}
+#koori {
+margin: 10px;
+
+background-color: rgba(7, 178, 230, 0.719);
+
+border: 5px solid;
+border-radius: 5px;
+border-color: rgb(233, 230, 230);
+}
+#koori p {
+padding: 10px;
+border: 3px solid;
+border-color: rgb(0, 238, 255);
+border-radius: 50px;
+
+background-color: rgba(121, 194, 224, 0.719);
+
+margin: 10px;
+font-size: 24px;
+}
+#koori iframe {
+border: 5px solid;
+border-color: rgb(255, 187, 0);
+border-radius: 25px;
+}
+#kooriThumb {
+border: 5px solid;
+border-radius: 20px;
+border-color: rgb(255, 187, 0);
+
+width: 450px;
+margin: auto;
+} 
+
+#sugar {
+  margin: 10px;
+  
+  background-color: rgba(238, 135, 161, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(211, 124, 109);
+  }
+  #sugar p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(255, 102, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #sugar iframe {
+  border: 5px solid;
+  border-color: rgb(136, 0, 170);
+  border-radius: 25px;
+  }
+  #sugarThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(136, 0, 170);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#nokemono {
+  margin: 10px;
+  
+  background-color: rgba(1, 7, 72, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(148, 40, 21);
+  }
+  #nokemono p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #nokemono iframe {
+  border: 5px solid;
+  border-color: rgb(204, 17, 3);
+  border-radius: 25px;
+  }
+  #nokemonoThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(204, 17, 3);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+/* ----- info design ----- */
+.grid-thumb {
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.source {
+  width: 100px;
+  vertical-align: middle;
+  border-radius: 20px;
+
+  transition: all ease-out 0.5s;
+}
+.Studio {
+  height: 60px;
+  vertical-align:middle;
+
+  transition: all ease-out 0.5s;
+}
+/* ----- trailers ----- */
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+
+  text-align: center;
+}
+.source:hover, .Studio:hover {
+  transform: scale(1.2);
+}
+/* --------------------------------- */
+
+#buttons {
+  display: flex;
+  flex-direction: column;
+}
+#mp3ShowDisable {
+  cursor: pointer;
+  position: fixed;
+  bottom: 170px;
+  right: 32px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#1f1f1f;
+  box-shadow: 5px 3px 3px black;
+  transition: all .4s;
+
+  z-index: 5;
+}
+#continue img{
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 100px;
+  right: 32px;
+  border-radius: 100%;
+  color:#1f1f1f;
+  box-shadow: 5px 3px 3px black;
+  transition: all .4s;
+
+  z-index: 5;
+}
+.to-top {    
+background: white;
+position: fixed;
+bottom: 16px;
+right:32px;
+width:60px;
+height:60px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size:32px;
+color:#1f1f1f;
+text-decoration: none;
+box-shadow: 5px 3px 3px black;
+opacity:0;
+pointer-events: none;
+transition: all .4s;
+}
+.to-top.active {
+bottom:32px;
+pointer-events: auto;
+opacity:1;
+}
+
+#anchor {
+  text-decoration: none;
+  color: #000000;
+}
+
+/*------------------------------------- mp3 player ---------------------------- */
+#drag {
+  display: none;
+  position: fixed;
+  left: 50px;
+  top: 90px;
+
+  opacity: 0.3;
+  transition: opacity 0.5s ease-in;
+
+  z-index: 100;
+}
+#drag:hover {
+  cursor: move;
+  opacity: 1;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  background-size: cover;
+
+  
+}
+@media screen and (max-width: 700px), (max-height: 500px) {
+  .wrapper {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
+
+.player {
+  background-image: url(https://besthqwallpapers.com/Uploads/6-2-2020/120547/thumb2-blue-ice-texture-ice-patterns-texture-frost-texture-winter-background-ice-background.jpg);
+  background-size: cover;
+  width: 365px;
+  min-height: 480px;
+  box-shadow: 0px 15px 35px -5px rgb(0, 0, 0);
+  border-radius: 15px;
+  padding: 30px;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player {
+    width: 95%;
+    padding: 20px;
+    margin-top: 75px;
+    min-height: initial;
+    padding-bottom: 30px;
+    max-width: 400px;
+  }
+}
+
+.player__top {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  z-index: 4;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player__top {
+    flex-wrap: wrap;
+  }
+}
+
+.player-cover {
+  width: 250px;
+  height: 370px;
+  margin-left: -70px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+  border-radius: 15px;
+  z-index: 1;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player-cover {
+    margin-top: -70px;
+    margin-bottom: 25px;
+    width: 290px;
+    height: 230px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .player-cover__item {
+    background-size: cover!important;
+  }
+}
+
+.player-cover__item {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.player-cover__item:before {
+  content: "";
+  background: inherit;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.5);
+  display: block;
+  z-index: 1;
+  position: absolute;
+  top: 30px;
+  transform: scale(0.9);
+  filter: blur(10px);
+  opacity: 0.9;
+  border-radius: 15px;
+}
+.player-cover__item:after {
+  content: "";
+  background: inherit;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.5);
+  display: block;
+  z-index: 2;
+  position: absolute;
+  border-radius: 15px;
+}
+.player-cover__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  pointer-events: none;
+}
+.player-controls {
+  flex: 1;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-end;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player-controls {
+    flex-direction: row;
+    padding-left: 0;
+    width: 100%;
+    flex: unset;
+  }
+}
+
+.player-controls__item {
+  display: inline-flex;
+  font-size: 30px;
+  padding: 5px;
+  margin-bottom: 10px;
+  color: #c4f6ff;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player-controls__item {
+    font-size: 26px;
+    padding: 5px;
+    margin-right: 10px;
+    color: #c4f6ff;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+  }
+}
+.player-controls__item::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgb(38, 168, 255);
+  transform: scale(0.5);
+  opacity: 0;
+  box-shadow: 0px 5px 10px 0px rgba(76, 70, 124, 0.2);
+  transition: all 0.3s ease-in-out;
+  transition: all 0.4s cubic-bezier(0.35, 0.57, 0.13, 0.88);
+}
+@media screen and (min-width: 500px) {
+  .player-controls__item:hover {
+    color: rgb(255, 255, 255);
+  }
+  .player-controls__item:hover::before {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player-controls__item:active {
+    color: brown;
+  }
+  .player-controls__item:active::before {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+.player-controls__item .icon {
+  position: relative;
+  z-index: 2;
+}
+.player-controls__item.-xl {
+  margin-bottom: 0;
+  font-size: 95px;
+  filter: drop-shadow(0 11px 6px rgba(0, 0, 0, 0.45));
+  color: #c4f6ff;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .player-controls__item.-xl {
+    margin-left: auto;
+    font-size: 75px;
+    margin-right: 0;
+  }
+}
+.player-controls__item.-xl:before {
+  display: none;
+}
+
+.progress {
+  width: 100%;
+  margin-top: -15px;
+  user-select: none;
+}
+.progress__top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.progress__duration {
+  color: #c4f6ff;
+  font-weight: 700;
+  font-size: 20px;
+}
+.progress__time {
+  margin-top: 2px;
+  color: #c4f6ff;
+  font-weight: 700;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.progress__bar {
+  position:initial;
+  height: 6px;
+  width: 100%;
+  background-color: rgb(65, 179, 245);
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.progress__current {
+  height: inherit;
+  width: 0%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.album-info {
+  color: #c4f6ff;
+  flex: 1;
+  padding-right: 60px;
+  user-select: none;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .album-info {
+    padding-right: 30px;
+  }
+}
+.album-info__name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  line-height: 1.3em;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .album-info__name {
+    font-size: 18px;
+    margin-bottom: 9px;
+  }
+}
+.album-info__track {
+  font-weight: 400;
+  font-size: 20px;
+  opacity: 0.7;
+  line-height: 1.3em;
+  min-height: 52px;
+}
+@media screen and (max-width: 576px), (max-height: 500px) {
+  .album-info__track {
+    font-size: 18px;
+    min-height: 50px;
+  }
+}
+
+.scale-out-enter-active {
+  transition: all 0.35s ease-in-out;
+}
+
+.scale-out-leave-active {
+  transition: all 0.35s ease-in-out;
+}
+
+.scale-out-enter {
+  transform: scale(0.55);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.scale-out-leave-to {
+  transform: scale(1.2);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.scale-in-enter-active {
+  transition: all 0.35s ease-in-out;
+}
+
+.scale-in-leave-active {
+  transition: all 0.35s ease-in-out;
+}
+
+.scale-in-enter {
+  transform: scale(1.2);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.scale-in-leave-to {
+  transform: scale(0.55);
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* ----------------------------------------------- Responsivity --------- */
+  /* ----- topnav ----- */
+@media screen and (max-width: 973px){
+  section {
+    width: 95%;
+  }
+
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+      float: right;
+      display: block;
+  } 
+
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+  }
+  .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+  }  
+
+  #home {
+    border-radius: 15px 0px 0px 15px;
+  }
+  #phoneIcon {
+    border-radius: 0px 15px 15px 0px;
+  }
+  #fall {
+    border-radius: 0px 0px 20px 20px;
+  }
+}
+  /* ---------------- */
+
+  /* ----- design ----- */
+@media screen and (max-width: 1300px) {
+  ul {
+      flex-direction: column;
+  } 
+  li{
+    align-self: center;
+    width: 500px;   
+  }
+}
+@media screen and (max-width: 1088px) {
+  .grid-thumb {
+      display: flex;
+      flex-direction: column;
+  }
+  .Estréias p, .Continuacoes p{
+      text-align: center;
+  }
+  body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+    /* //For Tablets */
+    html {
+        zoom: 85%;
+    }
+}
+    
+@media screen and (min-width: 768px) {
+    /* //For Laptops */
+    html {
+        zoom: 80%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    /* //For Large Laptops */
+    html {
+        zoom: 80%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    /* //For Big TV's (HD Screens)  */
+    html {
+        zoom: 80%;
+    }
+}
+
+
+@media screen and (min-width: 1920px) {
+    /* //For Projectors or Higher Resolution Screens (Full HD) */
+    html {
+        zoom: 85%;
+    }
+}
+@media screen and (min-width: 3840px) {
+    /* //For 4K Displays (Ultra HD) */
+    html {
+        zoom: 200%;
+    }
+    
+}
+  /* ---------------------- */
+/* -------------------------------------------- */
+
+/* Animations ------------------- */
+@keyframes backgroundAnimated {
+  0% {
+      background-position: left top;
+  }
+  50% {
+      background-position: right bottom;
+  }
+  100% {
+      background-position: left top;
+  }
+}
+@keyframes topnavAnimate {
+  from {
+      margin-left: 200%;
+      width: 300%
+  }
+  to {
+      margin-left: 0%;
+      width: 100%;
+  }
+}
+@keyframes FadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+@keyframes fade {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
