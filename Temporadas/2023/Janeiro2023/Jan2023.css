@@ -307,6 +307,40 @@ width: 450px;
 margin: auto;
 } 
 
+#Revenger {
+margin: 10px;
+  
+  background-color: rgba(85, 82, 56, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(52, 52, 52);
+  }
+  #Revenger p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(222, 214, 143);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #Revenger iframe {
+  border: 5px solid;
+  border-color: rgb(196, 0, 0);
+  border-radius: 25px;
+  }
+  #RevengerThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(196, 0, 0);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
 #sugar {
   margin: 10px;
   
@@ -506,6 +540,74 @@ margin: auto;
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(98, 0, 23);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#kaina {
+  margin: 10px;
+  
+  background-color: rgba(26, 43, 91, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(16, 0, 53);
+  }
+  #kaina p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(248, 255, 176);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #kaina iframe {
+  border: 5px solid;
+  border-color: rgb(98, 0, 23);
+  border-radius: 25px;
+  }
+  #kainaThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(98, 0, 23);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#hikari {
+  margin: 10px;
+  
+  background-color: rgba(12, 23, 52, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(27, 10, 68);
+  }
+  #hikari p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(237, 239, 211);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #hikari iframe {
+  border: 5px solid;
+  border-color: rgb(156, 2, 38);
+  border-radius: 25px;
+  }
+  #hikariThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(156, 2, 38);
   
   width: 450px;
   margin: auto;
