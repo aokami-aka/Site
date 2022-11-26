@@ -613,6 +613,143 @@ margin: 10px;
   margin: auto;
   } 
 
+#saitou {
+  margin: 10px;
+  
+  background-color: rgba(118, 92, 70, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(27, 10, 68);
+  }
+  #saitou p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(255, 157, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #saitou iframe {
+  border: 5px solid;
+  border-color: rgb(99, 119, 165);
+  border-radius: 25px;
+  }
+  #saitouThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(99, 119, 165);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#buddy {
+  margin: 10px;
+  
+  background-color: rgba(29, 85, 113, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(97, 47, 0);
+  }
+  #buddy p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(33, 33, 33);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #buddy iframe {
+  border: 5px solid;
+  border-color: rgb(171, 190, 0);
+  border-radius: 25px;
+  }
+  #buddyThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(171, 190, 0);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+  #eiyuuou {
+  margin: 10px;
+  
+  background-color: rgba(185, 185, 185, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(16, 2, 72);
+  }
+  #eiyuuou p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(1, 87, 31);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #eiyuuou iframe {
+  border: 5px solid;
+  border-color: rgb(173, 0, 0);
+  border-radius: 25px;
+  }
+  #eiyuuouThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(173, 0, 0);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#nonbiri {
+  margin: 10px;
+  
+  background-color: rgba(116, 160, 112, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(204, 204, 204);
+  }
+  #nonbiri p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(37, 111, 143);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #nonbiri iframe {
+  border: 5px solid;
+  border-color: rgb(196, 173, 22);
+  border-radius: 25px;
+  }
+  #nonbiriThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(196, 173, 22);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+
 
 
 
