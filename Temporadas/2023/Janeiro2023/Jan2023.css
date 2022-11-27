@@ -749,6 +749,210 @@ margin: 10px;
   margin: auto;
   } 
 
+#tomo {
+  margin: 10px;
+  
+  background-image: linear-gradient(45deg,rgb(79, 149, 230, 0.719), rgb(241, 96, 135, 0.719));
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(0, 191, 255);
+  }
+  #tomo p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(255, 28, 69);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #tomo iframe {
+  border: 5px solid;
+  border-color: rgb(255, 98, 216);
+  border-radius: 25px;
+  }
+  #tomoThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(255, 98, 216);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#kubo {
+  margin: 10px;
+  
+  background-color: rgba(68, 0, 113, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(255, 217, 242);
+  }
+  #kubo p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(57, 57, 57);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #kubo iframe {
+  border: 5px solid;
+  border-color: rgb(196, 173, 22);
+  border-radius: 25px;
+  }
+  #kuboThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(196, 173, 22);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#ippon {
+  margin: 10px;
+  
+  background-color: rgba(235, 212, 42, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(7, 0, 36);
+  }
+  #ippon p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(139, 65, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #ippon iframe {
+  border: 5px solid;
+  border-color: rgb(196, 173, 22);
+  border-radius: 25px;
+  }
+  #ipponThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(196, 173, 22);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#nier {
+  margin: 10px;
+  
+  background-color: rgba(220, 245, 248, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(0, 63, 88);
+  }
+  #nier p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #nier iframe {
+  border: 5px solid;
+  border-color: rgb(31, 31, 31);
+  border-radius: 25px;
+  }
+  #nierThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(31, 31, 31);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#onichan {
+  margin: 10px;
+  
+  background-color: rgba(246, 225, 216, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(252, 214, 141);
+  }
+  #onichan p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(245, 158, 174);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #onichan iframe {
+  border: 5px solid;
+  border-color: rgb(47, 50, 77);
+  border-radius: 25px;
+  }
+  #onichanThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(47, 50, 77);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#otonari {
+  margin: 10px;
+  
+  background-color: rgba(154, 206, 225, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(85, 143, 103);
+  }
+  #otonari p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(94, 77, 95);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #otonari iframe {
+  border: 5px solid;
+  border-color: rgb(226, 178, 138);
+  border-radius: 25px;
+  }
+  #otonariThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(226, 178, 138);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
 
 
 
