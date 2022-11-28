@@ -1155,12 +1155,45 @@ margin: 10px;
   
   width: 450px;
   margin: auto;
-  }
+}  
+
+
+
+
+
+#tsurune2 {
+  margin: 10px;
   
-
-
-
-
+  background-color: rgba(187, 109, 22, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(255, 255, 255);
+  }
+  #tsurune2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(255, 239, 146);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #tsurune2 iframe {
+  border: 5px solid;
+  border-color: rgb(162, 40, 21);
+  border-radius: 25px;
+  }
+  #tsurune2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(162, 40, 21);
+  
+  width: 450px;
+  margin: auto;
+  } 
 
 #dungeon4 {
   margin: 10px;
@@ -1191,6 +1224,108 @@ margin: 10px;
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(4, 139, 83);
+  
+  width: 450px;
+  margin: auto;
+  }
+  
+#nagatoro2 {
+  margin: 10px;
+  
+  background-color: rgba(203, 151, 119, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(247, 220, 161);
+  }
+  #nagatoro2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(83, 88, 98);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #nagatoro2 iframe {
+  border: 5px solid;
+  border-color: rgb(122, 135, 175);
+  border-radius: 25px;
+  }
+  #nagatoro2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(122, 135, 175);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#kamitachi2 {
+  margin: 10px;
+  
+  background-color: rgba(229, 231, 208, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(254, 244, 154);
+  }
+  #kamitachi2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(86, 122, 134);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #kamitachi2 iframe {
+  border: 5px solid;
+  border-color: rgb(184, 103, 109);
+  border-radius: 25px;
+  }
+  #kamitachi2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(184, 103, 109);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#kyokou2 {
+  margin: 10px;
+  
+  background-color: rgba(139, 168, 190, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(61, 59, 72);
+  }
+  #kyokou2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(223, 199, 173);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #kyokou2 iframe {
+  border: 5px solid;
+  border-color: rgb(66, 131, 87);
+  border-radius: 25px;
+  }
+  #kyokou2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(66, 131, 87);
   
   width: 450px;
   margin: auto;
