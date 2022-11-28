@@ -953,6 +953,211 @@ margin: 10px;
   margin: auto;
   } 
 
+#rougo {
+  margin: 10px;
+  
+  background-color: rgba(211, 175, 64, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(254, 240, 57);
+  }
+  #rougo p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(228, 101, 117);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #rougo iframe {
+  border: 5px solid;
+  border-color: rgb(114, 110, 150);
+  border-radius: 25px;
+  }
+  #rougoThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(114, 110, 150);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#saikyou {
+  margin: 10px;
+  
+  background-color: rgba(30, 34, 71, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(170, 51, 52);
+  }
+  #saikyou p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(230, 219, 156);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #saikyou iframe {
+  border: 5px solid;
+  border-color: rgb(231, 1, 112);
+  border-radius: 25px;
+  }
+  #saikyouThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(231, 1, 112);
+  
+  width: 450px;
+  margin: auto;
+  }
+  
+#spy {
+  margin: 10px;
+  
+  background-color: rgba(70, 74, 99, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(39, 46, 77);
+  }
+  #spy p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(238, 203, 203);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #spy iframe {
+  border: 5px solid;
+  border-color: rgb(236, 231, 226);
+  border-radius: 25px;
+  }
+  #spyThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(236, 231, 226);
+  
+  width: 450px;
+  margin: auto;
+  }
+
+#tensei {
+  margin: 10px;
+  
+  background-image: linear-gradient(90deg, rgba(234, 135, 133, 0.719), rgba(46, 89, 167, 0.719));
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(39, 46, 77);
+  }
+  #tensei p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(209, 213, 220);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #tensei iframe {
+  border: 5px solid;
+  border-color: rgb(243, 230, 188);
+  border-radius: 25px;
+  }
+  #tenseiThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(243, 230, 188);
+  
+  width: 450px;
+  margin: auto;
+  }
+
+#skill {
+  margin: 10px;
+  
+  background-color: rgba(199, 187, 230, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(195, 202, 224);
+  }
+  #skill p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(132, 57, 83);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #skill iframe {
+  border: 5px solid;
+  border-color: rgb(129, 168, 82);
+  border-radius: 25px;
+  }
+  #skillThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(129, 168, 82);
+  
+  width: 450px;
+  margin: auto;
+  }
+
+#trigun {
+  margin: 10px;
+  
+  background-color: rgba(85, 151, 209, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(13, 84, 98);
+  }
+  #trigun p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(178, 40, 74);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #trigun iframe {
+  border: 5px solid;
+  border-color: rgb(214, 207, 102);
+  border-radius: 25px;
+  }
+  #trigunThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(214, 207, 102);
+  
+  width: 450px;
+  margin: auto;
+  }
+  
+
 
 
 
