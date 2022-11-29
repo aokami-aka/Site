@@ -1465,7 +1465,75 @@ margin: 10px;
   
   width: 450px;
   margin: auto;
-  }   
+  }  
+  
+#bofuri2 {
+  margin: 10px;
+  
+  background-color: rgba(107, 100, 132, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(93, 90, 91);
+  }
+  #bofuri2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(205, 76, 149);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #bofuri2 iframe {
+  border: 5px solid;
+  border-color: rgb(208, 51, 65);
+  border-radius: 25px;
+  }
+  #bofuri2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(208, 51, 65);
+  
+  width: 450px;
+  margin: auto;
+  } 
+  
+#maou2 {
+  margin: 10px;
+  
+  background-color: rgba(31, 50, 83, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(143, 54, 47);
+  }
+  #maou2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(103, 125, 151);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #maou2 iframe {
+  border: 5px solid;
+  border-color: rgb(191, 97, 160);
+  border-radius: 25px;
+  }
+  #maou2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(191, 97, 160);
+  
+  width: 450px;
+  margin: auto;
+  } 
 
 /* ----- info design ----- */
 .grid-thumb {
