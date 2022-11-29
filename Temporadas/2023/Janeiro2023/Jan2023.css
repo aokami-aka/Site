@@ -1331,6 +1331,142 @@ margin: 10px;
   margin: auto;
   } 
 
+#kyuuketsuki2 {
+  margin: 10px;
+  
+  background-color: rgba(139, 168, 190, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(61, 59, 72);
+  }
+  #kyuuketsuki2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(223, 199, 173);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #kyuuketsuki2 iframe {
+  border: 5px solid;
+  border-color: rgb(66, 131, 87);
+  border-radius: 25px;
+  }
+  #kyuuketsuki2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(66, 131, 87);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#vinland2 {
+  margin: 10px;
+  
+  background-color: rgba(139, 168, 190, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(61, 59, 72);
+  }
+  #vinland2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(223, 199, 173);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #vinland2 iframe {
+  border: 5px solid;
+  border-color: rgb(66, 131, 87);
+  border-radius: 25px;
+  }
+  #vinland2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(66, 131, 87);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
+#shinka2 {
+  margin: 10px;
+  
+  background-color: rgba(139, 168, 190, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(61, 59, 72);
+  }
+  #shinka2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(223, 199, 173);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #shinka2 iframe {
+  border: 5px solid;
+  border-color: rgb(66, 131, 87);
+  border-radius: 25px;
+  }
+  #shinka2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(66, 131, 87);
+  
+  width: 450px;
+  margin: auto;
+  }   
+
+#bungo4 {
+  margin: 10px;
+  
+  background-color: rgba(139, 168, 190, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(61, 59, 72);
+  }
+  #bungo4 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(223, 199, 173);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #bungo4 iframe {
+  border: 5px solid;
+  border-color: rgb(66, 131, 87);
+  border-radius: 25px;
+  }
+  #bungo4Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(66, 131, 87);
+  
+  width: 450px;
+  margin: auto;
+  }   
+
 /* ----- info design ----- */
 .grid-thumb {
   margin-left: 10px;
