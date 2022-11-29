@@ -117,6 +117,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_07.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Dainou-teki%20na%20Rendezvous.mp3?raw=true",
             url: "https://open.spotify.com/artist/1k5LyiTCRzPjORzcgHqJxF?si=lUKJcHXARRaiuMYgD41Tkg",
+          }, {
+            artist: "Ano",
+            name: "Chu, Tayousei.",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_08.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Chu%2C%20Tayousei.mp3?raw=true",
+            url: "https://open.spotify.com/track/5KLL3cZEyuSJRvyS84o4Df?si=1b25c1f47ca54518",
           },
           {      // Urusei Yatsura
             artist: "Minami, SAKURAmoti",
