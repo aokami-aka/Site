@@ -123,6 +123,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_08.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Chu%2C%20Tayousei.mp3?raw=true",
             url: "https://open.spotify.com/track/5KLL3cZEyuSJRvyS84o4Df?si=1b25c1f47ca54518",
+          }, {
+            artist: "TK",
+            name: "First Death",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_09.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/first%20death.mp3?raw=true",
+            url: "https://open.spotify.com/track/0ky07Oq85l9zx7e427XGgC?si=fe1dfdecc9224d9a",
           },
           {      // Urusei Yatsura
             artist: "Minami, SAKURAmoti",
