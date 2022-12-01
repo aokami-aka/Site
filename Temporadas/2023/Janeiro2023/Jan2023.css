@@ -1535,6 +1535,40 @@ margin: 10px;
   margin: auto;
   } 
 
+#tokyo2 {
+  margin: 10px;
+  
+  background-color: rgba(54, 70, 105, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(43, 43, 43);
+  }
+  #tokyo2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(200, 200, 200);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 194, 224, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #tokyo2 iframe {
+  border: 5px solid;
+  border-color: rgb(215, 187, 113);
+  border-radius: 25px;
+  }
+  #tokyo2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(215, 187, 113);
+  
+  width: 450px;
+  margin: auto;
+  } 
+
 /* ----- info design ----- */
 .grid-thumb {
   margin-left: 10px;
