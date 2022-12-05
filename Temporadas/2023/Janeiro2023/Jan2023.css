@@ -16,7 +16,7 @@ body {
   font-family: cursive;
 }
 .background {
-  animation: backgroundAnimated 6000s linear infinite;
+  animation: backgroundAnimated 8000s linear infinite;
 }
 /* ---------------------------- */
 
