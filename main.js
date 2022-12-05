@@ -159,6 +159,8 @@ var span = document.getElementsByClassName("close")[0];
 
 span.onclick = function() {
   modal.style.display = "none";
+  pointX = 0;
+  pointY = 0;
 }
 
   var scale = 1,
