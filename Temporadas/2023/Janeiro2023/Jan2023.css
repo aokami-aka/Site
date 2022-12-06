@@ -52,9 +52,7 @@ a:hover {
   font-weight: bold;
 }
 /* -------------------- */
-#img01:hover {
-  cursor: move;
-}
+
 /* --------- Topnav ---------- */
 h1 {
 text-align: center;
@@ -160,9 +158,9 @@ section {
   /* Hidden by default */
   position: fixed;
   /* Stay in place */
-  z-index: 1;
+  z-index: 7;
   /* Sit on top */
-  padding-top: 100px;
+  padding-top: 80px;
   /* Location of the box */
   left: 0;
   top: 0;
@@ -177,6 +175,9 @@ section {
   background-color: rgba(0, 0, 0, 0.9);
   /* Black w/ opacity */
 }
+.modal:hover {
+  cursor:pointer;
+}
 
 .myImages:hover {
   cursor:zoom-in;
@@ -185,19 +186,18 @@ section {
 .modal-content {
   margin: auto;
   display: block;
-  width: 80%;
+  width: 100%;
   max-width: 700px;
 }
 
 #caption {
   margin: auto;
   display: block;
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
   text-align: center;
   color: #ccc;
   padding: 10px 0;
-  height: 150px;
+  font-size: 25px;
 }
 
 .modal-content,
@@ -213,23 +213,6 @@ section {
   to {
     transform: scale(1)
   }
-}
-
-.close {
-  position: absolute;
-  top: 0;
-  right: 25%;
-  color: #f1f1f1;
-  font-size: 80px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 @media only screen and (max-width: 700px) {
@@ -1749,7 +1732,7 @@ opacity:1;
 }
 
 /*------------------------------------- mp3 player ---------------------------- */
-#drag {
+.mp3 {
   display: none;
   position: fixed;
   left: 50px;
@@ -1760,7 +1743,7 @@ opacity:1;
 
   z-index: 100;
 }
-#drag:hover {
+.mp3:hover {
   cursor: move;
   opacity: 1;
 }
