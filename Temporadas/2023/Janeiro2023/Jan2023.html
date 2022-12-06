@@ -70,7 +70,7 @@
     </div>
 
     <!------------------------------------- Music Player -------------------------------------------->
-    <div id="drag" ref="ActualPosition">
+    <div id="drag" class="mp3" ref="ActualPosition">
         <div class="wrapper" id="app">
             <div class="player">
                 <div class="player__top" >
@@ -159,7 +159,6 @@
     <!-------------------------------------------------------------------------------------------------->
     <section>
         <div id="myModal" class="modal">
-            <span class="close">&times;</span>
             <div id="modal-image">
                 <img class="modal-content" id="img01">
             </div>
@@ -170,7 +169,78 @@
             <h2 id="estreiasTitle" onclick="ShowHidden('Estreias-Container')">- Estréias -</h2> 
             <div id="Estreias-Container">
 
-            
+                <!----------------- Tensei Oujo to Tensai Reijou no Mahou Kakumei ---------------------------------->
+                <div id="tensei">
+                    <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('tenseiCard')">Tensei Oujo to Tensai Reijou no Mahou Kakumei<br><i class="english">The Magical Revolution of the Reincarnated Princess and the Genius Young Lady
+                    </i></h2>
+                    <div id="tenseiCard">
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container">
+                                <div class="mySlides24 fade">
+                                    <div class="numbertext">1 / 2</div>
+                                    <img loading="lazy" src="Estréias/tensei oujo.jpg" alt="Key Visual" id="tenseiThumb" class="myImages">
+                                </div>
+
+                                <div class="mySlides24 fade">
+                                    <div class="numbertext">2 / 2</div>
+                                    <img loading="lazy" src="Estréias/tensei oujo_02.jpeg" alt="Teaser Visual" id="tenseiThumb" class="myImages" >
+                                </div>
+
+                                <a class="prev" onclick="plusSlides(-1, 23)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1, 23)">&#10095;</a>
+                            </div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse:</b> Apesar de sua suposta incapacidade com a magia regular, a princesa Anisphia desafia as expectativas da aristocracia ao desenvolver a "magologia", uma teoria mágica única baseada em memórias de sua vida passada. Um dia, ela testemunha a brilhante nobre, Eufilia, injustamente ser despojada de seu título como a próxima monarca do reino. É quando Anisphia elabora um plano para ajudar Euphyllia a recuperar seu bom nome – o que de alguma forma os envolve vivendo juntos e pesquisando magia!
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero:</b> Comédia, Fantasia, Isekai
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor:</b> <a href="https://anidb.net/creator/12023" target="_blank" rel="noreferrer noopener">Tamaki Shingo </a>(<i>Ahiru no Sora, Aho Girl</i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a href="https://anidb.net/creator/1789" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Diomedéa_studio.png" class="Studio" alt="estúdio"></a> (<i>Domestic no Kanojo, Aho Girl, Ahiru no Sora</i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia:</b> 04/01
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios:</b> 12
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b>V: -----
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a href="https://anidb.net/anime/17569" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/52736" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><!--<a target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 50%;"></a>--></p>
+                        </div>
+
+                            <br><br>
+
+                        <div id="orientTrailers">
+                            <p style="text-align: center;"><b>Vídeos</b></p>
+
+                            <br><br>
+                            <!-- Lista de Trailers ----------------------------------------------------------------->
+                            <ul class="trailer">
+                                <!-- <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/QuYwsDJF6hA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientTrailer"><b>Abertura</b><br>Tensei Shitara Ken deshita<br><a href="https://open.spotify.com/artist/1zPnpAM7fGFr7pl8OSNvak?si=A8JeTv0yT8q5tiWPyiCx7g" target="_blank" rel="noreferrer noopener">Kishida Kyoudan & The Akeboshi Rockets</a></p>
+                                </li> -->
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/twyYWvBQHEc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientOP"><b>Trailer 1</b></p>
+                                </li>  
+                                <li>
+                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/XFkQUOuqmcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p id="orientED"><b>Trailer 2</b><!--<br>more＜STRONGLY<br><a href="https://open.spotify.com/track/5qodMWuc9osE51ZwfFQuKY?si=f485ea042c3648c0" target="_blank" rel="noreferrer noopener">Maon Kurosaki</a>--></p>
+                                </li> 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
                 <!----------------- Koori Zokusei Danshi to Cool ------------------------------------------------------------------>
                 <div id="koori">
                     <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('kooriCard')">Koori Zokusei Danshi to Cool na Douryou Joshi<br><i class="english">The Ice Guy and His Cool Female Colleague</i></h2>
@@ -180,12 +250,12 @@
                             <div class="slideshow-container">
                                 <div class="mySlides1 fade">
                                     <div class="numbertext">1 / 2</div>
-                                    <img loading="lazy" src="Estréias/Koori Zokusei Danshi to Cool na Douryou Joshi.jpg" alt="Koori Zokusei Danshi to Cool 1" class="myImages" id="kooriThumb">
+                                    <img loading="lazy" src="Estréias/Koori Zokusei Danshi to Cool na Douryou Joshi.jpg" alt="Teaser Visual" class="myImages" id="kooriThumb">
                                 </div>
 
                                 <div class="mySlides1 fade">
                                     <div class="numbertext">2 / 2</div>
-                                    <img loading="lazy" src="Estréias/Koori Zokusei Danshi to Cool na Douryou Joshi_02.jpeg" alt="Koori Zokusei Danshi to Cool 2" class="myImages" id="kooriThumb">
+                                    <img loading="lazy" src="Estréias/Koori Zokusei Danshi to Cool na Douryou Joshi_02.jpeg" alt="Key Visual" class="myImages" id="kooriThumb">
                                 </div>
 
                                 <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
@@ -1811,78 +1881,6 @@
                                     <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/iMG76sk7l88" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     <p id="orientED"><b>Teaser 2</b><br>more＜STRONGLY<br><a href="https://open.spotify.com/track/5qodMWuc9osE51ZwfFQuKY?si=f485ea042c3648c0" target="_blank" rel="noreferrer noopener">Maon Kurosaki</a></p>
                                 </li>--> 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <br><br>
-                <!----------------- Tensei Oujo to Tensai Reijou no Mahou Kakumei ---------------------------------->
-                <div id="tensei">
-                    <h2 class="animeTitle" title="Mostrar/esconder informações" onclick="ShowHidden('tenseiCard')">Tensei Oujo to Tensai Reijou no Mahou Kakumei<br><i class="english">The Magical Revolution of the Reincarnated Princess and the Genius Young Lady
-                    </i></h2>
-                    <div id="tenseiCard">
-                        <div class="grid-thumb">
-                            <!-- Thumbs ----->
-                            <div class="slideshow-container">
-                                <div class="mySlides24 fade">
-                                    <div class="numbertext">1 / 2</div>
-                                    <img loading="lazy" src="Estréias/tensei oujo.jpg" alt="Tensei Oujo 1" id="tenseiThumb" class="myImages">
-                                </div>
-
-                                <div class="mySlides24 fade">
-                                    <div class="numbertext">2 / 2</div>
-                                    <img loading="lazy" src="Estréias/tensei oujo_02.jpeg" alt="Tensei Oujo 2" id="tenseiThumb" class="myImages" >
-                                </div>
-
-                                <a class="prev" onclick="plusSlides(-1, 23)">&#10094;</a>
-                                <a class="next" onclick="plusSlides(1, 23)">&#10095;</a>
-                            </div>
-                            <!-- Sinopse -------->
-                            <p class="info"><b>Sinopse:</b> Apesar de sua suposta incapacidade com a magia regular, a princesa Anisphia desafia as expectativas da aristocracia ao desenvolver a "magologia", uma teoria mágica única baseada em memórias de sua vida passada. Um dia, ela testemunha a brilhante nobre, Eufilia, injustamente ser despojada de seu título como a próxima monarca do reino. É quando Anisphia elabora um plano para ajudar Euphyllia a recuperar seu bom nome – o que de alguma forma os envolve vivendo juntos e pesquisando magia!
-                            <br><br>
-                            <!-- Gênero -------------->
-                            <b>Gênero:</b> Comédia, Fantasia, Isekai
-                            <br><br>
-                            <!-- Diretor ------------------->
-                            <b>Diretor:</b> <a href="https://anidb.net/creator/12023" target="_blank" rel="noreferrer noopener">Tamaki Shingo </a>(<i>Ahiru no Sora, Aho Girl</i>)
-                            <br>
-                            <!-- Estúdio ------------------------->
-                            <b>Estúdio: </b><a href="https://anidb.net/creator/1789" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Diomedéa_studio.png" class="Studio" alt="estúdio"></a> (<i>Domestic no Kanojo, Aho Girl, Ahiru no Sora</i>)
-                            <br><br>
-                            <!-- Data ----------------------------------------->
-                            <b>Estréia:</b> Janeiro
-                            <br>
-                            <!-- Episódios ------------------------------------------->
-                            <b>Episódios:</b> 12
-                            <br><br>
-                            <!-- Comentários ------------------------------------------------->
-                            <b>Comentários: </b>V: -----
-                            <br><br>
-                            <!-- AniDB e MAL do anime ------------------------------------------------>
-                            <a href="https://anidb.net/anime/17569" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a href="https://myanimelist.net/anime/52736" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><!--<a target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="CR" class="source" style="height: 100px; opacity: 50%;"></a>--></p>
-                        </div>
-
-                            <br><br>
-
-                        <div id="orientTrailers">
-                            <p style="text-align: center;"><b>Vídeos</b></p>
-
-                            <br><br>
-                            <!-- Lista de Trailers ----------------------------------------------------------------->
-                            <ul class="trailer">
-                                <!-- <li>
-                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/QuYwsDJF6hA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <p id="orientTrailer"><b>Abertura</b><br>Tensei Shitara Ken deshita<br><a href="https://open.spotify.com/artist/1zPnpAM7fGFr7pl8OSNvak?si=A8JeTv0yT8q5tiWPyiCx7g" target="_blank" rel="noreferrer noopener">Kishida Kyoudan & The Akeboshi Rockets</a></p>
-                                </li> -->
-                                <li>
-                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/twyYWvBQHEc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <p id="orientOP"><b>Trailer 1</b></p>
-                                </li>  
-                                <li>
-                                    <iframe loading="lazy" width="400" height="315" src="https://www.youtube.com/embed/XFkQUOuqmcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <p id="orientED"><b>Trailer 2</b><!--<br>more＜STRONGLY<br><a href="https://open.spotify.com/track/5qodMWuc9osE51ZwfFQuKY?si=f485ea042c3648c0" target="_blank" rel="noreferrer noopener">Maon Kurosaki</a>--></p>
-                                </li> 
                             </ul>
                         </div>
                     </div>
