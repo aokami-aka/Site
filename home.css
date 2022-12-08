@@ -173,7 +173,7 @@ a {
     transition: all ease-out 0.5s;
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 780px) {
     .seasons {
         display: flex;
         flex-direction: column;
@@ -195,7 +195,7 @@ a {
     grid-template-columns: 1fr 1fr;
     justify-items: center;
 }
-@media screen and (max-width: 610px){
+@media screen and (max-width: 380px){
     #years {
         display: flex;
         flex-direction: column;
