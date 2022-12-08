@@ -129,6 +129,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_09.jpeg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/first%20death.mp3?raw=true",
             url: "https://open.spotify.com/track/0ky07Oq85l9zx7e427XGgC?si=fe1dfdecc9224d9a",
+          }, {
+            artist: "Aimer",
+            name: "Deep Down",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/chainsawman_10.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Deep%20down.mp3?raw=true",
+            url: "https://open.spotify.com/track/42IF4VUNaIGc1oD74rHa8O?si=9f3ef89588d34a61",
           },
           {      // Urusei Yatsura
             artist: "Minami, SAKURAmoti",
