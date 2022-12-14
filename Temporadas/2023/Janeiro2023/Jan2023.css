@@ -1095,11 +1095,11 @@ margin: 10px;
 #spy {
   margin: 10px;
   
-  background-color: rgba(70, 74, 99, 0.719);
+  background-color: rgba(9, 37, 113, 0.719);
   
   border: 5px solid;
   border-radius: 5px;
-  border-color: rgb(39, 46, 77);
+  border-color: rgb(255, 255, 255);
   }
   #spy p {
   padding: 10px;
@@ -1114,13 +1114,13 @@ margin: 10px;
   }
   #spy iframe {
   border: 5px solid;
-  border-color: rgb(236, 231, 226);
+  border-color: rgb(39, 46, 77);
   border-radius: 25px;
   }
   #spyThumb {
   border: 5px solid;
   border-radius: 20px;
-  border-color: rgb(236, 231, 226);
+  border-color: rgb(39, 46, 77);
   
   width: 450px;
   margin: auto;
