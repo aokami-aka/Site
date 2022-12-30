@@ -9,12 +9,28 @@ new Vue({
         currentTime: null,
         isTimerPlaying: false,
         tracks: [
-          {         // Tensei Shitara Ken Deshita
-            artist: "Kyoudan & The Akeboshi Rockets",
-            name: "Tensei Shitara Ken deshita",
-            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Estr%C3%A9ias/Tensei%20Shitara%20Ken%20Deshita.jpg?raw=true",
-            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2022/Outubro%202022/Music/Tensei%20shitara%20Ken%20Deshita%20.mp3?raw=true",
-            url: "https://open.spotify.com/artist/5STm6pQxk2nHd7JVcQCBoa?si=2W03ZtdQRzuN28WJCpBzqg",
+          {         // koori jousei
+            artist: "Sakuma Takao",
+            name: "Frozen Midnight",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/Koori%20Zokusei%20Danshi%20to%20Cool%20na%20Douryou%20Joshi.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Frozen_Midnight.mp3?raw=true",
+            url: "https://open.spotify.com/track/3vI81nyW6KM3aFHld1BX6K?si=ea04e60cfa7d4af9",
+          },
+
+          {            // high card
+            artist: "Five New Old",
+            name: "Trickster",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/high%20card.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Trickster.mp3?raw=true",
+            url: "https://open.spotify.com/track/4080qNZP4kWloqGH3ujVkp?si=f5ba7ec7a0d248cb",
+          },
+
+          {             // Mononogatari
+            artist: "Arcana Project",
+            name: "Koigoromo",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/mononogatari.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Koigoromo.mp3?raw=true",
+            url: "https://open.spotify.com/artist/33nBmWfW7J3vL487uRL8Cz?si=5pgP_wNoRD6TCYqi6-a2hg",
           }
 
         ],
