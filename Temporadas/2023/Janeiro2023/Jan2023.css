@@ -1737,7 +1737,6 @@ opacity:1;
 
 /*------------------------------------- mp3 player ---------------------------- */
 .mp3 {
-  display: none;
   position: fixed;
   left: 50px;
   top: 90px;
