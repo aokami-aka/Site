@@ -31,6 +31,20 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/mononogatari.jpeg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Koigoromo.mp3?raw=true",
             url: "https://open.spotify.com/artist/33nBmWfW7J3vL487uRL8Cz?si=5pgP_wNoRD6TCYqi6-a2hg",
+          },
+
+          {             // bungo stray dogs 4
+            artist: "SCREEN mode",
+            name: "True Story",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/bungo%20stray%20dogs.webp?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Shirushi.mp3?raw=true",
+            url: "https://open.spotify.com/artist/44CA4qMx5IOMDQOTg7G6KN?si=1cIOHF-VTXCXeq_l9kWX0g",
+          }, {
+            artist: "Luck Life",
+            name: "Shirushi",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/bungo%20stray%20dogs%204_03.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/True_Story.mp3?raw=true",
+            url: "https://open.spotify.com/artist/35AeYLIKrorZDAxsb40vVZ?si=oEzSOSlnRKii09_I5huasg",
           }
 
         ],
