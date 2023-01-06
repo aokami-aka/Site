@@ -17,6 +17,14 @@ new Vue({
             url: "https://open.spotify.com/track/3vI81nyW6KM3aFHld1BX6K?si=ea04e60cfa7d4af9",
           },
 
+          {         // buddy daddies
+            artist: "Ayase",
+            name: "Shock!",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/buddy%20daddies.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Shock!.mp3?raw=true",
+            url: "https://open.spotify.com/artist/1S8OQ9SqlLdD9l4paaZMuZ?si=rqX_VwA3Tg28zEKs8jhSGA",
+          },
+
           {            // high card
             artist: "Five New Old",
             name: "Trickster",
