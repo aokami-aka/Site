@@ -53,6 +53,14 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/bungo%20stray%20dogs%204_03.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/True_Story.mp3?raw=true",
             url: "https://open.spotify.com/artist/35AeYLIKrorZDAxsb40vVZ?si=oEzSOSlnRKii09_I5huasg",
+          },
+
+          {             // nagatoro 2
+            artist: "Sumire Uesaka",
+            name: "LOVE CRAZY",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/nagatoro%202.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/love_crazy.mp3?raw=true",
+            url: "https://open.spotify.com/artist/4hRg5l2hXQl3lAzffFF8P8?si=upsCz8msTwyv6K28cggpUA",
           }
 
         ],
