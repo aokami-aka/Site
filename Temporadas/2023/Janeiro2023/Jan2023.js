@@ -17,6 +17,14 @@ new Vue({
             url: "https://open.spotify.com/track/3vI81nyW6KM3aFHld1BX6K?si=ea04e60cfa7d4af9",
           },
 
+          {         // onimai
+            artist: "Enako",
+            name: "Identeitei Meltdown",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/oniichan.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Identeitei_Meltdown.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2jHLZmPoAmnlCswCMc8WCj?si=JTQfUrZ-S_CurZdDfixFHw",
+          },
+
           {         // buddy daddies
             artist: "Ayase",
             name: "Shock!",
