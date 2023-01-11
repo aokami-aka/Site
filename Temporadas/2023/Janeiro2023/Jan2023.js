@@ -15,6 +15,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/Koori%20Zokusei%20Danshi%20to%20Cool%20na%20Douryou%20Joshi.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Frozen_Midnight.mp3?raw=true",
             url: "https://open.spotify.com/track/3vI81nyW6KM3aFHld1BX6K?si=ea04e60cfa7d4af9",
+          }, {        
+            artist: "Nowlu",
+            name: "Linaria",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/Koori%20Zokusei%20Danshi%20to%20Cool%20na%20Douryou%20Joshi_02.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/linaria.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0TAhk9VlgZqLcM4wn5nUpO?si=jsxklmVuTSKykKW7MkcvKA",
           },
 
           {         // revenger
@@ -31,6 +37,12 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/oniichan.jpeg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Identeitei_Meltdown.mp3?raw=true",
             url: "https://open.spotify.com/artist/2jHLZmPoAmnlCswCMc8WCj?si=JTQfUrZ-S_CurZdDfixFHw",
+          }, {         
+            artist: "ONIMAI SISTERS",
+            name: "Himegoto＊Crisisters",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/oniichan.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/HimegotoCrisisters.mp3?raw=true",
+            url: "https://open.spotify.com/artist/3w1Hf6Gk9QBWQwXnjeSqjZ?si=wwbrc9i5ShqlvWK3Yat4jQ",
           },
 
           {         // otonari tenshi sama
@@ -103,6 +115,20 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/mononogatari.jpeg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Koigoromo.mp3?raw=true",
             url: "https://open.spotify.com/artist/33nBmWfW7J3vL487uRL8Cz?si=5pgP_wNoRD6TCYqi6-a2hg",
+          }, {             
+            artist: "TRUE",
+            name: "Rebind",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/mononogatari_02.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/rebind.mp3?raw=true",
+            url: "https://open.spotify.com/artist/0UwVT0iMLLAa9SUNENg4te?si=lw6wtbcOR9irFRPfJxTX0Q",
+          },
+
+          {             // Kubo-san Wa Mob
+            artist: "DIALOGUE+",
+            name: "Kasuka de Tashika",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Estr%C3%A9ias/kubo-san_03.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Kasuka_de_Tashika.mp3?raw=true",
+            url: "https://open.spotify.com/artist/2edEpSuGIPWwl7QJF3hXM0?si=uKcmHZ4vSHWfNyFDteZ7Qw",
           },
 
           {             // bungo stray dogs 4
@@ -117,6 +143,20 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/bungo%20stray%20dogs%204_03.jpg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/True_Story.mp3?raw=true",
             url: "https://open.spotify.com/artist/35AeYLIKrorZDAxsb40vVZ?si=oEzSOSlnRKii09_I5huasg",
+          },
+
+          {             // tsurune 2
+            artist: "Luck Life",
+            name: "°C",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/tsurune%202.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/%C2%B0C.mp3?raw=true",
+            url: "https://open.spotify.com/artist/35AeYLIKrorZDAxsb40vVZ?si=oEzSOSlnRKii09_I5huasg",
+          }, {            
+            artist: "Tei",
+            name: "Hitomi Naka",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/tsurune%202_02.jpg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/hitominaka.mp3?raw=true",
+            url: "https://www.youtube.com/c/%E4%B8%81teihinoto",
           },
 
           {             // dungeon 4 - part 2
@@ -147,6 +187,20 @@ new Vue({
             cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/kami-tachi%202.jpeg?raw=true",
             source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/way_to_go.mp3?raw=true",
             url: "https://open.spotify.com/artist/7MSns7VCEysJJhcp67gvtZ?si=anGApqRMQH-wnMSC-a73nw",
+          }, {             
+            artist: "Azusa Tadokoro",
+            name: "Drum Shiki Tansaki",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/kami-tachi%202_02.jpeg?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/Drum_Shiki_Tansaki.mp3?raw=true",
+            url: "https://open.spotify.com/artist/6QA62pTldn4AF8DeKsKW0h?si=j3vpUsWnTDCBtRA0msKgbw",
+          },
+
+          {             // Tokyo Revenegers 2
+            artist: "Official HIGE DANdism",
+            name: "White Noise",
+            cover: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Continua%C3%A7%C3%B5es/tokyo%20revengers%202.jfif?raw=true",
+            source: "https://github.com/aokami-aka/Site/blob/main/Temporadas/2023/Janeiro2023/Music/white_noise.mp3?raw=true",
+            url: "https://open.spotify.com/artist/5Vo1hnCRmCM6M4thZCInCj?si=oZCA6mAWQVGMLxlHV48SzQ",
           },
 
           {             // kyokou suiri 2
