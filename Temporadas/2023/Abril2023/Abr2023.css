@@ -357,7 +357,7 @@ img {vertical-align: middle;}
   #tengoku p {
   padding: 10px;
   border: 3px solid;
-  border-color: rgb(209, 213, 220);
+  border-color: rgb(0, 89, 12);
   border-radius: 50px;
   
   background-color: rgba(121, 224, 128, 0.719);
@@ -382,16 +382,16 @@ img {vertical-align: middle;}
 #jigokuraku {
   margin: 10px;
   
-  background-color: rgba(16, 39, 119, 0.719);
+  background-color: rgba(0, 0, 0, 0.719);
   
   border: 5px solid;
   border-radius: 5px;
-  border-color: rgb(86, 140, 51);
+  border-color: rgb(208, 189, 167);
   }
   #jigokuraku p {
   padding: 10px;
   border: 3px solid;
-  border-color: rgb(209, 213, 220);
+  border-color: rgb(0, 89, 12);
   border-radius: 50px;
   
   background-color: rgba(121, 224, 128, 0.719);
@@ -401,17 +401,155 @@ img {vertical-align: middle;}
   }
   #jigokuraku iframe {
   border: 5px solid;
-  border-color: rgb(159, 59, 45);
+  border-color: rgb(201, 215, 255);
   border-radius: 25px;
   }
   #jigokurakuThumb {
   border: 5px solid;
   border-radius: 20px;
-  border-color: rgb(159, 59, 45);
+  border-color: rgb(201, 215, 255);
   
   width: 450px;
   margin: auto;
   }
+
+#kokoro {
+  margin: 10px;
+  
+  background-color: rgba(95, 61, 50, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(255, 255, 255);
+}
+#kokoro p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#kokoro iframe {
+  border: 5px solid;
+  border-color: rgb(14, 117, 120);
+  border-radius: 25px;
+}
+#kokoroThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(14, 117, 120);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#tenkousei {
+  margin: 10px;
+  
+  background-color: rgba(243, 213, 184, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(137, 200, 207)
+}
+#tenkousei p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#tenkousei iframe {
+  border: 5px solid;
+  border-color: rgb(59, 58, 64);
+  border-radius: 25px;
+}
+#tenkouseiThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(59, 58, 64);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#skip {
+  margin: 10px;
+  
+  background-color: rgba(243, 213, 184, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(137, 200, 207)
+}
+#skip p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#skip iframe {
+  border: 5px solid;
+  border-color: rgb(59, 58, 64);
+  border-radius: 25px;
+}
+#skipThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(59, 58, 64);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#konosuba {
+  margin: 10px;
+  
+  background-color: rgba(58, 40, 104, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(223, 194, 136);
+}
+#konosuba p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#konosuba iframe {
+  border: 5px solid;
+  border-color: rgb(140, 90, 101);
+  border-radius: 25px;
+}
+#konosubaThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(140, 90, 101);
+  
+  width: 450px;
+  margin: auto;
+}
+
+  
 
   
 
@@ -427,10 +565,10 @@ img {vertical-align: middle;}
   #shingeki4 p {
   padding: 10px;
   border: 3px solid;
-  border-color: rgb(203, 225, 177);
+  border-color: rgb(0, 89, 12);
   border-radius: 50px;
   
-  background-color: rgba(121, 194, 224, 0.719);
+  background-color: rgba(121, 224, 128, 0.719);
   
   margin: 10px;
   font-size: 24px;
@@ -448,6 +586,40 @@ img {vertical-align: middle;}
   width: 450px;
   margin: auto;
   }  
+
+#edens2 {
+  margin: 10px;
+  
+  background-color: rgba(67, 153, 117, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(49, 53, 58);
+  }
+  #edens2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+  }
+  #edens2 iframe {
+  border: 5px solid;
+  border-color: rgb(216, 77, 93);
+  border-radius: 25px;
+  }
+  #edens2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(216, 77, 93);
+  
+  width: 450px;
+  margin: auto;
+  } 
 
 /* ----- info design ----- */
 .grid-thumb {
