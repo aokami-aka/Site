@@ -413,6 +413,40 @@ img {vertical-align: middle;}
   margin: auto;
   }
 
+#yamada {
+  margin: 10px;
+  
+  background-image: linear-gradient(5deg, rgba(227,150,187,0.719) 0%, rgba(64,74,109,0.719) 87%);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(47, 128, 155)
+}
+#yamada p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#yamada iframe {
+  border: 5px solid;
+  border-color: rgb(198, 74, 73);
+  border-radius: 25px;
+}
+#yamadaThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(198, 74, 73);
+  
+  width: 450px;
+  margin: auto;
+}
+
 #kokoro {
   margin: 10px;
   
@@ -484,11 +518,11 @@ img {vertical-align: middle;}
 #skip {
   margin: 10px;
   
-  background-color: rgba(243, 213, 184, 0.719);
+  background-color: rgba(212, 250, 211,0.719);
   
   border: 5px solid;
   border-radius: 5px;
-  border-color: rgb(137, 200, 207)
+  border-color: rgb(120, 209, 239);
 }
 #skip p {
   padding: 10px;
@@ -503,13 +537,13 @@ img {vertical-align: middle;}
 }
 #skip iframe {
   border: 5px solid;
-  border-color: rgb(59, 58, 64);
+  border-color: rgb(231, 157, 178);
   border-radius: 25px;
 }
 #skipThumb {
   border: 5px solid;
   border-radius: 20px;
-  border-color: rgb(59, 58, 64);
+  border-color: rgb(231, 157, 178);
   
   width: 450px;
   margin: auto;
@@ -544,6 +578,74 @@ img {vertical-align: middle;}
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(140, 90, 101);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#cheat {
+  margin: 10px;
+  
+  background: linear-gradient(45deg, rgba(229,178,210,0.719) 20%, rgba(92,195,254,0.719) 100%);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(35, 90, 155);
+}
+#cheat p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#cheat iframe {
+  border: 5px solid;
+  border-color: rgb(226, 67, 28);
+  border-radius: 25px;
+}
+#cheatThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(226, 67, 28);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#yuusha {
+  margin: 10px;
+  
+  background: rgb(74, 187, 227, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(255, 255, 255);
+}
+#yuusha p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#yuusha iframe {
+  border: 5px solid;
+  border-color: rgb(52, 49, 56);
+  border-radius: 25px;
+}
+#yuushaThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(52, 49, 56);
   
   width: 450px;
   margin: auto;
