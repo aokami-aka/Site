@@ -651,6 +651,176 @@ img {vertical-align: middle;}
   margin: auto;
 }
 
+#kawaisugi {
+  margin: 10px;
+  
+  background: rgba(55, 36, 80, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(12, 13, 17);
+}
+#kawaisugi p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#kawaisugi iframe {
+  border: 5px solid;
+  border-color: rgb(255, 240, 1);
+  border-radius: 25px;
+}
+#kawaisugiThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(255, 240, 1);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#elf {
+  margin: 10px;
+  
+  background: rgba(234, 224, 232, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(255, 0, 0);
+}
+#elf p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#elf iframe {
+  border: 5px solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: 25px;
+}
+#elfThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(0, 0, 0);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#neesan {
+  margin: 10px;
+  
+  background: rgba(18, 108, 53, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(127, 79, 65);
+}
+#neesan p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#neesan iframe {
+  border: 5px solid;
+  border-color: rgb(211, 89, 86);
+  border-radius: 25px;
+}
+#neesanThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(211, 89, 86);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#otonari {
+  margin: 10px;
+  
+  background: rgba(5, 17, 121, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(84, 59, 91);
+}
+#otonari p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#otonari iframe {
+  border: 5px solid;
+  border-color: rgb(240, 227, 167);
+  border-radius: 25px;
+}
+#otonariThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(240, 227, 167);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#shoukan {
+  margin: 10px;
+  
+  background: rgba(214, 177, 151, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(86, 81, 121);
+}
+#shoukan p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#shoukan iframe {
+  border: 5px solid;
+  border-color: rgb(108, 97, 105);
+  border-radius: 25px;
+}
+#shoukanThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(108, 97, 105);
+  
+  width: 450px;
+  margin: auto;
+}
+
   
 
   
