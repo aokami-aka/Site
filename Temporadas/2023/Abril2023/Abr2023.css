@@ -889,6 +889,40 @@ img {vertical-align: middle;}
   margin: auto;
 }
 
+#death {
+  margin: 10px;
+  
+  background: rgba(119, 24, 143, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(66, 60, 87);
+}
+#death p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#death iframe {
+  border: 5px solid;
+  border-color: rgb(12, 7, 13);
+  border-radius: 25px;
+}
+#deathThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(12, 7, 13);
+  
+  width: 450px;
+  margin: auto;
+}
+
   
 
   
