@@ -287,6 +287,19 @@ img {vertical-align: middle;}
   animation-name: fade;
   animation-duration: 1.5s;
 }
+
+#spoiler {
+  filter: blur(4px);
+  background-color: #00000040;
+
+  transition: all ease-in 0.1s;
+}
+#spoiler:hover {
+  filter: blur(0px);
+  font-style: normal;
+
+  border-radius: 5px;
+}
 /* --------------------------------------------- */
     /* -------------------Estréias -------------------------- */
 .Estréias {
@@ -1088,6 +1101,74 @@ img {vertical-align: middle;}
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(48, 26, 32);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#kemono {
+  margin: 10px;
+  
+  background: rgba(109, 84, 165, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(72, 74, 81);
+}
+#kemono p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#kemono iframe {
+  border: 5px solid;
+  border-color: rgb(243, 232, 119);
+  border-radius: 25px;
+}
+#kemonoThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(243, 232, 119);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#oshi {
+  margin: 10px;
+  
+  background: rgba(229, 103, 190, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(163, 22, 57);
+}
+#oshi p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#oshi iframe {
+  border: 5px solid;
+  border-color: rgb(76, 55, 115);
+  border-radius: 25px;
+}
+#oshiThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(76, 55, 115);
   
   width: 450px;
   margin: auto;
