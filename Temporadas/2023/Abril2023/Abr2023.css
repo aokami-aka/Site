@@ -1220,8 +1220,8 @@ img {vertical-align: middle;}
   border: 5px solid;
   border-radius: 5px;
   border-color: rgb(49, 53, 58);
-  }
-  #edens2 p {
+}
+#edens2 p {
   padding: 10px;
   border: 3px solid;
   border-color: rgb(0, 89, 12);
@@ -1231,20 +1231,122 @@ img {vertical-align: middle;}
   
   margin: 10px;
   font-size: 24px;
-  }
-  #edens2 iframe {
+}
+#edens2 iframe {
   border: 5px solid;
   border-color: rgb(216, 77, 93);
   border-radius: 25px;
-  }
-  #edens2Thumb {
+}
+#edens2Thumb {
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(216, 77, 93);
   
   width: 450px;
   margin: auto;
-  } 
+} 
+
+#kuma2 {
+  margin: 10px;
+  
+  background-color: rgba(78, 81, 89, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(89, 129, 167);
+}
+#kuma2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#kuma2 iframe {
+  border: 5px solid;
+  border-color: rgb(234, 233, 238);
+  border-radius: 25px;
+}
+#kuma2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(234, 233, 238);
+  
+  width: 450px;
+  margin: auto;
+} 
+
+#smarthphone2 {
+  margin: 10px;
+  
+  background-color: rgba(175, 196, 205, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(193, 57, 139);
+}
+#smarthphone2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#smarthphone2 iframe {
+  border: 5px solid;
+  border-color: rgb(48, 48, 67);
+  border-radius: 25px;
+}
+#smarthphone2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(48, 48, 67);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#mahou2 {
+  margin: 10px;
+  
+  background-color: rgba(255, 255, 255, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(226, 1, 19);
+}
+#mahou2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#mahou2 iframe {
+  border: 5px solid;
+  border-color: rgb(240, 127, 108);
+  border-radius: 25px;
+}
+#mahou2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(240, 127, 108);
+  
+  width: 450px;
+  margin: auto;
+}
 
 /* ----- info design ----- */
 .grid-thumb {
