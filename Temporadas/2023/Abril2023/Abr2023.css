@@ -10,13 +10,13 @@ html {
 
 /* ------ Background do site --------- */
 body {
-  background-image: url('Thumb_Jan_2023.jpg');
+  background-image: url('Thumb_Abr_2023.jpg');
   min-width: 600px;
 
   font-family: cursive;
 }
 .background {
-  animation: backgroundAnimated 8000s linear infinite;
+  animation: backgroundAnimated 29000s linear infinite;
 }
 /* ---------------------------- */
 
