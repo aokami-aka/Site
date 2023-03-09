@@ -1348,6 +1348,176 @@ img {vertical-align: middle;}
   margin: auto;
 }
 
+#gundam2 {
+  margin: 10px;
+  
+  background-color: rgba(66, 124, 159, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(204, 95, 47);
+}
+#gundam2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#gundam2 iframe {
+  border: 5px solid;
+  border-color: rgb(241, 196, 131);
+  border-radius: 25px;
+}
+#gundam2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(241, 196, 131);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#kimetsu3 {
+  margin: 10px;
+  
+  background-color: rgba(94, 6, 10, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(208, 72, 147);
+}
+#kimetsu3 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#kimetsu3 iframe {
+  border: 5px solid;
+  border-color: rgb(28, 212, 228);
+  border-radius: 25px;
+}
+#kimetsu3Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(28, 212, 228);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#ousama2 {
+  margin: 10px;
+  
+  background-color: rgba(255, 215, 29, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(56, 58, 47);
+}
+#ousama2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#ousama2 iframe {
+  border: 5px solid;
+  border-color: rgb(28, 212, 228);
+  border-radius: 25px;
+}
+#ousama2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(28, 212, 228);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#tonikawa2 {
+  margin: 10px;
+  
+  background-color: rgba(226, 130, 127, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(169, 140, 180);
+}
+#tonikawa2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#tonikawa2 iframe {
+  border: 5px solid;
+  border-color: rgb(0, 204, 191);
+  border-radius: 25px;
+}
+#tonikawa2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(0, 204, 191);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#stone3 {
+  margin: 10px;
+  
+  background-color: rgba(159, 114, 151, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(236, 114, 26);
+}
+#stone3 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#stone3 iframe {
+  border: 5px solid;
+  border-color: rgb(29, 73, 136);
+  border-radius: 25px;
+}
+#stone3Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(29, 73, 136);
+  
+  width: 450px;
+  margin: auto;
+}
+
 /* ----- info design ----- */
 .grid-thumb {
   margin-left: 10px;
