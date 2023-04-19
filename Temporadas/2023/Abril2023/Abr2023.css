@@ -357,6 +357,38 @@ img {vertical-align: middle;}
    
 }
 
+video::-webkit-media-controls-play-button {
+  display: none;
+}
+video::-webkit-media-controls-fullscreen-button, video::-webkit-media-controls-mute-button{
+  transition: all 0.2s;
+}
+video::-webkit-media-controls-fullscreen-button:hover, video::-webkit-media-controls-mute-button:hover{
+  background-color: rgba(0, 255, 106, 0.556);
+  border-radius: 50%
+}
+video::-webkit-media-controls-volume-slider {
+  background-color: rgb(0, 255, 98);
+  padding-top: 0;
+  margin-top: 20px;
+  padding-bottom: 0;
+}
+
+video::-webkit-media-controls-timeline {
+  margin: auto;
+  background-color: #04a75b;
+  border-radius: 100%;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 20px;
+}
+video::-webkit-media-controls-current-time-display, video::-webkit-media-controls-time-remaining-display {
+  color: #75ead4;
+  font-family: cursive;
+  font-weight: bolder;
+}
+
 
 #tengoku {
   margin: 10px;
@@ -378,7 +410,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
   }
-  #tengoku iframe {
+  #tengoku video {
   border: 5px solid;
   border-color: rgb(159, 59, 45);
   border-radius: 25px;
@@ -412,7 +444,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
   }
-  #jigokuraku iframe {
+  #jigokuraku video {
   border: 5px solid;
   border-color: rgb(201, 215, 255);
   border-radius: 25px;
@@ -446,7 +478,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#yamada iframe {
+#yamada video {
   border: 5px solid;
   border-color: rgb(198, 74, 73);
   border-radius: 25px;
@@ -480,7 +512,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#kokoro iframe {
+#kokoro video {
   border: 5px solid;
   border-color: rgb(14, 117, 120);
   border-radius: 25px;
@@ -514,7 +546,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#tenkousei iframe {
+#tenkousei video {
   border: 5px solid;
   border-color: rgb(59, 58, 64);
   border-radius: 25px;
@@ -548,7 +580,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#skip iframe {
+#skip video {
   border: 5px solid;
   border-color: rgb(231, 157, 178);
   border-radius: 25px;
@@ -582,7 +614,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#konosuba iframe {
+#konosuba video {
   border: 5px solid;
   border-color: rgb(140, 90, 101);
   border-radius: 25px;
@@ -616,7 +648,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#cheat iframe {
+#cheat video {
   border: 5px solid;
   border-color: rgb(226, 67, 28);
   border-radius: 25px;
@@ -650,7 +682,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#yuusha iframe {
+#yuusha video {
   border: 5px solid;
   border-color: rgb(52, 49, 56);
   border-radius: 25px;
@@ -684,7 +716,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#kawaisugi iframe {
+#kawaisugi video {
   border: 5px solid;
   border-color: rgb(255, 240, 1);
   border-radius: 25px;
@@ -718,7 +750,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#elf iframe {
+#elf video {
   border: 5px solid;
   border-color: rgb(0, 0, 0);
   border-radius: 25px;
@@ -752,7 +784,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#neesan iframe {
+#neesan video {
   border: 5px solid;
   border-color: rgb(211, 89, 86);
   border-radius: 25px;
@@ -786,7 +818,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#otonari iframe {
+#otonari video {
   border: 5px solid;
   border-color: rgb(240, 227, 167);
   border-radius: 25px;
@@ -820,7 +852,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#shoukan iframe {
+#shoukan video {
   border: 5px solid;
   border-color: rgb(108, 97, 105);
   border-radius: 25px;
@@ -854,7 +886,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#blue iframe {
+#blue video {
   border: 5px solid;
   border-color: rgb(203, 19, 67);
   border-radius: 25px;
@@ -888,7 +920,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#alice iframe {
+#alice video {
   border: 5px solid;
   border-color: rgb(70, 69, 74);
   border-radius: 25px;
@@ -922,7 +954,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#death iframe {
+#death video {
   border: 5px solid;
   border-color: rgb(12, 7, 13);
   border-radius: 25px;
@@ -956,7 +988,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#kaminaki iframe {
+#kaminaki video {
   border: 5px solid;
   border-color: rgb(105, 76, 103);
   border-radius: 25px;
@@ -990,7 +1022,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#insomnia iframe {
+#insomnia video {
   border: 5px solid;
   border-color: rgb(64, 115, 181);
   border-radius: 25px;
@@ -1024,7 +1056,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#magical iframe {
+#magical video {
   border: 5px solid;
   border-color: rgb(244, 210, 221);
   border-radius: 25px;
@@ -1058,7 +1090,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#mashle iframe {
+#mashle video {
   border: 5px solid;
   border-color: rgb(230, 0, 0);
   border-radius: 25px;
@@ -1092,7 +1124,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#hero iframe {
+#hero video {
   border: 5px solid;
   border-color: rgb(48, 26, 32);
   border-radius: 25px;
@@ -1126,7 +1158,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#kemono iframe {
+#kemono video {
   border: 5px solid;
   border-color: rgb(243, 232, 119);
   border-radius: 25px;
@@ -1160,7 +1192,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#oshi iframe {
+#oshi video {
   border: 5px solid;
   border-color: rgb(76, 55, 115);
   border-radius: 25px;
@@ -1198,7 +1230,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
   }
-  #shingeki4 iframe {
+  #shingeki4 video {
   border: 5px solid;
   border-color: rgb(254, 162, 3);
   border-radius: 25px;
@@ -1232,7 +1264,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#edens2 iframe {
+#edens2 video {
   border: 5px solid;
   border-color: rgb(216, 77, 93);
   border-radius: 25px;
@@ -1266,7 +1298,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#kuma2 iframe {
+#kuma2 video {
   border: 5px solid;
   border-color: rgb(234, 233, 238);
   border-radius: 25px;
@@ -1300,7 +1332,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#smarthphone2 iframe {
+#smarthphone2 video {
   border: 5px solid;
   border-color: rgb(48, 48, 67);
   border-radius: 25px;
@@ -1334,7 +1366,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#mahou2 iframe {
+#mahou2 video {
   border: 5px solid;
   border-color: rgb(240, 127, 108);
   border-radius: 25px;
@@ -1368,7 +1400,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#gundam2 iframe {
+#gundam2 video {
   border: 5px solid;
   border-color: rgb(241, 196, 131);
   border-radius: 25px;
@@ -1402,7 +1434,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#kimetsu3 iframe {
+#kimetsu3 video {
   border: 5px solid;
   border-color: rgb(28, 212, 228);
   border-radius: 25px;
@@ -1436,7 +1468,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#ousama2 iframe {
+#ousama2 video {
   border: 5px solid;
   border-color: rgb(28, 212, 228);
   border-radius: 25px;
@@ -1470,7 +1502,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#tonikawa2 iframe {
+#tonikawa2 video {
   border: 5px solid;
   border-color: rgb(0, 204, 191);
   border-radius: 25px;
@@ -1504,7 +1536,7 @@ img {vertical-align: middle;}
   margin: 10px;
   font-size: 24px;
 }
-#stone3 iframe {
+#stone3 video {
   border: 5px solid;
   border-color: rgb(29, 73, 136);
   border-radius: 25px;
