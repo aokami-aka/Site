@@ -24,19 +24,19 @@ body {
 /* --- Scroll Design ---*/
 ::-webkit-scrollbar-track{
 
-border: 5px solid rgb(0, 80, 4);
-background-color: #97ff8f;
+border: 5px solid rgb(79, 80, 0);
+background-color: #fbff8f;
 }
 
 ::-webkit-scrollbar
 {
 width: 15px;
-background-color: #6dff6d;
+background-color: #fdff6d;
 }
 
 ::-webkit-scrollbar-thumb
 {
-background-color: #02ad02;
+background-color: #adaa02;
 border-radius: 10px;
 }
 /* ------------------------- */
@@ -404,10 +404,10 @@ video::cue {
 #ryza p {
   padding: 10px;
   border: 3px solid;
-  border-color: rgb(0, 89, 12);
+  border-color: rgb(89, 0, 0);
   border-radius: 50px;
   
-  background-color: rgba(121, 224, 128, 0.719);
+  background-color: rgba(215, 224, 121, 0.719);
   
   margin: 10px;
   font-size: 24px;
@@ -430,16 +430,16 @@ video::cue {
 
   
 
-#shingeki4 {
+#mushoku2 {
   margin: 10px;
   
   background-color: rgba(134, 77, 66, 0.719);
   
   border: 5px solid;
   border-radius: 5px;
-  border-color: rgb(255, 255, 255);
+  border-color: rgb(94, 89, 83);
 }
-#shingeki4 p {
+#mushoku2 p {
   padding: 10px;
   border: 3px solid;
   border-color: rgb(0, 89, 12);
@@ -450,12 +450,12 @@ video::cue {
   margin: 10px;
   font-size: 24px;
 }
-#shingeki4 video {
+#mushoku2 video {
   border: 5px solid;
   border-color: rgb(254, 162, 3);
   border-radius: 25px;
 }
-#shingeki4Thumb {
+#mushoku2Thumb {
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(254, 162, 3);
