@@ -426,6 +426,41 @@ video::cue {
   margin: auto;
 }
 
+#fate {
+  margin: 10px;
+  
+  background-color: rgba(114, 229, 255, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(206, 209, 201);
+}
+#fate p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#fate video {
+  border: 5px solid;
+  border-color: rgb(159, 59, 45);
+  border-radius: 25px;
+}
+#fateThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(159, 59, 45);
+  
+  width: 450px;
+  margin: auto;
+}
+
+
   
 
   
@@ -459,6 +494,40 @@ video::cue {
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(254, 162, 3);
+  
+  width: 450px;
+  margin: auto;
+}  
+
+#masamune2 {
+  margin: 10px;
+  
+  background-color: rgba(122, 118, 116, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(52, 50, 61);
+}
+#masamune2 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(0, 89, 12);
+  border-radius: 50px;
+  
+  background-color: rgba(121, 224, 128, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#masamune2 video {
+  border: 5px solid;
+  border-color: rgb(128, 60, 53);
+  border-radius: 25px;
+}
+#masamune2Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(128, 60, 53);
   
   width: 450px;
   margin: auto;
