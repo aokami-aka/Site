@@ -596,6 +596,142 @@ video::cue {
   margin: auto;
 }
 
+#liar {
+  margin: 10px;
+  
+  background-color: rgba(44, 48, 109, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(231, 242, 249);
+}
+#liar p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#liar video {
+  border: 5px solid;
+  border-color: rgb(215, 60, 122);
+  border-radius: 25px;
+}
+#liarThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(215, 60, 122);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#zom {
+  margin: 10px;
+  
+  background-color: rgba(0, 0, 0, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(255, 238, 0);
+}
+#zom p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#zom video {
+  border: 5px solid;
+  border-color: rgb(215, 60, 122);
+  border-radius: 25px;
+}
+#zomThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(215, 60, 122);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#dark {
+  margin: 10px;
+  
+  background-color: rgba(73, 51, 64, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(64, 44, 79);
+}
+#dark p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#dark video {
+  border: 5px solid;
+  border-color: rgb(204, 69, 90);
+  border-radius: 25px;
+}
+#darkThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(204, 69, 90);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#synduality {
+  margin: 10px;
+  
+  background-color: rgba(17, 47, 85, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(227, 227, 227);
+}
+#synduality p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#synduality video {
+  border: 5px solid;
+  border-color: rgb(65, 207, 214);
+  border-radius: 25px;
+}
+#syndualityThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(65, 207, 214);
+  
+  width: 450px;
+  margin: auto;
+}
+
 
   
 
