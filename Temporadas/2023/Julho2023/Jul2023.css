@@ -460,6 +460,142 @@ video::cue {
   margin: auto;
 }
 
+#jidou {
+  margin: 10px;
+  
+  background-color: rgba(249, 227, 168, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(129, 209, 247);
+}
+#jidou p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#jidou video {
+  border: 5px solid;
+  border-color: rgb(238, 153, 54);
+  border-radius: 25px;
+}
+#jidouThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(238, 153, 54);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#kenshin {
+  margin: 10px;
+  
+  background-color: rgba(213, 206, 199, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(224, 127, 86);
+}
+#kenshin p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#kenshin video {
+  border: 5px solid;
+  border-color: rgb(172, 56, 60);
+  border-radius: 25px;
+}
+#kenshinThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(172, 56, 60);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#AI {
+  margin: 10px;
+  
+  background-color: rgba(28, 28, 28, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+}
+#AI p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#AI video {
+  border: 5px solid;
+  border-color: rgb(233, 233, 233);
+  border-radius: 25px;
+}
+#AIThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(233, 233, 233);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#neko {
+  margin: 10px;
+  
+  background-color: rgba(69, 6, 0, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(254, 240, 229);
+}
+#neko p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#neko video {
+  border: 5px solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: 25px;
+}
+#nekoThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(0, 0, 0);
+  
+  width: 450px;
+  margin: auto;
+}
+
 
   
 
