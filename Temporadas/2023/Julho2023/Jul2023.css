@@ -528,6 +528,74 @@ video::cue {
   margin: auto;
 }
 
+#okashi {
+  margin: 10px;
+  
+  background-color: rgba(239, 213, 195, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(194, 80, 92);
+}
+#okashi p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#okashi video {
+  border: 5px solid;
+  border-color: rgb(75, 105, 219);
+  border-radius: 25px;
+}
+#okashiThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(75, 105, 219);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#megane {
+  margin: 10px;
+  
+  background-color: rgba(208, 149, 149, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(184, 154, 128);
+}
+#megane p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#megane video {
+  border: 5px solid;
+  border-color: rgb(131, 50, 55);
+  border-radius: 25px;
+}
+#meganeThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(131, 50, 55);
+  
+  width: 450px;
+  margin: auto;
+}
+
 #jidou {
   margin: 10px;
   
@@ -562,6 +630,40 @@ video::cue {
   margin: auto;
 }
 
+#marriage {
+  margin: 10px;
+  
+  background-color: rgba(254, 197, 230, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(85, 76, 95);
+}
+#marriage p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#marriage video {
+  border: 5px solid;
+  border-color: rgb(252, 204, 133);
+  border-radius: 25px;
+}
+#marriageThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(252, 204, 133);
+  
+  width: 450px;
+  margin: auto;
+}
+
 #kenshin {
   margin: 10px;
   
@@ -591,6 +693,40 @@ video::cue {
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(172, 56, 60);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#seven {
+  margin: 10px;
+  
+  background-color: rgba(4, 29, 81, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(116, 53, 172);
+}
+#seven p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#seven video {
+  border: 5px solid;
+  border-color: rgb(106, 65, 123);
+  border-radius: 25px;
+}
+#sevenThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(106, 65, 123);
   
   width: 450px;
   margin: auto;
@@ -664,6 +800,74 @@ video::cue {
   margin: auto;
 }
 
+#temple {
+  margin: 10px;
+  
+  background-color: rgba(255, 255, 255, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(176, 52, 50);
+}
+#temple p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#temple video {
+  border: 5px solid;
+  border-color: rgb(111, 54, 146);
+  border-radius: 25px;
+}
+#templeThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(111, 54, 146);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#lv1 {
+  margin: 10px;
+  
+  background-color: rgba(92, 141, 242, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(52, 66, 89);
+}
+#lv1 p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#lv1 video {
+  border: 5px solid;
+  border-color: rgb(56, 112, 100);
+  border-radius: 25px;
+}
+#lv1Thumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(56, 112, 100);
+  
+  width: 450px;
+  margin: auto;
+}
+
 #liar {
   margin: 10px;
   
@@ -727,6 +931,40 @@ video::cue {
   border: 5px solid;
   border-radius: 20px;
   border-color: rgb(215, 60, 122);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#hero {
+  margin: 10px;
+  
+  background-color: rgba(230, 213, 143, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(250, 249, 245);
+}
+#hero p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#hero video {
+  border: 5px solid;
+  border-color: rgb(73, 63, 53);
+  border-radius: 25px;
+}
+#heroThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(73, 63, 53);
   
   width: 450px;
   margin: auto;
@@ -851,10 +1089,10 @@ video::cue {
 #mushoku2 p {
   padding: 10px;
   border: 3px solid;
-  border-color: rgb(0, 89, 12);
+  border-color: rgb(89, 0, 0);
   border-radius: 50px;
   
-  background-color: rgba(121, 224, 128, 0.719);
+  background-color: rgba(215, 224, 121, 0.719);
   
   margin: 10px;
   font-size: 24px;
@@ -885,10 +1123,10 @@ video::cue {
 #masamune2 p {
   padding: 10px;
   border: 3px solid;
-  border-color: rgb(0, 89, 12);
+  border-color: rgb(89, 0, 0);
   border-radius: 50px;
   
-  background-color: rgba(121, 224, 128, 0.719);
+  background-color: rgba(215, 224, 121, 0.719);
   
   margin: 10px;
   font-size: 24px;
