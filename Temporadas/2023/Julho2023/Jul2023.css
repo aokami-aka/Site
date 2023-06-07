@@ -1208,6 +1208,108 @@ video::cue {
   margin: auto;
 }
 
+#cecilia {
+  margin: 10px;
+  
+  background-color: rgba(237, 209, 187, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(77, 71, 87);
+}
+#cecilia p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#cecilia video {
+  border: 5px solid;
+  border-color: rgb(217, 97, 94);
+  border-radius: 25px;
+}
+#ceciliaThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(217, 97, 94);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#undead {
+  margin: 10px;
+  
+  background-color: rgba(44, 75, 96, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(190, 96, 79);
+}
+#undead p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#undead video {
+  border: 5px solid;
+  border-color: rgb(189, 148, 70);
+  border-radius: 25px;
+}
+#undeadThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(189, 148, 70);
+  
+  width: 450px;
+  margin: auto;
+}
+
+#yumemiru {
+  margin: 10px;
+  
+  background-color: rgba(208, 162, 84, 0.719);
+  
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: rgb(86, 129, 133);
+}
+#yumemiru p {
+  padding: 10px;
+  border: 3px solid;
+  border-color: rgb(89, 0, 0);
+  border-radius: 50px;
+  
+  background-color: rgba(215, 224, 121, 0.719);
+  
+  margin: 10px;
+  font-size: 24px;
+}
+#yumemiru video {
+  border: 5px solid;
+  border-color: rgb(173, 84, 98);
+  border-radius: 25px;
+}
+#yumemiruThumb {
+  border: 5px solid;
+  border-radius: 20px;
+  border-color: rgb(173, 84, 98);
+  
+  width: 450px;
+  margin: auto;
+}
+
 
   
 
