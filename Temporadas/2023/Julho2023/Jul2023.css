@@ -356,8 +356,8 @@ img {vertical-align: middle;}
    
 }
 
-video::-webkit-media-controls-play-button {
-  display: none;
+video::-webkit-media-controls-play-button, video::-webkit-media-controls-overflow-button, video::-webkit-media-controls-overflow-menu {
+  display: none !important;
 }
 video::-webkit-media-controls-fullscreen-button, video::-webkit-media-controls-mute-button{
   transition: all 0.2s;
