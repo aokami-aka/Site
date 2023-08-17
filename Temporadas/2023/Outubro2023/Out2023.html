@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="por">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <title>AnimeGuides - Outubro 2023</title>
+
+    <link href="Out2023.css" rel="stylesheet" type="text/css" />    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
+
+    <!-- SEO -->
+    <link rel= "canonical" href= "https://animeguides.vercel.app/"/>
+    <meta name="description" content="Guias acompanhando aos lançamentos dos animes semanais, com suas respectivas informações e datas de lançamento junto com outras informações.">
+    <meta name="keywords" content="Guias, anime, temporada, 2023, primavera, verão, outono, inverno"/>
+    <meta name="thumbnail" content="https://github.com/aokami-aka/Site/blob/main/link2.png?raw=true" />
+
+    <meta name="robots" content="index, follow">
+
+    <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://animeguides.vercel.app">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AnimeGuides - Guias de temporada">
+  <meta property="og:description" content="Guias mostrando as informações dos animes em lançamento">
+  <meta property="og:image" content="https://animeguides.vercel.app/link2.png">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="animeguides.vercel.app">
+  <meta property="twitter:url" content="https://animeguides.vercel.app">
+  <meta name="twitter:title" content="AnimeGuides - Guias de temporada">
+  <meta name="twitter:description" content="Guias mostrando as informações dos animes em lançamento">
+  <meta name="twitter:image" content="https://animeguides.vercel.app/link2.png">
+    <!-- SEO -->
+
+    <h1 id="title"><img src="../../../favicon.png" alt="AnimeGuides">Outubro 2023</h1>
+
+    <!-- ----------- Topnav ------------ -->
+    <nav>
+        <div class="topnav" id="banner">
+            <a href="../../../index.html" id="home"><i class="fa fa-home"></i>&nbspPágina inicial</a>
+            <a href="../Janeiro2023/Jan2023.html" id="winter"><i class="far fa-snowflake"></i>&nbspJaneiro 2023</a>
+            <a href="../Abril2023/Abr2023.html" id="spring"><i class="fa fa-leaf"></i>&nbspAbril 2023</a>
+            <a href="../Julho2023/Jul2023.html" id="summer"><i class="fas fa-sun"></i>&nbspJulho 2023</a>
+            <a class="active" id="fall"><i class="fab fa-pagelines"></i>&nbspOutubro 2023</a>
+
+            <a href="javascript:void(0);" class="icon" id="phoneIcon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </nav>
+
+</head>
+<body>
+
+    <div id="buttons">
+        <a href="#" class="to-top">
+            <i class="fa fa-arrow-up"></i>
+        </a>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div id="modal-image">
+            <img class="modal-content" id="img01">
+        </div>
+    </div>
+
+    <section>
+
+        <div style="display: none;" class="animeCard">
+            <div class="anime-card">
+                <h2 class="animeTitle"><span id="anime-title"></span><i class="english"><br><span id="anime-title-english"></span></i></h2>
+                <div>
+                    <div class="grid-thumb">
+                        <!-- Thumbs ----->
+                        <div class="slideshow-container">
+                            <div id="thumb1-container" class="mySlides1 fade">
+                                <div id="text1" class="numbertext"></div>
+                                <img loading="lazy" src="" id="anime-cardThumb1" class="myImages">
+                            </div>
+
+                            <div id="thumb2-container" class="mySlides1 fade">
+                                <div id="text2" class="numbertext"></div>
+                                <img loading="lazy" src="" id="anime-cardThumb2" class="myImages">
+                            </div>
+
+                            <div id="thumb3-container" class="mySlides1 fade">
+                                <div id="text3" class="numbertext"></div>
+                                <img loading="lazy" src="" id="anime-cardThumb3" class="myImages">
+                            </div>
+
+                            <div id="thumb4-container" class="mySlides1 fade">
+                                <div id="text4" class="numbertext"></div>
+                                <img loading="lazy" src="" id="anime-cardThumb4" class="myImages">
+                            </div>
+
+                            <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+                        </div>
+                        <!-- Sinopse -------->
+                        <p class="info"><b>Sinopse: </b><span style="white-space: pre-line" id="anime-synopsis"></span>
+                        <br><br>
+                        <!-- Gênero -------------->
+                        <b>Gênero: </b><span id="anime-genre"></span>
+                        <br><br>
+                        <!-- Diretor ------------------->
+                        <b>Diretor: </b><a id="anime-director-link" href="" target="_blank" rel="noreferrer noopener"><span id="anime-director"></span></a><a id="anime-director2-link" href="" target="_blank" rel="noreferrer noopener"><span id="anime-director2"></span></a> (<i><span id="anime-director-works"></span></i>)
+                        <br>
+                        <!-- Estúdio ------------------------->
+                        <b>Estúdio: </b><a id="anime-studio-link" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="" id="anime-studio" class="Studio" alt="estúdio"></a><a id="anime-studio2-link" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="" id="anime-studio2" class="Studio" alt="estúdio"></a> (<i><span id="anime-studio-works"></span></i>)
+                        <br><br>
+                        <!-- Data ----------------------------------------->
+                        <b>Estréia: </b> <span id="anime-time"></span>
+                        <br>
+                        <!-- Episódios ------------------------------------------->
+                        <b>Episódios: </b> <span id="anime-duration"></span>
+                        <br><br>
+                        <!-- Comentários ------------------------------------------------->
+                        <b>Comentários: </b> <span id="anime-commentary"></span>
+                        <br><br>
+                        <!-- AniDB e MAL do anime ------------------------------------------------>
+                        <a id="anime-anidb" href="" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a id="anime-mal" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a id="anime-cr" href="" target="_blank" rel="noreferrer noopener"><img id="cr-image" loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="cr" class="source" style="height: 100px;"></a></p>
+                    </div>
+
+                        <br><br>
+
+                    
+                        <div id="orientTrailers">
+                            <details>
+                                <summary><p style="text-align: center;"><b>Vídeos</b></p></summary>
+                                <div class="content">
+                                    <br><br>
+                                    <!-- Lista de Trailers ----------------------------------------------------------------->
+                                    <ul id="trailers" class="trailer">
+                                        <li id="anime-video1-container">
+                                            <video id="anime-video1" loading="lazy" style="width:500px; height:285px; object-fit: cover;" controls disablepictureinpicture controlslist="nodownload noplaybackrate" poster="" src=""></video>
+                                            <p id="orientOP"><b><span id="anime-video1-caption"></span></b></p>
+                                        </li> 
+
+                                        <li id="anime-video2-container">
+                                            <video id="anime-video2" loading="lazy" style="width:500px; height:285px; object-fit: cover;" controls disablepictureinpicture controlslist="nodownload noplaybackrate" poster="" src=""></video>
+                                            <p id="orientOP"><b><span id="anime-video2-caption"></span></b></p>
+                                        </li> 
+
+                                        <li id="anime-video3-container">
+                                            <video id="anime-video3" loading="lazy" style="width:500px; height:285px; object-fit: cover;" controls disablepictureinpicture controlslist="nodownload noplaybackrate" poster="" src=""></video>
+                                            <p id="orientOP"><b><span id="anime-video3-caption"></span></b></p>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <details open>
+            <br>
+            <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Estréias</h1></summary>
+            <div class="content">
+                <div id="anime-chart">
+                    <!-- Ordem: titulo, titulo(ingles), slideid, caminho imagem1, caminho imagem2, caminho imagem3, caminho imagem4, slidegroup, sinopse, gênero, link diretor1, diretor1, link diretor2, diretor2, trabalhos diretor, link estúdio, caminho estúdio, link estúdio 2, caminho estúdio 2, trabalhos estúdio, data, duração, comentário, anidb, mal, cr, video1, poster1, descrição1, video2, poster2, descrição2, video3, poster3, descrição3 -->
+                    
+                    <div class="image-container">
+                        <a href="#banner"><img src="Estréias/img/naruto.jpeg" class="image" onclick="AnimeCard('Naruto (2023)', '', 'mySlides1', 'Estréias/img/naruto.jpeg', 'false', '', '', '0', 'Novo projeto de anime de Naruto de quatro episódios para comemorar o 20º aniversário do anime.', 'Ação, Aventura, Comédia, Shounen', '', '', '', '', '', '', '', '', '', '', '03/09', '12', 'a volta dos que não foram', 'http:\/\/anidb.net/a17897', 'https:\/\/myanimelist.net/anime/54688', 'false', '', '', 'Trailer 1', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="1"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <a href="#banner"><img src="Estréias/img/banken.webp" class="image" onclick="AnimeCard('Ojou to Banken-kun', 'A Girl & Her Guard Dog', 'mySlides2', 'Estréias/img/banken.webp', 'Estréias/img/banken_02.jpeg', 'false', '', '1', 'Isaku Senagaki, de quinze anos, neta do terceiro chefe do sindicato do crime de Senagaki, só quer ter amigos normais e um romance normal no ensino médio. Ela se matricula em uma escola longe de sua cidade natal, mas o jovem líder superprotetor, Keiya Uto, de vinte e seis anos, mente sobre sua idade e suborna seu caminho para a mesma escola que Isaku!<br>Dizendo a Isaku que ela é muito jovem para se apaixonar, Keiya está pronta para assustar todos os meninos. Mas na verdade, Isaku teve sentimentos não correspondidos por Keiya esse tempo todo.', 'Romance, Escolar, Shoujo', 'https:\/\/anidb.net/creator/1536', 'Takamoto Yoshihiro', '', '', 'Vazzrock the animation, Beelzebub', 'https:\/\/anidb.net/creator/35813', '../../../Estúdios/Project_No.9_Logo.png', '', '', 'Uchi no Kaisha, Otonari no Tenshi-sama, Tomozaki-kun', '28/09', '12', '', 'http:\/\/anidb.net/a17666', 'https:\/\/myanimelist.net/anime/53300', 'nolink', '', 'https:\/\/i.ytimg.com/vi/-Q6Y7N3JT_o/maxresdefault.jpg', 'Teaser', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="3"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <a href="#banner"><img src="Estréias/img/frieren.jpg" class="image" onclick="AnimeCard('Sousou no Frieren', 'Frieren: Beyond Journeys End', 'mySlides3', 'Estréias/img/frieren.jpg', 'Estréias/img/frieren_02.jpg', 'Estréias/img/frieren_03.jpg', 'false', '2', 'A maga Frieren derrotou o Rei Demônio ao lado do grupo do herói Himmel após uma missão de 10 anos. A paz foi restaurada ao reino. Por ser uma elfa, ela é capaz de viver mais de mil anos. Ela promete a Himmel e aos outros que voltará para vê-los e, em seguida, parte em uma jornada sozinha.<br>&emsp;Cinquenta anos depois, Frieren vai visitar Himmel e os outros. Ela permaneceu inalterada, mas Himmel e os outros envelheceram e apenas um pouco de suas vidas permanecem. Mais tarde, ela testemunha a morte de Himmel. Frieren sofre com seu desejo de ter passado mais tempo conhecendo pessoas. Com esse arrependimento no coração, ela então parte em uma jornada para fazer exatamente isso. Em sua jornada, ela conhece muitas pessoas e muitos eventos a aguardam.', 'Aventura, Drama, Fantasia, Shounen', 'https:\/\/anidb.net/creator/57709', 'Saitou Keiichirou', '', '', 'Bocchi The rock!!, ACCA13', 'https:\/\/anidb.net/creator/731', '../../../Estúdios/Madhouse_studio.png', '', '', 'Yamada-kun to lv999, Sonny Boy, Death Parade', '29/09', '24', 'Finalmente um anime de fantasia que promete?', 'http:\/\/anidb.net/17617', 'https:\/\/myanimelist.net/anime/52991', 'nolink', 'false', '', '', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="4"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <a href="#banner"><img src="Estréias/img/daigo.webp" class="image" onclick="AnimeCard('Megumi no Daigo: Kyuukoku no Orange', 'Firefighter Daigo: Rescuer in Orange', 'mySlides4', 'Estréias/img/daigo.webp', 'Estréias/img/daigo_02.webp', 'false', '', '3', 'Onoda Shun luta contra as paredes que bloqueiam seu próprio caminho. Nakamura Yuki espera se tornar uma das poucas mulheres do corpo especial de resgate, conhecido como Orange. Quando esses três jovens bombeiros que compartilham o objetivo de se tornarem membros da Orange se reúnem, a história de como o Japão um dia será salvo começa.', 'Ação, Drama, Shounen', 'https:\/\/anidb.net/creator/669', 'Murata Masahiko', '', '', 'Fumetsu no Anata e 1st Season, Naruto Shippuden', 'https:\/\/anidb.net/creator/982', '../../../Estúdios/brains_base.png', '', '', 'Kyokou Suiri, Golden Kamui, Fumetsu no Anata e 1st Season', '30/09', '12', 'Fire force sem echhi?', 'http:\/\/anidb.net/17771', 'https:\/\/myanimelist.net/anime/53848', 'nolink', 'false', '', '', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="5"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <a href="#banner"><img src="Estréias/img/ragna.jpg" class="image" onclick="AnimeCard('Ragna Crimson', '', 'mySlides5', 'Estréias/img/ragna.jpg', 'Estréias/img/ragna_02.webp', 'false', '', '4', 'Os dragões reinam o terror sobre a terra, o mar e o céu. Ragna se junta a um homem misterioso chamado Crimson que jurou enfrentar os dragões que ameaçam o mundo. Mas embora as motivações de Crimson possam ser misteriosas, seu objetivo e de Ragna estão perfeitamente alinhados, e juntos eles lutarão para derrotar os dragões de uma vez por todas.', 'Ação, Fantasia, Isekai, Shounen', 'https:\/\/anidb.net/creator/14025', 'Takahashi Ken', '', '', 'Fate/kaleid', 'https:\/\/anidb.net/creator/2900', '../../../Estúdios/Silver_Link.png', '', '', 'Lv1 Maou, Maou Gakuin, Fate/Kaleid', '01/10', '12', '', 'http:\/\/anidb.net/17263', 'https:\/\/myanimelist.net/anime/51297', 'false', 'false', '', '', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="6"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <a href="#banner"><img src="Estréias/img/kamonohashi.jpg" class="image" onclick="AnimeCard('Kamonohashi Ron no Kindan Suiri', 'Ron Kamonohashi: Deranged Detective', 'mySlides6', 'Estréias/img/kamonohashi.jpg', 'Estréias/img/kamonohashi_02.jpeg', 'false', '', '5', 'Ron Kamonohashi, um investigador particular com problemas sérios, e Totomaru Ishiki, um detetive policial de coração puro, mas sombrio, se unem para resolver os mistérios mais desconcertantes!', 'Mistério, Shounen', 'https:\/\/anidb.net/creator/12191', 'Ibata Shouta', '', '', 'Seijo no Maryoku, Domestic na Kanojo', 'https:\/\/anidb.net/creator/1789', '../../../Estúdios/Diomedéa_studio.png', '', '', 'Tensei Oujo, Seijo no Maryoku, Domestic na Kanojo', '02/10', '12', '', 'http:\/\/anidb.net/17783', 'https:\/\/myanimelist.net/anime/53879', 'false', 'false', '', '', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="19"></i></span>
+                    </div>
+                    
+                    
+                    <div class="image-container">
+                        <img src="Estréias/img/akuyaku.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="7"></i></span>
+                    </div>
+                    
+                    
+                    <div class="image-container">
+                        <img src="Estréias/img/yusuki.webp" alt="Janeiro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="8"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="Estréias/img/kanojo.jpg" alt="Abril 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="9"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="Estréias/img/protocol.webp" alt="Julho 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="10"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/berserk.jpeg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="11"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/shiro.jpg" alt="Janeiro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="12"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/dekoboko.webp" alt="Abril 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="13"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/dog.webp" alt="Julho 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="14"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/hametsu.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="15"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/hikikomari.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="16"></i></span>
+                    </div>
+
+                    <div class="image-container">                    
+                        <img src="Estréias/img/telepath.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="17"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/kamierabi.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="18"></i></span>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="Estréias/img/kawagoe.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="20"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/keikenzumi.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="21"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/kikansha.jpeg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="22"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/konyaku.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="23"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/hitorigoto.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="24"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/migi.jpeg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="25"></i></span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Estréias/img/overtake.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="26"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/potion.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="27"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/seiken.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="28"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img style="object-fit: cover;" src="Estréias/img/shangrila.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="29"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/shy.jpeg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="30"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/tearmoon.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="31"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/ossan.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="32"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/undead.jpeg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="33"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/ninja.jpeg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="34"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/bikkuri.jpg" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="35"></i></span>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="Estréias/img/boukensha.webp" alt="Outubro 2023" class="image">
+                        <span class="star"><i class="far fa-star" data-index="36"></i></span>
+                    </div>
+
+                </div>
+            </div>
+        </details>
+
+        <br><br>
+
+        <details>
+            <br>
+            <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Continuações</h1></summary>
+            <div class="content">
+                <div id="anime-chart">
+                    <!-- Ordem: titulo, titulo(ingles), slideid, caminho imagem1, caminho imagem2, caminho imagem3, caminho imagem4, slidegroup, sinopse, gênero, link diretor1, diretor1, link diretor2, diretor2, trabalhos diretor, link estúdio, caminho estúdio, link estúdio 2, caminho estúdio 2, trabalhos estúdio, data, duração, comentário, anidb, mal, cr, video1, poster1, descrição1, video2, poster2, descrição2, video3, poster3, descrição3 -->
+
+                    <div class="image-container">
+                        <a href="#banner"><img src="Continuações/img/grunge.jpg" class="image" onclick="AnimeCard('FLCL: Grunge', '', 'mySlides36', 'Continuações/img/grunge.jpg', 'false', '', '', '37', 'A quarta temporada de FLCL, e sequência de FLCL Alternative. Centra-se em três adolescentes que se formaram e começaram a trabalhar. O anime CGI terá como tema a sensação de ser adulto.', 'Ação, Aventura, Comédia, Mecha, Ficção Científica', 'https:\/\/anidb.net/creator/36236', 'Takekiyo Hitoshi', '', '', 'Houkago Midnighters', 'https:\/\/anidb.net/creator/54289', '../../../Estúdios/montblanc.png', '', '', 'Houkago Midnighters', '09/09', '12', '', 'http:\/\/anidb.net/a17264', 'https:\/\/myanimelist.net/anime/51304', 'false', 'false', '', '', 'false', '', '', 'false', '', '')"></a>
+                        <span class="star"><i class="far fa-star" data-index="37"></i></span>
+                    </div>
+
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <script src="../../../main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.fa-star');
+
+            stars.forEach(star => {
+                star.addEventListener('click', toggleStar);
+                const starIndex = star.getAttribute('data-index');
+                const starStatus = localStorage.getItem(`star-${starIndex}`);
+                if (starStatus === 'favorited') {
+                    star.classList.replace('far', 'fas');
+                }
+            });
+
+            function toggleStar(event) {
+                const clickedStar = event.target;
+                const starIndex = clickedStar.getAttribute('data-index');
+
+                if (clickedStar.classList.contains('far')) {
+                    clickedStar.classList.replace('far', 'fas');
+                    localStorage.setItem(`star-${starIndex}`, 'favorited');
+                } else {
+                    clickedStar.classList.replace('fas', 'far');
+                    localStorage.removeItem(`star-${starIndex}`);
+                }
+            }
+        });
+
+    </script>
+    
+</body>
+</html>
