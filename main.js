@@ -161,7 +161,7 @@ for (var i = 0; i < images.length; i++) {
   img.onclick = function(evt) {
     modal.style.display = "block";
     modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
+	captionText.innerHTML = this.alt;
   }
 }
 
@@ -230,6 +230,7 @@ function showSlides(n, no) {
   let i;
   let x = document.getElementsByClassName(slideId[no]);
   if (n > x.length) {slideIndex[no] = 1}
+
   if (n < 1) {slideIndex[no] = x.length}
   for (i = 0; i < x.length; i++) {
      x[i].style.display = "none";  
@@ -239,7 +240,7 @@ function showSlides(n, no) {
 
 // -------- New design ---------------------------
 
-function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4, slidegroup, Synopsis, Genre, DirectorLink, Director, Director2Link, Director2,  DirectorWorks, StudioLink, Studio, Studio2Link, Studio2, StudioWorks, Time, Duration, Commentary, Anidb, Mal, Cr, Video1, Poster1, caption1, Video2, Poster2, caption2, Video3, Poster3, caption3) {
+function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4, slidegroup, Synopsis, Genre, DirectorLink, Director, Director2Link, Director2,  DirectorWorks, StudioLink, Studio, Studio2Link, Studio2, StudioWorks, Time, Duration, Commentary, Anidb, Mal, Cr, netflix, disney, Video1, Poster1, caption1, Video2, Poster2, caption2, Video3, Poster3, caption3) {
             var animecard = document.querySelector('.animeCard');
             var animeTitle = document.getElementById('anime-title');
             var animetitleEnglish = document.getElementById('anime-title-english');
@@ -276,6 +277,8 @@ function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4,
             var animeAnidb = document.getElementById('anime-anidb');
             var animeMal = document.getElementById('anime-mal');
             var animeCr = document.getElementById('anime-cr');
+			var animeNetflix = document.getElementById('anime-netflix');
+			var animeDisney = document.getElementById('anime-disney');
 			var animeVideo1container = document.getElementById('anime-video1-container');
             var animeVideo1 = document.getElementById('anime-video1');
             var animeCaption1 = document.getElementById('anime-video1-caption');
@@ -323,6 +326,8 @@ function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4,
                 animeAnidb.href = Anidb;
                 animeMal.href = Mal;
                 animeCr.href = Cr;
+				animeNetflix.href = netflix;
+				animeDisney.href = disney;
                 animeVideo1.src = Video1;
                 animeVideo1.poster = Poster1;
                 animeCaption1.innerHTML = caption1;
@@ -361,10 +366,38 @@ function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4,
                 document.getElementById('cr-image').style.cursor = 'pointer';
 				animeCr.target = "_blank"
             }
+			if (netflix == "nolink") {
+                document.getElementById('netflix-image').style.opacity = '60%';
+                document.getElementById('netflix-image').style.cursor = 'default';
+				animeNetflix.href = '#anime-card'; animeNetflix.target = ""
+            } else {
+                document.getElementById('netflix-image').style.opacity = '100%';
+                document.getElementById('netflix-image').style.cursor = 'pointer';
+				animeNetflix.target = "_blank"
+            }
+			if (disney == "nolink") {
+                document.getElementById('disney-image').style.opacity = '60%';
+                document.getElementById('disney-image').style.cursor = 'default';
+				animeDisney.href = '#anime-card'; animeDisney.target = ""
+            } else {
+                document.getElementById('disney-image').style.opacity = '100%';
+                document.getElementById('disney-image').style.cursor = 'pointer';
+				animeDisney.target = "_blank"
+            }
             if (Cr == "false") {
                 document.getElementById('cr-image').style.display = 'none';
             } else {
                 document.getElementById('cr-image').style.display = 'inherit';
+            }
+			if (netflix == "false") {
+                document.getElementById('netflix-image').style.display = 'none';
+            } else {
+                document.getElementById('netflix-image').style.display = 'inherit';
+            }
+			if (disney == "false") {
+                document.getElementById('disney-image').style.display = 'none';
+            } else {
+                document.getElementById('disney-image').style.display = 'inherit';
             }
 
             if (Thumb2 == "false") {
@@ -384,9 +417,16 @@ function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4,
             } else {
                 text = 4;
                 text1.innerHTML = '1 / ' + text, text2.innerHTML = '2 / ' + text, text3.innerHTML = '3 / ' + text, text4.innerHTML = '4 / ' + text;
-            }  
+            } 
 
+			if (StudioLink == '') {
+				document.getElementById('anime-studio-link').style.display = 'none';
+			} else {
+				document.getElementById('anime-studio-link').style.display = '';
+			}
 			if (Studio2Link == '') {
 				document.getElementById('anime-studio2-link').style.display = 'none';
+			} else {
+				document.getElementById('anime-studio2-link').style.display = '';
 			}
         }
