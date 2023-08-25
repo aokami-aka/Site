@@ -9,7 +9,7 @@ html {
   }
 
 body {
-  background-image: url('../../../Temporadas/2023/Julho2023/Thumb_Jul_2023dark.jpg');
+  background-image: url('../../../Temporadas/2023/Outubro2023/Thumb_Out_2023-black.jpg');
   min-width: 600px;
 
   font-family: cursive;
@@ -382,8 +382,8 @@ video::cue {
   height: 60px;
   vertical-align:middle;
   mix-blend-mode: multiply;
-
   transition: all ease-out 0.5s;
+  /* display: block; */
 }
 
 /* ----- trailers ----- */
