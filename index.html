@@ -11,8 +11,12 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f1724">
     <title>AnimeGuides - Guias de Temporada</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <link href="home.css" rel="stylesheet" type="text/css" />    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
@@ -68,72 +72,69 @@
   <meta name="twitter:image" content="https://animeguides.vercel.app/link2.png">
     <!-- SEO -->
 
-    <h1 id="title"><img src="favicon.png" alt="AnimeGuides">AnimeGuides</h1>
-
-    <!-- ----------- Topnav ------------ -->
-    <nav>
-        <div class="topnav" id="banner">
-            <a class="active" id="home"><i class="fa fa-home"></i>&nbspPágina inicial</a>
-            <a href="Temporadas/2023/Janeiro2023/Jan2023.html" id="winter"><i class="far fa-snowflake"></i>&nbspJaneiro 2023</a>
-            <a href="Temporadas/2023/Abril2023/Abr2023.html" id="spring"><i class="fa fa-leaf"></i>&nbspAbril 2023</a>
-            <a href="Temporadas/2023/Julho2023/Jul2023.html" id="summer"><i class="fas fa-sun"></i>&nbspJulho 2023</a>
-            <a href="Temporadas/2023/Outubro2023/Out2023.html" id="fall"><i class="fab fa-pagelines"></i>&nbspOutubro 2023</a>
-
-            <a href="javascript:void(0);" class="icon" id="phoneIcon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </div>
-    </nav>
-
 </head>
 <body class="background">
-     <!-- Google Tag Manager (noscript) -->
-     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FBP6NK"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="favicon.png" alt="AnimeGuides" class="logo">
+        <h1 id="title">AnimeGuides</h1>
+      </div>
 
+      <!-- ensure the hamburger is OUTSIDE the nav and always present in DOM -->
+      <button id="phoneIcon" class="icon" aria-expanded="false" aria-controls="banner" aria-label="Toggle menu">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <nav class="topnav" id="banner" aria-hidden="true" aria-label="Main navigation">
+        <a class="active" id="home" href="#"><i class="fa fa-home"></i> Página inicial</a>
+        <a href="Temporadas/2026/Janeiro2026/Out2023.html"><i class="far fa-snowflake"></i> Janeiro 2026</a>
+        <a><i class="fa fa-leaf"></i> Abril 2026</a>
+        <a><i class="fas fa-sun"></i> Julho 2026</a>
+        <a><i class="fab fa-pagelines"></i> Outubro 2026</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
     <section>
-        <div id="Guides">
-        
-            <div id="years">
-                <details>
-                    <summary><img src="folders/folder icon_2023.png" alt="2023" class="yearPaste"></summary>
-                    <div id="year2023">
-                        <div class="content">
-                            <div class="seasons">
-                                <a href="Temporadas/2023/Janeiro2023/Jan2023.html"><img src="folders/folder icon_winter.png" alt="Janeiro 2023" class="SeasonPaste"><br>Janeiro 2023</a>
-                                <br>
-                                <a href="Temporadas/2023/Abril2023/Abr2023.html"><img src="folders/folder icon_spring.png" alt="Abril 2023" class="SeasonPaste"><br>Abril 2023</a>
-                                <br>
-                                <a href="Temporadas/2023/Julho2023/Jul2023.html"><img src="folders/folder icon_summer.png" alt="Julho 2023" class="SeasonPaste"><br>Julho 2023</a>
-                                <br>
-                                <a href="Temporadas/2023/Outubro2023/Out2023.html"><img src="folders/folder icon_fall.png" alt="Outubro 2023" class="SeasonPaste"><br>Outubro 2023</a>
-                            </div>
-                        </div>
-                    </div>
-                </details>  
-                <details>
-                    <summary><img src="folders/folder icon_2022.png" alt="2022" class="yearPaste"></summary>
-                    <div id="year2022">
-                        <div class="content">
-                            <div class="seasons">
-                                <a href="Temporadas/2022/Janeiro 2022/Jan2022.html"><img src="folders/folder icon_winter.png" alt="Janeiro 2022" class="SeasonPaste"><br>Janeiro 2022</a>
-                                <br>
-                                <a href="Temporadas/2022/Abril 2022/Abr2022.html"><img src="folders/folder icon_spring.png" alt="Abril 2022" class="SeasonPaste"><br>Abril 2022</a>
-                                <br>
-                                <a href="Temporadas/2022/Julho 2022/Jul2022.html"><img src="folders/folder icon_summer.png" alt="Julho 2022" class="SeasonPaste"><br>Julho 2022</a>
-                                <br>
-                                <a href="Temporadas/2022/Outubro 2022/Out2022.html"><img src="folders/folder icon_fall.png" alt="Outubro 2022" class="SeasonPaste"><br>Outubro 2022</a>
-                            </div>
-                        </div>                              
-                    </div>
-                </details>
+      <div id="Guides">
+        <div id="years">
+          <details>
+            <summary><img src="folders/folder icon_2026.png" alt="2023" class="yearPaste"><span>2026</span></summary>
+            <div id="year2026" class="content year-grid">
+              <div class="seasons">
+                <a class="season-card" href="Temporadas/2026/Janeiro2026/Out2023.html">
+                  <img src="folders/folder icon_winter.png" alt="Janeiro 2026" class="SeasonPaste">
+                  <span>Janeiro 2026</span>
+                </a>
+                <!-- <a class="season-card" href="Temporadas/2023/Abril2023/Abr2023.html">
+                  <img src="folders/folder icon_spring.png" alt="Abril 2023" class="SeasonPaste">
+                  <span>Abril 2023</span>
+                </a> -->
+                <!-- <a class="season-card" href="Temporadas/2023/Julho2023/Jul2023.html">
+                  <img src="folders/folder icon_summer.png" alt="Julho 2023" class="SeasonPaste">
+                  <span>Julho 2023</span>
+                </a> -->
+                <!-- <a class="season-card" href="Temporadas/2023/Outubro2023/Out2023.html">
+                  <img src="folders/folder icon_fall.png" alt="Outubro 2023" class="SeasonPaste">
+                  <span>Outubro 2023</span>
+                </a> --> 
+              </div>
             </div>
-            
+          </details>
         </div>
+      </div>
     </section>
+  </main>
 
-    <script src="main.js"></script>
-    
+  <footer class="site-footer">
+    <div class="container">
+      <p>© AnimeGuides — Guias de temporada</p>
+    </div>
+  </footer>
+
+    <!-- load script at end -->
+  <script src="main.js" defer></script>
 </body>
 </html>
