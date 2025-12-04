@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="por">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f1724">
+    <title>AnimeGuides - Janeiro 2026</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="Jan2026.css" rel="stylesheet" type="text/css" />    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
+
+    <!-- SEO -->
+    <link rel="canonical" href="https://animeguides.vercel.app/"/>
+    <meta name="description" content="Guias acompanhando aos lançamentos dos animes semanais, com suas respectivas informações e datas de lançamento junto com outras informações.">
+    <meta name="keywords" content="Guias, anime, temporada, 2023, primavera, verão, outono, inverno"/>
+    <meta name="thumbnail" content="https://github.com/aokami-aka/Site/blob/main/link2.png?raw=true" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://animeguides.vercel.app">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AnimeGuides - Guias de temporada">
+    <meta property="og:description" content="Guias mostrando as informações dos animes em lançamento">
+    <meta property="og:image" content="https://animeguides.vercel.app/link2.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="animeguides.vercel.app">
+    <meta property="twitter:url" content="https://animeguides.vercel.app">
+    <meta name="twitter:title" content="AnimeGuides - Guias de temporada">
+    <meta name="twitter:description" content="Guias mostrando as informações dos animes em lançamento">
+    <meta name="twitter:image" content="https://animeguides.vercel.app/link2.png">
+</head>
+<body class="background">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FBP6NK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <img src="../../../favicon.png" alt="AnimeGuides" class="logo">
+          <h1 id="title">AnimeGuides</h1>
+        </div>
+
+        <!-- Hamburger button outside nav -->
+        <button id="phoneIcon" class="icon" aria-expanded="false" aria-controls="banner" aria-label="Toggle menu">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <nav class="topnav" id="banner" aria-hidden="true" aria-label="Main navigation">
+          <a href="../../../index.html" id="home"><i class="fa fa-home"></i> Página inicial</a>
+          <a class="active" id="winter"><i class="far fa-snowflake"></i> Janeiro 2026</a>
+          <a href="../Abril2023/Abr2023.html" id="spring"><i class="fa fa-leaf"></i> Abril 2023</a>
+          <a href="../Julho2023/Jul2023.html" id="summer"><i class="fas fa-sun"></i> Julho 2023</a>
+          <a href="../Outubro2023/Out2023.html" id="fall"><i class="fab fa-pagelines"></i> Outubro 2023</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main-content">
+        <div id="buttons">
+            <a href="#" class="to-top">
+                <i class="fa fa-arrow-up"></i>
+            </a>
+        </div>
+
+        <section>
+            <div style="display: none;" class="animeCard">
+                <div class="anime-card">
+                    <h2 class="animeTitle"><span id="anime-title"></span><i class="english"><br><span id="anime-title-english"></span></i></h2>
+                    <br>
+                    <div>
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container"></div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse: </b><span style="white-space: pre-line" id="anime-synopsis"></span>
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero: </b><span id="anime-genre"></span>
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor: </b><a id="anime-director-link" href="" target="_blank" rel="noreferrer noopener"><span id="anime-director"></span></a><a id="anime-director2-link" href="" target="_blank" rel="noreferrer noopener"><span id="anime-director2"></span></a> (<i><span id="anime-director-works"></span></i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a id="anime-studio-link" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="" id="anime-studio" class="Studio" alt="estúdio"></a><a id="anime-studio2-link" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="" id="anime-studio2" class="Studio" alt="estúdio"></a> (<i><span id="anime-studio-works"></span></i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia: </b> <span id="anime-time"></span>
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios: </b> <span id="anime-duration"></span>
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b> <span id="anime-commentary"></span>
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a id="anime-anidb" href="" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a id="anime-mal" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a id="anime-cr" href="" target="_blank" rel="noreferrer noopener"><img id="cr-image" loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="cr" class="source"></a><a id="anime-netflix" href="" target="_blank" rel="noreferrer noopener"><img id="netflix-image" loading="lazy" src="../../../Estúdios/netflix.png" alt="netflix" class="source"></a> <a id="anime-disney" href="" target="_blank" rel="noreferrer noopener"><img id="disney-image" loading="lazy" src="../../../Estúdios/disney.jpg" alt="disney+" class="source"></a></p>
+                        </div>
+
+                            <br><br>
+
+                        
+                            <div id="orientTrailers">
+                                <details>
+                                    <summary><p style="text-align: center;"><b>Vídeos</b></p></summary>
+                                    <div class="content">
+                                        <!-- Lista de Trailers -->
+                                        <div id="trailers" class="trailer">
+
+                                            <!-- Player de Vídeo 1 -->
+                                            <div class="video-player-container">
+                                                <video class="video-player" poster="" src=""></video>
+                                                <div class="video-controls">
+                                                    <button class="control-button play-pause-btn" title="Play/Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <div class="progress-bar-container">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
+                                                    <span class="time-display">0:00 / 0:00</span>
+                                                    <button class="control-button volume-btn" title="Mute/Unmute">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                                                    <button class="control-button fullscreen-btn" title="Fullscreen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="video-caption"><b><span id="anime-video1-caption"></span></b></p>
+                                            </div>
+
+                                            <!-- Player de Vídeo 2 -->
+                                            <div class="video-player-container">
+                                                <video class="video-player" poster="" src=""></video>
+                                                <div class="video-controls">
+                                                    <button class="control-button play-pause-btn" title="Play/Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <div class="progress-bar-container">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
+                                                    <span class="time-display">0:00 / 0:00</span>
+                                                    <button class="control-button volume-btn" title="Mute/Unmute">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                                                    <button class="control-button fullscreen-btn" title="Fullscreen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="video-caption"><b><span id="anime-video2-caption"></span></b></p>
+                                            </div>
+
+                                            <!-- Player de Vídeo 3 -->
+                                            <div class="video-player-container">
+                                                <video class="video-player" poster="" src=""></video>
+                                                <div class="video-controls">
+                                                    <button class="control-button play-pause-btn" title="Play/Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <div class="progress-bar-container">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
+                                                    <span class="time-display">0:00 / 0:00</span>
+                                                    <button class="control-button volume-btn" title="Mute/Unmute">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                                                    <button class="control-button fullscreen-btn" title="Fullscreen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="video-caption"><b><span id="anime-video3-caption"></span></b></p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <details open>
+                <br>
+                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Estréias - TV</h1></summary>
+                <div class="content">
+                    <div id="anime-chart">
+                        <!-- Ordem: titulo, titulo(ingles), caminho imagem1, caminho imagem2, caminho imagem3, caminho imagem4, sinopse, gênero, link diretor1, diretor1, link diretor2, diretor2, trabalhos diretor, link estúdio, caminho estúdio, link estúdio 2, caminho estúdio 2, trabalhos estúdio, data, duração, comentário, anidb, mal, cr, netflix, disney+, video1, poster1, descrição1, video2, poster2, descrição2, video3, poster3, descrição3 -->
+                        
+                        <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
+                        <div class="image-container">
+                            <a href="#banner" class="anime-card-trigger"
+                                data-title="Ojou to Banken-kun"
+                                data-title-english="A Girl & Her Guard Dog"
+                                data-thumb1="Estréias/img/banken.webp"
+                                data-thumb2="Estréias/img/banken_02.jpeg"
+                                data-thumb3=""
+                                data-thumb4=""
+                                data-synopsis="Isaku Senagaki, de quinze"
+                                data-genre="Romance, Escolar, Shoujo"
+                                data-director-link="https://anidb.net/creator/1536"
+                                data-director="Takamoto Yoshihiro"
+                                data-director2-link=""
+                                data-director2=""
+                                data-director-works="Vazzrock the animation, Beelzebub"
+                                data-studio-link="https://anidb.net/creator/35813"
+                                data-studio="../../../Estúdios/bridge-studios.png"
+                                data-studio2-link=""
+                                data-studio2=""
+                                data-studio-works="Uchi no Kaisha, Otonari no Tenshi-sama, Tomozaki-kun"
+                                data-time="28/09"
+                                data-duration="12"
+                                data-commentary=""
+                                data-anidb="http://anidb.net/a17666"
+                                data-mal="https://myanimelist.net/anime/53300"
+                                data-cr="nolink"
+                                data-netflix="false"
+                                data-disney="false"
+                                data-video1="https://github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/banken-teaser.mp4"
+                                data-poster1="https://i.ytimg.com/vi/-Q6Y7N3JT_o/maxresdefault.jpg"
+                                data-caption1="Teaser"
+                                data-video2="false"
+                                data-poster2=""
+                                data-caption2=""
+                                data-video3="false"
+                                data-poster3=""
+                                data-caption3=""
+                            >
+                                <img src="Estréias/img/banken.webp" class="image">
+                            </a>
+                            <span class="star"><i class="far fa-star" data-index="2"></i></span>
+                        </div>
+
+                        
+                        <div class="image-container">
+                            <a href="#banner"><img src="Estréias/img/frieren.jpg" class="image" onclick="AnimeCard('Sousou no Frieren', 'Frieren: Beyond Journeys End', 'Estréias/img/frieren.jpg', 'Estréias/img/frieren_02.jpg', 'Estréias/img/frieren_03.jpg', 'false', 'A maga Frieren derrotou o Rei Demônio ao lado do grupo do herói Himmel após uma missão de 10 anos. A paz foi restaurada ao reino. Por ser uma elfa, ela é capaz de viver mais de mil anos. Ela promete a Himmel e aos outros que voltará para vê-los e, em seguida, parte em uma jornada sozinha.<br>&emsp;Cinquenta anos depois, Frieren vai visitar Himmel e os outros. Ela permaneceu inalterada, mas Himmel e os outros envelheceram e apenas um pouco de suas vidas permanecem. Mais tarde, ela testemunha a morte de Himmel. Frieren sofre com seu desejo de ter passado mais tempo conhecendo pessoas. Com esse arrependimento no coração, ela então parte em uma jornada para fazer exatamente isso. Em sua jornada, ela conhece muitas pessoas e muitos eventos a aguardam.', 'Aventura, Drama, Fantasia, Shounen', 'https:\/\/anidb.net/creator/57709', 'Saitou Keiichirou', '', '', 'Bocchi The rock!!, ACCA13', 'https:\/\/anidb.net/creator/731', '../../../Estúdios/Madhouse_studio.png', '', '', 'Yamada-kun to lv999, Sonny Boy, Death Parade', '29/09', '24', 'Finalmente um anime de fantasia que promete?', 'http:\/\/anidb.net/17617', 'https:\/\/myanimelist.net/anime/52991', 'nolink', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/frieren-trailer1.mp4', 'https:\/\/i.ytimg.com/vi/eXjbk-4ljgc/maxresdefault.jpg', 'Trailer 1*', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/frieren-trailer2.mp4', 'https:\/\/i.ytimg.com/vi/tR8YH0G67Rk/maxresdefault.jpg', 'Trailer 2', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="3"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner"><img src="Estréias/img/banken.webp" class="image" onclick="AnimeCard('Ojou to Banken-kun', 'A Girl & Her Guard Dog', 'Estréias/img/banken.webp', 'Estréias/img/banken_02.jpeg', 'false', '', 'Isaku Senagaki, de quinze anos, neta do terceiro chefe do sindicato do crime de Senagaki, só quer ter amigos normais e um romance normal no ensino médio. Ela se matricula em uma escola longe de sua cidade natal, mas o jovem líder superprotetor, Keiya Uto, de vinte e seis anos, mente sobre sua idade e suborna seu caminho para a mesma escola que Isaku!<br>Dizendo a Isaku que ela é muito jovem para se apaixonar, Keiya está pronta para assustar todos os meninos. Mas na verdade, Isaku teve sentimentos não correspondidos por Keiya esse tempo todo.', 'Romance, Escolar, Shoujo', 'https:\/\/anidb.net/creator/1536', 'Takamoto Yoshihiro', '', '', 'Vazzrock the animation, Beelzebub', 'https:\/\/anidb.net/creator/35813', '../../../Estúdios/Project_No.9_Logo.png', '', '', 'Uchi no Kaisha, Otonari no Tenshi-sama, Tomozaki-kun', '28/09', '12', '', 'http:\/\/anidb.net/a17666', 'https:\/\/myanimelist.net/anime/53300', 'nolink', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/banken-teaser.mp4', 'https:\/\/i.ytimg.com/vi/-Q6Y7N3JT_o/maxresdefault.jpg', 'Teaser', 'false', '', '', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="2"></i></span>
+                        </div>
+                        
+                        <div class="image-container">
+                            <a href="#banner"><img src="Estréias/img/frieren.jpg" class="image" onclick="AnimeCard('Sousou no Frieren', 'Frieren: Beyond Journeys End', 'Estréias/img/frieren.jpg', 'Estréias/img/frieren_02.jpg', 'Estréias/img/frieren_03.jpg', 'false', 'A maga Frieren derrotou o Rei Demônio ao lado do grupo do herói Himmel após uma missão de 10 anos. A paz foi restaurada ao reino. Por ser uma elfa, ela é capaz de viver mais de mil anos. Ela promete a Himmel e aos outros que voltará para vê-los e, em seguida, parte em uma jornada sozinha.<br>&emsp;Cinquenta anos depois, Frieren vai visitar Himmel e os outros. Ela permaneceu inalterada, mas Himmel e os outros envelheceram e apenas um pouco de suas vidas permanecem. Mais tarde, ela testemunha a morte de Himmel. Frieren sofre com seu desejo de ter passado mais tempo conhecendo pessoas. Com esse arrependimento no coração, ela então parte em uma jornada para fazer exatamente isso. Em sua jornada, ela conhece muitas pessoas e muitos eventos a aguardam.', 'Aventura, Drama, Fantasia, Shounen', 'https:\/\/anidb.net/creator/57709', 'Saitou Keiichirou', '', '', 'Bocchi The rock!!, ACCA13', 'https:\/\/anidb.net/creator/731', '../../../Estúdios/Madhouse_studio.png', '', '', 'Yamada-kun to lv999, Sonny Boy, Death Parade', '29/09', '24', 'Finalmente um anime de fantasia que promete?', 'http:\/\/anidb.net/17617', 'https:\/\/myanimelist.net/anime/52991', 'nolink', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/frieren-trailer1.mp4', 'https:\/\/i.ytimg.com/vi/eXjbk-4ljgc/maxresdefault.jpg', 'Trailer 1*', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/frieren-trailer2.mp4', 'https:\/\/i.ytimg.com/vi/tR8YH0G67Rk/maxresdefault.jpg', 'Trailer 2', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="3"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner"><img src="Estréias/img/banken.webp" class="image" onclick="AnimeCard('Ojou to Banken-kun', 'A Girl & Her Guard Dog', 'Estréias/img/banken.webp', 'Estréias/img/banken_02.jpeg', 'false', '', 'Isaku Senagaki, de quinze anos, neta do terceiro chefe do sindicato do crime de Senagaki, só quer ter amigos normais e um romance normal no ensino médio. Ela se matricula em uma escola longe de sua cidade natal, mas o jovem líder superprotetor, Keiya Uto, de vinte e seis anos, mente sobre sua idade e suborna seu caminho para a mesma escola que Isaku!<br>Dizendo a Isaku que ela é muito jovem para se apaixonar, Keiya está pronta para assustar todos os meninos. Mas na verdade, Isaku teve sentimentos não correspondidos por Keiya esse tempo todo.', 'Romance, Escolar, Shoujo', 'https:\/\/anidb.net/creator/1536', 'Takamoto Yoshihiro', '', '', 'Vazzrock the animation, Beelzebub', 'https:\/\/anidb.net/creator/35813', '../../../Estúdios/Project_No.9_Logo.png', '', '', 'Uchi no Kaisha, Otonari no Tenshi-sama, Tomozaki-kun', '28/09', '12', '', 'http:\/\/anidb.net/a17666', 'https:\/\/myanimelist.net/anime/53300', 'nolink', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/banken-teaser.mp4', 'https:\/\/i.ytimg.com/vi/-Q6Y7N3JT_o/maxresdefault.jpg', 'Teaser', 'false', '', '', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="2"></i></span>
+                        </div>
+                        
+                        <div class="image-container">
+                            <a href="#banner"><img src="Estréias/img/frieren.jpg" class="image" onclick="AnimeCard('Sousou no Frieren', 'Frieren: Beyond Journeys End', 'Estréias/img/frieren.jpg', 'Estréias/img/frieren_02.jpg', 'Estréias/img/frieren_03.jpg', 'false', 'A maga Frieren derrotou o Rei Demônio ao lado do grupo do herói Himmel após uma missão de 10 anos. A paz foi restaurada ao reino. Por ser uma elfa, ela é capaz de viver mais de mil anos. Ela promete a Himmel e aos outros que voltará para vê-los e, em seguida, parte em uma jornada sozinha.<br>&emsp;Cinquenta anos depois, Frieren vai visitar Himmel e os outros. Ela permaneceu inalterada, mas Himmel e os outros envelheceram e apenas um pouco de suas vidas permanecem. Mais tarde, ela testemunha a morte de Himmel. Frieren sofre com seu desejo de ter passado mais tempo conhecendo pessoas. Com esse arrependimento no coração, ela então parte em uma jornada para fazer exatamente isso. Em sua jornada, ela conhece muitas pessoas e muitos eventos a aguardam.', 'Aventura, Drama, Fantasia, Shounen', 'https:\/\/anidb.net/creator/57709', 'Saitou Keiichirou', '', '', 'Bocchi The rock!!, ACCA13', 'https:\/\/anidb.net/creator/731', '../../../Estúdios/Madhouse_studio.png', '', '', 'Yamada-kun to lv999, Sonny Boy, Death Parade', '29/09', '24', 'Finalmente um anime de fantasia que promete?', 'http:\/\/anidb.net/17617', 'https:\/\/myanimelist.net/anime/52991', 'nolink', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/frieren-trailer1.mp4', 'https:\/\/i.ytimg.com/vi/eXjbk-4ljgc/maxresdefault.jpg', 'Trailer 1*', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/frieren-trailer2.mp4', 'https:\/\/i.ytimg.com/vi/tR8YH0G67Rk/maxresdefault.jpg', 'Trailer 2', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="3"></i></span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </details>
+
+            <br><br>
+
+            <!-- <details>
+                <br>
+                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Estréias - WEB</h1></summary>
+                <div class="content">
+                    <div id="anime-chart">
+                        Ordem: titulo, titulo(ingles), caminho imagem1, caminho imagem2, caminho imagem3, caminho imagem4, sinopse, gênero, link diretor1, diretor1, link diretor2, diretor2, trabalhos diretor, link estúdio, caminho estúdio, link estúdio 2, caminho estúdio 2, trabalhos estúdio, data, duração, comentário, anidb, mal, cr, netflix, disney+, video1, poster1, descrição1, video2, poster2, descrição2, video3, poster3, descrição3
+
+                        <div class="image-container">
+                            <a href="#banner"><img src="Estréias/img/eden.webp" class="image" onclick="AnimeCard('Hi no Tori: Eden no Sora', 'PHOENIX: EDEN17', 'Estréias/img/eden.webp', 'Estréias/img/eden_02.webp', 'false', '', 'O anime acompanha uma mulher chamada Romi e seu parceiro enquanto eles partem da Terra devastada e partem para uma nova vida no planeta Éden17. No entanto, a vida já foi extinta no novo mundo, então Romi se vê vivendo uma vida ainda mais dura lá.', 'Drama, Fantasia, Psicológico, Romance, Ficção Científica', 'https:\/\/anidb.net/creator/14845', 'Nishimi Shoujirou', '', '', 'Mutafukaz', 'https:\/\/anidb.net/creator/738', '../../../Estúdios/4c.png', '', '', 'Kaijuu no Kodomo, ', '13/09', '04', '', 'http:\/\/anidb.net/17743', 'https:\/\/myanimelist.net/anime/53720', 'false', 'false', 'nolink', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/eden-trailer1.mp4', 'https:\/\/i.ytimg.com/vi/KPruQM1ZBQE/maxresdefault.jpg', 'Trailer', 'false', '', '', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="50"></i></span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </details> -->
+
+            <details>
+                <br>
+                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Continuações</h1></summary>
+                <div class="content">
+                    <div id="anime-chart">
+                        <!-- Ordem: titulo, titulo(ingles), caminho imagem1, caminho imagem2, caminho imagem3, caminho imagem4, sinopse, gênero, link diretor1, diretor1, link diretor2, diretor2, trabalhos diretor, link estúdio, caminho estúdio, link estúdio 2, caminho estúdio 2, trabalhos estúdio, data, duração, comentário, anidb, mal, cr, video1, poster1, descrição1, video2, poster2, descrição2, video3, poster3, descrição3 -->
+
+                        <div class="image-container">
+                            <a href="#banner"><img src="Continuações/img/grunge.jpg" class="image" onclick="AnimeCard('FLCL: Grunge', '', 'Continuações/img/grunge.jpg', 'false', '', '', 'A quarta temporada de FLCL, e sequência de FLCL Alternative. Centra-se em três adolescentes que se formaram e começaram a trabalhar. O anime CGI terá como tema a sensação de ser adulto.', 'Ação, Aventura, Comédia, Mecha, Ficção Científica', 'https:\/\/anidb.net/creator/36236', 'Takekiyo Hitoshi', '', '', 'Houkago Midnighters', 'https:\/\/anidb.net/creator/54289', '../../../Estúdios/montblanc.png', '', '', 'Houkago Midnighters', '09/09', '12', '', 'http:\/\/anidb.net/a17264', 'https:\/\/myanimelist.net/anime/51304', 'false', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Continua%C3%A7%C3%B5es/trailers/grunge-trailer1.mp4', 'https:\/\/i.ytimg.com/vi/SOM0sBPrPO4/maxresdefault.jpg', 'Trailer', 'false', '', '', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="37"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner"><img src="Continuações/img/tsubasa2.jpg" class="image" onclick="AnimeCard('Captain Tsubasa Season 2: Junior Youth-hen', 'Captain Tsubasa Jr. Youth Arc', 'Continuações/img/tsubasa2.jpg', 'false', '', '', 'segunda temporada de Captain Tsubasa (2018).<br>O Torneio Internacional Júnior Juvenil em Paris, França, está prestes a começar, e Tsubasa, Misaki, Wakabayashi, Hyuga e Wakashimazu estão prontos. A equipe de jogadores de elite do Japão vai enfrentar o melhor que o mundo do futebol tem a oferecer.', 'Ação, Futebol, Shounen', 'https:\/\/anidb.net/creator/7668', 'Ono Katsumi', '', '', 'Gaikotsu Kishi-sama, Hypnosis Mic, Yuu Gi Ou: Arc-V', 'https:\/\/anidb.net/creator/59227', '../../../Estúdios/Kai.png', '', '', 'Gaikotsu Kishi-sama, Fuuto Tantei, 7 Seeds (2020)', '01/10', '12', '', 'http:\/\/anidb.net/a17930', 'https:\/\/myanimelist.net/anime/54803', 'false', 'false', 'false', 'https:\/\/github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Continua%C3%A7%C3%B5es/trailers/tsubasa2-trailer1.mp4', 'https:\/\/i.ytimg.com/vi/d41ni2IAPiE/maxresdefault.jpg', 'Trailer', 'false', '', '', 'false', '', '')"></a>
+                            <span class="star"><i class="far fa-star" data-index="41"></i></span>
+                        </div>
+
+                    </div>
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© AnimeGuides — Guias de temporada</p>
+      </div>
+    </footer>
+
+    <script src="../../../main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.fa-star');
+
+            stars.forEach(star => {
+                star.addEventListener('click', toggleStar);
+                const starIndex = star.getAttribute('data-index');
+                const starStatus = localStorage.getItem(`star-${starIndex}`);
+                if (starStatus === 'favorited') {
+                    star.classList.replace('far', 'fas');
+                }
+            });
+
+            function toggleStar(event) {
+                const clickedStar = event.target;
+                const starIndex = clickedStar.getAttribute('data-index');
+
+                if (clickedStar.classList.contains('far')) {
+                    clickedStar.classList.replace('far', 'fas');
+                    localStorage.setItem(`star-${starIndex}`, 'favorited');
+                } else {
+                    clickedStar.classList.replace('fas', 'far');
+                    localStorage.removeItem(`star-${starIndex}`);
+                }
+            }
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const videoPlayers = document.querySelectorAll('.video-player-container');
+
+            videoPlayers.forEach(container => {
+                const video = container.querySelector('.video-player');
+                const playPauseBtn = container.querySelector('.play-pause-btn');
+                const playPauseIcon = playPauseBtn.querySelector('i');
+                const progressBar = container.querySelector('.progress-bar');
+                const progressBarContainer = container.querySelector('.progress-bar-container');
+                const timeDisplay = container.querySelector('.time-display');
+                const volumeBtn = container.querySelector('.volume-btn');
+                const volumeIcon = volumeBtn.querySelector('i');
+                const volumeSlider = container.querySelector('.volume-slider');
+                const fullscreenBtn = container.querySelector('.fullscreen-btn');
+
+                // --- Funções de Controle ---
+                function togglePlayPause() {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                }
+
+                function updatePlayPauseIcon() {
+                    playPauseIcon.className = `fas ${video.paused ? 'fa-play' : 'fa-pause'}`;
+                }
+
+                function updateProgress() {
+                    const progressPercentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = `${progressPercentage}%`;
+                    timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration || 0)}`;
+                }
+
+                function scrub(e) {
+                    const scrubTime = (e.offsetX / progressBarContainer.offsetWidth) * video.duration;
+                    video.currentTime = scrubTime;
+                }
+
+                function toggleMute() {
+                    video.muted = !video.muted;
+                }
+
+                function updateVolumeIcon() {
+                    volumeIcon.className = 'fas';
+                    if (video.muted || video.volume === 0) {
+                        volumeIcon.classList.add('fa-volume-mute');
+                    } else if (video.volume < 0.5) {
+                        volumeIcon.classList.add('fa-volume-down');
+                    } else {
+                        volumeIcon.classList.add('fa-volume-up');
+                    }
+                }
+                
+                function handleVolumeChange() {
+                    video.volume = volumeSlider.value;
+                    if (video.volume > 0) {
+                        video.muted = false;
+                    }
+                }
+
+                function toggleFullscreen() {
+                    if (!document.fullscreenElement) {
+                        container.requestFullscreen().catch(err => {
+                            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                }
+
+                function formatTime(seconds) {
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = Math.floor(seconds % 60);
+                    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+                }
+
+                // --- Event Listeners ---
+                video.addEventListener('click', togglePlayPause);
+                playPauseBtn.addEventListener('click', togglePlayPause);
+                video.addEventListener('play', updatePlayPauseIcon);
+                video.addEventListener('pause', updatePlayPauseIcon);
+                video.addEventListener('timeupdate', updateProgress);
+                video.addEventListener('loadedmetadata', updateProgress);
+                
+                progressBarContainer.addEventListener('click', scrub);
+                
+                volumeBtn.addEventListener('click', toggleMute);
+                volumeSlider.addEventListener('input', handleVolumeChange);
+                video.addEventListener('volumechange', updateVolumeIcon);
+
+                fullscreenBtn.addEventListener('click', toggleFullscreen);
+                
+                // Inicializa o ícone de volume
+                updateVolumeIcon();
+            });
+        });
+
+
+    </script>
+    
+</body>
+</html>
