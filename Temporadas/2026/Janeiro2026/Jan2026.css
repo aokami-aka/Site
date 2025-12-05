@@ -386,7 +386,7 @@ details summary{
 }
 
 .Studio{
-  height:100px;
+  max-height:25px;
   margin-right:8px;
   filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));
   vertical-align: middle; /* Alinha melhor com o texto ao redor */
