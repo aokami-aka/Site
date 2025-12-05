@@ -6,17 +6,107 @@ window.addEventListener("scroll", () => {
   } else {
     toTop.classList.remove("active");
   }
-})
+});
+
+// Adiciona o evento de clique para rolagem suave ao topo
+toTop.addEventListener('click', (e) => {
+  e.preventDefault(); // Previne o salto instantâneo do link #
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // A mágica da rolagem suave acontece aqui
+  });
+});
 
 // // ------------------- Topnav Function --------------------------------------------------------------------------------------------------------------------------------
+// Mobile nav: robust toggle + click-outside + Escape to close
+function toggleMobileNav(open) {
+  const btn = document.getElementById("phoneIcon");
+  const nav = document.getElementById("banner");
+  if (!btn || !nav) { console.warn('toggleMobileNav: missing elements', {btn, nav}); return; }
+
+  if (open) {
+    btn.setAttribute("aria-expanded", "true");
+    nav.setAttribute("aria-hidden", "false");
+    nav.classList.add("open");
+    // force visible by inline style (overrides problematic CSS)
+    nav.style.display = 'flex';
+    nav.style.flexDirection = 'column';
+    nav.style.maxHeight = nav.scrollHeight + 'px';
+    nav.style.opacity = '1';
+    document.body.classList.add("nav-open");
+    console.log('Mobile nav opened');
+  } else {
+    btn.setAttribute("aria-expanded", "false");
+    nav.setAttribute("aria-hidden", "true");
+    nav.classList.remove("open");
+    // collapse with inline style
+    nav.style.maxHeight = '0';
+    nav.style.opacity = '0';
+    // keep display none after transition (small timeout to let CSS transition run)
+    setTimeout(() => {
+      if (btn.getAttribute("aria-expanded") !== "true") nav.style.display = '';
+    }, 360);
+    document.body.classList.remove("nav-open");
+    console.log('Mobile nav closed');
+  }
+}
+
 function myFunction() {
-	var x = document.getElementById("banner");
-	if (x.className == "topnav") {
-		x.className += " responsive";
-	} else {
-		x.className = "topnav";
-	}
-} 
+  const btn = document.getElementById("phoneIcon");
+  if (!btn) { console.warn('myFunction: phoneIcon not found'); return; }
+  const isOpen = btn.getAttribute("aria-expanded") === "true";
+  toggleMobileNav(!isOpen);
+}
+
+// initialize and bind more robustly on DOM ready
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("phoneIcon");
+  const nav = document.getElementById("banner");
+  if (!btn || !nav) { console.warn('DOMContentLoaded: missing phoneIcon or banner'); return; }
+
+  // ensure initial accessibility state
+  btn.setAttribute("role", "button");
+  btn.tabIndex = 0;
+  if (!btn.hasAttribute("aria-expanded")) btn.setAttribute("aria-expanded", "false");
+  if (!nav.hasAttribute("aria-hidden")) nav.setAttribute("aria-hidden", "true");
+
+  // handlers
+  btn.addEventListener("click", (e) => { e.preventDefault(); myFunction(); });
+  btn.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); myFunction(); } });
+
+  // stop propagation from nav so document click doesn't immediately close it
+  nav.addEventListener("click", (e) => e.stopPropagation());
+
+  // click outside closes nav
+  document.addEventListener("click", (e) => {
+    const isOpen = btn.getAttribute("aria-expanded") === "true";
+    if (!isOpen) return;
+    if (!nav.contains(e.target) && !btn.contains(e.target)) toggleMobileNav(false);
+  });
+
+  // escape closes nav
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") toggleMobileNav(false); });
+
+  // on resize: reset inline styles when switching to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 880) {
+      nav.style.display = '';
+      nav.style.maxHeight = '';
+      nav.style.opacity = '';
+      btn.setAttribute("aria-expanded", "false");
+      nav.setAttribute("aria-hidden", "false"); // keep visible on desktop per CSS
+      document.body.classList.remove("nav-open");
+    } else {
+      // mobile default collapsed
+      btn.setAttribute("aria-expanded", "false");
+      nav.setAttribute("aria-hidden", "true");
+      nav.style.maxHeight = '0';
+      nav.style.opacity = '0';
+    }
+  });
+
+  console.log('Mobile nav init', { btn, nav });
+});
 
 function ShowHidden(el) {
 	var display = document.getElementById(el).style.display;
@@ -143,300 +233,614 @@ class Accordion {
 	new Accordion(el);
 });
 
-// ---------------- Modal Image Function ---------------------------------------------
+// ---------------- Lightbox (Modal de Imagem) Function ---------------------------------------------
+class Lightbox {
+    constructor() {
+        this.createLightboxDOM();
+        this.images = [];
+        this.currentIndex = 0;
+        this.zoomLevel = 1;
+        this.addEventListeners();
 
-// create references to the modal...
-var modal = document.getElementById('myModal');
-// to all images -- note I'm using a class!
-var images = document.getElementsByClassName('myImages');
-// the image in the modal
-var modalImg = document.getElementById("img01");
-// and the caption in the modal
-var captionText = document.getElementById("caption");
+        // Propriedades para arrastar a imagem com zoom
+        this.isDragging = false;
+        this.startDragX = 0;
+        this.startDragY = 0;
+        this.translateX = 0;
+        this.translateY = 0;
+    }
 
-// Go through all of the images with our custom class
-for (var i = 0; i < images.length; i++) {
-  var img = images[i];
-  // and attach our click listener for this image.
-  img.onclick = function(evt) {
-    modal.style.display = "block";
-    modalImg.src = this.src;
-	captionText.innerHTML = this.alt;
-  }
-}
+    createLightboxDOM() {
+        if (document.getElementById('lightbox')) return;
 
-modal.onclick = function() {
-  modal.style.display = "none";
-}
+        const lightboxHTML = `
+            <div id="lightbox" class="lightbox-modal" style="display: none;">
+                <span class="lightbox-close">&times;</span>
+                <div class="lightbox-content">
+                    <a class="lightbox-prev">&#10094;</a>
+                    <div class="lightbox-image-container">
+                        <img id="lightbox-img" src="">
+                    </div>
+                    <a class="lightbox-next">&#10095;</a>
+                </div>
+                <div class="lightbox-controls">
+                    <button id="zoom-in">+</button>
+                    <button id="zoom-out">-</button>
+                </div>
+                <div class="lightbox-caption" id="lightbox-caption"></div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', lightboxHTML);
 
-document.addEventListener("keydown", function (e) {
-	if (e.key == "Escape") {
-		modal.style.display = "none";
-	}
-});
+        this.lightbox = document.getElementById('lightbox');
+        this.imgElement = document.getElementById('lightbox-img');
+        this.captionElement = document.getElementById('lightbox-caption');
+        this.closeBtn = this.lightbox.querySelector('.lightbox-close');
+        this.prevBtn = this.lightbox.querySelector('.lightbox-prev');
+        this.nextBtn = this.lightbox.querySelector('.lightbox-next');
+        this.zoomInBtn = document.getElementById('zoom-in');
+        this.zoomOutBtn = document.getElementById('zoom-out');
+    }
 
-// // ------------------ Slides Function -------------------------------------------------------------------------------------------------------------
-let slideIndex = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-var slideId = ["mySlides1", "mySlides2","mySlides3","mySlides4","mySlides5","mySlides6", "mySlides7","mySlides8","mySlides9","mySlides10","mySlides11", "mySlides12","mySlides13","mySlides14","mySlides15","mySlides16", "mySlides17","mySlides18","mySlides19","mySlides20","mySlides21","mySlides22","mySlides23","mySlides24","mySlides25","mySlides26","mySlides27","mySlides28","mySlides29","mySlides30","mySlides31","mySlides32","mySlides33","mySlides34","mySlides35","mySlides36","mySlides37","mySlides38","mySlides39","mySlides40","mySlides41","mySlides42","mySlides43","mySlides44","mySlides45","mySlides46","mySlides47","mySlides48","mySlides49","mySlides50"] // .. multi slide class  name in array
-//initalization 
-showSlides(1, 0);  // zero  index
-showSlides(1, 1);  // first  
-showSlides(1, 2);  // second  
-showSlides(1, 3);  // third 
-showSlides(1, 4);   //four 
-showSlides(1, 5);  
-showSlides(1, 6);    
-showSlides(1, 7);   
-showSlides(1, 8);  
-showSlides(1, 9); 
-showSlides(1, 10);  
-showSlides(1, 11);    
-showSlides(1, 12);   
-showSlides(1, 13);  
-showSlides(1, 14);  
-showSlides(1, 15);  
-showSlides(1, 16);  
-showSlides(1, 17);    
-showSlides(1, 18);   
-showSlides(1, 19);  
-showSlides(1, 20);  
-showSlides(1, 21); 
-showSlides(1, 22); 
-showSlides(1, 23); 
-showSlides(1, 24); 
-showSlides(1, 25); 
-showSlides(1, 26); 
-showSlides(1, 27); 
-showSlides(1, 28); 
-showSlides(1, 29); 
-showSlides(1, 30); 
-showSlides(1, 31); 
-showSlides(1, 32); 
-showSlides(1, 33); 
-showSlides(1, 34); 
-showSlides(1, 35); 
-showSlides(1, 36); 
-showSlides(1, 37); 
-showSlides(1, 38); 
-showSlides(1, 39); 
-showSlides(1, 40); 
-showSlides(1, 41); 
-showSlides(1, 42); 
-showSlides(1, 43); 
-showSlides(1, 44); 
-showSlides(1, 45); 
-showSlides(1, 46); 
-showSlides(1, 47); 
-showSlides(1, 48); 
-showSlides(1, 49); 
-showSlides(1, 50); 
-//....
+    open(images, index) {
+        this.images = images.filter(img => img && img !== "false");
+        if (this.images.length === 0) return;
 
-function plusSlides(n, no) {
-  showSlides(slideIndex[no] += n, no);
-}
+        this.currentIndex = index;
+        this.lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        this.updateImage();
+    }
 
-function showSlides(n, no) {
-  let i;
-  let x = document.getElementsByClassName(slideId[no]);
-  if (n > x.length) {slideIndex[no] = 1}
+    close() {
+        this.lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+        this.resetImageState();
+    }
 
-  if (n < 1) {slideIndex[no] = x.length}
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";  
-  }
-  x[slideIndex[no]-1].style.display = "block";  
-}
-
-// -------- New design ---------------------------
-
-function AnimeCard(title, titleEnglish, slideid, Thumb1, Thumb2, Thumb3, Thumb4, slidegroup, Synopsis, Genre, DirectorLink, Director, Director2Link, Director2,  DirectorWorks, StudioLink, Studio, Studio2Link, Studio2, StudioWorks, Time, Duration, Commentary, Anidb, Mal, Cr, netflix, disney, Video1, Poster1, caption1, Video2, Poster2, caption2, Video3, Poster3, caption3) {
-            var animecard = document.querySelector('.animeCard');
-            var animeTitle = document.getElementById('anime-title');
-            var animetitleEnglish = document.getElementById('anime-title-english');
-            var animeThumb1 = document.getElementById('anime-cardThumb1');
-            var animeThumb2 = document.getElementById('anime-cardThumb2');
-            var animeThumb3 = document.getElementById('anime-cardThumb3');
-            var animeThumb4 = document.getElementById('anime-cardThumb4');
-			var prevslidebutton = document.querySelector('.prev');
-			var prevcurrentslideid = prevslidebutton.getAttribute('onclick');
-			var prevsetslideid = prevcurrentslideid.replace(/plusSlides\(-1, \d+\)/, "plusSlides(-1, " + slidegroup + ")");
-			var nextslidebutton = document.querySelector('.next');
-			var nextcurrentslideid = nextslidebutton.getAttribute('onclick');
-			var nextsetslideid = nextcurrentslideid.replace(/plusSlides\(1, \d+\)/, "plusSlides(1, " + slidegroup + ")");
-            let text = 1;
-            var text1 = document.getElementById('text1');
-            var text2 = document.getElementById('text2');
-            var text3 = document.getElementById('text3');
-            var text4 = document.getElementById('text4');
-            var animeSynopsis = document.getElementById('anime-synopsis');
-            var animeGenre = document.getElementById('anime-genre');
-            var animeDirectorLink = document.getElementById('anime-director-link');
-			var animeDirector2Link = document.getElementById('anime-director2-link');
-            var animeDirector = document.getElementById('anime-director');
-			var animeDirector2 = document.getElementById('anime-director2');
-            var animeDirectorWorks = document.getElementById('anime-director-works');
-            var animeStudioLink = document.getElementById('anime-studio-link');
-			var animeStudio2Link = document.getElementById('anime-studio2-link');
-            var animeStudio = document.getElementById('anime-studio');
-			var animeStudio2 = document.getElementById('anime-studio2');
-            var animeStudioWorks = document.getElementById('anime-studio-works');
-            var animeTime = document.getElementById('anime-time');
-            var animeDuration = document.getElementById('anime-duration');
-            var animeCommentary = document.getElementById('anime-commentary');
-            var animeAnidb = document.getElementById('anime-anidb');
-            var animeMal = document.getElementById('anime-mal');
-            var animeCr = document.getElementById('anime-cr');
-			var animeNetflix = document.getElementById('anime-netflix');
-			var animeDisney = document.getElementById('anime-disney');
-			var animeVideo1container = document.getElementById('anime-video1-container');
-            var animeVideo1 = document.getElementById('anime-video1');
-            var animeCaption1 = document.getElementById('anime-video1-caption');
-            var animeVideo2container = document.getElementById('anime-video2-container');
-            var animeVideo2 = document.getElementById('anime-video2');
-            var animeCaption2 = document.getElementById('anime-video2-caption');
-            var animeVideo3container = document.getElementById('anime-video3-container');
-            var animeVideo3 = document.getElementById('anime-video3');
-            var animeCaption3 = document.getElementById('anime-video3-caption');
-
-            if (animecard.style.display === 'none' || animeTitle.innerHTML !== title) {
-                animecard.style.display = 'block';
-                animeTitle.innerHTML = title;
-                animetitleEnglish.innerHTML = titleEnglish;
-				document.getElementById('thumb1-container').className = slideid+' fade';
-				document.getElementById('thumb2-container').className = slideid+' fade';
-				document.getElementById('thumb3-container').className = slideid+' fade';
-				document.getElementById('thumb4-container').className = slideid+' fade';
-                animeThumb1.src = Thumb1;
-                animeThumb2.src = Thumb2;
-                animeThumb3.src = Thumb3;
-                animeThumb4.src = Thumb4;
-				prevslidebutton.setAttribute("onclick", prevsetslideid);
-				nextslidebutton.setAttribute("onclick", nextsetslideid);
-                text1.innerHTML = '1 / ' + text
-                text2.innerHTML = '2 / ' + text
-                text3.innerHTML = '3 / ' + text
-                text4.innerHTML = '4 / ' + text
-                animeSynopsis.innerHTML = Synopsis;
-                animeSynopsis.innerHTML = Synopsis.replace(/\n/g, '<br>');
-                animeGenre.innerHTML = Genre;
-                animeDirectorLink.href = DirectorLink;
-				animeDirector2Link.href = Director2Link;
-                animeDirector.innerHTML = Director;
-				animeDirector2.innerHTML = Director2;
-                animeDirectorWorks.innerHTML = DirectorWorks;
-                animeStudioLink.href = StudioLink;
-				animeStudio2Link.href = Studio2Link;
-                animeStudio.src = Studio;
-				animeStudio2.src = Studio2;
-                animeStudioWorks.innerHTML = StudioWorks;
-                animeTime.innerHTML = Time;
-                animeDuration.innerHTML = Duration;
-                animeCommentary.innerHTML = Commentary;
-                animeAnidb.href = Anidb;
-                animeMal.href = Mal;
-                animeCr.href = Cr;
-				animeNetflix.href = netflix;
-				animeDisney.href = disney;
-                animeVideo1.src = Video1;
-                animeVideo1.poster = Poster1;
-                animeCaption1.innerHTML = caption1;
-                animeVideo2.src = Video2;
-                animeVideo2.poster = Poster2;
-                animeCaption2.innerHTML = caption2;
-                animeVideo3.src = Video3;
-                animeVideo3.poster = Poster3;
-                animeCaption3.innerHTML = caption3;
-            } else {
-                animecard.style.display = 'none';
-            }
-
-			if (Video1 == "false") {
-                animeVideo1container.style.display = 'none';
-            } else {
-                animeVideo1container.style.display = 'list-item';
-            }
-            if (Video2 == "false") {
-                animeVideo2container.style.display = 'none';
-            } else {
-                animeVideo2container.style.display = 'list-item';
-            }
-            if (Video3 == "false") {
-                animeVideo3container.style.display = 'none';
-            } else {
-                animeVideo3container.style.display = 'list-item';
-            }
-
-            if (Cr == "nolink") {
-                document.getElementById('cr-image').style.opacity = '60%';
-                document.getElementById('cr-image').style.cursor = 'default';
-				animeCr.href = '#anime-card'; animeCr.target = ""
-            } else {
-                document.getElementById('cr-image').style.opacity = '100%';
-                document.getElementById('cr-image').style.cursor = 'pointer';
-				animeCr.target = "_blank"
-            }
-			if (netflix == "nolink") {
-                document.getElementById('netflix-image').style.opacity = '60%';
-                document.getElementById('netflix-image').style.cursor = 'default';
-				animeNetflix.href = '#anime-card'; animeNetflix.target = ""
-            } else {
-                document.getElementById('netflix-image').style.opacity = '100%';
-                document.getElementById('netflix-image').style.cursor = 'pointer';
-				animeNetflix.target = "_blank"
-            }
-			if (disney == "nolink") {
-                document.getElementById('disney-image').style.opacity = '60%';
-                document.getElementById('disney-image').style.cursor = 'default';
-				animeDisney.href = '#anime-card'; animeDisney.target = ""
-            } else {
-                document.getElementById('disney-image').style.opacity = '100%';
-                document.getElementById('disney-image').style.cursor = 'pointer';
-				animeDisney.target = "_blank"
-            }
-            if (Cr == "false") {
-                document.getElementById('cr-image').style.display = 'none';
-            } else {
-                document.getElementById('cr-image').style.display = 'inherit';
-            }
-			if (netflix == "false") {
-                document.getElementById('netflix-image').style.display = 'none';
-            } else {
-                document.getElementById('netflix-image').style.display = 'inherit';
-            }
-			if (disney == "false") {
-                document.getElementById('disney-image').style.display = 'none';
-            } else {
-                document.getElementById('disney-image').style.display = 'inherit';
-            }
-
-            if (Thumb2 == "false") {
-				animeThumb2.src = Thumb1, animeThumb3.src = Thumb1, animeThumb4.src = Thumb1;
-                document.getElementById('thumb1-container').className = slideid, document.getElementById('thumb2-container').className = slideid, document.getElementById('thumb3-container').className = slideid, document.getElementById('thumb4-container').className = slideid;
-				text1.innerHTML = '1 / ' + text, text2.innerHTML = '1 / ' + text, text3.innerHTML = '1 / ' + text, text4.innerHTML = '1 / ' + text;
-            } else if (Thumb3 == "false") {
-				animeThumb3.src = Thumb2, animeThumb4.src = Thumb2;
-                document.getElementById('thumb3-container').className = slideid, document.getElementById('thumb4-container').className = slideid;
-				text = 2;
-				text1.innerHTML = '1 / ' + text, text2.innerHTML = '2 / ' + text, text3.innerHTML = '2 / ' + text, text4.innerHTML = '2 / ' + text;
-            } else if (Thumb4 == "false") {
-				animeThumb4.src = Thumb3;
-                document.getElementById('thumb4-container').className = slideid;
-				text = 3;
-				text1.innerHTML = '1 / ' + text, text2.innerHTML = '2 / ' + text, text3.innerHTML = '3 / ' + text, text4.innerHTML = '3 / ' + text;
-            } else {
-                text = 4;
-                text1.innerHTML = '1 / ' + text, text2.innerHTML = '2 / ' + text, text3.innerHTML = '3 / ' + text, text4.innerHTML = '4 / ' + text;
-            } 
-
-			if (StudioLink == '') {
-				document.getElementById('anime-studio-link').style.display = 'none';
-			} else {
-				document.getElementById('anime-studio-link').style.display = '';
-			}
-			if (Studio2Link == '') {
-				document.getElementById('anime-studio2-link').style.display = 'none';
-			} else {
-				document.getElementById('anime-studio2-link').style.display = '';
-			}
+    changeImage(direction) {
+        this.currentIndex += direction;
+        if (this.currentIndex >= this.images.length) {
+            this.currentIndex = 0;
+        } else if (this.currentIndex < 0) {
+            this.currentIndex = this.images.length - 1;
         }
+        this.updateImage();
+    }
+
+    updateImage() {
+        this.resetImageState();
+        this.imgElement.src = this.images[this.currentIndex];
+        this.captionElement.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+        this.prevBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+        this.nextBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+    }
+
+    applyZoom(direction) {
+        this.zoomLevel += direction * 0.2;
+        if (this.zoomLevel < 1) this.zoomLevel = 1; // Nível mínimo de zoom é 1x
+        
+        // Se o zoom voltar para 1x, reseta a posição
+        if (this.zoomLevel === 1) {
+            this.resetImageState();
+        } else {
+            this.applyTransform();
+        }
+    }
+
+    resetImageState() {
+        this.zoomLevel = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.applyTransform();
+    }
+
+    addEventListeners() {
+        this.closeBtn.addEventListener('click', () => this.close());
+        this.prevBtn.addEventListener('click', () => this.changeImage(-1));
+        this.nextBtn.addEventListener('click', () => this.changeImage(1));
+
+        // Eventos de zoom contínuo
+        ['mousedown', 'touchstart'].forEach(type => {
+            this.zoomInBtn.addEventListener(type, () => this.startZoom(1));
+            this.zoomOutBtn.addEventListener(type, () => this.startZoom(-1));
+        });
+        ['mouseup', 'mouseleave', 'touchend'].forEach(type => {
+            this.zoomInBtn.addEventListener(type, () => this.stopZoom());
+            this.zoomOutBtn.addEventListener(type, () => this.stopZoom());
+        });
+
+        // Eventos de teclado
+        document.addEventListener('keydown', (e) => {
+            if (this.lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') this.close();
+                if (e.key === 'ArrowLeft') this.changeImage(-1);
+                if (e.key === 'ArrowRight') this.changeImage(1);
+                if (e.key === '+') this.applyZoom(1);
+                if (e.key === '-') this.applyZoom(-1);
+            }
+        });
+
+        // Eventos para arrastar a imagem
+        this.imgElement.addEventListener('mousedown', (e) => this.startDrag(e));
+        window.addEventListener('mousemove', (e) => this.drag(e));
+        window.addEventListener('mouseup', () => this.stopDrag());
+
+        // Evento de zoom com a roda do mouse
+        this.lightbox.addEventListener('wheel', (e) => this.handleWheelZoom(e));
+    }
+
+    // --- Funções de Zoom Contínuo ---
+    startZoom(direction) {
+        this.stopZoom(); // Garante que não haja intervalos múltiplos
+        this.applyZoom(direction);
+        this.zoomInterval = setInterval(() => this.applyZoom(direction), 100);
+    }
+
+    stopZoom() {
+        clearInterval(this.zoomInterval);
+    }
+
+    // --- Funções para Arrastar (Pan) ---
+    startDrag(e) {
+        if (this.zoomLevel <= 1) return;
+        e.preventDefault();
+        this.isDragging = true;
+        this.startDragX = e.clientX - this.translateX;
+        this.startDragY = e.clientY - this.translateY;
+        this.imgElement.classList.add('zooming');
+    }
+
+    drag(e) {
+        if (!this.isDragging) return;
+        this.translateX = e.clientX - this.startDragX;
+        this.translateY = e.clientY - this.startDragY;
+        this.applyTransform();
+    }
+
+    stopDrag() {
+        this.isDragging = false;
+        this.imgElement.classList.remove('zooming');
+    }
+
+    applyTransform() {
+        this.imgElement.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.zoomLevel})`;
+    }
+
+    // --- Função de Zoom com a Roda do Mouse ---
+    handleWheelZoom(e) {
+        e.preventDefault(); // Impede que a página role para cima ou para baixo
+        const direction = e.deltaY < 0 ? 1 : -1; // Roda para cima = zoom in, roda para baixo = zoom out
+        this.applyZoom(direction);
+    }
+}
+
+const lightbox = new Lightbox();
+
+// // ------------------ Nova Função de Slideshow (Reformulada) -------------------------------------------------------------------------------------------------------------
+
+class Slideshow {
+    constructor(containerSelector, images) {
+        this.container = document.querySelector(containerSelector);
+        if (!this.container) {
+            console.error(`Container do slideshow "${containerSelector}" não encontrado.`);
+            return;
+        }
+        this.images = images.filter(img => img && img !== "false");
+        this.currentIndex = 0;
+        this.createSlides();
+        this.showSlide(this.currentIndex);
+    }
+
+    createSlides() {
+        // Limpa o conteúdo anterior
+        this.container.innerHTML = '';
+
+        if (this.images.length === 0) {
+            this.container.innerHTML = '<p>Nenhuma imagem disponível.</p>';
+            return;
+        }
+
+        // Cria os slides
+        this.images.forEach((src, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'slideshow-slide fade';
+            
+            const text = document.createElement('div');
+            text.className = 'numbertext';
+            text.textContent = `${index + 1} / ${this.images.length}`;
+            
+            const img = document.createElement('img');
+            img.src = src;
+            // Adiciona o evento de clique para abrir o lightbox
+            img.addEventListener('click', () => {
+                lightbox.open(this.images, index);
+            });
+            
+            slide.appendChild(text);
+            slide.appendChild(img);
+            this.container.appendChild(slide);
+        });
+
+        // Adiciona botões de navegação se houver mais de uma imagem
+        if (this.images.length > 1) {
+            const prev = document.createElement('a');
+            prev.className = 'prev';
+            prev.innerHTML = '&#10094;';
+            prev.onclick = () => this.changeSlide(-1);
+
+            const next = document.createElement('a');
+            next.className = 'next';
+            next.innerHTML = '&#10095;';
+            next.onclick = () => this.changeSlide(1);
+
+            this.container.appendChild(prev);
+            this.container.appendChild(next);
+        }
+
+        this.slides = this.container.querySelectorAll('.slideshow-slide');
+    }
+
+    changeSlide(n) {
+        this.currentIndex += n;
+        if (this.currentIndex >= this.images.length) {
+            this.currentIndex = 0;
+        }
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.images.length - 1;
+        }
+        this.showSlide(this.currentIndex);
+    }
+
+    showSlide(index) {
+        if (!this.slides || this.slides.length === 0) return;
+        this.slides.forEach(slide => {
+            slide.style.display = 'none';
+        });
+        this.slides[index].style.display = 'block';
+    }
+}
+
+// Guarda a instância do slideshow atual para ser usada
+let currentSlideshow = null;
+
+class AnimeCardManager {
+    constructor(selector) {
+        this.card = document.querySelector(selector);
+        this.elements = {
+            title: this.card.querySelector('#anime-title'),
+            titleEnglish: this.card.querySelector('#anime-title-english'),
+            synopsis: this.card.querySelector('#anime-synopsis'),
+            genre: this.card.querySelector('#anime-genre'),
+            directorLink: this.card.querySelector('#anime-director-link'),
+            director2Link: this.card.querySelector('#anime-director2-link'),
+            director: this.card.querySelector('#anime-director'),
+            director2: this.card.querySelector('#anime-director2'),
+            directorWorks: this.card.querySelector('#anime-director-works'),
+            studioLink: this.card.querySelector('#anime-studio-link'),
+            studio2Link: this.card.querySelector('#anime-studio2-link'),
+            studio: this.card.querySelector('#anime-studio'),
+            studio2: this.card.querySelector('#anime-studio2'),
+            studioWorks: this.card.querySelector('#anime-studio-works'),
+            time: this.card.querySelector('#anime-time'),
+            duration: this.card.querySelector('#anime-duration'),
+            commentary: this.card.querySelector('#anime-commentary'),
+            anidb: this.card.querySelector('#anime-anidb'),
+            mal: this.card.querySelector('#anime-mal'),
+            cr: this.card.querySelector('#anime-cr'),
+            netflix: this.card.querySelector('#anime-netflix'),
+            youtube: this.card.querySelector('#anime-youtube'),
+            disney: this.card.querySelector('#anime-disney'),
+            crImage: this.card.querySelector('#cr-image'),
+            netflixImage: this.card.querySelector('#netflix-image'),
+            youtubeImage: this.card.querySelector('#youtube-image'),
+            disneyImage: this.card.querySelector('#disney-image'),
+            videoContainers: this.card.querySelectorAll('.video-player-container'),
+        };
+    }
+
+    // Função genérica para preencher texto
+    _setText(element, text) {
+        if (element && text !== undefined) element.innerHTML = text;
+    }
+
+    // Função genérica para configurar links
+    _setLink(element, url, imageElement) {
+        if (!element) return;
+        const isNoLink = url === 'nolink';
+        const isFalse = url === 'false';
+
+        if (imageElement) imageElement.style.display = isFalse ? 'none' : 'inherit';
+        if (isFalse) return;
+
+        element.href = isNoLink ? '#anime-card' : url;
+        element.target = isNoLink ? '' : '_blank';
+        if (imageElement) {
+            imageElement.style.opacity = isNoLink ? '0.4' : '1';
+            imageElement.style.cursor = isNoLink ? 'default' : 'pointer';
+        }
+    }
+
+    // Função para mostrar ou esconder elementos
+    _setVisibility(element, condition) {
+        if (element) element.style.display = condition ? '' : 'none';
+    }
+
+    // Função para lidar com a sinopse e o "Ler mais"
+    _setSynopsis(text) {
+        const synopsisEl = this.elements.synopsis;
+        if (!synopsisEl) return;
+
+        const maxLength = 250; // Limite de caracteres para a sinopse
+
+        // Remove qualquer listener de clique anterior para evitar duplicatas
+        if (this._synopsisClickListener) {
+            synopsisEl.removeEventListener('click', this._synopsisClickListener);
+            this._synopsisClickListener = null;
+        }
+
+        const fullTextHtml = text.replace(/\n/g, '<br>');
+
+        // Se o texto for curto, apenas exibe e encerra
+        if (text.length <= maxLength) {
+            synopsisEl.innerHTML = fullTextHtml;
+            return;
+        }
+
+        // Prepara as versões do HTML
+        const truncatedText = text.substring(0, text.lastIndexOf(' ', maxLength));
+        const truncatedHtml = `${truncatedText.replace(/\n/g, '<br>')}... <button class="read-more-btn">Ler mais</button>`;
+        const expandedHtml = `${fullTextHtml} <button class="read-less-btn">Ler menos</button>`;
+
+        // Define o estado inicial como recolhido
+        synopsisEl.innerHTML = truncatedHtml;
+
+        // Adiciona um único listener que gerencia os dois botões
+        this._synopsisClickListener = (e) => {
+            if (e.target.classList.contains('read-more-btn')) {
+                synopsisEl.innerHTML = expandedHtml;
+            } else if (e.target.classList.contains('read-less-btn')) {
+                synopsisEl.innerHTML = truncatedHtml;
+            }
+        };
+        synopsisEl.addEventListener('click', this._synopsisClickListener);
+    }
+
+    populate(data) {
+        // Lógica para abrir/fechar o card
+        if (this.card.style.display === 'block' && this.elements.title.innerHTML === data.title) {
+            this.card.style.display = 'none';
+            return;
+        }
+        this.card.style.display = 'block';
+
+        // Preenche os dados
+        this._setText(this.elements.title, data.title);
+        this._setText(this.elements.titleEnglish, data.titleEnglish);
+        this._setSynopsis(data.synopsis); // Usa a nova função para a sinopse
+        this._setText(this.elements.genre, data.genre);
+        this._setText(this.elements.director, data.director);
+        this._setText(this.elements.director2, data.director2);
+        this._setText(this.elements.directorWorks, data.directorWorks);
+        this._setText(this.elements.studioWorks, data.studioWorks);
+        this._setText(this.elements.time, data.time);
+        this._setText(this.elements.duration, data.duration);
+        this._setText(this.elements.commentary, data.commentary);
+
+        // Configura links
+        this._setLink(this.elements.anidb, data.anidb);
+        this._setLink(this.elements.mal, data.mal);
+        this._setLink(this.elements.cr, data.cr, this.elements.crImage);
+        this._setLink(this.elements.netflix, data.netflix, this.elements.netflixImage);
+        this._setLink(this.elements.youtube, data.youtube, this.elements.youtubeImage);
+        this._setLink(this.elements.disney, data.disney, this.elements.disneyImage);
+        this._setLink(this.elements.directorLink, data.directorLink);
+        this._setLink(this.elements.director2Link, data.director2Link);
+        this._setLink(this.elements.studioLink, data.studioLink);
+        this._setLink(this.elements.studio2Link, data.studio2Link);
+
+        // Configura imagens de estúdio
+        if (this.elements.studio) this.elements.studio.src = data.studio;
+        if (this.elements.studio2) this.elements.studio2.src = data.studio2;
+        this._setVisibility(this.elements.studioLink, data.studioLink);
+        this._setVisibility(this.elements.studio2Link, data.studio2Link);
+
+        // Cria o slideshow
+        const images = [];
+        let i = 1;
+        while (data[`thumb${i}`]) {
+            images.push(data[`thumb${i}`]);
+            i++;
+        }
+        currentSlideshow = new Slideshow('.slideshow-container', images);
+
+        // Atualiza os players de vídeo
+        const videoData = [
+            { video: data.video1, poster: data.poster1, caption: data.caption1, subtitle: data.subtitle1 || "false" },
+            { video: data.video2, poster: data.poster2, caption: data.caption2, subtitle: data.subtitle2 || "false" },
+            { video: data.video3, poster: data.poster3, caption: data.caption3, subtitle: data.subtitle3 || "false" }
+        ];
+
+                this.elements.videoContainers.forEach((container, index) => {
+            const vData = videoData[index];
+            const videoPlayer = container.querySelector('.video-player');
+            const captionSpan = container.querySelector('.video-caption-text');
+            const trackElement = container.querySelector('track');
+            const subtitlesBtn = container.querySelector('.subtitles-btn');
+
+            if (vData.video && vData.video !== "false") {
+                container.style.display = 'flex';
+                videoPlayer.src = vData.video;
+                videoPlayer.poster = vData.poster;
+                this._setText(captionSpan, vData.caption);
+                videoPlayer.currentTime = 0;
+                videoPlayer.load();
+
+                // Lógica das legendas
+                if (trackElement && subtitlesBtn) {
+                    if (vData.subtitle && vData.subtitle !== "false") {
+                        trackElement.src = vData.subtitle;
+                        
+                        // Aguarda o vídeo carregar os metadados para manipular a trilha de texto
+                        videoPlayer.onloadedmetadata = () => {
+                            if (videoPlayer.textTracks && videoPlayer.textTracks.length > 0) {
+                                // Garante que a legenda comece desativada
+                                videoPlayer.textTracks[0].mode = 'showing';
+                            }
+                        };
+
+                        subtitlesBtn.style.display = 'inline-block';
+                        subtitlesBtn.classList.add('subtitles-active');
+                    } else {
+                        trackElement.src = '';
+                        subtitlesBtn.style.display = 'none';
+                    }
+                }
+            } else {
+                container.style.display = 'none';
+            }
+        });
+    }
+}
+
+// --- INICIALIZAÇÃO ---
+document.addEventListener('DOMContentLoaded', () => {
+    const animeCardManager = new AnimeCardManager('.animeCard');
+    const animeChart = document.getElementById('anime-chart');
+
+    if (animeChart) {
+        animeChart.addEventListener('click', (e) => {
+            // Encontra o link pai que aciona o card
+            const trigger = e.target.closest('.anime-card-trigger');
+            if (!trigger) return;
+
+            e.preventDefault(); // Previne o comportamento padrão do link
+
+            // Coleta todos os atributos data-* e os transforma em um objeto
+            const animeData = { ...trigger.dataset };
+
+            // Popula o card com os dados coletados
+            animeCardManager.populate(animeData);
+        });
+    }
+
+    // --- INICIALIZAÇÃO DO PLAYER DE VÍDEO CUSTOMIZADO ---
+    const videoPlayers = document.querySelectorAll('.video-player-container');
+
+    videoPlayers.forEach(container => {
+        const video = container.querySelector('.video-player');
+        const playPauseBtn = container.querySelector('.play-pause-btn');
+        const playPauseIcon = playPauseBtn.querySelector('i');
+        const progressBar = container.querySelector('.progress-bar');
+        const progressBarContainer = container.querySelector('.progress-bar-container');
+        const timeDisplay = container.querySelector('.time-display');
+        const volumeBtn = container.querySelector('.volume-btn');
+        const volumeIcon = volumeBtn.querySelector('i');
+        const volumeSlider = container.querySelector('.volume-slider');
+        const fullscreenBtn = container.querySelector('.fullscreen-btn');
+        const subtitlesBtn = container.querySelector('.subtitles-btn');
+
+        // --- Funções de Controle ---
+        function togglePlayPause() {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+
+        function updatePlayPauseIcon() {
+            playPauseIcon.className = `fas ${video.paused ? 'fa-play' : 'fa-pause'}`;
+        }
+
+        function updateProgress() {
+            const progressPercentage = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration || 0)}`;
+        }
+
+        function scrub(e) {
+            const scrubTime = (e.offsetX / progressBarContainer.offsetWidth) * video.duration;
+            video.currentTime = scrubTime;
+        }
+
+        function toggleMute() {
+            video.muted = !video.muted;
+        }
+
+        function updateVolumeIcon() {
+            volumeIcon.className = 'fas';
+            if (video.muted || video.volume === 0) {
+                volumeIcon.classList.add('fa-volume-mute');
+            } else if (video.volume < 0.5) {
+                volumeIcon.classList.add('fa-volume-down');
+            } else {
+                volumeIcon.classList.add('fa-volume-up');
+            }
+        }
+        
+        function handleVolumeChange() {
+            video.volume = volumeSlider.value;
+            if (video.volume > 0) {
+                video.muted = false;
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                video.closest('.video-player-container').requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function toggleSubtitles() {
+            const track = video.textTracks[0];
+            if (!track) return;
+
+            const isShowing = track.mode === 'showing';
+            track.mode = isShowing ? 'hidden' : 'showing';
+            subtitlesBtn.classList.toggle('subtitles-active', !isShowing);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // --- Event Listeners ---
+        video.addEventListener('click', togglePlayPause);
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        video.addEventListener('play', () => {
+            // Pausa todos os outros vídeos quando este começar a tocar
+            videoPlayers.forEach(otherContainer => {
+                const otherVideo = otherContainer.querySelector('.video-player');
+                if (otherVideo !== video) {
+                    otherVideo.pause();
+                }
+            });
+            updatePlayPauseIcon();
+        });
+        video.addEventListener('pause', updatePlayPauseIcon);
+        video.addEventListener('timeupdate', updateProgress);
+        video.addEventListener('loadedmetadata', updateProgress);
+        
+        progressBarContainer.addEventListener('click', scrub);
+        
+        volumeBtn.addEventListener('click', toggleMute);
+        volumeSlider.addEventListener('input', handleVolumeChange);
+        video.addEventListener('volumechange', updateVolumeIcon);
+
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+        
+        if (subtitlesBtn) {
+            subtitlesBtn.addEventListener('click', toggleSubtitles);
+        }
+        
+        // Inicializa o ícone de volume
+        updateVolumeIcon();
+    });
+});
