@@ -724,6 +724,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LÓGICA DE FILTRO POR GÊNERO ---
+    function initializeGenreFilters() {
+        const animeTriggers = document.querySelectorAll('.anime-card-trigger');
+        const filterContainer = document.getElementById('genre-filter-container');
+        const animeContainers = document.querySelectorAll('#anime-chart .image-container');
+
+        if (!filterContainer || animeTriggers.length === 0) return;
+
+        // 1. Coletar todos os gêneros únicos
+        const allGenres = new Set();
+        animeTriggers.forEach(trigger => {
+            const genres = trigger.dataset.genre;
+            if (genres) {
+                genres.split(',').forEach(genre => {
+                    allGenres.add(genre.trim());
+                });
+            }
+        });
+
+        // 2. Criar e adicionar os botões de filtro
+        filterContainer.innerHTML = ''; // Limpa filtros existentes
+
+        // Botão "Mostrar Todos"
+        const allButton = document.createElement('button');
+        allButton.className = 'filter-btn active';
+        allButton.textContent = 'Mostrar Todos';
+        allButton.addEventListener('click', () => {
+            filterAnimes('all');
+            setActiveButton(allButton);
+        });
+        filterContainer.appendChild(allButton);
+
+        // Botões para cada gênero
+        [...allGenres].sort().forEach(genre => {
+            const button = document.createElement('button');
+            button.className = 'filter-btn';
+            button.textContent = genre;
+            button.addEventListener('click', () => {
+                filterAnimes(genre);
+                setActiveButton(button);
+            });
+            filterContainer.appendChild(button);
+        });
+
+        // 3. Funções de filtro
+        function filterAnimes(selectedGenre) {
+            animeContainers.forEach(container => {
+                const trigger = container.querySelector('.anime-card-trigger');
+                const animeGenres = trigger.dataset.genre || '';
+                const shouldShow = selectedGenre === 'all' || animeGenres.includes(selectedGenre);
+                container.style.display = shouldShow ? 'flex' : 'none';
+            });
+        }
+
+        function setActiveButton(activeBtn) {
+            filterContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            activeBtn.classList.add('active');
+        }
+    }
+
+    initializeGenreFilters();
+
     // --- INICIALIZAÇÃO DO PLAYER DE VÍDEO CUSTOMIZADO ---
     const videoPlayers = document.querySelectorAll('.video-player-container');
 
