@@ -209,6 +209,10 @@
                 <br>
                 <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Estréias - TV</h1></summary>
                 <div class="content">
+                    <!-- Contêiner para os filtros de gênero -->
+                    <div id="genre-filter-container" class="filter-container">
+                        <!-- Botões de filtro serão inseridos aqui pelo JavaScript -->
+                    </div>
                     <div id="anime-chart">
                         
                         <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
@@ -219,7 +223,6 @@
                                 data-thumb1="Estréias/img/jingai.webp"
                                 data-thumb2="Estréias/img/jingai_02.webp"
                                 data-thumb3="Estréias/img/jingai_03.webp"
-                                data-thumb4=""
                                 data-synopsis="Sou Rei Hitoma, um misantropo autoproclamado devido a alguns traumas passados. Justamente quando pensei que meu novo emprego de professor nas montanhas proporcionaria um ambiente tranquilo e rejuvenescedor, descobri que esta escola é, na verdade, para demi-humanos que querem se tornar seres humanos completos!<br>Há uma sereia, um lobisomem, um coelho e um pássaro... todos os quais agora são meus alunos. É meu dever ensiná-los sobre a humanidade."
                                 data-genre="Drama, Escolar, Sobrenatural"
                                 data-director-link="https://anidb.net/creator/8022"
@@ -253,7 +256,7 @@
                                 data-caption3="">
                                 <img src="Estréias/img/jingai.webp" class="image">
                             </a>
-                            <span class="star"><i class="far fa-star" data-index="1"></i></span>
+                            <span class="star"><i class="far fa-star"></i></span>
                         </div>
 
                         <div class="image-container">
@@ -262,8 +265,6 @@
                                 data-title-english="Tamon's B-Side"
                                 data-thumb1="Estréias/img/tamon.webp"
                                 data-thumb2="Estréias/img/tamon_02.jpg"
-                                data-thumb3=""
-                                data-thumb4=""
                                 data-synopsis="A estudante do ensino médio Utage Kinoshita trabalha meio período como empregada doméstica para poder bancar sua obsessão de fã por Tamon Fukuhara, seu membro favorito da boy band F/ACE. Quando o trabalho a envia por acaso para a casa de seu ídolo, ela descobre que o verdadeiro Tamon não poderia ser mais diferente de sua persona selvagem e sexy no palco!"
                                 data-genre="Comédia, Romance, Shoujo"
                                 data-director-link="https://anidb.net/creator/28453"
@@ -299,7 +300,7 @@
                                 data-subtitle3="false">
                                 <img src="Estréias/img/tamon.webp" class="image">
                             </a>
-                            <span class="star"><i class="far fa-star" data-index="2"></i></span>
+                            <span class="star"><i class="far fa-star"></i></span>
                         </div>
 
                         <div class="image-container">
@@ -347,7 +348,184 @@
                                 data-subtitle3="false">
                                 <img src="Estréias/img/fate.jpeg" class="image">
                             </a>
-                            <span class="star"><i class="far fa-star" data-index="3"></i></span>
+                            <span class="star"><i class="far fa-star"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner" class="anime-card-trigger"
+                                data-title="Hanazakari no Kimitachi e"
+                                data-title-english="Hana-Kimi"
+                                data-thumb1="Estréias/img/hana.webp"
+                                data-thumb2="Estréias/img/hana_02.webp"
+                                data-synopsis="A estrela nipo-americana do atletismo, Mizuki, conseguiu se transferir para uma escola no Japão... mas não para qualquer escola! Para ficar perto de seu ídolo, o saltador em altura Izumi Sano, ela vai para uma escola só para meninos... e se disfarça de menino!<br>Mas, como o destino quis, eles são mais do que colegas de classe... são colegas de quarto! Agora, Mizuki deve guardar seu segredo na sala de aula, no vestiário e em seu próprio quarto.<br>E seus colegas de classe - e a enfermeira da escola - devem lidar com um novo aluno transferido que pode fazê-los questionar sua própria orientação..."
+                                data-genre="Comédia, Drama, Romance, Shoujo"
+                                data-director-link="https://anidb.net/creator/30534"
+                                data-director="Takemura Natsuki"
+                                data-director2-link=""
+                                data-director2=""
+                                data-director-works="Apenas trabalhos em animes infantis"
+                                data-studio-link="https://anidb.net/creator/43312"
+                                data-studio="../../../Estúdios/SignalMD.png"
+                                data-studio2-link=""
+                                data-studio2=""
+                                data-studio-works="Hikari no Ou, Platinum End, Mars Red"
+                                data-time="04/01"
+                                data-duration="12"
+                                data-commentary=""
+                                data-anidb="https://anidb.net/anime/18636"
+                                data-mal="https://myanimelist.net/anime/58861"
+                                data-cr="nolink"
+                                data-netflix="false"
+                                data-youtube="false"
+                                data-disney="false"
+                                data-video1="Estréias/trailers/hana-teaser.mp4"
+                                data-poster1="https://i.ytimg.com/vi/9feK5OU8LnM/maxresdefault.jpg"
+                                data-caption1="Teaser"
+                                data-subtitle1="Estréias/trailers/hana-teaser.vtt"
+                                data-video2="Estréias/trailers/hana-trailer.mp4"
+                                data-poster2="https://i.ytimg.com/vi/yfnOQr_hG1s/maxresdefault.jpg"
+                                data-caption2="Trailer"
+                                data-subtitle2="Estréias/trailers/hana-trailer.vtt"
+                                data-video3="false"
+                                data-poster3=""
+                                data-caption3=""
+                                data-subtitle3="false">
+                                <img src="Estréias/img/hana.webp" class="image">
+                            </a>
+                            <span class="star"><i class="far fa-star"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner" class="anime-card-trigger"
+                                data-title="Majutsushi Kunon wa Mieteiru"
+                                data-title-english="Kunon the Sorcerer Can See"
+                                data-thumb1="Estréias/img/majutsushin.webp"
+                                data-thumb2="Estréias/img/majutsushin_02.webp"
+                                data-synopsis="Kunon, um jovem que não consegue ver, tem o objetivo de criar novos olhos com magia da água. Após apenas cinco meses de aprendizado de feitiçaria, Kunon superou seu próprio mentor e aprimorou seu talento ao tentar realizar um feito nunca antes feito."
+                                data-genre="Fantasia, Seinen"
+                                data-director-link="https://anidb.net/creator/6315"
+                                data-director="Takemura Natsuki"
+                                data-director2-link=""
+                                data-director2=""
+                                data-director-works="Koroshi Ai, Kai Byoui Ramune"
+                                data-studio-link="https://anidb.net/creator/46190"
+                                data-studio="../../../Estúdios/Platinum_Vision.png"
+                                data-studio2-link=""
+                                data-studio2=""
+                                data-studio-works="Koroshi Ai, Kai Byoui Ramune"
+                                data-time="04/01"
+                                data-duration="12"
+                                data-commentary=""
+                                data-anidb="https://anidb.net/anime/19131"
+                                data-mal="https://myanimelist.net/anime/60810"
+                                data-cr="nolink"
+                                data-netflix="false"
+                                data-youtube="false"
+                                data-disney="false"
+                                data-video1="Estréias/trailers/majutsushin-teaser.mp4"
+                                data-poster1="https://i.ytimg.com/vi/FInmR1F31Ho/maxresdefault.jpg"
+                                data-caption1="Teaser"
+                                data-subtitle1="Estréias/trailers/majutsushin-teaser.vtt"
+                                data-video2="false"
+                                data-poster2=""
+                                data-caption2=""
+                                data-subtitle2="false"
+                                data-video3="false"
+                                data-poster3=""
+                                data-caption3=""
+                                data-subtitle3="false">
+                                <img src="Estréias/img/majutsushin.webp" class="image">
+                            </a>
+                            <span class="star"><i class="far fa-star"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner" class="anime-card-trigger"
+                                data-title="Ikoku Nikki"
+                                data-title-english="Journal with witch"
+                                data-thumb1="Estréias/img/nikki.webp"
+                                data-thumb2="Estréias/img/nikki_02.webp"
+                                data-thumb3="Estréias/img/nikki_03.webp"
+                                data-synopsis="Quando a romancista de jovens adultos de 35 anos, KODAI Makio, perde a irmã em um acidente de carro, ela acolhe sua sobrinha, TAKUMI Asa. Tendo perdido os pais e sido jogada em um mundo desconhecido, Asa começa uma busca pela versão de si mesma que ela quer se tornar, eventualmente tentando a música."
+                                data-genre="Drama, Josei"
+                                data-director-link="https://anidb.net/creator/21223"
+                                data-director="Ooshiro Miyuki"
+                                data-director2-link=""
+                                data-director2=""
+                                data-director-works="Primeiro trabalho"
+                                data-studio-link="https://anidb.net/creator/40621"
+                                data-studio="../../../Estúdios/shuka.jpg"
+                                data-studio2-link=""
+                                data-studio2=""
+                                data-studio-works="91 Days, Durarara!! 2, Shabake"
+                                data-time="05/01"
+                                data-duration="12"
+                                data-commentary=""
+                                data-anidb="https://anidb.net/anime/18610"
+                                data-mal="https://myanimelist.net/anime/58788"
+                                data-cr="false"
+                                data-netflix="false"
+                                data-youtube="false"
+                                data-disney="false"
+                                data-video1="Estréias/trailers/nikki-pv1.mp4"
+                                data-poster1="https://i.ytimg.com/vi/m1LtPWp8BbM/maxresdefault.jpg"
+                                data-caption1="PV 1"
+                                data-subtitle1="Estréias/trailers/nikki-pv1.vtt"
+                                data-video2="Estréias/trailers/nikki-pv2.mp4"
+                                data-poster2="https://i.ytimg.com/vi/Cbm6m_WfmqI/maxresdefault.jpg"
+                                data-caption2="PV 2"
+                                data-subtitle2="Estréias/trailers/nikki-pv2.vtt"
+                                data-video3="false"
+                                data-poster3=""
+                                data-caption3=""
+                                data-subtitle3="false">
+                                <img src="Estréias/img/nikki.webp" class="image">
+                            </a>
+                            <span class="star"><i class="far fa-star"></i></span>
+                        </div>
+
+                        <div class="image-container">
+                            <a href="#banner" class="anime-card-trigger"
+                                data-title="Goumon Baito-kun no Nichijou"
+                                data-title-english="The Daily Life of a Part-Time Torturer"
+                                data-thumb1="Estréias/img/goumon.jpeg"
+                                data-thumb2="Estréias/img/goumon_02.jpeg"
+                                data-synopsis="Este é um mundo onde matar e torturar são legalizados. Sero, um trabalhador de meio período em uma empresa de tortura, gosta de torturar pessoas todos os dias com seu colega sênior, Siu. Com a adição dos novos trabalhadores de meio período Mike e Hugh, a divertida vida de tortura continua!"
+                                data-genre="Comédia"
+                                data-director-link="https://anidb.net/creator/4158"
+                                data-director="Oizaki Fumitoshi"
+                                data-director2-link=""
+                                data-director2=""
+                                data-director-works="Akuma-kun, Deaimon"
+                                data-studio-link="https://anidb.net/creator/1789"
+                                data-studio="../../../Estúdios/Diomedéa_studio.png"
+                                data-studio2-link=""
+                                data-studio2=""
+                                data-studio-works="Tensei Oujo, Ahiru no Sora, Domestic na Kanojo"
+                                data-time="05/01"
+                                data-duration="12"
+                                data-commentary=""
+                                data-anidb="https://anidb.net/anime/19399"
+                                data-mal="https://myanimelist.net/anime/61886"
+                                data-cr="false"
+                                data-netflix="false"
+                                data-youtube="false"
+                                data-disney="false"
+                                data-video1="Estréias/trailers/goumon-teaser.mp4"
+                                data-poster1="https://i.ytimg.com/vi/RTevzaviDws/maxresdefault.jpg"
+                                data-caption1="Teaser"
+                                data-subtitle1="Estréias/trailers/goumon-teaser.vtt"
+                                data-video2="Estréias/trailers/goumon-pv.mp4"
+                                data-poster2="https://i.ytimg.com/vi/adYllv555BE/maxresdefault.jpg"
+                                data-caption2="PV"
+                                data-subtitle2="Estréias/trailers/goumon-pv.vtt"
+                                data-video3="false"
+                                data-poster3=""
+                                data-caption3=""
+                                data-subtitle3="false">
+                                <img src="Estréias/img/goumon.jpeg" class="image">
+                            </a>
+                            <span class="star"><i class="far fa-star"></i></span>
                         </div>
 
                     </div>
@@ -403,7 +581,7 @@
                                 data-caption3="">
                                 <img src="Estréias/img/jingai.webp" class="image">
                             </a>
-                            <span class="star"><i class="far fa-star" data-index="1"></i></span>
+                            <span class="star"><i class="far fa-star"></i></span>
                         </div>
 
                     </div>
@@ -476,29 +654,33 @@
     <script src="../../../main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const stars = document.querySelectorAll('.fa-star');
+            const imageContainers = document.querySelectorAll('.image-container');
 
-            stars.forEach(star => {
-                star.addEventListener('click', toggleStar);
-                const starIndex = star.getAttribute('data-index');
-                const starStatus = localStorage.getItem(`star-${starIndex}`);
+            imageContainers.forEach(container => {
+                const star = container.querySelector('.fa-star');
+                const trigger = container.querySelector('.anime-card-trigger');
+                if (!star || !trigger) return;
+
+                const animeTitle = trigger.dataset.title;
+                const storageKey = `star-${animeTitle}`;
+
+                // Verifica o estado inicial ao carregar a página
+                const starStatus = localStorage.getItem(storageKey);
                 if (starStatus === 'favorited') {
                     star.classList.replace('far', 'fas');
                 }
+
+                // Adiciona o evento de clique
+                star.addEventListener('click', () => {
+                    if (star.classList.contains('far')) {
+                        star.classList.replace('far', 'fas');
+                        localStorage.setItem(storageKey, 'favorited');
+                    } else {
+                        star.classList.replace('fas', 'far');
+                        localStorage.removeItem(storageKey);
+                    }
+                });
             });
-
-            function toggleStar(event) {
-                const clickedStar = event.target;
-                const starIndex = clickedStar.getAttribute('data-index');
-
-                if (clickedStar.classList.contains('far')) {
-                    clickedStar.classList.replace('far', 'fas');
-                    localStorage.setItem(`star-${starIndex}`, 'favorited');
-                } else {
-                    clickedStar.classList.replace('fas', 'far');
-                    localStorage.removeItem(`star-${starIndex}`);
-                }
-            }
         });
 
     </script>
