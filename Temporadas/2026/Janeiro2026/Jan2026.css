@@ -21,7 +21,7 @@ body.background{
   background: 
     linear-gradient(180deg, rgba(7, 39, 39, 0.85) 0%, rgba(15, 36, 35, 0.9) 60%),
     url('../../../Temporadas/2026/Janeiro2026/Thumb_Jan_2026.jpg');
-  background-repeat: repeat; /* Repete a imagem horizontalmente */
+  background-repeat: repeat; /* Repete a imagem apenas horizontalmente */
   background-blend-mode: multiply;
   background-size: auto, auto 100%; /* Ajusta a altura da imagem para 100% */
   background-position: center, 0 0;
@@ -173,13 +173,27 @@ details summary{
   border:1px solid rgba(110,231,183,0.1);
   border-radius:12px;
   overflow:hidden;
-  transition:.16s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease; /* Transição aprimorada */
   box-shadow:0 8px 24px rgba(2,6,23,0.45);
 }
 .image-container:hover{
   transform:translateY(-6px);
   box-shadow:0 16px 40px rgba(2,6,23,0.6);
 }
+
+/* Classe para animar o filtro */
+.image-container.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none; /* Impede interação com o card escondido */
+  /* Atraso para remover o item do fluxo, permitindo a animação de saída */
+  transition: transform 0.3s ease, opacity 0.3s ease, height 0s 0.3s, padding 0s 0.3s, margin 0s 0.3s;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none; /* Remove a borda para não ocupar espaço */
+}
+
 .image-container img.image{
   width:auto;
   height:280px;
@@ -191,6 +205,84 @@ details summary{
   transition:.2s;
 }
 .image-container img.image:hover{transform:scale(1.03);}
+
+/* ================= FILTER CONTAINER ================= */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* Aumentar um pouco o espaçamento */
+  margin-bottom: 28px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.03); /* Fundo mais sutil */
+  backdrop-filter: blur(5px); /* Efeito de vidro */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Borda mais sutil */
+  color: var(--muted);
+  padding: 10px 20px; /* Mais espaçamento interno */
+  border-radius: 8px; /* Bordas mais modernas */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transição com mais impacto */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff; /* Cor do texto mais clara no hover */
+  transform: translateY(-2px); /* Efeito de levantar */
+}
+
+.filter-btn.active {
+  background: var(--winter);
+  color: var(--bg);
+  border-color: var(--winter);
+  transform: translateY(-2px) scale(1.05); /* Destaca o botão ativo */
+  box-shadow: 0 8px 20px rgba(1, 195, 243, 0.2); /* Sombra colorida para o botão ativo */
+}
+
+/* ================= FILTER CONTAINER ================= */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* Aumentar um pouco o espaçamento */
+  margin-bottom: 28px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.03); /* Fundo mais sutil */
+  backdrop-filter: blur(5px); /* Efeito de vidro */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Borda mais sutil */
+  color: var(--muted);
+  padding: 10px 20px; /* Mais espaçamento interno */
+  border-radius: 8px; /* Bordas mais modernas */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transição com mais impacto */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff; /* Cor do texto mais clara no hover */
+  transform: translateY(-2px); /* Efeito de levantar */
+}
+
+.filter-btn.active {
+  background: var(--winter);
+  color: var(--bg);
+  border-color: var(--winter);
+  transform: translateY(-2px) scale(1.05); /* Destaca o botão ativo */
+  box-shadow: 0 8px 20px rgba(1, 195, 243, 0.2); /* Sombra colorida para o botão ativo */
+}
 
 .image-container .star{
   position:absolute;
@@ -386,7 +478,7 @@ details summary{
 }
 
 .Studio{
-  max-height:25px;
+  height:42px;
   margin-right:8px;
   filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));
   vertical-align: middle; /* Alinha melhor com o texto ao redor */
@@ -649,6 +741,11 @@ details summary{
   transform: scale(1.1);
 }
 
+.control-button.subtitles-active {
+  color: var(--winter);
+  transform: scale(1.1);
+}
+
 .progress-bar-container {
   flex-grow: 1;
   height: 6px;
@@ -764,6 +861,18 @@ details summary{
   .topnav[aria-hidden="false"] a {
     width: 100%; /* Garante que o link ocupe todo o espaço */
   }
+}
+
+/* ================= SUBTITLE STYLING ================= */
+::cue {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem; /* Tamanho base */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+@media(max-width: 768px) {
+  ::cue { font-size: 1rem; }
 }
 
 /* AnimeCard responsive */
