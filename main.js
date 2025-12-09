@@ -524,6 +524,7 @@ class AnimeCardManager {
             studioWorks: this.card.querySelector('#anime-studio-works'),
             time: this.card.querySelector('#anime-time'),
             duration: this.card.querySelector('#anime-duration'),
+            type: this.card.querySelector('#anime-type'),
             commentary: this.card.querySelector('#anime-commentary'),
             anidb: this.card.querySelector('#anime-anidb'),
             mal: this.card.querySelector('#anime-mal'),
@@ -613,6 +614,11 @@ class AnimeCardManager {
             return;
         }
         this.card.style.display = 'block';
+        
+        // Rola suavemente para o card após ele ser exibido
+        setTimeout(() => {
+            this.card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50); // Pequeno timeout para garantir que o elemento está visível antes de rolar
 
         // Preenche os dados
         this._setText(this.elements.title, data.title);
@@ -625,6 +631,7 @@ class AnimeCardManager {
         this._setText(this.elements.studioWorks, data.studioWorks);
         this._setText(this.elements.time, data.time);
         this._setText(this.elements.duration, data.duration);
+        this._setText(this.elements.type, data.type);
         this._setText(this.elements.commentary, data.commentary);
 
         // Configura links
@@ -705,6 +712,17 @@ class AnimeCardManager {
 
 // --- INICIALIZAÇÃO ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Função para preencher as faixas de título automaticamente
+    function populateTitleOverlays() {
+        const animeTriggers = document.querySelectorAll('.anime-card-trigger');
+        animeTriggers.forEach(trigger => {
+            const titleOverlay = trigger.querySelector('.title-overlay');
+            if (titleOverlay) {
+                titleOverlay.textContent = trigger.dataset.title;
+            }
+        });
+    }
+
     const animeCardManager = new AnimeCardManager('.animeCard');
     const animeChart = document.getElementById('anime-chart');
 
@@ -724,12 +742,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA DE FILTRO POR GÊNERO ---
-    function initializeGenreFilters() {
-        const animeTriggers = document.querySelectorAll('.anime-card-trigger');
-        const filterContainer = document.getElementById('genre-filter-container');
-        const animeContainers = document.querySelectorAll('#anime-chart .image-container');
+    // Preenche os títulos assim que a página carrega
+    populateTitleOverlays();
 
+    let currentGenreFilter = 'all';
+    let currentTypeFilter = 'all';
+    // --- LÓGICA DE FILTRO POR GÊNERO ---
+    function initializeGenreFilters(chartId, filterContainerId) {
+        const chart = document.getElementById(chartId);
+        if (!chart) return;
+
+        const animeTriggers = chart.querySelectorAll('.anime-card-trigger');
+        const filterContainer = document.getElementById(filterContainerId);
+        const animeContainers = chart.querySelectorAll('.image-container');
+
+        // Se não houver container de filtro ou animes na grade, não faz nada.
         if (!filterContainer || animeTriggers.length === 0) return;
 
         // 1. Coletar todos os gêneros únicos
@@ -750,7 +777,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const allButton = document.createElement('button');
         allButton.className = 'filter-btn active';
         allButton.textContent = 'Mostrar Todos';
-        allButton.addEventListener('click', () => {
+        allButton.addEventListener('click', (e) => {
             filterAnimes('all');
             setActiveButton(allButton);
         });
@@ -761,7 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = document.createElement('button');
             button.className = 'filter-btn';
             button.textContent = genre;
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
                 filterAnimes(genre);
                 setActiveButton(button);
             });
@@ -770,12 +797,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Funções de filtro
         function filterAnimes(selectedGenre) {
-            animeContainers.forEach(container => {
-                const trigger = container.querySelector('.anime-card-trigger');
-                const animeGenres = trigger.dataset.genre || '';
-                const shouldShow = selectedGenre === 'all' || animeGenres.includes(selectedGenre);
-                container.style.display = shouldShow ? 'flex' : 'none';
-            });
+            currentGenreFilter = selectedGenre;
+            applyAllFilters(chartId);
         }
 
         function setActiveButton(activeBtn) {
@@ -784,7 +807,184 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    initializeGenreFilters();
+    // --- LÓGICA DE FILTRO POR TIPO ---
+    function initializeTypeFilters(chartId, filterContainerId) {
+        const chart = document.getElementById(chartId);
+        if (!chart) return;
+
+        const animeTriggers = chart.querySelectorAll('.anime-card-trigger');
+        const filterContainer = document.getElementById(filterContainerId);
+
+        if (!filterContainer || animeTriggers.length === 0) return;
+
+        const allTypes = new Set();
+        animeTriggers.forEach(trigger => {
+            const type = trigger.dataset.type;
+            if (type) allTypes.add(type.trim());
+        });
+
+        filterContainer.innerHTML = '';
+
+        const allButton = document.createElement('button');
+        allButton.className = 'filter-btn active';
+        allButton.textContent = 'Todos os Tipos';
+        allButton.addEventListener('click', () => {
+            filterByType('all');
+            setActiveButton(allButton);
+        });
+        filterContainer.appendChild(allButton);
+
+        [...allTypes].sort().forEach(type => {
+            const button = document.createElement('button');
+            button.className = 'filter-btn';
+            button.textContent = type;
+            button.addEventListener('click', () => {
+                filterByType(type);
+                setActiveButton(button);
+            });
+            filterContainer.appendChild(button);
+        });
+
+        function filterByType(selectedType) {
+            currentTypeFilter = selectedType;
+            applyAllFilters(chartId);
+        }
+
+        function setActiveButton(activeBtn) {
+            filterContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            activeBtn.classList.add('active');
+        }
+    }
+
+    // --- FUNÇÃO PARA ATUALIZAR A CONTAGEM DE ANIMES ---
+    function updateAnimeCount(chartId) {
+        const chart = document.getElementById(chartId);
+        const countElement = document.getElementById('anime-count');
+        if (!chart || !countElement) return;
+
+        const visibleItems = chart.querySelectorAll('.image-container:not(.hidden)').length;
+        countElement.textContent = visibleItems;
+    }
+    // --- FUNÇÃO MESTRA DE FILTRAGEM ---
+    function applyAllFilters(chartId) {
+        const loader = document.getElementById('loader');
+        const chart = document.getElementById(chartId);
+        if (!chart || !loader) return;
+
+        // Mostra o loader
+        loader.style.display = 'flex';
+
+        const animeContainers = chart.querySelectorAll('.image-container');
+        animeContainers.forEach(container => {
+            const trigger = container.querySelector('.anime-card-trigger');
+            const matchesGenre = currentGenreFilter === 'all' || (trigger.dataset.genre || '').includes(currentGenreFilter);
+            const matchesType = currentTypeFilter === 'all' || (trigger.dataset.type || '') === currentTypeFilter;
+            container.classList.toggle('hidden', !(matchesGenre && matchesType));
+        });
+
+        // Esconde o loader após um pequeno atraso para garantir que a animação seja visível
+        setTimeout(() => {
+            loader.style.display = 'none';
+            
+            // Atualiza a contagem de animes visíveis
+            updateAnimeCount(chartId);
+        }, 400); // 400ms é um bom ponto de partida
+    }
+    // --- LÓGICA DE ORDENAÇÃO ---
+    function initializeSorting(chartId, sortSelectId) {
+        const sortSelect = document.getElementById(sortSelectId);
+        const animeChart = document.getElementById(chartId);
+
+        if (!sortSelect || !animeChart) {
+            // Se o seletor ou a grade não existirem, não faz nada.
+            return;
+        }
+
+        sortSelect.addEventListener('change', () => {
+            sortAnimes(sortSelect.value);
+        });
+
+        function sortAnimes(sortValue) {
+            const animeContainers = Array.from(animeChart.querySelectorAll('.image-container'));
+
+            const sortFunction = (a, b) => {
+                const triggerA = a.querySelector('.anime-card-trigger');
+                const triggerB = b.querySelector('.anime-card-trigger');
+
+                switch (sortValue) {
+                    case 'alpha-asc':
+                        return triggerA.dataset.title.localeCompare(triggerB.dataset.title);
+                    case 'alpha-desc':
+                        return triggerB.dataset.title.localeCompare(triggerA.dataset.title);
+                    case 'date-desc':
+                        // Lógica aprimorada para ordenar por data considerando a virada do ano (Dezembro > Janeiro)
+                        const [dayA, monthA] = triggerA.dataset.time.split('/').map(Number);
+                        const [dayB, monthB] = triggerB.dataset.time.split('/').map(Number);
+
+                        // Trata Dezembro (12) como um mês "maior" que Janeiro (1) para a temporada de inverno
+                        const adjustedMonthA = monthA === 12 ? 13 : monthA;
+                        const adjustedMonthB = monthB === 12 ? 13 : monthB;
+
+                        const dateA = adjustedMonthA * 100 - dayA; // Ex: 14/12 -> 1300-14=1286 | 01/01 -> 100-1=99
+                        const dateB = adjustedMonthB * 100 - dayB; // Ex: 05/01 -> 100-5=95
+                        return dateB - dateA;
+                    case 'default':
+                    default:
+                        // Retorna à ordem original do DOM
+                        return parseInt(a.dataset.originalOrder) - parseInt(b.dataset.originalOrder);
+                }
+            };
+
+            animeContainers.sort(sortFunction);
+
+            // Reanexa os elementos na nova ordem
+            animeContainers.forEach(container => animeChart.appendChild(container));
+        }
+
+        // Armazena a ordem original para a opção "Padrão"
+        animeChart.querySelectorAll('.image-container').forEach((container, index) => {
+            container.dataset.originalOrder = index;
+        });
+    }
+
+    // --- LÓGICA PARA LIMPAR FILTROS ---
+    function initializeClearButton(chartId, typeContainerId, genreContainerId, sortSelectId) {
+        const clearBtn = document.getElementById('clear-filters-btn');
+        if (!clearBtn) return;
+
+        clearBtn.addEventListener('click', () => {
+            // Reseta as variáveis de estado
+            currentTypeFilter = 'all';
+            currentGenreFilter = 'all';
+
+            // Reseta os botões de filtro de tipo
+            const typeContainer = document.getElementById(typeContainerId);
+            typeContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            typeContainer.querySelector('.filter-btn').classList.add('active'); // Ativa o primeiro botão ("Todos os Tipos")
+
+            // Reseta os botões de filtro de gênero
+            const genreContainer = document.getElementById(genreContainerId);
+            genreContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            genreContainer.querySelector('.filter-btn').classList.add('active'); // Ativa o primeiro botão ("Mostrar Todos")
+
+            // Reseta a ordenação e aplica todos os filtros
+            document.getElementById(sortSelectId).value = 'default';
+            applyAllFilters(chartId); // Mostra/esconde os cards
+            
+            // Dispara um evento de 'change' para que a função de ordenação seja executada
+            document.getElementById(sortSelectId).dispatchEvent(new Event('change'));
+        });
+    }
+
+    // Preenche os títulos e a contagem inicial assim que a página carrega
+    populateTitleOverlays();
+    updateAnimeCount('anime-chart');
+
+    // Inicializa os filtros e a ordenação para a grade de "Estréias"
+    initializeTypeFilters('anime-chart', 'type-filter-container');
+    initializeGenreFilters('anime-chart', 'genre-filter-container');
+    initializeSorting('anime-chart', 'sort-select');
+    initializeClearButton('anime-chart', 'type-filter-container', 'genre-filter-container', 'sort-select');
 
     // --- INICIALIZAÇÃO DO PLAYER DE VÍDEO CUSTOMIZADO ---
     const videoPlayers = document.querySelectorAll('.video-player-container');
