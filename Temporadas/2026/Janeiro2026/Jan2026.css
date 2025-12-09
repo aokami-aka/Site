@@ -155,12 +155,44 @@ details summary{
   margin-top:32px;
 }
 
+/* ================= CHART WRAPPER & LOADER ================= */
+.chart-wrapper {
+  position: relative;
+  min-height: 200px; /* Altura mínima para o loader ser visível mesmo se a grade estiver vazia */
+}
+
+.loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 36, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* Garante que fique sobre a grade */
+    border-radius: 12px;
+    transition: opacity 0.3s ease;
+}
+
+.loader-spinner {
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top: 5px solid var(--winter);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
 /* ================= ANIME GRID ================= */
 #anime-chart{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap:24px;
   margin-top:12px;
+  justify-content: center; /* Opcional: centraliza os itens na linha */
 }
 
 /* ================= IMAGE CARDS ================= */
@@ -173,26 +205,56 @@ details summary{
   border:1px solid rgba(110,231,183,0.1);
   border-radius:12px;
   overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease; /* Transição aprimorada */
+  transition: all 0.4s ease;
   box-shadow:0 8px 24px rgba(2,6,23,0.45);
+  flex: 1 1 240px; /* Flexbox: base de 240px, pode crescer mas não encolher */
+  max-width: calc(25% - 18px); /* Garante 4 colunas em telas grandes, ajustando pelo gap */
 }
 .image-container:hover{
   transform:translateY(-6px);
   box-shadow:0 16px 40px rgba(2,6,23,0.6);
 }
 
+.image-container a.anime-card-trigger {
+  display: block; /* Garante que o 'a' se comporte como um bloco */
+  position: relative; /* Essencial para o posicionamento do overlay */
+  text-decoration: none; /* Remove sublinhado do link */
+  height: 100%;
+}
+
 /* Classe para animar o filtro */
 .image-container.hidden {
-  opacity: 0;
+  /* Anima a saída e depois colapsa o espaço */
+  transition: transform 0.3s ease, opacity 0.3s ease, max-width 0.4s 0.1s, flex-basis 0.4s 0.1s, margin 0.4s 0.1s, padding 0.4s 0.1s;
   transform: scale(0.8);
+  opacity: 0;
   pointer-events: none; /* Impede interação com o card escondido */
-  /* Atraso para remover o item do fluxo, permitindo a animação de saída */
-  transition: transform 0.3s ease, opacity 0.3s ease, height 0s 0.3s, padding 0s 0.3s, margin 0s 0.3s;
-  height: 0;
+  max-width: 0;
+  flex-basis: 0;
   padding: 0;
   margin: 0;
-  border: none; /* Remove a borda para não ocupar espaço */
+  border-width: 0;
 }
+
+.title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+  color: #fff;
+  padding: 20px 10px 8px 10px; /* Mais padding no topo e em baixo para o gradiente */
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  opacity: 1; /* Deixa a faixa sempre visível */
+}
+
 
 .image-container img.image{
   width:auto;
@@ -216,43 +278,16 @@ details summary{
   padding: 10px 0;
 }
 
-.filter-btn {
-  background: rgba(255, 255, 255, 0.03); /* Fundo mais sutil */
-  backdrop-filter: blur(5px); /* Efeito de vidro */
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Borda mais sutil */
-  color: var(--muted);
-  padding: 10px 20px; /* Mais espaçamento interno */
-  border-radius: 8px; /* Bordas mais modernas */
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 15px;
-  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transição com mais impacto */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+#type-filter-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.filter-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff; /* Cor do texto mais clara no hover */
-  transform: translateY(-2px); /* Efeito de levantar */
-}
-
-.filter-btn.active {
-  background: var(--winter);
-  color: var(--bg);
-  border-color: var(--winter);
-  transform: translateY(-2px) scale(1.05); /* Destaca o botão ativo */
-  box-shadow: 0 8px 20px rgba(1, 195, 243, 0.2); /* Sombra colorida para o botão ativo */
-}
-
-/* ================= FILTER CONTAINER ================= */
-.filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px; /* Aumentar um pouco o espaçamento */
-  margin-bottom: 28px;
-  justify-content: center;
-  padding: 10px 0;
+#type-filter-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .filter-btn {
@@ -282,6 +317,90 @@ details summary{
   border-color: var(--winter);
   transform: translateY(-2px) scale(1.05); /* Destaca o botão ativo */
   box-shadow: 0 8px 20px rgba(1, 195, 243, 0.2); /* Sombra colorida para o botão ativo */
+}
+
+/* ================= SORT CONTAINER ================= */
+.sort-container {
+    display: flex;
+    justify-content: space-between; /* Alinha itens nas extremidades */
+    align-items: center;
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.sort-left-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.anime-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.anime-count #anime-count {
+    color: #fff;
+}
+
+.sort-select {
+    background: rgba(11, 18, 32, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--muted);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-appearance: none; /* Remove a aparência padrão no Safari/Chrome */
+    appearance: none;
+}
+
+.sort-select:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--winter);
+    box-shadow: 0 0 15px rgba(1, 195, 243, 0.2);
+}
+
+/* ================= CLEAR FILTER BUTTON ================= */
+.clear-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.clear-btn:hover {
+    color: #fc9d9d;
+    transform: scale(1.05);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .image-container .star{
