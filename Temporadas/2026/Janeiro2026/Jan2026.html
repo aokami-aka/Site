@@ -98,6 +98,9 @@
                             <!-- Episódios ------------------------------------------->
                             <b>Episódios: </b> <span id="anime-duration"></span>
                             <br><br>
+                            <!-- Tipo ------------------------------------------->
+                            <b>Tipo: </b> <span id="anime-type"></span>
+                            <br><br>
                             <!-- Comentários ------------------------------------------------->
                             <b>Comentários: </b> <span id="anime-commentary"></span>
                             <br><br>
@@ -207,438 +210,691 @@
 
             <details open>
                 <br>
-                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Estréias - TV</h1></summary>
+                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Animes da Temporada</h1></summary>
                 <div class="content">
+                    <!-- Contêiner para os filtros de TIPO -->
+                    <div id="type-filter-container" class="filter-container">
+                        <!-- Botões de filtro de tipo serão inseridos aqui -->
+                    </div>
                     <!-- Contêiner para os filtros de gênero -->
                     <div id="genre-filter-container" class="filter-container">
                         <!-- Botões de filtro serão inseridos aqui pelo JavaScript -->
                     </div>
-                    <div id="anime-chart">
-                        
-                        <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Jingai Kyoushitsu no Ningengirai Kyoushi"
-                                data-title-english="A Misanthrope Teaches a Class for Demi-Humans"
-                                data-thumb1="Estréias/img/jingai.webp"
-                                data-thumb2="Estréias/img/jingai_02.webp"
-                                data-thumb3="Estréias/img/jingai_03.webp"
-                                data-synopsis="Sou Rei Hitoma, um misantropo autoproclamado devido a alguns traumas passados. Justamente quando pensei que meu novo emprego de professor nas montanhas proporcionaria um ambiente tranquilo e rejuvenescedor, descobri que esta escola é, na verdade, para demi-humanos que querem se tornar seres humanos completos!<br>Há uma sereia, um lobisomem, um coelho e um pássaro... todos os quais agora são meus alunos. É meu dever ensiná-los sobre a humanidade."
-                                data-genre="Drama, Escolar, Sobrenatural"
-                                data-director-link="https://anidb.net/creator/8022"
-                                data-director="Iwanaga Akira"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Arifureta, Corpse Party, Kingdom (2013)"
-                                data-studio-link="https://anidb.net/creator/1012"
-                                data-studio="../../../Estúdios/asread.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Arifureta, Yuuna-san, Big Order"
-                                data-time="14/12"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="https://anidb.net/anime/19564"
-                                data-mal="https://myanimelist.net/anime/62432"
-                                data-cr="false"
-                                data-netflix="false"
-                                data-youtube="https://www.youtube.com/live/hd_M_FZI1iI"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/jingai-teaser.mp4"
-                                data-poster1="https://i.ytimg.com/vi/2ePbPaguNY4/maxresdefault.jpg"
-                                data-caption1="Teaser"
-                                data-subtitle1="Estréias/trailers/jingai-teaser.vtt"
-                                data-video2="false"
-                                data-poster2=""
-                                data-caption2=""
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3="">
-                                <img src="Estréias/img/jingai.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
-                        </div>
 
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Tamon-kun Ima Docchi!?"
-                                data-title-english="Tamon's B-Side"
-                                data-thumb1="Estréias/img/tamon.webp"
-                                data-thumb2="Estréias/img/tamon_02.jpg"
-                                data-synopsis="A estudante do ensino médio Utage Kinoshita trabalha meio período como empregada doméstica para poder bancar sua obsessão de fã por Tamon Fukuhara, seu membro favorito da boy band F/ACE. Quando o trabalho a envia por acaso para a casa de seu ídolo, ela descobre que o verdadeiro Tamon não poderia ser mais diferente de sua persona selvagem e sexy no palco!"
-                                data-genre="Comédia, Romance, Shoujo"
-                                data-director-link="https://anidb.net/creator/28453"
-                                data-director="Nagaoka Chika"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Detective Conan, Uta no Prince-sama"
-                                data-studio-link="https://anidb.net/creator/720"
-                                data-studio="../../../Estúdios/J.C.Staff.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Index, Honey Lemon Soda, Dungeon ni Deai"
-                                data-time="01/01"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="https://anidb.net/anime/18681"
-                                data-mal="https://myanimelist.net/anime/59047"
-                                data-cr="false"
-                                data-netflix="false"
-                                data-youtube="false"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/tamon-pv1.mp4"
-                                data-poster1="https://i.ytimg.com/vi/WM3fJbNObSA/maxresdefault.jpg"
-                                data-caption1="PV 1"
-                                data-subtitle1="Estréias/trailers/tamon-pv1.vtt"
-                                data-video2="Estréias/trailers/tamon-pv2.mp4"
-                                data-poster2="https://i.ytimg.com/vi/GIOzUu_oRec/maxresdefault.jpg"
-                                data-caption2="PV 2"
-                                data-subtitle2="Estréias/trailers/tamon-pv2.vtt"
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3=""
-                                data-subtitle3="false">
-                                <img src="Estréias/img/tamon.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
+                    <!-- Contêiner para a ordenação -->
+                    <div class="sort-container">
+                        <div class="sort-left-controls">
+                            <button id="clear-filters-btn" class="clear-btn"><i class="fas fa-times"></i> Limpar Filtros</button>
+                            <div id="anime-count-container" class="anime-count">(<span id="anime-count">0</span>)</div>
                         </div>
-
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Fate/strange Fake"
-                                data-title-english=""
-                                data-thumb1="Estréias/img/fate.jpeg"
-                                data-thumb2="Estréias/img/fate_02.webp"
-                                data-thumb3="Estréias/img/fate_03.webp"
-                                data-thumb4="Estréias/img/fate_04.webp"
-                                data-thumb5="Estréias/img/fate_05.webp"
-                                data-thumb6="Estréias/img/fate_06.webp"
-                                data-synopsis="Em uma Guerra do Santo Graal, Magos (Mestres) e seus Espíritos Heróicos (Servos) lutam pelo controle do Santo Graal — um dispositivo onipotente que concede desejos e dizem realizar qualquer desejo. Anos se passaram desde o fim da Quinta Guerra do Santo Graal no Japão. Agora, sinais prenunciam o surgimento de um novo Santo Graal na cidade americana ocidental de Snowfield."
-                                data-genre="Ação, Fantasia, Sobrenatural"
-                                data-director-link="https://anidb.net/creator/36104"
-                                data-director="Enokido Shun, "
-                                data-director2-link="https://anidb.net/creator/43393"
-                                data-director2="Sakazume Takahito"
-                                data-director-works="Sem trabalhos anteriores como diretor geral"
-                                data-studio-link="https://anidb.net/creator/1303"
-                                data-studio="../../../Estúdios/A1-pictures.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Solo Leveling, Mashle, Eighty Six"
-                                data-time="03/01"
-                                data-duration="12"
-                                data-commentary="Isso vai ser Cinema 2!!"
-                                data-anidb="https://anidb.net/anime/18093"
-                                data-mal="https://myanimelist.net/anime/55830"
-                                data-cr="https://www.crunchyroll.com/pt-br/series/G4PH0WJQZ/fatestrange-fake"
-                                data-netflix="false"
-                                data-youtube="false"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/fate.mp4"
-                                data-poster1="https://i.ytimg.com/vi/ZpK4Jvyt1JU/maxresdefault.jpg"
-                                data-caption1="PV 1"
-                                data-subtitle1="Estréias/trailers/fate.vtt"
-                                data-video2="false"
-                                data-poster2=""
-                                data-caption2=""
-                                data-subtitle2="false"
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3=""
-                                data-subtitle3="false">
-                                <img src="Estréias/img/fate.jpeg" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
+                        <div class="sort-options">
+                            <label for="sort-select">Ordenar por:</label>
+                            <select id="sort-select" class="sort-select">
+                                <option value="default">Padrão</option>
+                                <option value="date-desc">Data de Lançamento</option>
+                                <option value="alpha-asc">Ordem Alfabética (A-Z)</option>
+                                <option value="alpha-desc">Ordem Alfabética (Z-A)</option>
+                            </select>
                         </div>
-
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Hanazakari no Kimitachi e"
-                                data-title-english="Hana-Kimi"
-                                data-thumb1="Estréias/img/hana.webp"
-                                data-thumb2="Estréias/img/hana_02.webp"
-                                data-synopsis="A estrela nipo-americana do atletismo, Mizuki, conseguiu se transferir para uma escola no Japão... mas não para qualquer escola! Para ficar perto de seu ídolo, o saltador em altura Izumi Sano, ela vai para uma escola só para meninos... e se disfarça de menino!<br>Mas, como o destino quis, eles são mais do que colegas de classe... são colegas de quarto! Agora, Mizuki deve guardar seu segredo na sala de aula, no vestiário e em seu próprio quarto.<br>E seus colegas de classe - e a enfermeira da escola - devem lidar com um novo aluno transferido que pode fazê-los questionar sua própria orientação..."
-                                data-genre="Comédia, Drama, Romance, Shoujo"
-                                data-director-link="https://anidb.net/creator/30534"
-                                data-director="Takemura Natsuki"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Apenas trabalhos em animes infantis"
-                                data-studio-link="https://anidb.net/creator/43312"
-                                data-studio="../../../Estúdios/SignalMD.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Hikari no Ou, Platinum End, Mars Red"
-                                data-time="04/01"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="https://anidb.net/anime/18636"
-                                data-mal="https://myanimelist.net/anime/58861"
-                                data-cr="nolink"
-                                data-netflix="false"
-                                data-youtube="false"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/hana-teaser.mp4"
-                                data-poster1="https://i.ytimg.com/vi/9feK5OU8LnM/maxresdefault.jpg"
-                                data-caption1="Teaser"
-                                data-subtitle1="Estréias/trailers/hana-teaser.vtt"
-                                data-video2="Estréias/trailers/hana-trailer.mp4"
-                                data-poster2="https://i.ytimg.com/vi/yfnOQr_hG1s/maxresdefault.jpg"
-                                data-caption2="Trailer"
-                                data-subtitle2="Estréias/trailers/hana-trailer.vtt"
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3=""
-                                data-subtitle3="false">
-                                <img src="Estréias/img/hana.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
-                        </div>
-
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Majutsushi Kunon wa Mieteiru"
-                                data-title-english="Kunon the Sorcerer Can See"
-                                data-thumb1="Estréias/img/majutsushin.webp"
-                                data-thumb2="Estréias/img/majutsushin_02.webp"
-                                data-synopsis="Kunon, um jovem que não consegue ver, tem o objetivo de criar novos olhos com magia da água. Após apenas cinco meses de aprendizado de feitiçaria, Kunon superou seu próprio mentor e aprimorou seu talento ao tentar realizar um feito nunca antes feito."
-                                data-genre="Fantasia, Seinen"
-                                data-director-link="https://anidb.net/creator/6315"
-                                data-director="Takemura Natsuki"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Koroshi Ai, Kai Byoui Ramune"
-                                data-studio-link="https://anidb.net/creator/46190"
-                                data-studio="../../../Estúdios/Platinum_Vision.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Koroshi Ai, Kai Byoui Ramune"
-                                data-time="04/01"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="https://anidb.net/anime/19131"
-                                data-mal="https://myanimelist.net/anime/60810"
-                                data-cr="nolink"
-                                data-netflix="false"
-                                data-youtube="false"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/majutsushin-teaser.mp4"
-                                data-poster1="https://i.ytimg.com/vi/FInmR1F31Ho/maxresdefault.jpg"
-                                data-caption1="Teaser"
-                                data-subtitle1="Estréias/trailers/majutsushin-teaser.vtt"
-                                data-video2="false"
-                                data-poster2=""
-                                data-caption2=""
-                                data-subtitle2="false"
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3=""
-                                data-subtitle3="false">
-                                <img src="Estréias/img/majutsushin.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
-                        </div>
-
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Ikoku Nikki"
-                                data-title-english="Journal with witch"
-                                data-thumb1="Estréias/img/nikki.webp"
-                                data-thumb2="Estréias/img/nikki_02.webp"
-                                data-thumb3="Estréias/img/nikki_03.webp"
-                                data-synopsis="Quando a romancista de jovens adultos de 35 anos, KODAI Makio, perde a irmã em um acidente de carro, ela acolhe sua sobrinha, TAKUMI Asa. Tendo perdido os pais e sido jogada em um mundo desconhecido, Asa começa uma busca pela versão de si mesma que ela quer se tornar, eventualmente tentando a música."
-                                data-genre="Drama, Josei"
-                                data-director-link="https://anidb.net/creator/21223"
-                                data-director="Ooshiro Miyuki"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Primeiro trabalho"
-                                data-studio-link="https://anidb.net/creator/40621"
-                                data-studio="../../../Estúdios/shuka.jpg"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="91 Days, Durarara!! 2, Shabake"
-                                data-time="05/01"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="https://anidb.net/anime/18610"
-                                data-mal="https://myanimelist.net/anime/58788"
-                                data-cr="false"
-                                data-netflix="false"
-                                data-youtube="false"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/nikki-pv1.mp4"
-                                data-poster1="https://i.ytimg.com/vi/m1LtPWp8BbM/maxresdefault.jpg"
-                                data-caption1="PV 1"
-                                data-subtitle1="Estréias/trailers/nikki-pv1.vtt"
-                                data-video2="Estréias/trailers/nikki-pv2.mp4"
-                                data-poster2="https://i.ytimg.com/vi/Cbm6m_WfmqI/maxresdefault.jpg"
-                                data-caption2="PV 2"
-                                data-subtitle2="Estréias/trailers/nikki-pv2.vtt"
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3=""
-                                data-subtitle3="false">
-                                <img src="Estréias/img/nikki.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
-                        </div>
-
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Goumon Baito-kun no Nichijou"
-                                data-title-english="The Daily Life of a Part-Time Torturer"
-                                data-thumb1="Estréias/img/goumon.jpeg"
-                                data-thumb2="Estréias/img/goumon_02.jpeg"
-                                data-synopsis="Este é um mundo onde matar e torturar são legalizados. Sero, um trabalhador de meio período em uma empresa de tortura, gosta de torturar pessoas todos os dias com seu colega sênior, Siu. Com a adição dos novos trabalhadores de meio período Mike e Hugh, a divertida vida de tortura continua!"
-                                data-genre="Comédia"
-                                data-director-link="https://anidb.net/creator/4158"
-                                data-director="Oizaki Fumitoshi"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Akuma-kun, Deaimon"
-                                data-studio-link="https://anidb.net/creator/1789"
-                                data-studio="../../../Estúdios/Diomedéa_studio.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Tensei Oujo, Ahiru no Sora, Domestic na Kanojo"
-                                data-time="05/01"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="https://anidb.net/anime/19399"
-                                data-mal="https://myanimelist.net/anime/61886"
-                                data-cr="false"
-                                data-netflix="false"
-                                data-youtube="false"
-                                data-disney="false"
-                                data-video1="Estréias/trailers/goumon-teaser.mp4"
-                                data-poster1="https://i.ytimg.com/vi/RTevzaviDws/maxresdefault.jpg"
-                                data-caption1="Teaser"
-                                data-subtitle1="Estréias/trailers/goumon-teaser.vtt"
-                                data-video2="Estréias/trailers/goumon-pv.mp4"
-                                data-poster2="https://i.ytimg.com/vi/adYllv555BE/maxresdefault.jpg"
-                                data-caption2="PV"
-                                data-subtitle2="Estréias/trailers/goumon-pv.vtt"
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3=""
-                                data-subtitle3="false">
-                                <img src="Estréias/img/goumon.jpeg" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
-                        </div>
-
                     </div>
-                </div>
-            </details>
-
-            <br><br>
-
-            <!-- <details>
-                <br>
-                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Estréias - WEB</h1></summary>
-                <div class="content">
-                    <div id="anime-chart">
-                        
-                        Adicione a classe "anime-card-trigger" e os atributos data-*
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Ojou to Banken-kun"
-                                data-title-english="A Girl & Her Guard Dog"
-                                data-thumb1="Estréias/img/jingai.webp"
-                                data-thumb2=""
-                                data-thumb3=""
-                                data-thumb4=""
-                                data-synopsis="Isaku Senagaki, de quinze"
-                                data-genre="Romance, Escolar, Shoujo"
-                                data-director-link="https://anidb.net/creator/1536"
-                                data-director="Takamoto Yoshihiro"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Vazzrock the animation, Beelzebub"
-                                data-studio-link="https://anidb.net/creator/35813"
-                                data-studio="../../../Estúdios/bridge-studios.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Uchi no Kaisha, Otonari no Tenshi-sama, Tomozaki-kun"
-                                data-time="28/09"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="http://anidb.net/a17666"
-                                data-mal="https://myanimelist.net/anime/53300"
-                                data-cr="nolink"
-                                data-netflix="false"
-                                data-disney="false"
-                                data-video1="https://github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/banken-teaser.mp4"
-                                data-poster1="https://i.ytimg.com/vi/-Q6Y7N3JT_o/maxresdefault.jpg"
-                                data-caption1="Teaser"
-                                data-subtitle1="false"
-                                data-video2="false"
-                                data-poster2=""
-                                data-caption2=""
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3="">
-                                <img src="Estréias/img/jingai.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star"></i></span>
+                    <div class="chart-wrapper">
+                        <!-- Loader -->
+                        <div id="loader" class="loader-container" style="display: none;">
+                            <div class="loader-spinner"></div>
                         </div>
 
-                    </div>
-                </div>
-            </details>
+                        <div id="anime-chart">
+                            
+                            <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Jingai Kyoushitsu no Ningengirai Kyoushi"
+                                    data-title-english="A Misanthrope Teaches a Class for Demi-Humans"
+                                    data-thumb1="Estréias/img/jingai.webp"
+                                    data-thumb2="Estréias/img/jingai_02.webp"
+                                    data-thumb3="Estréias/img/jingai_03.webp"
+                                    data-synopsis="Sou Rei Hitoma, um misantropo autoproclamado devido a alguns traumas passados. Justamente quando pensei que meu novo emprego de professor nas montanhas proporcionaria um ambiente tranquilo e rejuvenescedor, descobri que esta escola é, na verdade, para demi-humanos que querem se tornar seres humanos completos!<br>Há uma sereia, um lobisomem, um coelho e um pássaro... todos os quais agora são meus alunos. É meu dever ensiná-los sobre a humanidade."
+                                    data-genre="Drama, Escolar, Sobrenatural"
+                                    data-director-link="https://anidb.net/creator/8022"
+                                    data-director="Iwanaga Akira"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Arifureta, Corpse Party, Kingdom (2013)"
+                                    data-studio-link="https://anidb.net/creator/1012"
+                                    data-studio="../../../Estúdios/asread.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Arifureta, Yuuna-san, Big Order"
+                                    data-time="14/12"
+                                    data-duration="12"
+                                    data-type="Estréia - WEB"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19564"
+                                    data-mal="https://myanimelist.net/anime/62432"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="https://www.youtube.com/live/hd_M_FZI1iI"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/jingai-teaser.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/2ePbPaguNY4/maxresdefault.jpg"
+                                    data-caption1="Teaser"
+                                    data-subtitle1="Estréias/trailers/jingai-teaser.vtt"
+                                    data-video2="false"
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3="">
+                                    <img src="Estréias/img/jingai.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
 
-            <br><br> -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Tamon-kun Ima Docchi!?"
+                                    data-title-english="Tamon's B-Side"
+                                    data-thumb1="Estréias/img/tamon.webp"
+                                    data-thumb2="Estréias/img/tamon_02.jpg"
+                                    data-synopsis="A estudante do ensino médio Utage Kinoshita trabalha meio período como empregada doméstica para poder bancar sua obsessão de fã por Tamon Fukuhara, seu membro favorito da boy band F/ACE. Quando o trabalho a envia por acaso para a casa de seu ídolo, ela descobre que o verdadeiro Tamon não poderia ser mais diferente de sua persona selvagem e sexy no palco!"
+                                    data-genre="Comédia, Romance, Shoujo"
+                                    data-director-link="https://anidb.net/creator/28453"
+                                    data-director="Nagaoka Chika"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Detective Conan, Uta no Prince-sama"
+                                    data-studio-link="https://anidb.net/creator/720"
+                                    data-studio="../../../Estúdios/J.C.Staff.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Index, Honey Lemon Soda, Dungeon ni Deai"
+                                    data-time="01/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18681"
+                                    data-mal="https://myanimelist.net/anime/59047"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/tamon-pv1.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/WM3fJbNObSA/maxresdefault.jpg"
+                                    data-caption1="PV 1"
+                                    data-subtitle1="Estréias/trailers/tamon-pv1.vtt"
+                                    data-video2="Estréias/trailers/tamon-pv2.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/GIOzUu_oRec/maxresdefault.jpg"
+                                    data-caption2="PV 2"
+                                    data-subtitle2="Estréias/trailers/tamon-pv2.vtt"
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="false">
+                                    <img src="Estréias/img/tamon.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
 
-            <details>
-                <br>
-                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Continuações</h1></summary>
-                <div class="content">
-                    <div id="anime-chart">
-                        
-                        <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
-                        <div class="image-container">
-                            <a href="#banner" class="anime-card-trigger"
-                                data-title="Ojou to Banken-kun"
-                                data-title-english="A Girl & Her Guard Dog"
-                                data-thumb1="Estréias/img/jingai.webp"
-                                data-thumb2=""
-                                data-thumb3=""
-                                data-thumb4=""
-                                data-synopsis="Isaku Senagaki, de quinze"
-                                data-genre="Romance, Escolar, Shoujo"
-                                data-director-link="https://anidb.net/creator/1536"
-                                data-director="Takamoto Yoshihiro"
-                                data-director2-link=""
-                                data-director2=""
-                                data-director-works="Vazzrock the animation, Beelzebub"
-                                data-studio-link="https://anidb.net/creator/35813"
-                                data-studio="../../../Estúdios/bridge-studios.png"
-                                data-studio2-link=""
-                                data-studio2=""
-                                data-studio-works="Uchi no Kaisha, Otonari no Tenshi-sama, Tomozaki-kun"
-                                data-time="28/09"
-                                data-duration="12"
-                                data-commentary=""
-                                data-anidb="http://anidb.net/a17666"
-                                data-mal="https://myanimelist.net/anime/53300"
-                                data-cr="nolink"
-                                data-netflix="false"
-                                data-disney="false"
-                                data-video1="https://github.com/aokami-aka/Site/raw/main/Temporadas/2023/Outubro2023/Estr%C3%A9ias/trailers/banken-teaser.mp4"
-                                data-poster1="https://i.ytimg.com/vi/-Q6Y7N3JT_o/maxresdefault.jpg"
-                                data-caption1="Teaser"
-                                data-video2="false"
-                                data-poster2=""
-                                data-caption2=""
-                                data-video3="false"
-                                data-poster3=""
-                                data-caption3="">
-                                <img src="Estréias/img/jingai.webp" class="image">
-                            </a>
-                            <span class="star"><i class="far fa-star" data-index="1"></i></span>
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Fate/strange Fake"
+                                    data-title-english=""
+                                    data-thumb1="Estréias/img/fate.jpeg"
+                                    data-thumb2="Estréias/img/fate_02.webp"
+                                    data-thumb3="Estréias/img/fate_03.webp"
+                                    data-thumb4="Estréias/img/fate_04.webp"
+                                    data-thumb5="Estréias/img/fate_05.webp"
+                                    data-thumb6="Estréias/img/fate_06.webp"
+                                    data-synopsis="Em uma Guerra do Santo Graal, Magos (Mestres) e seus Espíritos Heróicos (Servos) lutam pelo controle do Santo Graal — um dispositivo onipotente que concede desejos e dizem realizar qualquer desejo. Anos se passaram desde o fim da Quinta Guerra do Santo Graal no Japão. Agora, sinais prenunciam o surgimento de um novo Santo Graal na cidade americana ocidental de Snowfield."
+                                    data-genre="Ação, Fantasia, Sobrenatural"
+                                    data-director-link="https://anidb.net/creator/36104"
+                                    data-director="Enokido Shun, "
+                                    data-director2-link="https://anidb.net/creator/43393"
+                                    data-director2="Sakazume Takahito"
+                                    data-director-works="Sem trabalhos anteriores como diretor geral"
+                                    data-studio-link="https://anidb.net/creator/1303"
+                                    data-studio="../../../Estúdios/A1-pictures.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Solo Leveling, Mashle, Eighty Six"
+                                    data-time="03/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary="Isso vai ser Cinema 2!!"
+                                    data-anidb="https://anidb.net/anime/18093"
+                                    data-mal="https://myanimelist.net/anime/55830"
+                                    data-cr="https://www.crunchyroll.com/pt-br/series/G4PH0WJQZ/fatestrange-fake"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/fate.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/ZpK4Jvyt1JU/maxresdefault.jpg"
+                                    data-caption1="PV 1"
+                                    data-subtitle1="Estréias/trailers/fate.vtt"
+                                    data-video2="false"
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-subtitle2="false"
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="false">
+                                    <img src="Estréias/img/fate.jpeg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Hanazakari no Kimitachi e"
+                                    data-title-english="Hana-Kimi"
+                                    data-thumb1="Estréias/img/hana.webp"
+                                    data-thumb2="Estréias/img/hana_02.webp"
+                                    data-synopsis="A estrela nipo-americana do atletismo, Mizuki, conseguiu se transferir para uma escola no Japão... mas não para qualquer escola! Para ficar perto de seu ídolo, o saltador em altura Izumi Sano, ela vai para uma escola só para meninos... e se disfarça de menino!<br>Mas, como o destino quis, eles são mais do que colegas de classe... são colegas de quarto! Agora, Mizuki deve guardar seu segredo na sala de aula, no vestiário e em seu próprio quarto.<br>E seus colegas de classe - e a enfermeira da escola - devem lidar com um novo aluno transferido que pode fazê-los questionar sua própria orientação..."
+                                    data-genre="Comédia, Drama, Romance, Shoujo"
+                                    data-director-link="https://anidb.net/creator/30534"
+                                    data-director="Takemura Natsuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Apenas trabalhos em animes infantis"
+                                    data-studio-link="https://anidb.net/creator/43312"
+                                    data-studio="../../../Estúdios/SignalMD.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Hikari no Ou, Platinum End, Mars Red"
+                                    data-time="04/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18636"
+                                    data-mal="https://myanimelist.net/anime/58861"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/hana-teaser.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/9feK5OU8LnM/maxresdefault.jpg"
+                                    data-caption1="Teaser"
+                                    data-subtitle1="Estréias/trailers/hana-teaser.vtt"
+                                    data-video2="Estréias/trailers/hana-trailer.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/yfnOQr_hG1s/maxresdefault.jpg"
+                                    data-caption2="Trailer"
+                                    data-subtitle2="Estréias/trailers/hana-trailer.vtt"
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="false">
+                                    <img src="Estréias/img/hana.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Majutsushi Kunon wa Mieteiru"
+                                    data-title-english="Kunon the Sorcerer Can See"
+                                    data-thumb1="Estréias/img/majutsushin.webp"
+                                    data-thumb2="Estréias/img/majutsushin_02.webp"
+                                    data-synopsis="Kunon, um jovem que não consegue ver, tem o objetivo de criar novos olhos com magia da água. Após apenas cinco meses de aprendizado de feitiçaria, Kunon superou seu próprio mentor e aprimorou seu talento ao tentar realizar um feito nunca antes feito."
+                                    data-genre="Fantasia, Seinen"
+                                    data-director-link="https://anidb.net/creator/6315"
+                                    data-director="Takemura Natsuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Koroshi Ai, Kai Byoui Ramune"
+                                    data-studio-link="https://anidb.net/creator/46190"
+                                    data-studio="../../../Estúdios/Platinum_Vision.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Koroshi Ai, Kai Byoui Ramune"
+                                    data-time="04/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19131"
+                                    data-mal="https://myanimelist.net/anime/60810"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/majutsushin-teaser.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/FInmR1F31Ho/maxresdefault.jpg"
+                                    data-caption1="Teaser"
+                                    data-subtitle1="Estréias/trailers/majutsushin-teaser.vtt"
+                                    data-video2="false"
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-subtitle2="false"
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="false">
+                                    <img src="Estréias/img/majutsushin.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Ikoku Nikki"
+                                    data-title-english="Journal with witch"
+                                    data-thumb1="Estréias/img/nikki.webp"
+                                    data-thumb2="Estréias/img/nikki_02.webp"
+                                    data-thumb3="Estréias/img/nikki_03.webp"
+                                    data-synopsis="Quando a romancista de jovens adultos de 35 anos, KODAI Makio, perde a irmã em um acidente de carro, ela acolhe sua sobrinha, TAKUMI Asa. Tendo perdido os pais e sido jogada em um mundo desconhecido, Asa começa uma busca pela versão de si mesma que ela quer se tornar, eventualmente tentando a música."
+                                    data-genre="Drama, Josei"
+                                    data-director-link="https://anidb.net/creator/21223"
+                                    data-director="Ooshiro Miyuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Primeiro trabalho"
+                                    data-studio-link="https://anidb.net/creator/40621"
+                                    data-studio="../../../Estúdios/shuka.jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="91 Days, Durarara!! 2, Shabake"
+                                    data-time="05/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18610"
+                                    data-mal="https://myanimelist.net/anime/58788"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/nikki-pv1.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/m1LtPWp8BbM/maxresdefault.jpg"
+                                    data-caption1="PV 1"
+                                    data-subtitle1="Estréias/trailers/nikki-pv1.vtt"
+                                    data-video2="Estréias/trailers/nikki-pv2.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/Cbm6m_WfmqI/maxresdefault.jpg"
+                                    data-caption2="PV 2"
+                                    data-subtitle2="Estréias/trailers/nikki-pv2.vtt"
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="false">
+                                    <img src="Estréias/img/nikki.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Goumon Baito-kun no Nichijou"
+                                    data-title-english="The Daily Life of a Part-Time Torturer"
+                                    data-thumb1="Estréias/img/goumon.jpeg"
+                                    data-thumb2="Estréias/img/goumon_02.jpeg"
+                                    data-synopsis="Este é um mundo onde matar e torturar são legalizados. Sero, um trabalhador de meio período em uma empresa de tortura, gosta de torturar pessoas todos os dias com seu colega sênior, Siu. Com a adição dos novos trabalhadores de meio período Mike e Hugh, a divertida vida de tortura continua!"
+                                    data-genre="Comédia"
+                                    data-director-link="https://anidb.net/creator/4158"
+                                    data-director="Oizaki Fumitoshi"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Akuma-kun, Deaimon"
+                                    data-studio-link="https://anidb.net/creator/1789"
+                                    data-studio="../../../Estúdios/Diomedéa_studio.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Tensei Oujo, Ahiru no Sora, Domestic na Kanojo"
+                                    data-time="05/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19399"
+                                    data-mal="https://myanimelist.net/anime/61886"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/goumon-teaser.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/RTevzaviDws/maxresdefault.jpg"
+                                    data-caption1="Teaser"
+                                    data-subtitle1="Estréias/trailers/goumon-teaser.vtt"
+                                    data-video2="Estréias/trailers/goumon-pv.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/adYllv555BE/maxresdefault.jpg"
+                                    data-caption2="PV"
+                                    data-subtitle2="Estréias/trailers/goumon-pv.vtt"
+                                    data-video3="false"
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="false">
+                                    <img src="Estréias/img/goumon.jpeg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Kirei ni Shitemoraemasu ka."
+                                    data-title-english="Wash It All Away"
+                                    data-thumb1="Estréias/img/kirei.avif"
+                                    data-thumb2="Estréias/img/kirei_02.webp"
+                                    data-thumb3="Estréias/img/kirei_03.webp"
+                                    data-thumb4="Estréias/img/kirei_04.webp"
+                                    data-synopsis="Por dois anos, Wakana Kinme administra uma lavanderia na cidade turística de Atami, à beira-mar. A Kinme Cleaning, e os moradores de Atami admiram a dedicação de Wakana ao seu ofício. Ela constrói uma vida gratificante fazendo amigos com os moradores locais e visitando fontes termais.<br>Embora Wakana não tenha conhecimento do seu próprio passado, seus serviços de limpeza protegem memórias impregnadas nos objetos preciosos dos clientes."
+                                    data-genre="Comédia, Slice of Life, Seinen"
+                                    data-director-link="https://anidb.net/creator/51342"
+                                    data-director="Oonishi Kenta"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Ore Dake Kakushi Dungeon, Fuguu-shoku"
+                                    data-studio-link="https://anidb.net/creator/59369"
+                                    data-studio="../../../Estúdios/Okuru_to_Noboru_logo.jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Kakkou no Inazuke, Tomodachi Game, Ore Dake Kakushi Dungeon"
+                                    data-time="05/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19373"
+                                    data-mal="https://myanimelist.net/anime/61782"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/kirei-trailer.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/eVcuNh1OIEY/maxresdefault.jpg"
+                                    data-caption1="PV 1"
+                                    data-subtitle1="Estréias/trailers/kirei-trailer.vtt"
+                                    data-video2=""
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/kirei.avif" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Yuusha Party wo Oidasareta Kiyou binbou"
+                                    data-title-english="Jack-of-All-Trades, Party of None"
+                                    data-thumb1="Estréias/img/yuusha.webp"
+                                    data-synopsis="Traído por seu amigo de infância e expulso do Grupo do Herói, Orhun Dura — outrora seu leal Encantador — é rotulado por seus antigos companheiros como &quot;faz-tudo, mas mestre em nada&quot;. Sozinho, ele parte para forjar um novo caminho como aventureiro solo."
+                                    data-genre="Ação, Aventura, Fantasia"
+                                    data-director-link="https://anidb.net/creator/2155"
+                                    data-director="Kanbe Hiroyuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Plunderer, Ore no Imouto"
+                                    data-studio-link="https://anidb.net/creator/80354"
+                                    data-studio="../../../Estúdios/studio_42.webp"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Primeiro trabalho"
+                                    data-time="01/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19190"
+                                    data-mal="https://myanimelist.net/anime/61128"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/yuusha-trailer.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/R-8hamGLZww/maxresdefault.jpg"
+                                    data-caption1="Trailer"
+                                    data-subtitle1=""
+                                    data-video2=""
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/yuusha.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Maou no Musume wa Yasashisugiru!!"
+                                    data-title-english="The Demon King's Daughter is too Kind!!"
+                                    data-thumb1="Estréias/img/maou.webp"
+                                    data-thumb2="Estréias/img/maou_02.webp"
+                                    data-synopsis="Apesar de ter nascido demônio, a bondade de Dou não conhece limites. Tal é a sua bondade que ela consegue acalmar demônios hediondos, monstros violentos, escravos humanos e até anjos, o inimigo jurado de sua espécie.<br>Isso também torna seu pai, o Rei Demônio, muito ocupado cuidando dela para liderar quaisquer ataques.O ajudante do Rei Demônio, Jahi, vê isso e decide transformar Dou em uma demônio digna através de uma série de provações."
+                                    data-genre="Comédia, Fantasia"
+                                    data-director-link="https://anidb.net/creator/7852"
+                                    data-director="Oota Masahiko"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Shikanoko, Onipan!, Himouto! Umaru-chan"
+                                    data-studio-link="https://anidb.net/creator/43522"
+                                    data-studio="../../../Estúdios/EMT².jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Shuumatsu Train, Kuma Kuma Bear, Assassins Pride"
+                                    data-time="06/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19398"
+                                    data-mal="https://myanimelist.net/anime/61884"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/maou-trailer.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/TYc1GegToJ0/maxresdefault.jpg"
+                                    data-caption1="Trailer"
+                                    data-subtitle1=""
+                                    data-video2=""
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/maou.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Isekai no Sata wa Shachiku Shidai"
+                                    data-title-english="Isekai Office Worker: The Other World's Books Depend on the Bean Counter"
+                                    data-thumb1="Estréias/img/isekai.jpg"
+                                    data-thumb2="Estréias/img/isekai_02.jpg"
+                                    data-synopsis="Seiichirou Kondou, um assalariado prestes a completar 30 anos, é envolvido em um ritual de invocação de uma donzela sagrada e transportado para um mundo chamado Reino de Romany. Tendo trabalhado dia e noite, ele desenvolveu a mentalidade de um escravo corporativo e até exigiu trabalho neste novo mundo, o que lhe rendeu um emprego no Departamento de Contabilidade Real.<br>Durante seus dias agitados reconstruindo o departamento de contabilidade, Seiichirou encontrou um tônico nutricional que eliminava qualquer fadiga. Graças ao tônico, as doenças crônicas e o esgotamento de Seiichirou desapareceram completamente, deixando-o radiante. Mas, como ele não tinha resistência à magia do mundo, os efeitos colaterais colocaram sua vida em perigo!<br>A única maneira de sobreviver era ter alguém com magia para ajudar seu corpo a se acostumar com a energia mágica, então, sem outra escolha, Seiichirou se entrega a Aresh, capitão da Terceira Ordem Real, conhecido como o Príncipe de Gelo."
+                                    data-genre="Isekai, Fantasia, Boy's Love"
+                                    data-director-link="https://anidb.net/creator/5571"
+                                    data-director="Ishihira Shinji"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Tensei Shitara Ken, Tsukimichi, Sasaki to Miyano"
+                                    data-studio-link="https://anidb.net/creator/730"
+                                    data-studio="../../../Estúdios/Deen.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Sasaki to Miyano, Re:Monster, Tadaima, Okaeri"
+                                    data-time="06/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19507"
+                                    data-mal="https://myanimelist.net/anime/60226"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/isekai-trailer.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/cX5gmf2hVjg/maxresdefault.jpg"
+                                    data-caption1="Trailer"
+                                    data-subtitle1=""
+                                    data-video2="Estréias/trailers/isekai-teaser.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/RCOw3iF5AmI/maxresdefault.jpg"
+                                    data-caption2="Teaser"
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/isekai.jpg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Mayonaka Heart Tune"
+                                    data-title-english="Tune In to the Midnight Heart"
+                                    data-thumb1="Estréias/img/mayonaka.jpeg"
+                                    data-thumb2="Estréias/img/mayonaka_02.webp"
+                                    data-synopsis="No fim de um dia difícil, o rico e arrogante, mas de bom coração, Arisu encontrou seu único consolo na voz de outra garota de sua idade, que fazia transmissões ao vivo sob o pseudônimo &quot;Apollo&quot;. Então, um dia, as transmissões pararam.<br>Arisu dedicou os anos desde então a encontrar a verdadeira identidade de Apollo. Ele se transfere como aluno e acha que ela pode estar lá - mas então descobre que pode ser qualquer uma das garotas do clube de transmissão! Essas quatro garotas não se importam com a personalidade de Arisu, mas cada uma delas nutre o sonho de usar suas vozes para construir uma carreira, e elas certamente poderiam usar seu dinheiro..."
+                                    data-genre="Comédia, Romance, Escolar"
+                                    data-director-link="https://anidb.net/creator/64628"
+                                    data-director="Takahashi Masayuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Butareba"
+                                    data-studio-link="https://anidb.net/creator/68440"
+                                    data-studio="../../../Estúdios/gekkou.jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Jiisan Baasan, Tenpuru, Isekai Onee-san"
+                                    data-time="06/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19210"
+                                    data-mal="https://myanimelist.net/anime/61211"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/mayonaka-pv.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/RMG3mgS0LJE/maxresdefault.jpg"
+                                    data-caption1="PV 1"
+                                    data-subtitle1=""
+                                    data-video2="Estréias/trailers/mayonaka-pv2.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/poUibdNvxPQ/maxresdefault.jpg"
+                                    data-caption2="PV 2"
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/mayonaka.jpeg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Yuusha Party ni Kawaii Ko ga Ita node, Kokuhaku shitemita."
+                                    data-title-english="There was a Cute Girl in the Hero's Party, so I Tried Confessing to Her"
+                                    data-thumb1="Estréias/img/kawaii.jpeg"
+                                    data-thumb2="Estréias/img/kawaii_02.webp"
+                                    data-synopsis="Reencarnado como um demônio de nível médio, Youki tinha um trabalho: destruir o grupo do herói. Então ele viu a sacerdotisa do grupo, Cecília, e se apaixonou perdidamente por ela. Agora, este demônio apaixonado jura confessar seus sentimentos, mesmo que isso signifique trair o Rei Demônio."
+                                    data-genre="Aventura, Comédia, Fantasia, Isekai, Romance"
+                                    data-director-link="https://anidb.net/creator/2172"
+                                    data-director="Yamamoto Yasutaka"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Medalist, Nokemono-tachi no Yoru, Nekopara"
+                                    data-studio-link="https://anidb.net/creator/68440"
+                                    data-studio="../../../Estúdios/gekkou.jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Jiisan Baasan, Tenpuru, Isekai Onee-san"
+                                    data-time="06/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19440"
+                                    data-mal="https://myanimelist.net/anime/61983"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/kawaii-trailer.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/EIlO6O5W2Ag/maxresdefault.jpg"
+                                    data-caption1="Trailer"
+                                    data-subtitle1=""
+                                    data-video2="Estréias/trailers/kawaii-teaser.mp4"
+                                    data-poster2="https://i.ytimg.com/vi/y09mmrgJNR8/maxresdefault.jpg"
+                                    data-caption2="Teaser"
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/kawaii.jpeg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Arne no Jikenbo"
+                                    data-title-english="The Case Book of Arne"
+                                    data-thumb1="Estréias/img/arne.webp"
+                                    data-synopsis="Arne Neuntöte é um detetive vampiro que manipula poderes sobrenaturais. Lynn Reinweiß é filha de um nobre que ama vampiros. Seus mundos nunca deveriam ter se cruzado, mas eles unem forças para resolver um mistério sangrento.<br>Na noite mais escura, Lynn se vê em extrema necessidade de ajuda. Então, ela vagueia pela misteriosa cidade de &quot;Lügenberg&quot;, onde não-humanos vivem. O mundo de Lynn muda drasticamente quando ela encontra &quot;Arne&quot;, um vampiro que é chamado de &quot;o pior&quot; na cidade. E esta noite, um novo caso de assassinato ocorreu"
+                                    data-genre="Mistério, Josei"
+                                    data-director-link="https://anidb.net/creator/27445"
+                                    data-director="Inoue Keisuke"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Otome Game, Ao-chan, LV1 Maou"
+                                    data-studio-link="https://anidb.net/creator/2900"
+                                    data-studio="../../../Estúdios/Silver_Link.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Yosakura Family, Maou Gakuin, agna Crinson"
+                                    data-time="07/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18967"
+                                    data-mal="https://myanimelist.net/anime/60255"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="Estréias/trailers/arne-trailer.mp4"
+                                    data-poster1="https://i.ytimg.com/vi/k36-zQohgzs/maxresdefault.jpg"
+                                    data-caption1="Trailer"
+                                    data-subtitle1=""
+                                    data-video2=""
+                                    data-poster2=""
+                                    data-caption2=""
+                                    data-subtitle2=""
+                                    data-video3=""
+                                    data-poster3=""
+                                    data-caption3=""
+                                    data-subtitle3="">
+                                    <img src="Estréias/img/arne.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
                         </div>
-
                     </div>
                 </div>
             </details>
