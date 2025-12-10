@@ -597,12 +597,14 @@ details summary{
 }
 
 .Studio{
-  height:42px;
+  height: auto; /* Altura automática para manter proporção */
+  max-height: 42px; /* Altura máxima para logos altos */
+  max-width: 150px; /* Largura máxima para logos largos */
   margin-right:8px;
   filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));
   vertical-align: middle; /* Alinha melhor com o texto ao redor */
   transition: transform 0.3s ease, filter 0.3s ease; /* Adiciona transição suave */
-  
+  object-fit: contain; /* Garante que a imagem caiba sem distorcer */
 }
 
 .Studio:hover {
