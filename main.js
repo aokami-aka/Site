@@ -663,51 +663,124 @@ class AnimeCardManager {
 
         // Atualiza os players de vídeo
         const videoData = [
-            { video: data.video1, poster: data.poster1, caption: data.caption1, subtitle: data.subtitle1 || "false" },
-            { video: data.video2, poster: data.poster2, caption: data.caption2, subtitle: data.subtitle2 || "false" },
-            { video: data.video3, poster: data.poster3, caption: data.caption3, subtitle: data.subtitle3 || "false" }
+            { video: data.video1, caption: data.caption1 },
+            { video: data.video2, caption: data.caption2 },
+            { video: data.video3, caption: data.caption3 }
         ];
 
-                this.elements.videoContainers.forEach((container, index) => {
-            const vData = videoData[index];
-            const videoPlayer = container.querySelector('.video-player');
-            const captionSpan = container.querySelector('.video-caption-text');
-            const trackElement = container.querySelector('track');
-            const subtitlesBtn = container.querySelector('.subtitles-btn');
+        // Destrói players antigos antes de criar novos
+        if (window.videoPlayers && window.videoPlayers.length) {
+            window.videoPlayers.forEach(p => {
+                if (p && typeof p.destroy === 'function') {
+                    p.destroy();
+                }
+            });
+        }
+        window.videoPlayers = [];
 
-            if (vData.video && vData.video !== "false") {
-                container.style.display = 'flex';
-                videoPlayer.src = vData.video;
-                videoPlayer.poster = vData.poster;
-                this._setText(captionSpan, vData.caption);
-                videoPlayer.currentTime = 0;
-                videoPlayer.load();
-
-                // Lógica das legendas
-                if (trackElement && subtitlesBtn) {
-                    if (vData.subtitle && vData.subtitle !== "false") {
-                        trackElement.src = vData.subtitle;
-                        
-                        // Aguarda o vídeo carregar os metadados para manipular a trilha de texto
-                        videoPlayer.onloadedmetadata = () => {
-                            if (videoPlayer.textTracks && videoPlayer.textTracks.length > 0) {
-                                // Garante que a legenda comece desativada
-                                videoPlayer.textTracks[0].mode = 'showing';
-                            }
-                        };
-
-                        subtitlesBtn.style.display = 'inline-block';
-                        subtitlesBtn.classList.add('subtitles-active');
-                    } else {
-                        trackElement.src = '';
-                        subtitlesBtn.style.display = 'none';
+        // Função para extrair o ID de um link do YouTube
+        function getYouTubeVideoId(url) {
+            if (!url) return null;
+            let videoId = null;
+            try {
+                const urlObj = new URL(url);
+                if (urlObj.hostname === 'youtu.be') {
+                    videoId = urlObj.pathname.slice(1);
+                } else if (urlObj.hostname.includes('youtube.com')) {
+                    if (urlObj.pathname === '/watch') {
+                        videoId = urlObj.searchParams.get('v');
+                    } else if (urlObj.pathname.startsWith('/embed/')) {
+                        videoId = urlObj.pathname.split('/')[2];
+                    } else if (urlObj.pathname.startsWith('/live/')) {
+                        videoId = urlObj.pathname.split('/')[2];
+                    } else if (urlObj.pathname.startsWith('/shorts/')) {
+                        videoId = urlObj.pathname.split('/')[2];
                     }
+                }
+            } catch (e) { /* URL inválida, ignora */ }
+            return videoId;
+        }
+
+        this.elements.videoContainers.forEach((container, index) => {
+            const vData = videoData[index];
+            const playerId = `video-player-${index + 1}`;
+            const playerContainer = container.querySelector(`#${playerId}`);
+            const captionSpan = container.querySelector('.video-caption-text');
+
+            // Limpa o container do player anterior
+            playerContainer.innerHTML = '';
+
+            if (vData.video && vData.video !== "false" && playerContainer) {
+                container.style.display = 'flex';
+                this._setText(captionSpan, vData.caption);
+
+                const videoId = getYouTubeVideoId(vData.video);
+
+                if (videoId) { // É um vídeo do YouTube
+                    const player = new YT.Player(playerId, {
+                        videoId: videoId,
+                        playerVars: {
+                            'playsinline': 1,
+                            'controls': 0,          // Desativa completamente os controles nativos do YouTube
+                            'rel': 0,               // Não mostra vídeos relacionados no final
+                            'modestbranding': 1,    // Logo do YouTube menor
+                            'cc_lang_pref': 'pt',   // Define português como idioma preferencial da legenda
+                            'cc_load_policy': 1     // Força a exibição de legendas por padrão
+                        },
+                        events: {
+                            'onReady': (event) => {
+                                // Tenta definir a qualidade para a mais alta disponível
+                                const qualityLevels = event.target.getAvailableQualityLevels();
+                                if (qualityLevels && qualityLevels.length > 0) {
+                                    event.target.setPlaybackQuality(qualityLevels[0]);
+                                }
+                                initializeCustomControls(container, event.target, 'youtube');
+                            },
+                            'onStateChange': (event) => {
+                                // Pausa outros players quando este começar
+                                if (event.data === YT.PlayerState.PLAYING) {
+                                    window.videoPlayers.forEach(p => {
+                                        // Verifica se é um player do YouTube e não é ele mesmo
+                                        if (p && typeof p.pauseVideo === 'function' && p !== player) {
+                                            p.pauseVideo();
+                                        }
+                                        // Verifica se é um player HTML5
+                                        else if (p && typeof p.pause === 'function' && p.tagName === 'VIDEO') {
+                                            p.pause();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                    window.videoPlayers.push(player);
+                } else {
+                    // É um vídeo local (HTML5)
+                    const videoElement = document.createElement('video');
+                    videoElement.className = 'video-player';
+                    videoElement.src = vData.video;
+                    
+                    playerContainer.appendChild(videoElement);
+                    initializeCustomControls(container, videoElement, 'html5');
+                    window.videoPlayers.push(videoElement);
                 }
             } else {
                 container.style.display = 'none';
             }
         });
     }
+}
+
+// --- CARREGAMENTO DA API DO YOUTUBE ---
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// Esta função será chamada pela API do YouTube quando estiver pronta.
+// Deixamos ela vazia pois a inicialização dos players é feita sob demanda.
+function onYouTubeIframeAPIReady() {
+    // A API está pronta.
 }
 
 // --- INICIALIZAÇÃO ---
@@ -987,10 +1060,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeClearButton('anime-chart', 'type-filter-container', 'genre-filter-container', 'sort-select');
 
     // --- INICIALIZAÇÃO DO PLAYER DE VÍDEO CUSTOMIZADO ---
-    const videoPlayers = document.querySelectorAll('.video-player-container');
-
-    videoPlayers.forEach(container => {
-        const video = container.querySelector('.video-player');
+    // A inicialização agora é feita pela função `initializeCustomControls`
+    // para poder lidar com players criados dinamicamente (HTML5 e YouTube).
+    window.initializeCustomControls = (container, player, type) => {
         const playPauseBtn = container.querySelector('.play-pause-btn');
         const playPauseIcon = playPauseBtn.querySelector('i');
         const progressBar = container.querySelector('.progress-bar');
@@ -1000,109 +1072,165 @@ document.addEventListener('DOMContentLoaded', () => {
         const volumeIcon = volumeBtn.querySelector('i');
         const volumeSlider = container.querySelector('.volume-slider');
         const fullscreenBtn = container.querySelector('.fullscreen-btn');
-        const subtitlesBtn = container.querySelector('.subtitles-btn');
+        const youtubeSubsBtn = container.querySelector('.youtube-subs-btn');
+
+        let progressInterval;
 
         // --- Funções de Controle ---
         function togglePlayPause() {
-            if (video.paused) {
-                video.play();
+            if (type === 'youtube') {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
+                }
             } else {
-                video.pause();
+                if (player.paused) {
+                    player.play();
+                } else {
+                    player.pause();
+                }
             }
         }
 
         function updatePlayPauseIcon() {
-            playPauseIcon.className = `fas ${video.paused ? 'fa-play' : 'fa-pause'}`;
+            let isPaused;
+            if (type === 'youtube') {
+                const state = player.getPlayerState();
+                isPaused = state !== YT.PlayerState.PLAYING;
+            } else {
+                isPaused = player.paused;
+            }
+            playPauseIcon.className = `fas ${isPaused ? 'fa-play' : 'fa-pause'}`;
         }
 
         function updateProgress() {
-            const progressPercentage = (video.currentTime / video.duration) * 100;
+            const currentTime = type === 'youtube' ? player.getCurrentTime() : player.currentTime;
+            const duration = type === 'youtube' ? player.getDuration() : player.duration;
+            const progressPercentage = (currentTime / duration) * 100;
             progressBar.style.width = `${progressPercentage}%`;
-            timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration || 0)}`;
+            timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration || 0)}`;
         }
 
         function scrub(e) {
-            const scrubTime = (e.offsetX / progressBarContainer.offsetWidth) * video.duration;
-            video.currentTime = scrubTime;
+            const duration = type === 'youtube' ? player.getDuration() : player.duration;
+            const scrubTime = (e.offsetX / progressBarContainer.offsetWidth) * duration;
+            if (type === 'youtube') {
+                player.seekTo(scrubTime, true);
+            } else {
+                player.currentTime = scrubTime;
+            }
         }
 
         function toggleMute() {
-            video.muted = !video.muted;
+            if (type === 'youtube') {
+                if (player.isMuted()) {
+                    player.unMute();
+                } else {
+                    player.mute();
+                }
+            } else {
+                player.muted = !player.muted;
+            }
+            updateVolumeIcon(); // Atualiza o ícone imediatamente
         }
 
         function updateVolumeIcon() {
+            const isMuted = type === 'youtube' ? player.isMuted() : player.muted;
+            const volume = type === 'youtube' ? player.getVolume() / 100 : player.volume;
+
             volumeIcon.className = 'fas';
-            if (video.muted || video.volume === 0) {
+            if (isMuted || volume === 0) {
                 volumeIcon.classList.add('fa-volume-mute');
-            } else if (video.volume < 0.5) {
+            } else if (volume < 0.5) {
                 volumeIcon.classList.add('fa-volume-down');
             } else {
                 volumeIcon.classList.add('fa-volume-up');
             }
         }
-        
+
         function handleVolumeChange() {
-            video.volume = volumeSlider.value;
-            if (video.volume > 0) {
-                video.muted = false;
+            const newVolume = volumeSlider.value;
+            if (type === 'youtube') {
+                player.setVolume(newVolume * 100);
+                if (newVolume > 0 && player.isMuted()) {
+                    player.unMute();
+                }
+            } else {
+                player.volume = newVolume;
+                if (newVolume > 0) {
+                    player.muted = false;
+                }
             }
         }
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                video.closest('.video-player-container').requestFullscreen().catch(err => {
+                const elementToFullscreen = type === 'youtube' ? player.getIframe() : player;
+                elementToFullscreen.closest('.video-player-container').requestFullscreen().catch(err => {
                     alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
                 });
             } else {
                 document.exitFullscreen();
             }
         }
-
-        function toggleSubtitles() {
-            const track = video.textTracks[0];
-            if (!track) return;
-
-            const isShowing = track.mode === 'showing';
-            track.mode = isShowing ? 'hidden' : 'showing';
-            subtitlesBtn.classList.toggle('subtitles-active', !isShowing);
+        
+        function openYouTubeSubtitlesMenu() {
+            if (type === 'youtube') {
+                player.loadModule('captions'); // Abre o menu de legendas nativo
+            }
         }
 
         function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
             const minutes = Math.floor(seconds / 60);
             const remainingSeconds = Math.floor(seconds % 60);
             return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
         }
 
         // --- Event Listeners ---
-        video.addEventListener('click', togglePlayPause);
-        playPauseBtn.addEventListener('click', togglePlayPause);
-        video.addEventListener('play', () => {
-            // Pausa todos os outros vídeos quando este começar a tocar
-            videoPlayers.forEach(otherContainer => {
-                const otherVideo = otherContainer.querySelector('.video-player');
-                if (otherVideo !== video) {
-                    otherVideo.pause();
-                }
+        if (type === 'html5') {
+            player.addEventListener('click', togglePlayPause);
+            player.addEventListener('play', () => {
+                // Pausa outros players
+                window.videoPlayers.forEach(p => {
+                    if (p !== player) {
+                        if (typeof p.pauseVideo === 'function') p.pauseVideo();
+                        if (typeof p.pause === 'function') p.pause();
+                    }
+                });
+                updatePlayPauseIcon();
             });
-            updatePlayPauseIcon();
-        });
-        video.addEventListener('pause', updatePlayPauseIcon);
-        video.addEventListener('timeupdate', updateProgress);
-        video.addEventListener('loadedmetadata', updateProgress);
-        
+            player.addEventListener('pause', updatePlayPauseIcon);
+            player.addEventListener('timeupdate', updateProgress);
+            player.addEventListener('loadedmetadata', updateProgress);
+            player.addEventListener('volumechange', updateVolumeIcon);
+        } else { // YouTube
+            // O clique é tratado pelo `playVideo` e `pauseVideo`
+            // O estado é verificado com `getPlayerState`
+            // A atualização do progresso precisa de um intervalo
+            progressInterval = setInterval(() => {
+                updateProgress();
+                updatePlayPauseIcon();
+            }, 250);
+        }
+
+        playPauseBtn.addEventListener('click', togglePlayPause);
         progressBarContainer.addEventListener('click', scrub);
-        
         volumeBtn.addEventListener('click', toggleMute);
         volumeSlider.addEventListener('input', handleVolumeChange);
-        video.addEventListener('volumechange', updateVolumeIcon);
-
         fullscreenBtn.addEventListener('click', toggleFullscreen);
-        
-        if (subtitlesBtn) {
-            subtitlesBtn.addEventListener('click', toggleSubtitles);
+
+        // Mostra e configura o botão de legendas apenas para YouTube
+        if (type === 'youtube' && youtubeSubsBtn) {
+            youtubeSubsBtn.style.display = 'inline-block';
+            youtubeSubsBtn.addEventListener('click', openYouTubeSubtitlesMenu);
+            youtubeSubsBtn.classList.add('subtitles-active'); // Deixa o botão ativo para indicar que a função existe
         }
-        
-        // Inicializa o ícone de volume
+
+        // Inicializa os ícones e o tempo
         updateVolumeIcon();
-    });
+        updateProgress();
+    };
 });
