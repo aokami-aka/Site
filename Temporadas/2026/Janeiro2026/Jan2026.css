@@ -867,6 +867,9 @@ details summary{
   transform: scale(1.1);
 }
 
+.youtube-subs-btn {
+  display: none; /* Escondido por padrão, ativado via JS para vídeos do YouTube */
+}
 .progress-bar-container {
   flex-grow: 1;
   height: 6px;
