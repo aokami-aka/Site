@@ -119,10 +119,8 @@
                                         <div id="trailers" class="trailer">
 
                                             <!-- Player de Vídeo 1 -->
-                                            <div class="video-player-container">
-                                                <video class="video-player" poster="" src="">
-                                                    <track kind="subtitles" label="Português" srclang="pt">
-                                                </video>
+                                            <div class="video-player-container" data-player-id="1">
+                                                <div id="video-player-1" class="video-player"></div>
                                                 <div class="video-controls">
                                                     <button class="control-button play-pause-btn" title="Play/Pause">
                                                         <i class="fas fa-play"></i>
@@ -135,7 +133,7 @@
                                                         <i class="fas fa-volume-up"></i>
                                                     </button>
                                                     <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
-                                                    <button class="control-button subtitles-btn" title="Legendas">
+                                                    <button class="control-button youtube-subs-btn" title="Legendas (YouTube)">
                                                         <i class="fas fa-closed-captioning"></i>
                                                     </button>
                                                     <button class="control-button fullscreen-btn" title="Fullscreen">
@@ -146,10 +144,8 @@
                                             </div>
 
                                             <!-- Player de Vídeo 2 -->
-                                            <div class="video-player-container">
-                                                <video class="video-player" poster="" src="">
-                                                    <track kind="subtitles" label="Português" srclang="pt">
-                                                </video>
+                                            <div class="video-player-container" data-player-id="2">
+                                                <div id="video-player-2" class="video-player"></div>
                                                 <div class="video-controls">
                                                     <button class="control-button play-pause-btn" title="Play/Pause">
                                                         <i class="fas fa-play"></i>
@@ -162,7 +158,7 @@
                                                         <i class="fas fa-volume-up"></i>
                                                     </button>
                                                     <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
-                                                    <button class="control-button subtitles-btn" title="Legendas">
+                                                    <button class="control-button youtube-subs-btn" title="Legendas (YouTube)">
                                                         <i class="fas fa-closed-captioning"></i>
                                                     </button>
                                                     <button class="control-button fullscreen-btn" title="Fullscreen">
@@ -173,10 +169,8 @@
                                             </div>
 
                                             <!-- Player de Vídeo 3 -->
-                                            <div class="video-player-container">
-                                                <video class="video-player" poster="" src="">
-                                                    <track kind="subtitles" label="Português" srclang="pt">
-                                                </video>
+                                            <div class="video-player-container" data-player-id="3">
+                                                <div id="video-player-3" class="video-player"></div>
                                                 <div class="video-controls">
                                                     <button class="control-button play-pause-btn" title="Play/Pause">
                                                         <i class="fas fa-play"></i>
@@ -189,7 +183,7 @@
                                                         <i class="fas fa-volume-up"></i>
                                                     </button>
                                                     <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
-                                                    <button class="control-button subtitles-btn" title="Legendas">
+                                                    <button class="control-button youtube-subs-btn" title="Legendas (YouTube)">
                                                         <i class="fas fa-closed-captioning"></i>
                                                     </button>
                                                     <button class="control-button fullscreen-btn" title="Fullscreen">
@@ -248,44 +242,39 @@
                             <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
                             <div class="image-container">
                                 <a href="#banner" class="anime-card-trigger"
-                                    data-title="Jingai Kyoushitsu no Ningengirai Kyoushi"
-                                    data-title-english="A Misanthrope Teaches a Class for Demi-Humans"
-                                    data-thumb1="Estréias/img/jingai.webp"
-                                    data-thumb2="Estréias/img/jingai_02.webp"
-                                    data-thumb3="Estréias/img/jingai_03.webp"
-                                    data-synopsis="Sou Rei Hitoma, um misantropo autoproclamado devido a alguns traumas passados. Justamente quando pensei que meu novo emprego de professor nas montanhas proporcionaria um ambiente tranquilo e rejuvenescedor, descobri que esta escola é, na verdade, para demi-humanos que querem se tornar seres humanos completos!<br>Há uma sereia, um lobisomem, um coelho e um pássaro... todos os quais agora são meus alunos. É meu dever ensiná-los sobre a humanidade."
-                                    data-genre="Drama, Escolar, Sobrenatural"
-                                    data-director-link="https://anidb.net/creator/8022"
-                                    data-director="Iwanaga Akira"
+                                    data-title="Sousou no Frieren 2nd Season"
+                                    data-title-english="Frieren e a Jornada para o Além Temporada 2"
+                                    data-thumb1="Estréias/img/frieren2.webp"
+                                    data-thumb2="Estréias/img/frieren2_02.webp"
+                                    data-synopsis="Segunda temporada de Sousou no Frieren."
+                                    data-genre="Aventura, Drama, Fantasia, Shounen"
+                                    data-director-link="https://anidb.net/creator/55055"
+                                    data-director="Kitagawa Tomoya"
                                     data-director2-link=""
                                     data-director2=""
-                                    data-director-works="Arifureta, Corpse Party, Kingdom (2013)"
-                                    data-studio-link="https://anidb.net/creator/1012"
-                                    data-studio="../../../Estúdios/asread.png"
+                                    data-director-works="Primeiro Trabalho"
+                                    data-studio-link="https://anidb.net/creator/731"
+                                    data-studio="../../../Estúdios/Madhouse_studio.png"
                                     data-studio2-link=""
                                     data-studio2=""
-                                    data-studio-works="Arifureta, Yuuna-san, Big Order"
-                                    data-time="14/12"
-                                    data-duration="12"
-                                    data-type="Estréia - WEB"
+                                    data-studio-works="Sousou no Frieren, Hunter x Hunter (2011), Overlord"
+                                    data-time="16/01"
+                                    data-duration="???"
+                                    data-type="Continuação"
                                     data-commentary=""
-                                    data-anidb="https://anidb.net/anime/19564"
-                                    data-mal="https://myanimelist.net/anime/62432"
-                                    data-cr="false"
+                                    data-anidb="https://anidb.net/anime/18886"
+                                    data-mal="https://myanimelist.net/anime/59978"
+                                    data-cr="https://www.crunchyroll.com/pt-br/series/GG5H5XQX4/frieren-beyond-journeys-end"
                                     data-netflix="false"
-                                    data-youtube="https://www.youtube.com/live/hd_M_FZI1iI"
+                                    data-youtube="false"
                                     data-disney="false"
-                                    data-video1="Estréias/trailers/jingai-teaser.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/2ePbPaguNY4/maxresdefault.jpg"
-                                    data-caption1="Teaser"
-                                    data-subtitle1="Estréias/trailers/jingai-teaser.vtt"
+                                    data-video1="https://youtu.be/tf9rS5EJ3Nw"
+                                    data-caption1="Trailer"
                                     data-video2="false"
-                                    data-poster2=""
                                     data-caption2=""
                                     data-video3="false"
-                                    data-poster3=""
                                     data-caption3="">
-                                    <img src="Estréias/img/jingai.webp" class="image">
+                                    <img src="Estréias/img/frieren2.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
                                 <span class="star"><i class="far fa-star"></i></span>
@@ -293,45 +282,282 @@
 
                             <div class="image-container">
                                 <a href="#banner" class="anime-card-trigger"
-                                    data-title="Tamon-kun Ima Docchi!?"
-                                    data-title-english="Tamon's B-Side"
-                                    data-thumb1="Estréias/img/tamon.webp"
-                                    data-thumb2="Estréias/img/tamon_02.jpg"
-                                    data-synopsis="A estudante do ensino médio Utage Kinoshita trabalha meio período como empregada doméstica para poder bancar sua obsessão de fã por Tamon Fukuhara, seu membro favorito da boy band F/ACE. Quando o trabalho a envia por acaso para a casa de seu ídolo, ela descobre que o verdadeiro Tamon não poderia ser mais diferente de sua persona selvagem e sexy no palco!"
-                                    data-genre="Comédia, Romance, Shoujo"
-                                    data-director-link="https://anidb.net/creator/28453"
-                                    data-director="Nagaoka Chika"
+                                    data-title="Jigokuraku 2nd Season"
+                                    data-title-english="Hell's Paradise SEASON 2"
+                                    data-thumb1="Estréias/img/jigokuraku2.webp"
+                                    data-synopsis="Segunda temporada de Jigokuraku."
+                                    data-genre="Ação, Aventura, Sobrenatural, Shounen"
+                                    data-director-link="https://anidb.net/creator/48873"
+                                    data-director="Makita Kaori"
                                     data-director2-link=""
                                     data-director2=""
-                                    data-director-works="Detective Conan, Uta no Prince-sama"
-                                    data-studio-link="https://anidb.net/creator/720"
-                                    data-studio="../../../Estúdios/J.C.Staff.png"
+                                    data-director-works="Jigokuraku, Kakegurui Twin"
+                                    data-studio-link="https://anidb.net/creator/31375"
+                                    data-studio="../../../Estúdios/MAPPA.png"
                                     data-studio2-link=""
                                     data-studio2=""
-                                    data-studio-works="Index, Honey Lemon Soda, Dungeon ni Deai"
-                                    data-time="01/01"
-                                    data-duration="12"
-                                    data-type="Estréia - TV"
+                                    data-studio-works="Dorohedoro, Jujutsu Kaisen, Zenshuu"
+                                    data-time="11/01"
+                                    data-duration="???"
+                                    data-type="Continuação"
                                     data-commentary=""
-                                    data-anidb="https://anidb.net/anime/18681"
-                                    data-mal="https://myanimelist.net/anime/59047"
+                                    data-anidb="https://anidb.net/anime/18090"
+                                    data-mal="https://myanimelist.net/anime/55825"
+                                    data-cr="https://www.crunchyroll.com/pt-br/series/GJ0H7Q5ZJ/hells-paradise"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/5QUyhQsXXtw"
+                                    data-caption1="Trailer"
+                                    data-video2="false"
+                                    data-caption2=""
+                                    data-video3="false"
+                                    data-caption3="">
+                                    <img src="Estréias/img/jigokuraku2.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="JUJUTSU KAISEN Shimetsu Kaiyu Zenpen"
+                                    data-title-english="JUJUTSU KAISEN The Culling Game Part 1"
+                                    data-thumb1="Estréias/img/jujutsu3.jpg"
+                                    data-thumb2="Estréias/img/jujutsu3_02.webp"
+                                    data-synopsis="Terceira temporada de Jujutsu Kaisen."
+                                    data-genre="Ação, Fantasia, Shounen"
+                                    data-director-link="https://anidb.net/creator/55134"
+                                    data-director="Goshozono Shouta"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Jujutsu Kaisen 2"
+                                    data-studio-link="https://anidb.net/creator/31375"
+                                    data-studio="../../../Estúdios/MAPPA.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Dorohedoro, Jujutsu Kaisen, Zenshuu"
+                                    data-time="09/01"
+                                    data-duration="???"
+                                    data-type="Continuação"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18363"
+                                    data-mal="https://myanimelist.net/anime/57658"
+                                    data-cr="https://www.crunchyroll.com/pt-br/series/GRDV0019R/jujutsu-kaisen"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/MePL_vS-G9Q"
+                                    data-caption1="Teaser"
+                                    data-video2="false"
+                                    data-caption2=""
+                                    data-video3="false"
+                                    data-caption3="">
+                                    <img src="Estréias/img/jujutsu3.jpg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Mato Seihei no Slave 2nd Season"
+                                    data-title-english="Chained Soldier Season 2"
+                                    data-thumb1="Estréias/img/seihei2.webp"
+                                    data-synopsis="Segunda temporada de Chained Soldier."
+                                    data-genre="Ação, Ecchi, Fantasia, Sobrenatural, Shounen"
+                                    data-director-link="https://anidb.net/creator/9728"
+                                    data-director="Tamura Masafumi"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Maou Gakuin, Kenja no Mago, Sekai Saikou no Ansatsusha"
+                                    data-studio-link="https://anidb.net/creator/67269"
+                                    data-studio="../../../Estúdios/hayabusa.png"
+                                    data-studio2-link="https://anidb.net/creator/35245"
+                                    data-studio2="../../../Estúdios/passione.jpg"
+                                    data-studio-works="Katainaka no Ossan | Nukitashi the Animation, Ishura, Isekai Meikyuu"
+                                    data-time="09/01"
+                                    data-duration="???"
+                                    data-type="Continuação"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18548"
+                                    data-mal="https://myanimelist.net/anime/58505"
+                                    data-cr="false"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/HV5DcLBjN2I"
+                                    data-caption1="Trailer"
+                                    data-video2="false"
+                                    data-caption2=""
+                                    data-video3="false"
+                                    data-caption3="">
+                                    <img src="Estréias/img/seihei2.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="【OSHI NO KO】3rd Season"
+                                    data-title-english=""
+                                    data-thumb1="Estréias/img/oshi3.webp"
+                                    data-thumb2="Estréias/img/oshi3_02.webp"
+                                    data-thumb3="Estréias/img/oshi3_03.webp"
+                                    data-thumb4="Estréias/img/oshi3_04.jpg"
+                                    data-thumb5="Estréias/img/oshi3_05.webp"
+                                    data-synopsis="Terceira temporada de Oshi no Ko."
+                                    data-genre="Drama, Sobrenatural, Seinen"
+                                    data-director-link="https://anidb.net/creator/9626"
+                                    data-director="Hiramaki Daisuke"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Oshi no Ko, Koi Suru Asteroid, Selection Project"
+                                    data-studio-link="https://anidb.net/creator/1067"
+                                    data-studio="../../../Estúdios/Doga_Kobo.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Oshi no Ko, Kawaii dake ja Nai, Maou-jou de Oyasumi"
+                                    data-time="14/01"
+                                    data-duration="???"
+                                    data-type="Continuação"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18901"
+                                    data-mal="https://myanimelist.net/anime/60058"
                                     data-cr="nolink"
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="Estréias/trailers/tamon-pv1.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/WM3fJbNObSA/maxresdefault.jpg"
-                                    data-caption1="PV 1"
-                                    data-subtitle1="Estréias/trailers/tamon-pv1.vtt"
-                                    data-video2="Estréias/trailers/tamon-pv2.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/GIOzUu_oRec/maxresdefault.jpg"
-                                    data-caption2="PV 2"
-                                    data-subtitle2="Estréias/trailers/tamon-pv2.vtt"
+                                    data-video1="https://youtu.be/7UilRDldO_g"
+                                    data-caption1="Trailer"
+                                    data-video2="false"
+                                    data-caption2=""
                                     data-video3="false"
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="false">
-                                    <img src="Estréias/img/tamon.webp" class="image">
+                                    data-caption3="">
+                                    <img src="Estréias/img/oshi3.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Enn Enn no Shouboutai San no Shou Cour 2"
+                                    data-title-english="Fire Force Season 3 Part 2"
+                                    data-thumb1="Estréias/img/fire3.webp"
+                                    data-thumb2="Estréias/img/fire3_02.webp"
+                                    data-synopsis="Segunda Parte da Terceira temporada de Fire Force."
+                                    data-genre="Ação, Sobrenatural, Shounen"
+                                    data-director-link="https://anidb.net/creator/28476"
+                                    data-director="Minamikawa Tatsuma"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Fire Force 2, Pon no Michi"
+                                    data-studio-link="https://anidb.net/creator/2887"
+                                    data-studio="../../../Estúdios/David_production.jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Jojo, Undead Unluck, Urusei Yatsura (2022)"
+                                    data-time="10/01"
+                                    data-duration="???"
+                                    data-type="Continuação"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18742"
+                                    data-mal="https://myanimelist.net/anime/59229"
+                                    data-cr="https://www.crunchyroll.com/pt-br/series/GYQWNXPZY/fire-force"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/voLZJvdwUEE"
+                                    data-caption1="Trailer"
+                                    data-video2="false"
+                                    data-caption2=""
+                                    data-video3="false"
+                                    data-caption3="">
+                                    <img src="Estréias/img/fire3.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Yuusha-kei ni Shosu: Choubatsu Yuusha 9004-tai Keimu Kiroku"
+                                    data-title-english="Sentenced to Be a Hero"
+                                    data-thumb1="Estréias/img/shosu.webp"
+                                    data-thumb2="Estréias/img/shosu_02.webp"
+                                    data-thumb3="Estréias/img/shosu_03.webp"
+                                    data-thumb4="Estréias/img/shosu_04.webp"
+                                    data-synopsis="Num mundo onde o heroísmo é um castigo, Xylo Forbartz, uma assassina de deusas condenada, luta contra hordas intermináveis de abominações monstruosas como parte da Unidade Penal de Heróis 9004. A morte não é uma fuga, apenas um ciclo de ressurreição e combate implacável.<br>Mas quando Xylo encontra uma nova deusa misteriosa, sua aliança improvável desencadeia uma rebelião que pode quebrar as correntes da punição eterna."
+                                    data-genre="Ação, Aventura, Fantasia"
+                                    data-director-link="https://anidb.net/creator/56943"
+                                    data-director="Takashima Hiroyuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Primeiro trabalho"
+                                    data-studio-link="https://anidb.net/creator/59227"
+                                    data-studio="../../../Estúdios/kai.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Fuuto Tantei, Uma-musume, Super Cub"
+                                    data-time="03/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18124"
+                                    data-mal="https://myanimelist.net/anime/56009"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/B5qZX2kh-7w"
+                                    data-caption1="PV 1"
+                                    data-video2="https://youtu.be/CQmFO--_HwE"
+                                    data-caption2="PV 2"
+                                    data-video3="https://youtu.be/GcRs1JC7xeg"
+                                    data-caption3="PV 3">
+                                    <img src="Estréias/img/shosu.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Yuusha Party ni Kawaii Ko ga Ita node, Kokuhaku shitemita."
+                                    data-title-english="There was a Cute Girl in the Hero's Party, so I Tried Confessing to Her"
+                                    data-thumb1="Estréias/img/kawaii.jpeg"
+                                    data-thumb2="Estréias/img/kawaii_02.webp"
+                                    data-synopsis="Reencarnado como um demônio de nível médio, Youki tinha um trabalho: destruir o grupo do herói. Então ele viu a sacerdotisa do grupo, Cecília, e se apaixonou perdidamente por ela. Agora, este demônio apaixonado jura confessar seus sentimentos, mesmo que isso signifique trair o Rei Demônio."
+                                    data-genre="Aventura, Comédia, Fantasia, Isekai, Romance"
+                                    data-director-link="https://anidb.net/creator/2172"
+                                    data-director="Yamamoto Yasutaka"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Medalist, Nokemono-tachi no Yoru, Nekopara"
+                                    data-studio-link="https://anidb.net/creator/68440"
+                                    data-studio="../../../Estúdios/gekkou.jpg"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Jiisan Baasan, Tenpuru, Isekai Onee-san"
+                                    data-time="06/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19440"
+                                    data-mal="https://myanimelist.net/anime/61983"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/y09mmrgJNR8"
+                                    data-caption1="Teaser"
+                                    data-video2="https://youtu.be/EIlO6O5W2Ag"
+                                    data-caption2="Trailer"
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="Estréias/img/kawaii.jpeg" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
                                 <span class="star"><i class="far fa-star"></i></span>
@@ -369,19 +595,128 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="Estréias/trailers/fate.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/ZpK4Jvyt1JU/maxresdefault.jpg"
+                                    data-video1="https://youtu.be/ZpK4Jvyt1JU"
                                     data-caption1="PV 1"
-                                    data-subtitle1="Estréias/trailers/fate.vtt"
-                                    data-video2="false"
-                                    data-poster2=""
-                                    data-caption2=""
-                                    data-subtitle2="false"
-                                    data-video3="false"
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="false">
+                                    data-video2="https://youtu.be/KjtdJQ7_rrY"
+                                    data-caption2="PV 2">
                                     <img src="Estréias/img/fate.jpeg" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Yuusha Party wo Oidasareta Kiyou binbou"
+                                    data-title-english="Jack-of-All-Trades, Party of None"
+                                    data-thumb1="Estréias/img/yuusha.webp"
+                                    data-synopsis="Traído por seu amigo de infância e expulso do Grupo do Herói, Orhun Dura — outrora seu leal Encantador — é rotulado por seus antigos companheiros como &quot;faz-tudo, mas mestre em nada&quot;. Sozinho, ele parte para forjar um novo caminho como aventureiro solo."
+                                    data-genre="Ação, Aventura, Fantasia"
+                                    data-director-link="https://anidb.net/creator/2155"
+                                    data-director="Kanbe Hiroyuki"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Plunderer, Ore no Imouto"
+                                    data-studio-link="https://anidb.net/creator/80354"
+                                    data-studio="../../../Estúdios/studio_42.webp"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Primeiro trabalho"
+                                    data-time="01/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19190"
+                                    data-mal="https://myanimelist.net/anime/61128"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/R-8hamGLZww"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-video3="">
+                                    <img src="Estréias/img/yuusha.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Jingai Kyoushitsu no Ningengirai Kyoushi"
+                                    data-title-english="A Misanthrope Teaches a Class for Demi-Humans"
+                                    data-thumb1="Estréias/img/jingai.webp"
+                                    data-thumb2="Estréias/img/jingai_02.webp"
+                                    data-thumb3="Estréias/img/jingai_03.webp"
+                                    data-synopsis="Sou Rei Hitoma, um misantropo autoproclamado devido a alguns traumas passados. Justamente quando pensei que meu novo emprego de professor nas montanhas proporcionaria um ambiente tranquilo e rejuvenescedor, descobri que esta escola é, na verdade, para demi-humanos que querem se tornar seres humanos completos!<br>Há uma sereia, um lobisomem, um coelho e um pássaro... todos os quais agora são meus alunos. É meu dever ensiná-los sobre a humanidade."
+                                    data-genre="Drama, Escolar, Sobrenatural"
+                                    data-director-link="https://anidb.net/creator/8022"
+                                    data-director="Iwanaga Akira"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Arifureta, Corpse Party, Kingdom (2013)"
+                                    data-studio-link="https://anidb.net/creator/1012"
+                                    data-studio="../../../Estúdios/asread.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Arifureta, Yuuna-san, Big Order"
+                                    data-time="11/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/19564"
+                                    data-mal="https://myanimelist.net/anime/62432"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://www.youtube.com/watch?v=QG5wbDblF8E"
+                                    data-caption1="Trailer"
+                                    data-video2="false"
+                                    data-caption2=""
+                                    data-video3="false"
+                                    data-caption3="">
+                                    <img src="Estréias/img/jingai.webp" class="image">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-title="Tamon-kun Ima Docchi!?"
+                                    data-title-english="Tamon's B-Side"
+                                    data-thumb1="Estréias/img/tamon.webp"
+                                    data-thumb2="Estréias/img/tamon_02.jpg"
+                                    data-synopsis="A estudante do ensino médio Utage Kinoshita trabalha meio período como empregada doméstica para poder bancar sua obsessão de fã por Tamon Fukuhara, seu membro favorito da boy band F/ACE. Quando o trabalho a envia por acaso para a casa de seu ídolo, ela descobre que o verdadeiro Tamon não poderia ser mais diferente de sua persona selvagem e sexy no palco!"
+                                    data-genre="Comédia, Romance, Shoujo"
+                                    data-director-link="https://anidb.net/creator/28453"
+                                    data-director="Nagaoka Chika"
+                                    data-director2-link=""
+                                    data-director2=""
+                                    data-director-works="Detective Conan, Uta no Prince-sama"
+                                    data-studio-link="https://anidb.net/creator/720"
+                                    data-studio="../../../Estúdios/J.C.Staff.png"
+                                    data-studio2-link=""
+                                    data-studio2=""
+                                    data-studio-works="Index, Honey Lemon Soda, Dungeon ni Deai"
+                                    data-time="01/01"
+                                    data-duration="12"
+                                    data-type="Estréia - TV"
+                                    data-commentary=""
+                                    data-anidb="https://anidb.net/anime/18681"
+                                    data-mal="https://myanimelist.net/anime/59047"
+                                    data-cr="nolink"
+                                    data-netflix="false"
+                                    data-youtube="false"
+                                    data-disney="false"
+                                    data-video1="https://youtu.be/ZcQYOsBqwAQ"
+                                    data-caption1="PV 1"
+                                    data-video2="https://youtu.be/GIOzUu_oRec"
+                                    data-caption2="PV 2"
+                                    data-video3="false">
+                                    <img src="Estréias/img/tamon.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
                                 <span class="star"><i class="far fa-star"></i></span>
@@ -416,17 +751,12 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/hana-teaser.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/9feK5OU8LnM/maxresdefault.jpg"
                                     data-caption1="Teaser"
                                     data-subtitle1="Estréias/trailers/hana-teaser.vtt"
                                     data-video2="Estréias/trailers/hana-trailer.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/yfnOQr_hG1s/maxresdefault.jpg"
                                     data-caption2="Trailer"
                                     data-subtitle2="Estréias/trailers/hana-trailer.vtt"
-                                    data-video3="false"
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="false">
+                                    data-video3="false">
                                     <img src="Estréias/img/hana.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -462,17 +792,9 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/majutsushin-teaser.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/FInmR1F31Ho/maxresdefault.jpg"
                                     data-caption1="Teaser"
                                     data-subtitle1="Estréias/trailers/majutsushin-teaser.vtt"
-                                    data-video2="false"
-                                    data-poster2=""
-                                    data-caption2=""
-                                    data-subtitle2="false"
-                                    data-video3="false"
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="false">
+                                    data-video2="false">
                                     <img src="Estréias/img/majutsushin.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -509,17 +831,12 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/nikki-pv1.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/m1LtPWp8BbM/maxresdefault.jpg"
                                     data-caption1="PV 1"
                                     data-subtitle1="Estréias/trailers/nikki-pv1.vtt"
                                     data-video2="Estréias/trailers/nikki-pv2.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/Cbm6m_WfmqI/maxresdefault.jpg"
                                     data-caption2="PV 2"
                                     data-subtitle2="Estréias/trailers/nikki-pv2.vtt"
-                                    data-video3="false"
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="false">
+                                    data-video3="false">
                                     <img src="Estréias/img/nikki.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -555,17 +872,12 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/goumon-teaser.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/RTevzaviDws/maxresdefault.jpg"
                                     data-caption1="Teaser"
                                     data-subtitle1="Estréias/trailers/goumon-teaser.vtt"
                                     data-video2="Estréias/trailers/goumon-pv.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/adYllv555BE/maxresdefault.jpg"
                                     data-caption2="PV"
                                     data-subtitle2="Estréias/trailers/goumon-pv.vtt"
-                                    data-video3="false"
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="false">
+                                    data-video3="false">
                                     <img src="Estréias/img/goumon.jpeg" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -603,63 +915,12 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/kirei-trailer.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/eVcuNh1OIEY/maxresdefault.jpg"
                                     data-caption1="PV 1"
                                     data-subtitle1="Estréias/trailers/kirei-trailer.vtt"
                                     data-video2=""
-                                    data-poster2=""
-                                    data-caption2=""
-                                    data-subtitle2=""
                                     data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
+                                    data-caption2="">
                                     <img src="Estréias/img/kirei.avif" class="image">
-                                    <div class="title-overlay"></div>
-                                </a>
-                                <span class="star"><i class="far fa-star"></i></span>
-                            </div>
-
-                            <div class="image-container">
-                                <a href="#banner" class="anime-card-trigger"
-                                    data-title="Yuusha Party wo Oidasareta Kiyou binbou"
-                                    data-title-english="Jack-of-All-Trades, Party of None"
-                                    data-thumb1="Estréias/img/yuusha.webp"
-                                    data-synopsis="Traído por seu amigo de infância e expulso do Grupo do Herói, Orhun Dura — outrora seu leal Encantador — é rotulado por seus antigos companheiros como &quot;faz-tudo, mas mestre em nada&quot;. Sozinho, ele parte para forjar um novo caminho como aventureiro solo."
-                                    data-genre="Ação, Aventura, Fantasia"
-                                    data-director-link="https://anidb.net/creator/2155"
-                                    data-director="Kanbe Hiroyuki"
-                                    data-director2-link=""
-                                    data-director2=""
-                                    data-director-works="Plunderer, Ore no Imouto"
-                                    data-studio-link="https://anidb.net/creator/80354"
-                                    data-studio="../../../Estúdios/studio_42.webp"
-                                    data-studio2-link=""
-                                    data-studio2=""
-                                    data-studio-works="Primeiro trabalho"
-                                    data-time="01/01"
-                                    data-duration="12"
-                                    data-type="Estréia - TV"
-                                    data-commentary=""
-                                    data-anidb="https://anidb.net/anime/19190"
-                                    data-mal="https://myanimelist.net/anime/61128"
-                                    data-cr="nolink"
-                                    data-netflix="false"
-                                    data-youtube="false"
-                                    data-disney="false"
-                                    data-video1="Estréias/trailers/yuusha-trailer.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/R-8hamGLZww/maxresdefault.jpg"
-                                    data-caption1="Trailer"
-                                    data-subtitle1=""
-                                    data-video2=""
-                                    data-poster2=""
-                                    data-caption2=""
-                                    data-subtitle2=""
-                                    data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
-                                    <img src="Estréias/img/yuusha.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
                                 <span class="star"><i class="far fa-star"></i></span>
@@ -694,17 +955,11 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/maou-trailer.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/TYc1GegToJ0/maxresdefault.jpg"
                                     data-caption1="Trailer"
                                     data-subtitle1=""
                                     data-video2=""
-                                    data-poster2=""
-                                    data-caption2=""
-                                    data-subtitle2=""
                                     data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
+                                    data-caption2="">
                                     <img src="Estréias/img/maou.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -740,17 +995,12 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/isekai-trailer.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/cX5gmf2hVjg/maxresdefault.jpg"
                                     data-caption1="Trailer"
                                     data-subtitle1=""
                                     data-video2="Estréias/trailers/isekai-teaser.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/RCOw3iF5AmI/maxresdefault.jpg"
                                     data-caption2="Teaser"
-                                    data-subtitle2=""
                                     data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
+                                    data-caption3="">
                                     <img src="Estréias/img/isekai.jpg" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -786,64 +1036,13 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/mayonaka-pv.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/RMG3mgS0LJE/maxresdefault.jpg"
                                     data-caption1="PV 1"
                                     data-subtitle1=""
                                     data-video2="Estréias/trailers/mayonaka-pv2.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/poUibdNvxPQ/maxresdefault.jpg"
                                     data-caption2="PV 2"
-                                    data-subtitle2=""
                                     data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
+                                    data-caption3="">
                                     <img src="Estréias/img/mayonaka.jpeg" class="image">
-                                    <div class="title-overlay"></div>
-                                </a>
-                                <span class="star"><i class="far fa-star"></i></span>
-                            </div>
-
-                            <div class="image-container">
-                                <a href="#banner" class="anime-card-trigger"
-                                    data-title="Yuusha Party ni Kawaii Ko ga Ita node, Kokuhaku shitemita."
-                                    data-title-english="There was a Cute Girl in the Hero's Party, so I Tried Confessing to Her"
-                                    data-thumb1="Estréias/img/kawaii.jpeg"
-                                    data-thumb2="Estréias/img/kawaii_02.webp"
-                                    data-synopsis="Reencarnado como um demônio de nível médio, Youki tinha um trabalho: destruir o grupo do herói. Então ele viu a sacerdotisa do grupo, Cecília, e se apaixonou perdidamente por ela. Agora, este demônio apaixonado jura confessar seus sentimentos, mesmo que isso signifique trair o Rei Demônio."
-                                    data-genre="Aventura, Comédia, Fantasia, Isekai, Romance"
-                                    data-director-link="https://anidb.net/creator/2172"
-                                    data-director="Yamamoto Yasutaka"
-                                    data-director2-link=""
-                                    data-director2=""
-                                    data-director-works="Medalist, Nokemono-tachi no Yoru, Nekopara"
-                                    data-studio-link="https://anidb.net/creator/68440"
-                                    data-studio="../../../Estúdios/gekkou.jpg"
-                                    data-studio2-link=""
-                                    data-studio2=""
-                                    data-studio-works="Jiisan Baasan, Tenpuru, Isekai Onee-san"
-                                    data-time="06/01"
-                                    data-duration="12"
-                                    data-type="Estréia - TV"
-                                    data-commentary=""
-                                    data-anidb="https://anidb.net/anime/19440"
-                                    data-mal="https://myanimelist.net/anime/61983"
-                                    data-cr="nolink"
-                                    data-netflix="false"
-                                    data-youtube="false"
-                                    data-disney="false"
-                                    data-video1="Estréias/trailers/kawaii-trailer.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/EIlO6O5W2Ag/maxresdefault.jpg"
-                                    data-caption1="Trailer"
-                                    data-subtitle1=""
-                                    data-video2="Estréias/trailers/kawaii-teaser.mp4"
-                                    data-poster2="https://i.ytimg.com/vi/y09mmrgJNR8/maxresdefault.jpg"
-                                    data-caption2="Teaser"
-                                    data-subtitle2=""
-                                    data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
-                                    <img src="Estréias/img/kawaii.jpeg" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
                                 <span class="star"><i class="far fa-star"></i></span>
@@ -877,17 +1076,11 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="Estréias/trailers/arne-trailer.mp4"
-                                    data-poster1="https://i.ytimg.com/vi/k36-zQohgzs/maxresdefault.jpg"
                                     data-caption1="Trailer"
                                     data-subtitle1=""
                                     data-video2=""
-                                    data-poster2=""
-                                    data-caption2=""
-                                    data-subtitle2=""
                                     data-video3=""
-                                    data-poster3=""
-                                    data-caption3=""
-                                    data-subtitle3="">
+                                    data-caption2="">
                                     <img src="Estréias/img/arne.webp" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
