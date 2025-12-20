@@ -325,6 +325,8 @@ details summary{
     justify-content: space-between; /* Alinha itens nas extremidades */
     align-items: center;
     margin-bottom: 24px;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha em telas pequenas */
+    gap: 16px; /* Adiciona espaço quando os itens quebram a linha */
     color: var(--muted);
     font-weight: 600;
 }
@@ -894,11 +896,8 @@ details summary{
 .volume-slider {
   width: 70px;
   cursor: pointer;
-  display: none; /* Hidden by default, shown on hover */
-}
-
-.volume-btn:hover + .volume-slider,
-.volume-slider:hover {
+  /* O slider agora fica sempre visível para ser compatível com mobile. */
+  /* A barra de controles como um todo só aparece no hover do container do vídeo. */
   display: inline-block;
 }
 
@@ -938,17 +937,26 @@ details summary{
 .to-top:hover { transform: scale(1.1); }
 
 /* ================= RESPONSIVE ================= */
-@media(max-width:768px){
-  #anime-chart{
-    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  }
-  .image-container img.image{height:240px;}
+/* Tablet (até 1024px) - 3 colunas */
+@media (max-width: 1024px) {
+    .image-container {
+        max-width: calc(33.333% - 16px);
+    }
 }
-@media(max-width:480px){
-  #anime-chart{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
-  .image-container img.image{height:200px;}
-  .image-container .star{width:36px;height:36px;}
-  .image-container .star i{font-size:16px;}
+
+/* Mobile (até 768px) - 2 colunas */
+@media (max-width: 768px) {
+    .image-container {
+        max-width: calc(50% - 12px);
+    }
+    .image-container img.image { height: 240px; }
+}
+
+/* Small Mobile (até 480px) */
+@media (max-width: 480px) {
+    .image-container img.image { height: 220px; }
+    .image-container .star { width: 36px; height: 36px; }
+    .image-container .star i { font-size: 16px; }
 }
 
 @media(max-width:880px){
@@ -1007,6 +1015,6 @@ details summary{
 
 @media(max-width:500px){
   .animeCard{padding:16px;}
-  .anime-card h2{font-size:22px;}
+  .anime-card h2{font-size:20px;}
   .trailer{grid-template-columns:1fr;}
 }
