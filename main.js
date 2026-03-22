@@ -17,6 +17,257 @@ toTop.addEventListener('click', (e) => {
   });
 });
 
+// --- CARREGAMENTO DA API DO YOUTUBE ---
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// Esta função será chamada pela API do YouTube quando estiver pronta.
+function onYouTubeIframeAPIReady() {
+    // A API está pronta.
+}
+
+// Função para abrir o modal de vídeo
+function openVideoModal(vData, playerIndex) {
+    const modal = document.getElementById('video-modal');
+    const modalPlayer = document.getElementById('video-modal-player');
+    const modalTitle = document.getElementById('video-modal-title');
+
+    if (!modal) {
+        console.error('Modal element not found!');
+        return;
+    }
+    if (!modalPlayer) {
+        console.error('Modal player element not found!');
+        return;
+    }
+    if (!modalTitle) {
+        console.error('Modal title element not found!');
+        return;
+    }
+
+    // Garante que os controles estejam visíveis
+    const controls = modal.querySelector('.video-modal-controls');
+    if (controls) {
+        controls.style.display = 'flex';
+    }
+
+    // Define o título do modal
+    modalTitle.textContent = vData.caption || 'Vídeo';
+
+    // Limpa o player anterior
+    modalPlayer.innerHTML = '';
+
+    // Limpa qualquer intervalo de progresso anterior
+    if (window.currentProgressInterval) {
+        clearInterval(window.currentProgressInterval);
+        window.currentProgressInterval = null;
+    }
+
+    // Destrói players antigos
+    if (window.currentModalPlayer) {
+        if (typeof window.currentModalPlayer.destroy === 'function') {
+            window.currentModalPlayer.destroy();
+        }
+        window.currentModalPlayer = null;
+    }
+
+    const videoId = getYouTubeVideoId(vData.video);
+
+    if (videoId) {
+        // Cria player do YouTube no modal
+        const player = new YT.Player('video-modal-player', {
+            videoId: videoId,
+            playerVars: {
+                'playsinline': 1,
+                'controls': 0,
+                'rel': 0,
+                'modestbranding': 1,
+                'cc_lang_pref': 'pt',
+                'cc_load_policy': 1,
+                'autoplay': 1  // Auto-play quando abrir o modal
+            },
+            events: {
+                'onReady': (event) => {
+                    // Tenta ativar legendas automaticamente com delay para garantir que o player esteja pronto
+                    setTimeout(() => {
+                        try {
+                            const player = event.target;
+                            
+                            // Primeiro tenta carregar o módulo de legendas
+                            player.loadModule('captions');
+                            
+                            // Lista de idiomas preferidos (português primeiro, depois inglês)
+                            const preferredLanguages = ['pt', 'pt-BR', 'pt-PT', 'en', 'en-US', 'en-GB'];
+                            
+                            // Pequeno delay adicional para o módulo carregar
+                            setTimeout(() => {
+                                try {
+                                    // Tenta obter a lista de tracks de legenda
+                                    const captionTracks = player.getOption('captions', 'tracklist') || [];
+                                    
+                                    console.log('Tracks de legenda disponíveis:', captionTracks);
+                                    
+                                    if (captionTracks.length > 0) {
+                                        // Procura por uma legenda nos idiomas preferidos
+                                        let selectedTrack = null;
+                                        for (const lang of preferredLanguages) {
+                                            selectedTrack = captionTracks.find(track => 
+                                                track.languageCode === lang || 
+                                                track.languageCode.startsWith(lang.split('-')[0])
+                                            );
+                                            if (selectedTrack) break;
+                                        }
+                                        
+                                        if (selectedTrack) {
+                                            // Ativa a legenda encontrada
+                                            player.setOption('captions', 'track', selectedTrack);
+                                            console.log('Legendas ativadas automaticamente:', selectedTrack.languageCode);
+                                        } else {
+                                            // Nenhuma legenda nos idiomas preferidos, desativa
+                                            player.setOption('captions', 'track', {});
+                                            console.log('Nenhuma legenda em português ou inglês encontrada, desativando');
+                                        }
+                                    } else {
+                                        // Não há legendas disponíveis
+                                        console.log('Vídeo sem legendas disponíveis');
+                                    }
+                                } catch (e) {
+                                    console.warn('Erro ao acessar tracks de legenda:', e);
+                                    // Fallback: tenta desativar legendas
+                                    try {
+                                        player.setOption('captions', 'track', {});
+                                    } catch (fallbackError) {
+                                        console.warn('Erro no fallback de legendas:', fallbackError);
+                                    }
+                                }
+                            }, 1000);
+                            
+                        } catch (e) {
+                            console.warn('Erro ao configurar legendas automaticamente:', e);
+                        }
+                    }, 500);
+                    
+                    // Inicializa os controles customizados
+                    initializeCustomControls(modal, event.target, 'youtube');
+                },
+                'onError': (event) => {
+                    console.error('Erro ao carregar vídeo do YouTube:', vData.video, 'Código de erro:', event.data);
+                    modalPlayer.innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #000; color: #fff; padding: 20px; text-align: center;">
+                            <div>
+                                <i class="fab fa-youtube" style="font-size: 64px; margin-bottom: 20px;"></i>
+                                <br>
+                                <p style="font-size: 18px; margin-bottom: 20px;">Vídeo não disponível para incorporação</p>
+                                <a href="${vData.video}" target="_blank" style="color: #ff0000; text-decoration: none; font-size: 20px; padding: 10px 20px; border: 2px solid #ff0000; border-radius: 5px;">
+                                    Ver no YouTube
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        });
+        window.currentModalPlayer = player;
+    } else {
+        // Link não reconhecido
+        const isXLink = isTwitterUrl(vData.video);
+        const iconClass = isXLink ? 'fa-brands fa-x-twitter' : 'fab fa-youtube';
+        const iconColor = isXLink ? '#ffffff' : '#ff0000';
+        const linkText = isXLink ? 'Abrir postagem original' : 'Ver no YouTube';
+        modalPlayer.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #000; color: #fff; padding: 20px; text-align: center;">
+                <div>
+                    <i class="${iconClass}" style="font-size: 64px; margin-bottom: 20px; color: ${iconColor};"></i>
+                    <br>
+                    <a href="${vData.video}" target="_blank" style="color: ${iconColor}; text-decoration: none; font-size: 20px; padding: 10px 20px; border: 2px solid ${iconColor}; border-radius: 5px;">
+                        ${linkText}
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+
+    // Mostra o modal
+    modal.classList.add('active');
+
+    // Fecha o modal ao clicar fora do conteúdo
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            closeVideoModal();
+        }
+    };
+
+    // Fecha o modal com tecla ESC
+    document.addEventListener('keydown', handleEscapeKey);
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('video-modal');
+    if (modal) {
+        modal.classList.remove('active');
+
+        // Limpa o intervalo de atualização do progresso
+        if (window.currentProgressInterval) {
+            clearInterval(window.currentProgressInterval);
+            window.currentProgressInterval = null;
+        }
+
+        // Destrói o player atual
+        if (window.currentModalPlayer) {
+            if (typeof window.currentModalPlayer.destroy === 'function') {
+                window.currentModalPlayer.destroy();
+            }
+            window.currentModalPlayer = null;
+        }
+    }
+    document.removeEventListener('keydown', handleEscapeKey);
+}
+
+function handleEscapeKey(e) {
+    if (e.key === 'Escape') {
+        closeVideoModal();
+    }
+}
+
+// Função para extrair o ID de um link do YouTube
+function getYouTubeVideoId(url) {
+    if (!url || url === "false") return null;
+    let videoId = null;
+    try {
+        // Remove query parameters e hash se existirem
+        const cleanUrl = url.split('?')[0].split('#')[0];
+        const urlObj = new URL(cleanUrl);
+        
+        if (urlObj.hostname === 'youtu.be') {
+            videoId = urlObj.pathname.slice(1).split('/')[0];
+        } else if (urlObj.hostname.includes('youtube.com')) {
+            if (urlObj.pathname === '/watch') {
+                // Tenta pegar do URL original se tem parâmetros
+                const originalUrl = new URL(url);
+                videoId = originalUrl.searchParams.get('v');
+            } else if (urlObj.pathname.startsWith('/embed/')) {
+                videoId = urlObj.pathname.split('/')[2];
+            } else if (urlObj.pathname.startsWith('/live/')) {
+                videoId = urlObj.pathname.split('/')[2];
+            } else if (urlObj.pathname.startsWith('/shorts/')) {
+                videoId = urlObj.pathname.split('/')[2];
+            } else if (urlObj.pathname.startsWith('/v/')) {
+                videoId = urlObj.pathname.split('/')[2];
+            }
+        }
+        
+        // Valida se o ID tem o formato correto (11 caracteres alfanuméricos, underscore, hífen)
+        if (videoId && !/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+            videoId = null;
+        }
+    } catch (e) { 
+        console.warn('Erro ao parsear URL do YouTube:', url, e);
+    }
+    return videoId;
+}
+
 // // ------------------- Topnav Function --------------------------------------------------------------------------------------------------------------------------------
 // Mobile nav: robust toggle + click-outside + Escape to close
 function toggleMobileNav(open) {
@@ -545,6 +796,25 @@ class AnimeCardManager {
         if (element && text !== undefined) element.innerHTML = text;
     }
 
+    // Função específica para comentário (pode ser texto ou imagem)
+    _setCommentary(text) {
+        const element = this.elements.commentary;
+        if (!element) return;
+
+        // Se for URL de imagem, exibe como sticker
+        if (typeof text === 'string' && /^https?:\/\//i.test(text)) {
+            const isDirectImage = /\.(png|jpe?g|webp|gif)(\?.*)?$/i.test(text);
+            const isGoogleThumb = /tbn:|gstatic\.com|googleusercontent\.com/i.test(text);
+            if (isDirectImage || isGoogleThumb) {
+                element.innerHTML = `<img src="${text}" alt="Comentário" class="commentary-sticker">`;
+                return;
+            }
+        }
+
+        // Caso padrão: texto com eventuais quebras de linha
+        element.innerHTML = text;
+    }
+
     // Função genérica para configurar links
     _setLink(element, url, imageElement) {
         if (!element) return;
@@ -632,7 +902,7 @@ class AnimeCardManager {
         this._setText(this.elements.time, data.time);
         this._setText(this.elements.duration, data.duration);
         this._setText(this.elements.type, data.type);
-        this._setText(this.elements.commentary, data.commentary);
+        this._setCommentary(data.commentary);
 
         // Configura links
         this._setLink(this.elements.anidb, data.anidb);
@@ -678,29 +948,6 @@ class AnimeCardManager {
         }
         window.videoPlayers = [];
 
-        // Função para extrair o ID de um link do YouTube
-        function getYouTubeVideoId(url) {
-            if (!url) return null;
-            let videoId = null;
-            try {
-                const urlObj = new URL(url);
-                if (urlObj.hostname === 'youtu.be') {
-                    videoId = urlObj.pathname.slice(1);
-                } else if (urlObj.hostname.includes('youtube.com')) {
-                    if (urlObj.pathname === '/watch') {
-                        videoId = urlObj.searchParams.get('v');
-                    } else if (urlObj.pathname.startsWith('/embed/')) {
-                        videoId = urlObj.pathname.split('/')[2];
-                    } else if (urlObj.pathname.startsWith('/live/')) {
-                        videoId = urlObj.pathname.split('/')[2];
-                    } else if (urlObj.pathname.startsWith('/shorts/')) {
-                        videoId = urlObj.pathname.split('/')[2];
-                    }
-                }
-            } catch (e) { /* URL inválida, ignora */ }
-            return videoId;
-        }
-
         this.elements.videoContainers.forEach((container, index) => {
             const vData = videoData[index];
             const playerId = `video-player-${index + 1}`;
@@ -714,56 +961,61 @@ class AnimeCardManager {
                 container.style.display = 'flex';
                 this._setText(captionSpan, vData.caption);
 
-                const videoId = getYouTubeVideoId(vData.video);
+                // Cria uma thumbnail/placeholder clicável em vez do player completo
+                const thumbnailDiv = document.createElement('div');
+                thumbnailDiv.className = 'video-thumbnail';
 
-                if (videoId) { // É um vídeo do YouTube
-                    const player = new YT.Player(playerId, {
-                        videoId: videoId,
-                        playerVars: {
-                            'playsinline': 1,
-                            'controls': 0,          // Desativa completamente os controles nativos do YouTube
-                            'rel': 0,               // Não mostra vídeos relacionados no final
-                            'modestbranding': 1,    // Logo do YouTube menor
-                            'cc_lang_pref': 'pt',   // Define português como idioma preferencial da legenda
-                            'cc_load_policy': 1     // Força a exibição de legendas por padrão
-                        },
-                        events: {
-                            'onReady': (event) => {
-                                // Tenta definir a qualidade para a mais alta disponível
-                                const qualityLevels = event.target.getAvailableQualityLevels();
-                                if (qualityLevels && qualityLevels.length > 0) {
-                                    event.target.setPlaybackQuality(qualityLevels[0]);
-                                }
-                                initializeCustomControls(container, event.target, 'youtube');
-                            },
-                            'onStateChange': (event) => {
-                                // Pausa outros players quando este começar
-                                if (event.data === YT.PlayerState.PLAYING) {
-                                    window.videoPlayers.forEach(p => {
-                                        // Verifica se é um player do YouTube e não é ele mesmo
-                                        if (p && typeof p.pauseVideo === 'function' && p !== player) {
-                                            p.pauseVideo();
-                                        }
-                                        // Verifica se é um player HTML5
-                                        else if (p && typeof p.pause === 'function' && p.tagName === 'VIDEO') {
-                                            p.pause();
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    });
-                    window.videoPlayers.push(player);
+                const videoId = getYouTubeVideoId(vData.video);
+                if (videoId) {
+                    // Thumbnail para YouTube
+                    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                    thumbnailDiv.innerHTML = `
+                        <img src="${thumbnailUrl}" alt="${vData.caption}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px);">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </div>
+                    `;
+                } else if (isTwitterUrl(vData.video)) {
+                    // Thumbnail para Twitter/X
+                    console.log('Criando thumbnail para Twitter:', vData.video);
+                    thumbnailDiv.innerHTML = `
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; pointer-events: none;">
+                            <i class="fa-brands fa-x-twitter" style="font-size: 48px;"></i>
+                        </div>
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+                    `;
                 } else {
-                    // É um vídeo local (HTML5)
-                    const videoElement = document.createElement('video');
-                    videoElement.className = 'video-player';
-                    videoElement.src = vData.video;
-                    
-                    playerContainer.appendChild(videoElement);
-                    initializeCustomControls(container, videoElement, 'html5');
-                    window.videoPlayers.push(videoElement);
+                    // Placeholder para outros
+                    thumbnailDiv.innerHTML = `
+                        <div style="width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white;">
+                            <i class="fas fa-play-circle" style="font-size: 48px;"></i>
+                        </div>
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px);">
+                            <i class="fas fa-external-link-alt"></i> Link
+                        </div>
+                    `;
                 }
+
+                // Adiciona evento de clique para abrir modal
+                thumbnailDiv.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Thumbnail clicked for video:', vData.caption, 'URL:', vData.video);
+                    if (typeof openVideoModal === 'function') {
+                        console.log('Calling openVideoModal');
+                        openVideoModal(vData, index + 1);
+                    } else {
+                        console.error('openVideoModal function not found');
+                    }
+                });
+
+                playerContainer.appendChild(thumbnailDiv);
+
+                // Remove os controles inline já que agora usamos modal
+                const controls = container.querySelector('.video-controls');
+                if (controls) controls.style.display = 'none';
             } else {
                 container.style.display = 'none';
             }
@@ -817,6 +1069,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Preenche os títulos assim que a página carrega
     populateTitleOverlays();
+
+    // Pré‑carrega todas as imagens visíveis para popularem o cache do navegador
+    function preloadAllImages() {
+        const selectors = ['.image-container img', '.slideshow-container img'];
+        selectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(img => {
+                const src = img.dataset.src || img.src;
+                if (src) {
+                    const picture = new Image();
+                    picture.src = src;
+                }
+            });
+        });
+    }
+    preloadAllImages();
 
     let currentGenreFilter = 'all';
     let currentTypeFilter = 'all';
@@ -1063,17 +1330,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // A inicialização agora é feita pela função `initializeCustomControls`
     // para poder lidar com players criados dinamicamente (HTML5 e YouTube).
     window.initializeCustomControls = (container, player, type) => {
-        const playPauseBtn = container.querySelector('.play-pause-btn');
-        const playPauseIcon = playPauseBtn.querySelector('i');
-        const progressBar = container.querySelector('.progress-bar');
-        const progressBarContainer = container.querySelector('.progress-bar-container');
-        const timeDisplay = container.querySelector('.time-display');
-        const volumeBtn = container.querySelector('.volume-btn');
-        const volumeIcon = volumeBtn.querySelector('i');
-        const volumeSlider = container.querySelector('.volume-slider');
-        const fullscreenBtn = container.querySelector('.fullscreen-btn');
-        const youtubeSubsBtn = container.querySelector('.youtube-subs-btn');
-
+        // Detecta se estamos no modal ou em um container inline
+        const isModal = container.id === 'video-modal';
+    const playPauseBtn = container.querySelector(isModal ? '.video-modal-controls .play-pause-btn' : '.play-pause-btn');
+    const playPauseIcon = playPauseBtn.querySelector('i');
+    const progressBar = container.querySelector(isModal ? '.video-modal-controls .progress-bar' : '.progress-bar');
+    const progressBarContainer = container.querySelector(isModal ? '.video-modal-controls .progress-bar-container' : '.progress-bar-container');
+    const timeDisplay = container.querySelector(isModal ? '.video-modal-controls .time-display' : '.time-display');
+    const volumeBtn = container.querySelector(isModal ? '.video-modal-controls .volume-btn' : '.volume-btn');
+    const volumeIcon = volumeBtn.querySelector('i');
+    const volumeSlider = container.querySelector(isModal ? '.video-modal-controls .volume-slider' : '.volume-slider');
         let progressInterval;
 
         // --- Funções de Controle ---
@@ -1108,9 +1374,16 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateProgress() {
             const currentTime = type === 'youtube' ? player.getCurrentTime() : player.currentTime;
             const duration = type === 'youtube' ? player.getDuration() : player.duration;
-            const progressPercentage = (currentTime / duration) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
-            timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration || 0)}`;
+            
+            // Só atualiza se a duração for válida
+            if (duration && duration > 0 && !isNaN(currentTime)) {
+                const progressPercentage = (currentTime / duration) * 100;
+                progressBar.style.width = `${Math.min(progressPercentage, 100)}%`;
+                timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+            } else {
+                // Se não temos duração válida, mostra apenas o tempo atual
+                timeDisplay.textContent = `${formatTime(currentTime)} / 0:00`;
+            }
         }
 
         function scrub(e) {
@@ -1165,23 +1438,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                const elementToFullscreen = type === 'youtube' ? player.getIframe() : player;
-                elementToFullscreen.closest('.video-player-container').requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
-        }
-        
-        function openYouTubeSubtitlesMenu() {
-            if (type === 'youtube') {
-                player.loadModule('captions'); // Abre o menu de legendas nativo
-            }
-        }
-
         function formatTime(seconds) {
             if (isNaN(seconds)) return "0:00";
             const minutes = Math.floor(seconds / 60);
@@ -1210,27 +1466,152 @@ document.addEventListener('DOMContentLoaded', () => {
             // O clique é tratado pelo `playVideo` e `pauseVideo`
             // O estado é verificado com `getPlayerState`
             // A atualização do progresso precisa de um intervalo
-            progressInterval = setInterval(() => {
-                updateProgress();
+            window.currentProgressInterval = setInterval(() => {
+                // Só atualiza se o vídeo estiver carregado e tocando
+                if (player.getDuration && player.getDuration() > 0) {
+                    updateProgress();
+                }
                 updatePlayPauseIcon();
-            }, 250);
+            }, 500); // Aumentado para 500ms para reduzir flickering
         }
 
         playPauseBtn.addEventListener('click', togglePlayPause);
         progressBarContainer.addEventListener('click', scrub);
         volumeBtn.addEventListener('click', toggleMute);
         volumeSlider.addEventListener('input', handleVolumeChange);
-        fullscreenBtn.addEventListener('click', toggleFullscreen);
-
-        // Mostra e configura o botão de legendas apenas para YouTube
-        if (type === 'youtube' && youtubeSubsBtn) {
-            youtubeSubsBtn.style.display = 'inline-block';
-            youtubeSubsBtn.addEventListener('click', openYouTubeSubtitlesMenu);
-            youtubeSubsBtn.classList.add('subtitles-active'); // Deixa o botão ativo para indicar que a função existe
-        }
 
         // Inicializa os ícones e o tempo
         updateVolumeIcon();
         updateProgress();
     };
+});
+
+// Função para detectar URLs do Twitter/X
+function isTwitterUrl(url) {
+    if (!url || url === "false") return false;
+    try {
+        const urlObj = new URL(url);
+        return urlObj.hostname === 'x.com' || urlObj.hostname === 'twitter.com';
+    } catch (e) {
+        return false;
+    }
+}
+
+// Lógica para os cards de anime
+document.addEventListener('DOMContentLoaded', () => {
+    const animeCards = document.querySelectorAll('.anime-card-trigger');
+    const animeModal = document.getElementById('anime-card');
+
+    if (!animeModal) {
+        console.error('Anime modal not found');
+        return;
+    }
+
+    animeCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            const data = card.dataset;
+            console.log('Card clicked, data.video2:', data.video2);
+
+            // Preenche o modal com dados básicos (adapte conforme necessário)
+            // ...
+
+            // Vídeos
+            const videoContainers = animeModal.querySelectorAll('.video-player-container');
+            const videoData = [
+                { video: data.video1, caption: data.caption1 },
+                { video: data.video2, caption: data.caption2 },
+                { video: data.video3, caption: data.caption3 }
+            ];
+
+            videoContainers.forEach((container, index) => {
+                const vData = videoData[index];
+                const playerContainer = container.querySelector('.video-player');
+                const captionEl = container.querySelector('.video-caption-text');
+
+                if (captionEl) captionEl.textContent = vData.caption || '';
+
+                if (vData.video && vData.video !== 'false' && playerContainer) {
+                    container.style.display = 'flex';
+
+                    // Cria thumbnail
+                    const thumbnailDiv = document.createElement('div');
+                    thumbnailDiv.className = 'video-thumbnail';
+                    thumbnailDiv.style.cursor = 'pointer';
+
+                    const videoId = getYouTubeVideoId(vData.video);
+                    if (videoId) {
+                        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                        thumbnailDiv.innerHTML = `
+                            <img src="${thumbnailUrl}" alt="${vData.caption}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; pointer-events: none;">
+                            <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
+                                <i class="fab fa-youtube"></i> YouTube
+                            </div>
+                        `;
+                    } else if (isTwitterUrl(vData.video)) {
+                        console.log('Criando thumbnail para Twitter:', vData.video);
+                        thumbnailDiv.innerHTML = `
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; pointer-events: none;">
+                                <i class="fa-brands fa-x-twitter" style="font-size: 48px;"></i>
+                            </div>
+                            <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </div>
+                        `;
+                    } else {
+                        thumbnailDiv.innerHTML = `
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; pointer-events: none;">
+                                <i class="fas fa-play-circle" style="font-size: 48px;"></i>
+                            </div>
+                            <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
+                                <i class="fas fa-external-link-alt"></i> Link
+                            </div>
+                        `;
+                    }
+
+                    // Evento de clique
+                    thumbnailDiv.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Thumbnail clicked for video:', vData.caption, 'URL:', vData.video);
+                        if (typeof openVideoModal === 'function') {
+                            console.log('Calling openVideoModal');
+                            openVideoModal(vData, index + 1);
+                        } else {
+                            console.error('openVideoModal function not found');
+                        }
+                    });
+
+                    // Limpa e adiciona
+                    playerContainer.innerHTML = '';
+                    playerContainer.appendChild(thumbnailDiv);
+
+                    // Esconde controles
+                    const controls = container.querySelector('.video-controls');
+                    if (controls) controls.style.display = 'none';
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+
+            // Mostra o modal
+            animeModal.style.display = 'block';
+            setTimeout(() => animeModal.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+        });
+    });
+
+    // Fechar modal
+    const closeBtn = animeModal.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            animeModal.style.display = 'none';
+        });
+    }
+
+    // Fechar ao clicar fora
+    window.addEventListener('click', (e) => {
+        if (e.target === animeModal) {
+            animeModal.style.display = 'none';
+        }
+    });
 });
