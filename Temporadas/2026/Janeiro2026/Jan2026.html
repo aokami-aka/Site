@@ -10,7 +10,90 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href="Jan2026.css" rel="stylesheet" type="text/css" />    
+    <!-- Estilos Globais Reutilizáveis -->
+    <link href="../../../style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Customizações Específicas da Temporada (Janeiro 2026) -->
+    <style>
+        :root {
+            --primary-color: #01c3f3;
+            --season-gradient: linear-gradient(180deg, rgba(7, 39, 39, 0.85) 0%, rgba(15, 36, 35, 0.9) 60%);
+            --season-bg-image: url('../../../Temporadas/2026/Janeiro2026/Thumb_Jan_2026.jpg');
+        }
+
+        body.background {
+            background: var(--season-gradient), var(--season-bg-image);
+            background-repeat: repeat;
+            background-blend-mode: multiply;
+            background-size: auto, auto 100%;
+            background-position: center, 0 0;
+            animation: bgShift 70s linear infinite;
+            color: #00f7d6;
+        }
+
+        body.background::after {
+            background:
+                radial-gradient(circle at 20% 50%, rgba(110, 207, 231, 0.349) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(115,103,240,0.15) 0%, transparent 50%);
+        }
+
+        /* ================= VIDEO MODAL - ENERO 2026 CUSTOMIZATION ================= */
+        /* Barra de Progresso */
+        
+
+        .video-modal .progress-bar-container {
+            background: rgba(1, 195, 243, 0.2);
+            transition: background 0.2s ease;
+        }
+
+        .video-modal .progress-bar-container:hover {
+            background: rgba(1, 195, 243, 0.3);
+        }
+
+        /* Botões de Controle */
+        .video-modal .control-button {
+            background: rgba(1, 195, 243, 0.15);
+            border: 1px solid rgba(1, 195, 243, 0.4);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal .control-button:hover {
+            background: rgba(1, 243, 243, 0.3);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 12px rgba(1, 195, 243, 0.5);
+        }
+
+        /* Exibição de Tempo */
+        .video-modal .time-display {
+            color: var(--primary-color);
+            text-shadow: 0 0 4px rgba(1, 195, 243, 0.6);
+        }
+
+        /* Slider de Volume */
+        .video-modal .volume-slider {
+            accent-color: var(--primary-color);
+        }
+
+        .video-modal .volume-slider::-webkit-slider-thumb {
+            background: var(--primary-color);
+            box-shadow: 0 0 6px rgba(1, 195, 243, 0.8);
+        }
+
+        .video-modal .volume-slider::-moz-range-thumb {
+            background: var(--primary-color);
+            box-shadow: 0 0 6px rgba(1, 195, 243, 0.8);
+        }
+
+        /* Título do Modal */
+        .video-modal-title {
+            text-shadow: 0 0 8px rgba(1, 195, 243, 0.5);
+            background: rgba(1, 195, 243, 0.1);
+            border: 1px solid rgba(1, 195, 243, 0.3);
+        }
+    </style>
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
@@ -57,7 +140,7 @@
         <nav class="topnav" id="banner" aria-hidden="true" aria-label="Main navigation">
           <a href="../../../index.html" id="home"><i class="fa fa-home"></i> Página inicial</a>
           <a class="active" id="winter"><i class="far fa-snowflake"></i> Janeiro 2026</a>
-          <a id="spring"><i class="fa fa-leaf"></i> Abril 2026</a>
+          <a href="../Abril2026/Abr2026.html" id="spring"><i class="fa fa-leaf"></i> Abril 2026</a>
           <a id="summer"><i class="fas fa-sun"></i> Julho 2026</a>
           <a id="fall"><i class="fab fa-pagelines"></i> Outubro 2026</a>
         </nav>
@@ -268,12 +351,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/tf9rS5EJ3Nw"
-                                    data-caption1="Trailer"
-                                    data-video2="false"
-                                    data-caption2=""
-                                    data-video3="false"
-                                    data-caption3="">
+                                    data-video2="https://youtu.be/C0BG3B7aksU"
+                                    data-caption2="OP"
+                                    data-video3="https://youtu.be/FY4Bx2qtkRM"
+                                    data-caption3="ED">
                                     <img src="Estréias/img/frieren2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -307,10 +388,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/5QUyhQsXXtw"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/JLe_NUnAZVs"
-                                    data-caption2="PV 2">
+                                    data-video2="https://youtu.be/gHIA3Mhc618"
+                                    data-caption2="OP"
+                                    data-video3="https://youtu.be/N-Go4JtUw6U"
+                                    data-caption3="ED">
                                     <img src="Estréias/img/jigokuraku2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -345,12 +426,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/MePL_vS-G9Q"
-                                    data-caption1="Teaser"
-                                    data-video2="false"
-                                    data-caption2=""
-                                    data-video3="false"
-                                    data-caption3="">
+                                    data-video2="https://youtu.be/Xr032EhUDPw"
+                                    data-caption2="OP"
+                                    data-video3="https://youtu.be/-i8LR9-WVps"
+                                    data-caption3="ED">
                                     <img src="Estréias/img/jujutsu3.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -384,10 +463,12 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/HV5DcLBjN2I"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/IDgkCjcNxtU"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/zgLov1TFHL4"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/xu98V3Skptg"
+                                    data-caption2="ED"
+                                    data-video3="https://youtu.be/TyE-9Vv9VsE"
+                                    data-caption3="ED2">
                                     <img src="Estréias/img/seihei2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -425,10 +506,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/7UilRDldO_g"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/JGYY6Pui5Kc"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/QgIQbeRzkkc"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/ZWvFR00t-NE"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/oshi3.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -463,12 +544,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/voLZJvdwUEE"
-                                    data-caption1="Trailer"
-                                    data-video2="false"
-                                    data-caption2=""
-                                    data-video3="false"
-                                    data-caption3="">
+                                    data-video1="https://youtu.be/FsQ09FXk_0o"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/4NHzOOWEaY0"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/fire3.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -503,10 +582,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/RMG3mgS0LJE"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/poUibdNvxPQ"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/u3s8uBhwgw0"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/IbuQaaZjDLA"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/mayonaka.jpeg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -543,12 +622,8 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/B5qZX2kh-7w"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/CQmFO--_HwE"
-                                    data-caption2="PV 2"
-                                    data-video3="https://youtu.be/GcRs1JC7xeg"
-                                    data-caption3="PV 3">
+                                    data-video1="https://youtu.be/h4I4frynoOo"
+                                    data-caption1="OP">
                                     <img src="Estréias/img/shosu.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -583,12 +658,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/y09mmrgJNR8"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/EIlO6O5W2Ag"
-                                    data-caption2="Trailer"
-                                    data-video3=""
-                                    data-caption3="">
+                                    data-video1="https://youtu.be/vMS0pPsTAkw"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/xC1T9sGVs9g"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/kawaii.jpeg" class="image">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -627,10 +700,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/ZpK4Jvyt1JU"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/KjtdJQ7_rrY"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/rHNXbpFZIPM"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/9VGadzqRPII"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/fate.jpeg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -664,8 +737,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/R-8hamGLZww"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/Jp6G6iiKMBc"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/fj6ag_NdfFc"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/yuusha.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -699,8 +774,8 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/LyHTqu5Yg7I"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/4ANpychCrf0"
+                                    data-caption1="OP">
                                     <img src="Estréias/img/kaguya4.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -736,12 +811,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/lg3xU4D4Wvs"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/E0Tf5DDzbCk"
-                                    data-caption2="PV 2"
-                                    data-video3="https://youtu.be/r0r2wbuGT6Q"
-                                    data-caption3="PV 3">
+                                    data-video1="https://youtu.be/iw0oJHZiP30"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/ohFsMWho5z4"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/kizoku.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -776,10 +849,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/aTvv9bZIoWY"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/CjO1Bo297N4"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/XX3rhQgBpiI"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/MQssSfiF7i0"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/hell.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -852,8 +925,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/i-8-xFFIOoM"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/bJFqYBcIMcc"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/S3HQmsf7BSY"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/vigilantes2.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -888,8 +963,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/d1P_Sap94wo"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/VugBZB4gNGk"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/9_wI_FRMrcI"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/shiboyugi.jpeg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -924,12 +1001,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/NGeVvNrJo8o"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/-lgT3jToqOI"
-                                    data-caption2="PV 2"
-                                    data-video3="https://youtu.be/xMe2-1qySqI"
-                                    data-caption3="PV 3">
+                                    data-video1="https://youtu.be/D_VIrnh8Gx4"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/23J4ayA0Ntw"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/okiraku.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -964,8 +1039,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/EooJNPOjZ2E"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/9PZ3t1RD9Rk"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/Dz3TitQnWvo"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/trigun2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1000,12 +1077,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/idsxG0Bodoc"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/WqLYp6na6NU"
-                                    data-caption2="PV 2"
-                                    data-video3="https://youtu.be/jZVJLee_2Bw"
-                                    data-caption3="PV 3">
+                                    data-video1="https://youtu.be/JIn6WqZ_Fs4"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/A6aH9jPW8ZY"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/seihantai.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1040,10 +1115,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/8AdpUgiFs2o"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/Tsq8_gAzzBc"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/e_VgQkPHhDE"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/i3fUfTlMErA"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/majutsushin.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1077,10 +1152,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/xekgFj5Movo"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/xzvQZMuH74w"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/GBs5dPA_iQs"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/MOsbaJaL02k"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/akuyaku.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1116,10 +1191,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/2RJrCUf_5Zw"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/iSRJs8e5aRo"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/6bCKqFGK5ko"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/UgDL_Y4Qi8Y"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/osanajimi.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1153,8 +1228,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/NOOSjng2xxg"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/YcRYX8hwQ8Y"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/SrmET-l5P_4"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/kamuy.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1189,12 +1266,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/h1SlIBhRHlg"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/veh9atqnsXg"
-                                    data-caption2="PV 2"
-                                    data-video3="https://youtu.be/hhu5ORrgd48"
-                                    data-caption3="PV 3">
+                                    data-video1="https://youtu.be/ozfUpxMXx5k"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/C8kawwE636o"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/eris.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1229,10 +1304,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/FbDyiF8s1hk"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/VzJSWjCCn8M"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/adm-a1C7TVk"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/qz49bDs3ZUc"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/uruwashi_02.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1268,8 +1343,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/cC-6G5daQBo"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/KPSvI5K6O_k"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/dvhpqvIwrfs"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/hime2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1304,10 +1381,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/ZcQYOsBqwAQ"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/GIOzUu_oRec"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/cugf5FQ4fLE"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/_2dl3blJgy8"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/tamon.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1343,8 +1420,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/VPLmZd3ByAM"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/tBqY4LcRsrE"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/5zqV7_9TVu4"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/dragon.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1379,10 +1458,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/aXuRZHU6CJc"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/LKlXRCtlOVY"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/tAJCwoSxojU"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/TEMxiB1qZ6c"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/odayaka.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1418,12 +1497,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/6Lv4RyUqmYc"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/-inYCd-C6vg"
-                                    data-caption2="PV 2"
-                                    data-video3="https://youtu.be/orVDfox9Ggc"
-                                    data-caption3="PV 3">
+                                    data-video1="https://youtu.be/AidpQPSomnk"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/umoFdK0YpfU"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/account.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1458,10 +1535,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/x_z8qrjh5t0"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/W1kp6GQhiOk"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/hcpOaVa12DA"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/QzpVZuNRyGo"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/otoko.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1498,10 +1575,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/_RM62zjB3Bk"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/LdHck8lxAj8"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/CUdMc-TYOIs"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/2q2mJyyQBhc"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/gotoki.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1537,10 +1614,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/Y4DWVjxC_Ts"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/3QnsBDevjk0"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/b3-5oQacXKU"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/ziEpfkT6DC0"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/dokushin.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1575,8 +1652,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/v3JunzVhGwQ"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/FXq7zmbs1ws"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/jCP_ZA_ga30"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/majo.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1613,10 +1692,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/eVcuNh1OIEY"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/URcT4mR6KSU"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/kinVGoEF3O4"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/kCERfeJ2HWI"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/kirei.avif" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1652,8 +1731,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="www.disneyplus.com/browse/entity-bb33d0c2-b077-4bc0-a549-d2ca27d4afa8"
-                                    data-video1="https://youtu.be/GTaqXo7scOY"
-                                    data-caption1="PV 1">
+                                    data-video1="https://youtu.be/-hPpXrlgncE"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/o076YrFjZsA"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/medalist2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1689,12 +1770,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://www.youtube.com/watch?v=QG5wbDblF8E"
-                                    data-caption1="Trailer"
-                                    data-video2="false"
-                                    data-caption2=""
-                                    data-video3="false"
-                                    data-caption3="">
+                                    data-video1="https://youtu.be/RLVTVMsb6Ic"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/jQhxE6YPWZg"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/jingai.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1729,10 +1808,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/BGa9_xVMaEY"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/3j8t-2IqcCU"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/qAlPo5EHilg"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/OGCOFl9HDlw"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/kaya.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1768,9 +1847,7 @@
                                     data-youtube="false"
                                     data-disney="false"
                                     data-video1="https://youtu.be/guXDNksXPB4"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/HJuYJpMJdGs"
-                                    data-caption2="PV 2">
+                                    data-caption1="Trailer">
                                     <img src="Estréias/img/ghost3.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1805,10 +1882,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/jy85CMZx02c"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/TYc1GegToJ0"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/8k5gEj292BU"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/Rn-Epwvu64Q"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/maou.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1843,10 +1920,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/cX5gmf2hVjg"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/4JenstiukSo"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/d-1B7OkYQJc"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/dk3fma4C32Y"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/isekai.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1881,10 +1958,12 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/knWebSSmDSA"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/8Onc4UBE_MA"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/aiAUHgVtGH0"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/GW6uUdv_JmM"
+                                    data-caption2="ED"
+                                    data-video3="https://youtu.be/bNyhOxPK4D4"
+                                    data-caption3="ED2">
                                     <img src="Estréias/img/dark.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1921,10 +2000,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/wZqUYMbdars"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/zRann2zoXx0"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/wTDmqzeugx8"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/MFNM8RXPDuE"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/darwin.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1958,8 +2037,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/k36-zQohgzs"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/CebPc_NsjiI"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/HsLxCMcfAR8"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/arne.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -1994,10 +2075,8 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/9feK5OU8LnM"
-                                    data-caption1="Teaser"
-                                    data-video2="https://youtu.be/yfnOQr_hG1s"
-                                    data-caption2="Trailer">
+                                    data-video1="https://youtu.be/QnFRBzxmC4s"
+                                    data-caption1="ED">
                                     <img src="Estréias/img/hana.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2033,10 +2112,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/m1LtPWp8BbM"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/kixtCAZ8qtE"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/g_nDJVMvSD8"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/fyzUQiDSXqs"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/nikki.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2070,10 +2149,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/8zCQHP4AFKw"
-                                    data-caption1="Trailer"
-                                    data-video2="https://youtu.be/hYx3JeSqDYg"
-                                    data-caption2="Abertura">
+                                    data-video1="https://youtu.be/hYx3JeSqDYg"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/II0A080dreo"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/sensei.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2108,8 +2187,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/rmhxBsx9yLw"
-                                    data-caption1="PV 1">
+                                    data-video1="https://youtu.be/0uwmTsnMSV0"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/6owf1r3HGpM"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/kuzu.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2144,10 +2225,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/bB6qXk2YOYE"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/cv93xas2xQ4"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/3GZ6TUiQv2I"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/pRY9mh6_bt4"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/hikuidori.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2219,8 +2300,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/ZBBQeTbUs5I"
-                                    data-caption1="Trailer">
+                                    data-video1="https://youtu.be/KOhrAtk6BLw"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/UQYuIdD-dwk"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/douse2.webp" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2256,10 +2339,10 @@
                                     data-netflix="false"
                                     data-youtube="false"
                                     data-disney="false"
-                                    data-video1="https://youtu.be/8g1t4Gu41Tg"
-                                    data-caption1="PV 1"
-                                    data-video2="https://youtu.be/7N_BxH_zAnY"
-                                    data-caption2="PV 2">
+                                    data-video1="https://youtu.be/763UwtlfkJs"
+                                    data-caption1="OP"
+                                    data-video2="https://youtu.be/HGUrqtDMIas"
+                                    data-caption2="ED">
                                     <img src="Estréias/img/ao2.jpg" class="image" loading="lazy" decoding="async">
                                     <div class="title-overlay"></div>
                                 </a>
@@ -2312,6 +2395,27 @@
         });
 
     </script>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <div class="video-modal-title" id="video-modal-title"></div>
+            <div id="video-modal-player" class="video-modal-player"></div>
+            <div class="video-modal-controls">
+                <button class="control-button play-pause-btn" title="Play/Pause">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <span class="time-display">0:00 / 0:00</span>
+                <button class="control-button volume-btn" title="Mute/Unmute">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
