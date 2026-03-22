@@ -17,7 +17,7 @@ body.background{
   min-height:100vh;
   background: 
     linear-gradient(180deg, rgba(7,16,39,0.85) 0%, rgba(15,23,36,0.9) 60%),
-    url('Temporadas/Home_BG_1080p.jpg') left center / auto 100% no-repeat scroll;
+    url('Temporadas/Home_BG.jpg') left center / auto 100% no-repeat scroll;
   background-blend-mode: multiply;
   background-position: center, left center;
   animation: bgShift 90s ease-in-out infinite alternate;
