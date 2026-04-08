@@ -837,6 +837,34 @@ class AnimeCardManager {
         if (element) element.style.display = condition ? '' : 'none';
     }
 
+    // Função para formatar caption de vídeo com música e banda em itálico para OP/ED
+    // Aceita formato: "OP | nome da música | nome da banda"
+    _formatVideoCaption(element, vData) {
+        if (!element) return;
+        
+        const caption = vData.caption || '';
+        
+        // Se contém "|", faz parsing
+        if (caption.includes('|')) {
+            const parts = caption.split('|').map(p => p.trim());
+            const title = parts[0]; // OP ou ED
+            const music = parts[1] || '';
+            const band = parts[2] || '';
+            
+            let html = `<b>${title}</b>`;
+            if (music) {
+                html += `<br><i>${music}</i>`;
+            }
+            if (band) {
+                html += `<br><i>${band}</i>`;
+            }
+            element.innerHTML = html;
+        } else {
+            // Se não tem "|", exibe o texto normal
+            this._setText(element, caption);
+        }
+    }
+
     // Função para lidar com a sinopse e o "Ler mais"
     _setSynopsis(text) {
         const synopsisEl = this.elements.synopsis;
@@ -959,7 +987,9 @@ class AnimeCardManager {
 
             if (vData.video && vData.video !== "false" && playerContainer) {
                 container.style.display = 'flex';
-                this._setText(captionSpan, vData.caption);
+                
+                // Formata o caption com música e banda em itálico para OP/ED
+                this._formatVideoCaption(captionSpan, vData);
 
                 // Cria uma thumbnail/placeholder clicável em vez do player completo
                 const thumbnailDiv = document.createElement('div');
@@ -1529,7 +1559,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const playerContainer = container.querySelector('.video-player');
                 const captionEl = container.querySelector('.video-caption-text');
 
-                if (captionEl) captionEl.textContent = vData.caption || '';
+                if (captionEl) this._formatVideoCaption(captionEl, vData);
 
                 if (vData.video && vData.video !== 'false' && playerContainer) {
                     container.style.display = 'flex';
