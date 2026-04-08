@@ -779,6 +779,11 @@ details summary{
   text-align: center;
   color: #e2e9ef;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 60px;
 }
 
 .video-controls {
