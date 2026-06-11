@@ -1385,16 +1385,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 2. Busca os dados da temporada em background (sem bloquear os cliques)
     const { year, season } = getSeasonFromURL();
-    fetchSeasonAnimes(year, season).then(() => {
-        populateTitleOverlays();
+    const loader = document.getElementById('loader');
+    const loaderText = loader ? loader.querySelector('.loader-text') : null;
+    
+    // Verifica se os dados da temporada já estão no cache persistente
+    const seasonKey = `${season}_${year}`;
+    const isSeasonCached = jikanCache._metadata && jikanCache._metadata[seasonKey];
+
+    // Se não estiver em cache (primeira vez ou expirado), mostra o loader global
+    if (!isSeasonCached && loader) {
+        if (loaderText) loaderText.textContent = 'Buscando lista da temporada...';
+        loader.style.display = 'flex';
+    }
+
+    fetchSeasonAnimes(year, season).then(async () => {
+        if (loaderText) loaderText.textContent = 'Processando imagens e títulos...';
+        
+        // Preenche as thumbs e títulos, buscando dados individuais para animes que não vieram na listagem da temporada
+        await populateTitleOverlays();
+        
         updateAnimeCount('anime-chart');
         
-        // Inicializa filtros após os dados estarem prontos
+        // Inicializa filtros após os dados estarem prontos e títulos populados
         initializeTypeFilters('anime-chart', 'type-filter-container');
         initializeGenreFilters('anime-chart', 'genre-filter-container');
         initializeSorting('anime-chart', 'sort-select');
         initializeClearButton('anime-chart', 'type-filter-container', 'genre-filter-container', 'sort-select');
-        console.log(`✅ Dados da temporada ${season} carregados e filtros prontos.`);
+    }).finally(() => {
+        if (loader) loader.style.display = 'none';
+        console.log(`✅ Dados da temporada ${season} carregados com sucesso.`);
     });
 
     // 3. Função única para popular os títulos (removendo as duplicatas abaixo)
@@ -1403,35 +1422,89 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function populateTitleOverlays() {
     const animeTriggers = document.querySelectorAll('.anime-card-trigger');
-    animeTriggers.forEach((trigger) => {
+    const missingAnimes = [];
+
+    // Função auxiliar para aplicar a classe carregada apenas quando a imagem estiver pronta
+    const setLoaded = (container, img) => {
+        if (!container) return;
+        if (!img || img.complete) {
+            container.classList.add('loaded');
+        } else {
+            img.onload = () => container.classList.add('loaded');
+            img.onerror = () => container.classList.add('loaded'); // Fallback se a imagem falhar
+        }
+    };
+
+    // 1. Primeiro passo: Preenchimento instantâneo a partir do cache
+    for (const trigger of animeTriggers) {
+        const container = trigger.closest('.image-container');
         const titleOverlay = trigger.querySelector('.title-overlay');
         const animeImage = trigger.querySelector('.image');
         const jikanId = trigger.dataset.animeData;
+        const localThumb = trigger.dataset.thumb1;
+
+        let dataReady = false;
 
         if (jikanId) {
-            // Usa dados em cache se disponível
-            // NÃO faz requisição - isso é para carregamento inicial apenas!
-            const cachedData = jikanCache[parseInt(jikanId)];
-            
+            const id = parseInt(jikanId);
+            const cachedData = jikanCache[id];
+
             if (cachedData) {
                 trigger.dataset.title = cachedData.title;
                 if (!trigger.dataset.genre) trigger.dataset.genre = cachedData.genre;
                 if (!trigger.dataset.type) trigger.dataset.type = cachedData.type;
-                if (!trigger.dataset.time) trigger.dataset.time = cachedData.time
+                if (!trigger.dataset.time) trigger.dataset.time = cachedData.time;
 
                 if (cachedData.thumb1 && animeImage) {
                     animeImage.src = cachedData.thumb1;
                 }
                 if (titleOverlay) titleOverlay.textContent = cachedData.title;
-            } else if (titleOverlay && trigger.dataset.title) {
-                titleOverlay.textContent = trigger.dataset.title;
+                dataReady = true;
+            } else {
+                // Fallback imediato: usa o que está no HTML enquanto a API não responde
+                if (localThumb && animeImage) animeImage.src = localThumb;
+                if (titleOverlay && trigger.dataset.title) titleOverlay.textContent = trigger.dataset.title;
+                if (localThumb && container) setLoaded(container, animeImage);
+
+                // Se não está no cache da temporada, marca para busca individual
+                missingAnimes.push({ id, trigger, animeImage, titleOverlay, container });
             }
-        } else {
-            if (titleOverlay && trigger.dataset.title) {
-                titleOverlay.textContent = trigger.dataset.title;
-            }
+        } else if (titleOverlay && trigger.dataset.title) {
+            titleOverlay.textContent = trigger.dataset.title;
+            if (localThumb && animeImage) animeImage.src = localThumb;
+            dataReady = true;
         }
-    });
+
+        // Aplica o fade-in se o dado base já estiver visível
+        if (dataReady && container) {
+            setLoaded(container, animeImage);
+        }
+    }
+
+    // 2. Segundo passo: Busca individual para animes faltantes (ex: animes que não aparecem nas primeiras páginas da Jikan)
+    if (missingAnimes.length > 0) {
+        console.log(`[Main] Buscando dados extras para ${missingAnimes.length} animes remanescentes...`);
+        for (const item of missingAnimes) {
+            const freshData = await fetchAnimeFromJikan(item.id);
+            if (freshData) {
+                item.trigger.dataset.title = freshData.title;
+                if (!item.trigger.dataset.genre) item.trigger.dataset.genre = freshData.genre;
+                if (!item.trigger.dataset.type) item.trigger.dataset.type = freshData.type;
+                if (!item.trigger.dataset.time) item.trigger.dataset.time = freshData.time;
+
+                if (freshData.thumb1 && item.animeImage) {
+                    item.animeImage.src = freshData.thumb1;
+                }
+                if (item.titleOverlay) item.titleOverlay.textContent = freshData.title;
+            }
+            
+            // Garante que o card apareça mesmo se a API falhar
+            setLoaded(item.container, item.animeImage);
+
+            // Delay de segurança para não estourar o Rate Limit da API Jikan
+            await new Promise(r => setTimeout(r, 400));
+        }
+    }
 }
 
 // Remova as funções repetidas que estavam no final do arquivo original,
@@ -1575,10 +1648,12 @@ async function populateTitleOverlays() {
     // --- FUNÇÃO MESTRA DE FILTRAGEM ---
     function applyAllFilters(chartId) {
         const loader = document.getElementById('loader');
+        const loaderText = loader ? loader.querySelector('.loader-text') : null;
         const chart = document.getElementById(chartId);
         if (!chart || !loader) return;
 
         // Mostra o loader
+        if (loaderText) loaderText.textContent = 'Filtrando animes...';
         loader.style.display = 'flex';
 
         const animeContainers = chart.querySelectorAll('.image-container');
@@ -1684,16 +1759,6 @@ async function populateTitleOverlays() {
             document.getElementById(sortSelectId).dispatchEvent(new Event('change'));
         });
     }
-
-    // Preenche os títulos e a contagem inicial assim que a página carrega
-    populateTitleOverlays();
-    updateAnimeCount('anime-chart');
-
-    // Inicializa os filtros e a ordenação para a grade de "Estréias"
-    initializeTypeFilters('anime-chart', 'type-filter-container');
-    initializeGenreFilters('anime-chart', 'genre-filter-container');
-    initializeSorting('anime-chart', 'sort-select');
-    initializeClearButton('anime-chart', 'type-filter-container', 'genre-filter-container', 'sort-select');
 
     function isTwitterUrl(url) {
     if (!url || url === "false") return false;
