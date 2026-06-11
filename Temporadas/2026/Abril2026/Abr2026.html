@@ -97,6 +97,36 @@
             background: rgba(1, 243, 53, 0.1);
             border: 1px solid rgba(1, 243, 74, 0.3);
         }
+
+        /* ================= CARD LOADING INDICATOR ================= */
+        .anime-card {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .card-loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 36, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ================= PLAYER CLEANUP ================= */
+        .video-modal-player {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
     </style>
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
@@ -125,6 +155,7 @@
     <meta name="twitter:description" content="Guias mostrando as informações dos animes em lançamento">
     <meta name="twitter:image" content="https://animeguides.vercel.app/link2.png">
 </head>
+
 <body class="background">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FBP6NK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -146,7 +177,7 @@
           <a href="../../../index.html" id="home"><i class="fa fa-home"></i> Página inicial</a>
           <a href="../Janeiro2026/Jan2026.html" id="winter"><i class="far fa-snowflake"></i> Janeiro 2026</a>
           <a class="active" id="spring"><i class="fa fa-leaf"></i> Abril 2026</a>
-          <a id="summer"><i class="fas fa-sun"></i> Julho 2026</a>
+          <a href="../Julho2026/Jul2026.html" id="summer"><i class="fas fa-sun"></i> Julho 2026</a>
           <a id="fall"><i class="fab fa-pagelines"></i> Outubro 2026</a>
         </nav>
       </div>
@@ -162,6 +193,9 @@
         <section>
             <div style="display: none;" class="animeCard">
                 <div class="anime-card">
+                    <div id="card-loader" class="card-loader-overlay">
+                        <div class="loader-spinner"></div>
+                    </div>
                     <h2 class="animeTitle"><span id="anime-title"></span><i class="english"><br><span id="anime-title-english"></span></i></h2>
                     <br>
                     <div>
@@ -373,6 +407,7 @@
                                 <a href="#banner" class="anime-card-trigger"
                                     data-title="Dorohedoro Season 2"
                                     data-title-english=""
+                                    data-anime-data="57779"
                                     data-thumb1="img/dorohedoro2-key2.webp"
                                     data-thumb2="img/dorohedoro2-key.webp"
                                     data-thumb3="img/dorohedoro2-teaser.webp"
@@ -2718,6 +2753,7 @@
       </div>
     </footer>
 
+    <script src="../../../jikan-api.js"></script>
     <script src="../../../main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -2728,8 +2764,12 @@
                 const trigger = container.querySelector('.anime-card-trigger');
                 if (!star || !trigger) return;
 
-                const animeTitle = trigger.dataset.title;
-                const storageKey = `star-${animeTitle}`;
+                // Prioriza o ID da Jikan/MAL (animeData) como identificador único para o cache.
+                // Se não houver ID (animes manuais), usa o title como fallback.
+                const identifier = trigger.dataset.animeData || trigger.dataset.title;
+                if (!identifier) return;
+
+                const storageKey = `star-${identifier}`;
 
                 // Verifica o estado inicial ao carregar a página
                 const starStatus = localStorage.getItem(storageKey);
