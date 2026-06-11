@@ -17,6 +17,32 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 
+/* ================= ESTILIZAÇÃO DA BARRA DE ROLAGEM ================= */
+/* Para Chrome, Edge e Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary-color), transparent 70%); /* Cor sutil baseada na temporada */
+  border-radius: 10px;
+  border: 2px solid var(--bg); /* Cria um efeito de margem em volta da barra */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Suporte para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary-color), transparent 50%) var(--bg);
+}
+
 /* ================= ANIMAÇÕES GLOBAIS ================= */
 @keyframes bgShift{
   from { background-position: center, 0 0; }
@@ -935,20 +961,36 @@ details summary{
 
 .video-modal-content {
   position: relative;
-  width: 90%;
-  max-width: 1200px;
-  max-height: 90vh;
-  background: #000;
-  border-radius: 12px;
+  width: 85vw;
+  max-width: 1000px;
+  height: auto;
+  background: transparent;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .video-modal-player {
   width: 100%;
-  height: auto;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.video-modal-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .video-modal-controls {
@@ -958,31 +1000,50 @@ details summary{
   right: 0;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   padding: 15px 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3), transparent);
-  z-index: 2;
+  background: black;
+  z-index: 10;
+  pointer-events: auto;
+  height: auto;
+  box-sizing: border-box;
+  opacity: 1;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.video-modal-controls.inactive {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .video-modal .control-button {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .video-modal .progress-bar-container {
   flex-grow: 1;
-  height: 8px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 4px;
+  height: 6px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
   cursor: pointer;
-  margin: 0 10px;
+  margin: 0 8px;
+  transition: height 0.2s ease;
+}
+
+.video-modal .progress-bar-container:hover {
+  height: 8px;
+  background: rgba(255,255,255,0.35);
 }
 
 .video-modal .progress-bar {
@@ -994,16 +1055,18 @@ details summary{
 }
 
 .video-modal .time-display {
-  font-size: 16px;
+  font-size: 13px;
   color: #fff;
-  font-weight: 600;
-  min-width: 120px;
+  font-weight: 500;
+  min-width: 110px;
   text-align: center;
   font-family: 'Courier New', monospace;
+  flex-shrink: 0;
 }
 
 .video-modal .volume-slider {
-  width: 100px;
+  width: 80px;
+  flex-shrink: 0;
 }
 
 .video-modal-title {
@@ -1152,4 +1215,137 @@ details summary{
     .image-container {
         max-width: calc(33.333% - 16px);
     }
+}
+
+/* ================= NOVO LAYOUT DO PLAYER DE VÍDEO ================= */
+
+/* 1. O contêiner de fundo (Modal) vira um Flexbox para centralizar tudo na tela */
+.video-modal {
+    display: none; /* Controlado pelo JS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo bem escuro */
+    z-index: 99999;
+    
+    /* Centralização perfeita vertical e horizontal */
+    display: none; 
+    align-items: center;
+    justify-content: center;
+}
+
+.video-modal-content {
+    background: #0b1220; /* Cor padrão do seu tema var(--card) */
+    width: 95%;          /* Ocupa quase toda a largura em telas menores */
+    max-width: 1100px;   /* Aumentado de 850px para 1100px (tamanho ideal de cinema) */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column; /* Mantém o vídeo em cima e controles embaixo */
+    position: relative;
+}
+
+.video-modal-player {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Força a proporção de cinema nativamente */
+    background: #000;
+    position: relative;
+    overflow: hidden; /* Garante que o zoom do iframe não vaze */
+    cursor: pointer;
+}
+
+.video-modal-player iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    padding-bottom: 0; 
+    box-sizing: border-box;
+    background: #000; /* Mantém o fundo preto no espaço criado */
+    pointer-events: auto; /* Restaura a interação para permitir o uso do botão de play nativo */
+    transform: scale(1.05); /* Pequeno zoom para garantir que bordas de UI nativas fiquem fora da tela */
+    user-select: none;
+}
+
+.video-modal-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent !important;
+  height: 100% !important;
+  padding: 0 !important;
+  display: block !important;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+.video-modal-title {
+    display: none !important;
+}
+
+/* Play/Pause Central */
+.video-modal-controls .play-pause-btn {
+    display: none !important; /* Removido para evitar sobreposição com o botão nativo do YouTube */
+}
+
+/* Botão de Mudo Discreto */
+.video-modal-controls .volume-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 36px;
+    height: 36px;
+    border-radius: 50% !important;
+    font-size: 14px !important;
+    color: white !important;
+    pointer-events: auto;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Barra de Progresso colada no fundo */
+.video-modal-controls .progress-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    pointer-events: auto;
+    opacity: 1 !important;
+}
+
+.video-modal-controls .progress-bar {
+    height: 100% !important;
+    background: var(--primary-color) !important;
+}
+
+/* Lógica de Visibilidade */
+.video-modal-content:hover .play-pause-btn,
+.video-modal-content:hover .volume-btn,
+.video-modal-controls.is-paused .play-pause-btn,
+.video-modal-controls.is-paused .volume-btn {
+    opacity: 1;
+}
+
+.video-modal-controls .time-display,
+.video-modal-controls .volume-slider,
+.video-modal-controls .fullscreen-btn,
+.video-modal-controls .youtube-subs-btn {
+    display: none !important;
 }
