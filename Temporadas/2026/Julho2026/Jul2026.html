@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="por">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f1724">
+    <title>AnimeGuides - Julho 2026</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos Globais Reutilizáveis -->
+    <link href="../../../style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Customizações Específicas da Temporada (Janeiro 2026) -->
+    <style>
+        :root {
+            --primary-color: #f3ef00;
+            --season-gradient: linear-gradient(180deg, rgba(39, 38, 7, 0.85) 0%, rgba(36, 36, 15, 0.9) 60%);
+            --season-bg-image: url('Thumb_Jul_2026.jpg');
+        }
+
+        body.background {
+            background: var(--season-gradient), var(--season-bg-image);
+            background-repeat: repeat;
+            background-blend-mode: multiply;
+            background-size: auto, auto 100%;
+            background-position: center, 0 0;
+            animation: bgShift 70s linear infinite;
+            color: #f6f86d;
+        }
+
+        body.background::after {
+            background:
+                radial-gradient(circle at 20% 50%, rgba(219, 231, 110, 0.349) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(199, 240, 103, 0.15) 0%, transparent 50%);
+        }
+
+        .image-container .star:hover{
+            background:rgba(229, 231, 110, 0.8);
+            transform:scale(1.1);
+        }
+
+        /* ================= VIDEO MODAL - ENERO 2026 CUSTOMIZATION ================= */
+        /* Barra de Progresso */
+        
+
+        .video-modal .progress-bar-container {
+            background: rgba(219, 243, 1, 0.2);
+            transition: background 0.2s ease;
+        }
+
+        .video-modal .progress-bar-container:hover {
+            background: rgba(239, 243, 1, 0.3);
+        }
+
+        /* Botões de Controle */
+        .video-modal .control-button {
+            background: rgba(227, 243, 1, 0.15);
+            border: 1px solid rgba(243, 239, 1, 0.4);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal .control-button:hover {
+            background: rgba(219, 243, 1, 0.3);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 12px rgba(219, 243, 1, 0.5);
+        }
+
+        /* Exibição de Tempo */
+        .video-modal .time-display {
+            color: var(--primary-color);
+            text-shadow: 0 0 4px rgba(239, 243, 1, 0.6);
+        }
+
+        /* Slider de Volume */
+        .video-modal .volume-slider {
+            accent-color: var(--primary-color);
+        }
+
+        .video-modal .volume-slider::-webkit-slider-thumb {
+            background: var(--primary-color);
+            box-shadow: 0 0 6px rgba(227, 243, 1, 0.8);
+        }
+
+        .video-modal .volume-slider::-moz-range-thumb {
+            background: var(--primary-color);
+            box-shadow: 0 0 6px rgba(239, 243, 1, 0.8);
+        }
+
+        /* Título do Modal */
+        .video-modal-title {
+            text-shadow: 0 0 8px rgba(219, 243, 1, 0.5);
+            background: rgba(227, 243, 1, 0.1);
+            border: 1px solid rgba(239, 243, 1, 0.3);
+        }
+
+        /* ================= CARD LOADING INDICATOR ================= */
+        .anime-card {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .card-loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 36, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ================= PLAYER CLEANUP ================= */
+        .video-modal-player {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-modal-player iframe {
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Impede que o mouse ative o menu de título/compartilhar do YT */
+        }
+    </style>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../favicon.png">
+
+    <!-- SEO -->
+    <link rel="canonical" href="https://animeguides.vercel.app/"/>
+    <meta name="description" content="Guias acompanhando aos lançamentos dos animes semanais, com suas respectivas informações e datas de lançamento junto com outras informações.">
+    <meta name="keywords" content="Guias, anime, temporada, 2023, primavera, verão, outono, inverno"/>
+    <meta name="thumbnail" content="https://github.com/aokami-aka/Site/blob/main/link2.png?raw=true" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://animeguides.vercel.app">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AnimeGuides - Guias de temporada">
+    <meta property="og:description" content="Guias mostrando as informações dos animes em lançamento">
+    <meta property="og:image" content="https://animeguides.vercel.app/link2.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="animeguides.vercel.app">
+    <meta property="twitter:url" content="https://animeguides.vercel.app">
+    <meta name="twitter:title" content="AnimeGuides - Guias de temporada">
+    <meta name="twitter:description" content="Guias mostrando as informações dos animes em lançamento">
+    <meta name="twitter:image" content="https://animeguides.vercel.app/link2.png">
+</head>
+
+<body class="background">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FBP6NK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <img src="../../../favicon.png" alt="AnimeGuides" class="logo">
+          <h1 id="title">AnimeGuides</h1>
+        </div>
+
+        <!-- Hamburger button outside nav -->
+        <button id="phoneIcon" class="icon" aria-expanded="false" aria-controls="banner" aria-label="Toggle menu">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <nav class="topnav" id="banner" aria-hidden="true" aria-label="Main navigation">
+          <a href="../../../index.html" id="home"><i class="fa fa-home"></i> Página inicial</a>
+          <a href="../Janeiro2026/Jan2026.html" id="winter"><i class="far fa-snowflake"></i> Janeiro 2026</a>
+          <a href="../Abril2026/Abr2026.html" id="spring"><i class="fa fa-leaf"></i> Abril 2026</a>
+          <a class="active" id="summer"><i class="fas fa-sun"></i> Julho 2026</a>
+          <a id="fall"><i class="fab fa-pagelines"></i> Outubro 2026</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main-content">
+        <div id="buttons">
+            <a href="#" class="to-top">
+                <i class="fa fa-arrow-up"></i>
+            </a>
+        </div>
+
+        <section>
+            <div style="display: none;" class="animeCard">
+                <div class="anime-card">
+                    <div id="card-loader" class="card-loader-overlay">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <h2 class="animeTitle"><span id="anime-title"></span><i class="english"><br><span id="anime-title-english"></span></i></h2>
+                    <br>
+                    <div>
+                        <div class="grid-thumb">
+                            <!-- Thumbs ----->
+                            <div class="slideshow-container"></div>
+                            <!-- Sinopse -------->
+                            <p class="info"><b>Sinopse: </b><span style="white-space: pre-line" id="anime-synopsis"></span>
+                            <br><br>
+                            <!-- Gênero -------------->
+                            <b>Gênero: </b><span id="anime-genre"></span>
+                            <br><br>
+                            <!-- Diretor ------------------->
+                            <b>Diretor: </b><a id="anime-director-link" href="" target="_blank" rel="noreferrer noopener"><span id="anime-director"></span></a><a id="anime-director2-link" href="" target="_blank" rel="noreferrer noopener"><span id="anime-director2"></span></a> (<i><span id="anime-director-works"></span></i>)
+                            <br>
+                            <!-- Estúdio ------------------------->
+                            <b>Estúdio: </b><a id="anime-studio-link" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="" id="anime-studio" class="Studio" alt="estúdio"></a><a id="anime-studio2-link" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="" id="anime-studio2" class="Studio" alt="estúdio"></a> (<i><span id="anime-studio-works"></span></i>)
+                            <br><br>
+                            <!-- Data ----------------------------------------->
+                            <b>Estréia: </b> <span id="anime-time"></span>
+                            <br>
+                            <!-- Episódios ------------------------------------------->
+                            <b>Episódios: </b> <span id="anime-duration"></span>
+                            <br><br>
+                            <!-- Status & score ------------------------------------------->
+                            <b>Status: </b> <span id="anime-status"></span>
+                            <br>
+                            <b>Nota: </b> <span id="anime-score"></span>&nbsp;<i style="color: var(--primary-color);" class="fa-solid fa-star"></i>
+                            <br><br>
+                            <!-- Tipo ------------------------------------------->
+                            <b>Tipo: </b> <span id="anime-type"></span>
+                            <br><br>
+                            <!-- Comentários ------------------------------------------------->
+                            <b>Comentários: </b> <span id="anime-commentary"></span>
+                            <br><br>
+                            <!-- AniDB e MAL do anime ------------------------------------------------>
+                            <a id="anime-anidb" href="" target="_blank" rel="noreferrer noopener"> <img loading="lazy" src="../../../Estúdios/AniDB.png" alt="AniDB" class="source"></a><a id="anime-mal" href="" target="_blank" rel="noreferrer noopener"><img loading="lazy" src="../../../Estúdios/MyAnimeList.jpg" alt="MyAnimeList" class="source"></a><a id="anime-cr" href="" target="_blank" rel="noreferrer noopener"><img id="cr-image" loading="lazy" src="../../../Estúdios/Crunchyroll.png" alt="cr" class="source"></a><a id="anime-netflix" href="" target="_blank" rel="noreferrer noopener"><img id="netflix-image" loading="lazy" src="../../../Estúdios/netflix.png" alt="netflix" class="source"></a><a id="anime-youtube" href="" target="_blank" rel="noreferrer noopener"><img id="youtube-image" loading="lazy" src="../../../Estúdios/youtube.png" alt="youtube" class="source"></a><a id="anime-disney" href="" target="_blank" rel="noreferrer noopener"><img id="disney-image" loading="lazy" src="../../../Estúdios/disney.jpg" alt="disney+" class="source"></a></p>
+                        </div>
+
+                            <br><br>
+
+                        
+                            <div id="orientTrailers">
+                                <details>
+                                    <summary><p style="text-align: center;"><b>Vídeos</b></p></summary>
+                                    <div class="content">
+                                        <!-- Lista de Trailers -->
+                                        <div id="trailers" class="trailer">
+
+                                            <!-- Player de Vídeo 1 -->
+                                            <div class="video-player-container" data-player-id="1">
+                                                <div id="video-player-1" class="video-player"></div>
+                                                <div class="video-controls">
+                                                    <button class="control-button play-pause-btn" title="Play/Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <div class="progress-bar-container">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
+                                                    <span class="time-display">0:00 / 0:00</span>
+                                                    <button class="control-button volume-btn" title="Mute/Unmute">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                                                    <button class="control-button youtube-subs-btn" title="Legendas (YouTube)">
+                                                        <i class="fas fa-closed-captioning"></i>
+                                                    </button>
+                                                    <button class="control-button fullscreen-btn" title="Fullscreen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="video-caption"><b><span class="video-caption-text"></span></b></p>
+                                            </div>
+
+                                            <!-- Player de Vídeo 2 -->
+                                            <div class="video-player-container" data-player-id="2">
+                                                <div id="video-player-2" class="video-player"></div>
+                                                <div class="video-controls">
+                                                    <button class="control-button play-pause-btn" title="Play/Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <div class="progress-bar-container">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
+                                                    <span class="time-display">0:00 / 0:00</span>
+                                                    <button class="control-button volume-btn" title="Mute/Unmute">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                                                    <button class="control-button youtube-subs-btn" title="Legendas (YouTube)">
+                                                        <i class="fas fa-closed-captioning"></i>
+                                                    </button>
+                                                    <button class="control-button fullscreen-btn" title="Fullscreen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="video-caption"><b><span class="video-caption-text"></span></b></p>
+                                            </div>
+
+                                            <!-- Player de Vídeo 3 -->
+                                            <div class="video-player-container" data-player-id="3">
+                                                <div id="video-player-3" class="video-player"></div>
+                                                <div class="video-controls">
+                                                    <button class="control-button play-pause-btn" title="Play/Pause">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                    <div class="progress-bar-container">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
+                                                    <span class="time-display">0:00 / 0:00</span>
+                                                    <button class="control-button volume-btn" title="Mute/Unmute">
+                                                        <i class="fas fa-volume-up"></i>
+                                                    </button>
+                                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                                                    <button class="control-button youtube-subs-btn" title="Legendas (YouTube)">
+                                                        <i class="fas fa-closed-captioning"></i>
+                                                    </button>
+                                                    <button class="control-button fullscreen-btn" title="Fullscreen">
+                                                        <i class="fas fa-expand"></i>
+                                                    </button>
+                                                </div>
+                                                <p class="video-caption"><b><span class="video-caption-text"></span></b></p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <details open>
+                <br>
+                <summary><h1 style="margin: auto; font-size: 35px; cursor: pointer;">Animes da Temporada</h1></summary>
+                <div class="content">
+                    <!-- Contêiner para os filtros de TIPO -->
+                    <div id="type-filter-container" class="filter-container">
+                        <!-- Botões de filtro de tipo serão inseridos aqui -->
+                    </div>
+                    <!-- Contêiner para os filtros de gênero -->
+                    <div id="genre-filter-container" class="filter-container">
+                        <!-- Botões de filtro serão inseridos aqui pelo JavaScript -->
+                    </div>
+
+                    <!-- Contêiner para a ordenação -->
+                    <div class="sort-container">
+                        <div class="sort-left-controls">
+                            <button id="clear-filters-btn" class="clear-btn"><i class="fas fa-times"></i> Limpar Filtros</button>
+                            <div id="anime-count-container" class="anime-count">(<span id="anime-count">0</span>)</div>
+                        </div>
+                        <div class="sort-options">
+                            <label for="sort-select">Ordenar por:</label>
+                            <select id="sort-select" class="sort-select">
+                                <option value="default">Padrão</option>
+                                <option value="date-desc">Data de Lançamento</option>
+                                <option value="alpha-asc">Ordem Alfabética (A-Z)</option>
+                                <option value="alpha-desc">Ordem Alfabética (Z-A)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <!-- Loader -->
+                        <div id="loader" class="loader-container" style="display: none;">
+                            <div class="loader-spinner"></div>
+                        </div>
+
+                        <div id="anime-chart">
+                            
+                            <!-- Adicione a classe "anime-card-trigger" e os atributos data-* -->
+                             <!-- mushoku 3 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="59193"
+                                    data-thumb1="https://media.kitsu.app/upload/887874/content/acfd487932a4f05643485d9452ac5298.png"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=4-UTuXoe5hI"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Otome game mob 3 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="54000"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=aQWo0lR5lNw"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Youjo Senki 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="49233"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=3-Cj3dXwQWI"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Gaikotsu 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="60522"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=u_TQJHga6k8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- bleach -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="60636"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=Px1xodGZAT0"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Katainaka no Ossan 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61897"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=7n7FDNqtBHg"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- 100 girlfriends 3 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62811"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=VMywkje8jWA"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- clevatess 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62513"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=uMqyY0WD56A"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Saijo no Osewa -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62876"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=98FTHSMn1rs"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Tenkou-saki -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="56735"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=UTsFnJgDJz8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Tsuihou sareta -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="59741"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=mcZRE6a2XgU"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Polar Opposites Season 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63832"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=o9eLX4W-gys"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Saikyou Degarashi -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="56736"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=5gp0pGTnxdY"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Lv999 no Murabito -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62322"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=IMKro1SWUzw"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Hell Mode 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63817"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=HwrkfSaeJmg"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Rakudai Kenja no Gakuin -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63508"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=gmPvdGFji5Y"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Koko wa Ore ni Makasete -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62617"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=p0JRE_K6s5A"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Kimi ga Shinu -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61126"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=OYIv6-LQGCY"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Grand Blue 3 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62542"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=qR5_ycDZdLY"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Nijuuseiki Denki -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62856"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=-0pTQs83eNI"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Nige Jouzu 2 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="60059"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=DQrfB-El47o"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Super no Ura -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62076"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=jTFOWjC5dUI"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Dogulwang -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63316"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=HHJH6dI25BE"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Sekai Saikyou no Kouei -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62435"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=2fi6yX2S3Wg"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Ghost in the shell -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="58929"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=va7kEv1mjpM"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Tai-ari -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="46488"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=ld8NyRP6IH8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Toumei na Yoru -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62936"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=HZW_fbHDsT8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- BLACK TORCH -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61169"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=rLkd9C6jufc"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Buchigire Reijou -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62289"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=bTXoIq40eso"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Heroine? Seijo? -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61686"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=I9V_HpMr3_8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Futsutsuka na Akujo -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61240"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=h1VGTiNBNt4"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Ryoumin 0-nin -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62078"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=pXoTSkLpaiI"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Otome Kaijuu -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63150"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=GmwnpahecR8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Hanaori-san -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62535"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=vaKS3NiT0Tw"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Neko to Ryuu -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61048"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=F8ChbZFvTsw"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Mujikaku Seijo -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62080"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=AbbfdJ1Igq8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- ONE PIECE HEROINES -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62233"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=qWlvJPCWCg8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Tenmaku no Jaadugar -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61483"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=1oPCiZlXnYQ"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Mebius Dust -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63802"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=486nVRQfVoo"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Suterare Seijo no Isekai -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63752"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=P2sGhDi_FrE"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Yani Neko -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63403"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=ydK2WdTAOgU"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Oni no Hanayome -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61814"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=mhEVYchaisg"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- "Kimi wo Aisuru Ki wa Nai" -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63537"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=MNzf8UswtzI"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Mahou Shoujo Lyrical -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="60637"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=0kgUsF8R7JM"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Kabushikigaisha -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="60552"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=hhWJdRhybpM"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Tefuda ga Oome no Victoria -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62476"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=-HNOXWE2wVU"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Sora wa Akai Kawa no Hotori -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63489"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=TLmRzMmyYok"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- World Is Dancing -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63347"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=Zu45LJG7Chs"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Ibitte Konai Gibo to Gishi -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62102"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=2DqmMItlgfQ"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Uchi no Otouto-domo ga Sumimasen -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63061"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=P927_ZvgUUg"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Sayonara Lara -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="58878"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=Zo_rqLknYMY"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Hanazakari no Kimitachi e 2nd Season -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63780"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=dN7LV-oVFBg"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Reiwa no Dara-san -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63082"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=AZKlUSu5tQ0"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Grow Up Show ~Himawari no Circus-dan~ -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62051"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=W93ZGwcNfh8"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Kore Kaite Shine -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="61280"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=jI61NtGuxV4"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Tetsunabe no Jan! -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63100"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=m_XDEs4L_ec"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Iwamoto-senpai no Suisen -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63324"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=OMCPr9YwHdM"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Let's go KAIKIGUMI -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="62683"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=XBqUZYpEcfk"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+                             <!-- Thunder 3 -->
+                            <div class="image-container">
+                                <a href="#banner" class="anime-card-trigger"
+                                    data-anime-data="63418"
+                                    data-commentary=""
+                                    data-video1="https://www.youtube.com/watch?v=AUwRm1MjUTk"
+                                    data-caption1="Trailer"
+                                    data-video2=""
+                                    data-caption2=""
+                                    data-video3=""
+                                    data-caption3="">
+                                    <img src="" class="image" loading="lazy" decoding="async">
+                                    <div class="title-overlay"></div>
+                                </a>
+                                <span class="star"><i class="far fa-star"></i></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© AnimeGuides — Guias de temporada</p>
+      </div>
+    </footer>
+
+    <script src="../../../jikan-api.js"></script>
+    <script src="../../../main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainers = document.querySelectorAll('.image-container');
+
+            imageContainers.forEach(container => {
+                const star = container.querySelector('.fa-star');
+                const trigger = container.querySelector('.anime-card-trigger');
+                if (!star || !trigger) return;
+
+                // Prioriza o ID da Jikan/MAL (animeData) como identificador único para o cache.
+                // Se não houver ID (animes manuais), usa o title como fallback.
+                const identifier = trigger.dataset.animeData || trigger.dataset.title;
+                
+                // Se não houver nenhum identificador, abortamos para não criar uma chave "star-undefined" comum a todos
+                if (!identifier) return;
+
+                const storageKey = `star-${identifier}`;
+
+                // Verifica o estado inicial ao carregar a página
+                const starStatus = localStorage.getItem(storageKey);
+                if (starStatus === 'favorited') {
+                    star.classList.replace('far', 'fas');
+                }
+
+                // Adiciona o evento de clique
+                star.addEventListener('click', () => {
+                    if (star.classList.contains('far')) {
+                        star.classList.replace('far', 'fas');
+                        localStorage.setItem(storageKey, 'favorited');
+                    } else {
+                        star.classList.replace('fas', 'far');
+                        localStorage.removeItem(storageKey);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <div class="video-modal-title" id="video-modal-title"></div>
+            <div id="video-modal-player" class="video-modal-player"></div>
+            <div class="video-modal-controls">
+                <button class="control-button play-pause-btn" title="Play/Pause">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <span class="time-display">0:00 / 0:00</span>
+                <button class="control-button volume-btn" title="Mute/Unmute">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
