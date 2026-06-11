@@ -1,3 +1,11 @@
+// --- CARREGAMENTO DA API DO YOUTUBE ---
+if (!window.YT) {
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
 const toTop = document.querySelector(".to-top");
 
 window.addEventListener("scroll", () => {
@@ -17,16 +25,6 @@ toTop.addEventListener('click', (e) => {
   });
 });
 
-// --- CARREGAMENTO DA API DO YOUTUBE ---
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// Esta função será chamada pela API do YouTube quando estiver pronta.
-function onYouTubeIframeAPIReady() {
-    // A API está pronta.
-}
 
 // Função para abrir o modal de vídeo
 function openVideoModal(vData, playerIndex) {
@@ -47,10 +45,11 @@ function openVideoModal(vData, playerIndex) {
         return;
     }
 
-    // Garante que os controles estejam visíveis
+    // Garanta que os controles estejam visíveis
     const controls = modal.querySelector('.video-modal-controls');
     if (controls) {
         controls.style.display = 'flex';
+        controls.classList.remove('inactive');
     }
 
     // Define o título do modal
@@ -84,73 +83,67 @@ function openVideoModal(vData, playerIndex) {
                 'controls': 0,
                 'rel': 0,
                 'modestbranding': 1,
+                'iv_load_policy': 3, // Oculta anotações e cards informativos
+                'fs': 0,             // Desativa o botão de tela cheia nativo do YouTube
+                'disablekb': 1,      // Desativa os atalhos de teclado nativos (evita conflitos)
+                'showinfo': 0,       // Remove informações do vídeo
+                'autohide': 1,       // Auto-hide da barra de progresso
+                'widget_referrer': window.location.origin,
                 'cc_lang_pref': 'pt',
                 'cc_load_policy': 1,
-                'autoplay': 1  // Auto-play quando abrir o modal
+                'autoplay': 1,  // Auto-play quando abrir o modal
+                'vq': 'highres' // Hint para iniciar na maior qualidade disponível
             },
             events: {
                 'onReady': (event) => {
-                    // Tenta ativar legendas automaticamente com delay para garantir que o player esteja pronto
+                    const player = event.target;
+
+                    // Força a maior qualidade disponível (highres/hd1080/etc)
+                    try {
+                        player.setPlaybackQuality('highres');
+                    } catch (e) {
+                        console.warn('Erro ao definir qualidade:', e);
+                    }
+
+                    // Configuração inteligente de legendas
                     setTimeout(() => {
                         try {
-                            const player = event.target;
-                            
-                            // Primeiro tenta carregar o módulo de legendas
                             player.loadModule('captions');
                             
-                            // Lista de idiomas preferidos (português primeiro, depois inglês)
-                            const preferredLanguages = ['pt', 'pt-BR', 'pt-PT', 'en', 'en-US', 'en-GB'];
-                            
-                            // Pequeno delay adicional para o módulo carregar
+                            // Pequeno delay para o módulo de legendas processar as opções do vídeo
                             setTimeout(() => {
                                 try {
-                                    // Tenta obter a lista de tracks de legenda
                                     const captionTracks = player.getOption('captions', 'tracklist') || [];
+                                    const translations = player.getOption('captions', 'translationLanguages') || [];
                                     
-                                    console.log('Tracks de legenda disponíveis:', captionTracks);
-                                    
-                                    if (captionTracks.length > 0) {
-                                        // Procura por uma legenda nos idiomas preferidos
-                                        let selectedTrack = null;
-                                        for (const lang of preferredLanguages) {
-                                            selectedTrack = captionTracks.find(track => 
-                                                track.languageCode === lang || 
-                                                track.languageCode.startsWith(lang.split('-')[0])
-                                            );
-                                            if (selectedTrack) break;
+                                    const ptTrack = captionTracks.find(t => t.languageCode.startsWith('pt'));
+                                    const ptTranslation = translations.find(t => t.languageCode.startsWith('pt'));
+                                    const enTrack = captionTracks.find(t => t.languageCode.startsWith('en'));
+
+                                    if (ptTrack) {
+                                        player.setOption('captions', 'track', ptTrack);
+                                    } else if (ptTranslation) {
+                                        // Se não há PT nativo, tenta tradução automática para PT vinda do Inglês ou primeiro disponível
+                                        const baseTrack = enTrack || captionTracks[0];
+                                        if (baseTrack) {
+                                            player.setOption('captions', 'track', {
+                                                languageCode: baseTrack.languageCode,
+                                                translationLanguage: ptTranslation
+                                            });
                                         }
-                                        
-                                        if (selectedTrack) {
-                                            // Ativa a legenda encontrada
-                                            player.setOption('captions', 'track', selectedTrack);
-                                            console.log('Legendas ativadas automaticamente:', selectedTrack.languageCode);
-                                        } else {
-                                            // Nenhuma legenda nos idiomas preferidos, desativa
-                                            player.setOption('captions', 'track', {});
-                                            console.log('Nenhuma legenda em português ou inglês encontrada, desativando');
-                                        }
-                                    } else {
-                                        // Não há legendas disponíveis
-                                        console.log('Vídeo sem legendas disponíveis');
+                                    } else if (enTrack) {
+                                        player.setOption('captions', 'track', enTrack);
                                     }
                                 } catch (e) {
                                     console.warn('Erro ao acessar tracks de legenda:', e);
-                                    // Fallback: tenta desativar legendas
-                                    try {
-                                        player.setOption('captions', 'track', {});
-                                    } catch (fallbackError) {
-                                        console.warn('Erro no fallback de legendas:', fallbackError);
-                                    }
                                 }
                             }, 1000);
-                            
                         } catch (e) {
                             console.warn('Erro ao configurar legendas automaticamente:', e);
                         }
                     }, 500);
                     
-                    // Inicializa os controles customizados
-                    initializeCustomControls(modal, event.target, 'youtube');
+                    window.initializeCustomControls(modal, player, 'youtube');
                 },
                 'onError': (event) => {
                     console.error('Erro ao carregar vídeo do YouTube:', vData.video, 'Código de erro:', event.data);
@@ -166,6 +159,19 @@ function openVideoModal(vData, playerIndex) {
                             </div>
                         </div>
                     `;
+                },
+                'onStateChange': (event) => {
+                    // Armazena o estado atual do player para ser usado na lógica de auto-hide
+                    const state = event.data;
+                    const playing = window.YT ? YT.PlayerState.PLAYING : 1;
+                    const paused = window.YT ? YT.PlayerState.PAUSED : 2;
+                    
+                    window.playerState = state;
+                    if (state === paused) {
+                        window.isPausedModal = true;
+                    } else if (state === playing) {
+                        window.isPausedModal = false;
+                    }
                 }
             }
         });
@@ -199,6 +205,66 @@ function openVideoModal(vData, playerIndex) {
         }
     };
 
+    // Auto-hide controles quando mouse parado
+    let controlsTimeout;
+    let mouseInPlayer = false;
+    
+    const playerElement = modal.querySelector('.video-modal-player');
+
+    const hideControls = () => {
+        // Se o vídeo está pausado, nunca esconda os controles
+        if (window.isPausedModal) {
+            return;
+        }
+        if (controls) {
+            controls.classList.add('inactive');
+        }
+        if (playerElement) {
+            playerElement.classList.remove('controls-visible');
+        }
+    };
+    
+    const showControls = () => {
+        if (controls) {
+            controls.classList.remove('inactive');
+        }
+        if (playerElement) {
+            playerElement.classList.add('controls-visible');
+        }
+        clearTimeout(controlsTimeout);
+        // Esconde após 3 segundos apenas se o vídeo estiver tocando
+        if (!window.isPausedModal && mouseInPlayer) {
+            controlsTimeout = setTimeout(hideControls, 3000);
+        }
+    };
+    
+    if (playerElement) {
+        playerElement.addEventListener('mouseenter', () => {
+            mouseInPlayer = true;
+            showControls();
+        });
+        playerElement.addEventListener('mousemove', showControls);
+        playerElement.addEventListener('mouseleave', () => {
+            mouseInPlayer = false;
+            controlsTimeout = setTimeout(hideControls, 1000);
+        });
+    }
+    
+    if (controls) {
+        controls.addEventListener('mouseenter', () => {
+            clearTimeout(controlsTimeout);
+        });
+        controls.addEventListener('mouseleave', () => {
+            if (!window.isPausedModal) {
+                controlsTimeout = setTimeout(hideControls, 3000);
+            }
+        });
+    }
+
+    // Closes the modal with ESC key
+    document.addEventListener('keydown', handleEscapeKey);
+
+
     // Fecha o modal com tecla ESC
     document.addEventListener('keydown', handleEscapeKey);
 }
@@ -228,6 +294,7 @@ function closeVideoModal() {
 function handleEscapeKey(e) {
     if (e.key === 'Escape') {
         closeVideoModal();
+        e.stopPropagation(); // Impede que o evento ESC feche outros elementos (como o topnav)
     }
 }
 
@@ -267,6 +334,130 @@ function getYouTubeVideoId(url) {
     }
     return videoId;
 }
+
+// --- INICIALIZAÇÃO DO PLAYER DE VÍDEO CUSTOMIZADO ---
+window.initializeCustomControls = (container, player, type) => {
+    const isModal = container.id === 'video-modal';
+    const playPauseBtn = container.querySelector(isModal ? '.video-modal-controls .play-pause-btn' : '.play-pause-btn');
+    const playPauseIcon = playPauseBtn ? playPauseBtn.querySelector('i') : null;
+    const progressBar = container.querySelector(isModal ? '.video-modal-controls .progress-bar' : '.progress-bar');
+    const progressBarContainer = container.querySelector(isModal ? '.video-modal-controls .progress-bar-container' : '.progress-bar-container');
+    const timeDisplay = container.querySelector(isModal ? '.video-modal-controls .time-display' : '.time-display');
+    const volumeBtn = container.querySelector(isModal ? '.video-modal-controls .volume-btn' : '.volume-btn');
+    const volumeIcon = volumeBtn.querySelector('i');
+    const volumeSlider = container.querySelector(isModal ? '.video-modal-controls .volume-slider' : '.volume-slider');
+
+    function togglePlayPause() {
+        if (type === 'youtube') {
+            const state = player.getPlayerState();
+            if (state === (window.YT ? YT.PlayerState.PLAYING : 1)) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        } else {
+            if (player.paused) player.play();
+            else player.pause();
+        }
+    }
+
+    function updatePlayPauseIcon() {
+        let isPaused;
+        if (type === 'youtube') {
+            const state = player.getPlayerState();
+            isPaused = state !== (window.YT ? YT.PlayerState.PLAYING : 1);
+        } else {
+            isPaused = player.paused;
+        }
+        if (playPauseIcon) playPauseIcon.className = `fas ${isPaused ? 'fa-play' : 'fa-pause'}`;
+
+        // Adiciona classe de estado para o CSS controlar visibilidade do botão central
+        const controls = container.querySelector(isModal ? '.video-modal-controls' : null);
+        if (controls) controls.classList.toggle('is-paused', isPaused);
+    }
+
+    function updateProgress() {
+        const currentTime = type === 'youtube' ? player.getCurrentTime() : player.currentTime;
+        const duration = type === 'youtube' ? player.getDuration() : player.duration;
+        
+        if (duration && duration > 0 && !isNaN(currentTime)) {
+            const progressPercentage = (currentTime / duration) * 100;
+            progressBar.style.width = `${Math.min(progressPercentage, 100)}%`;
+            timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+        }
+    }
+
+    function scrub(e) {
+        const duration = type === 'youtube' ? player.getDuration() : player.duration;
+        const scrubTime = (e.offsetX / progressBarContainer.offsetWidth) * duration;
+        if (type === 'youtube') player.seekTo(scrubTime, true);
+        else player.currentTime = scrubTime;
+    }
+
+    function toggleMute() {
+        if (type === 'youtube') {
+            if (player.isMuted()) player.unMute();
+            else player.mute();
+        } else {
+            player.muted = !player.muted;
+        }
+        updateVolumeIcon();
+    }
+
+    function updateVolumeIcon() {
+        const isMuted = type === 'youtube' ? player.isMuted() : player.muted;
+        const volume = type === 'youtube' ? player.getVolume() / 100 : player.volume;
+
+        volumeIcon.className = 'fas';
+        if (isMuted || volume === 0) volumeIcon.classList.add('fa-volume-mute');
+        else if (volume < 0.5) volumeIcon.classList.add('fa-volume-down');
+        else volumeIcon.classList.add('fa-volume-up');
+    }
+
+    function handleVolumeChange() {
+        const newVolume = volumeSlider.value;
+        if (type === 'youtube') {
+            player.setVolume(newVolume * 100);
+            if (newVolume > 0 && player.isMuted()) player.unMute();
+        } else {
+            player.volume = newVolume;
+            if (newVolume > 0) player.muted = false;
+        }
+    }
+
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
+    if (type === 'html5') {
+        player.addEventListener('click', togglePlayPause);
+        player.addEventListener('play', () => {
+            window.videoPlayers.forEach(p => {
+                if (p !== player) {
+                    if (p.pauseVideo) p.pauseVideo();
+                    if (p.pause) p.pause();
+                }
+            });
+            updatePlayPauseIcon();
+        });
+        player.addEventListener('pause', updatePlayPauseIcon);
+        player.addEventListener('timeupdate', updateProgress);
+        player.addEventListener('volumechange', updateVolumeIcon);
+    } else {
+        window.currentProgressInterval = setInterval(() => {
+            if (player.getDuration && player.getDuration() > 0) updateProgress();
+            updatePlayPauseIcon();
+        }, 500);
+    }
+
+    if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
+    progressBarContainer.addEventListener('click', scrub);
+    volumeBtn.addEventListener('click', toggleMute);
+    volumeSlider.addEventListener('input', handleVolumeChange);
+};
 
 // // ------------------- Topnav Function --------------------------------------------------------------------------------------------------------------------------------
 // Mobile nav: robust toggle + click-outside + Escape to close
@@ -775,6 +966,8 @@ class AnimeCardManager {
             studioWorks: this.card.querySelector('#anime-studio-works'),
             time: this.card.querySelector('#anime-time'),
             duration: this.card.querySelector('#anime-duration'),
+            status: this.card.querySelector('#anime-status'),
+            score: this.card.querySelector('#anime-score'),
             type: this.card.querySelector('#anime-type'),
             commentary: this.card.querySelector('#anime-commentary'),
             anidb: this.card.querySelector('#anime-anidb'),
@@ -788,7 +981,27 @@ class AnimeCardManager {
             youtubeImage: this.card.querySelector('#youtube-image'),
             disneyImage: this.card.querySelector('#disney-image'),
             videoContainers: this.card.querySelectorAll('.video-player-container'),
+            cardLoader: this.card.querySelector('#card-loader'),
         };
+    }
+
+    // Controla a visibilidade do loading interno do card
+    setLoading(isLoading) {
+        if (!this.elements.cardLoader) return;
+        
+        if (isLoading) {
+            this.card.style.display = 'block';
+            this.elements.cardLoader.style.display = 'flex';
+            // Garante que o scroll vá para o card enquanto carrega
+            this.card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Diminui opacidade do conteúdo antigo se houver
+            const content = this.card.querySelector('.grid-thumb');
+            if (content) content.style.opacity = '0.3';
+        } else {
+            this.elements.cardLoader.style.display = 'none';
+            const content = this.card.querySelector('.grid-thumb');
+            if (content) content.style.opacity = '1';
+        }
     }
 
     // Função genérica para preencher texto
@@ -911,13 +1124,8 @@ class AnimeCardManager {
             this.card.style.display = 'none';
             return;
         }
-        this.card.style.display = 'block';
+        // A exibição do card e a rolagem são agora gerenciadas por setLoading(true)
         
-        // Rola suavemente para o card após ele ser exibido
-        setTimeout(() => {
-            this.card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50); // Pequeno timeout para garantir que o elemento está visível antes de rolar
-
         // Preenche os dados
         this._setText(this.elements.title, data.title);
         this._setText(this.elements.titleEnglish, data.titleEnglish);
@@ -930,6 +1138,8 @@ class AnimeCardManager {
         this._setText(this.elements.time, data.time);
         this._setText(this.elements.duration, data.duration);
         this._setText(this.elements.type, data.type);
+        this._setText(this.elements.status, data.status);
+        this._setText(this.elements.score, data.score);
         this._setCommentary(data.commentary);
 
         // Configura links
@@ -944,9 +1154,61 @@ class AnimeCardManager {
         this._setLink(this.elements.studioLink, data.studioLink);
         this._setLink(this.elements.studio2Link, data.studio2Link);
 
-        // Configura imagens de estúdio
-        if (this.elements.studio) this.elements.studio.src = data.studio;
-        if (this.elements.studio2) this.elements.studio2.src = data.studio2;
+        // Configura imagens de estúdio com suporte híbrido (Objeto API / String Local)
+        if (this.elements.studio && data.studio) {
+            const studioImg = this.elements.studio;
+            const studioLinkEl = this.elements.studioLink;
+
+            // 1. Limpa qualquer texto de fallback inserido em um clique anterior
+            if (studioLinkEl) {
+                const activeFallback = studioLinkEl.querySelector('.studio-text-fallback');
+                if (activeFallback) activeFallback.remove();
+            }
+
+            // 2. Torna a tag de imagem visível por padrão
+            studioImg.style.display = 'inline-block';
+
+            // 3. DETECÇÃO HÍBRIDA: Verifica se o dado é um Objeto (API) ou String (Local)
+            if (typeof data.studio === 'object' && data.studio !== null) {
+                // Caso venha da Jikan API (Objeto)
+                studioImg.src = data.studio.url || '';
+
+                // Captura de erro para links quebrados da API externa
+                studioImg.onerror = function() {
+                    console.warn(`[Estúdio] Imagem corrompida na API para: ${data.studio.name}. Injetando texto.`);
+                    this.style.display = 'none';
+
+                    const fallbackText = document.createElement('span');
+                    fallbackText.className = 'studio-text-fallback';
+                    fallbackText.style.fontWeight = 'bold';
+                    fallbackText.style.fontSize = '1.1em';
+                    fallbackText.style.color = 'var(--text-color, #ffffff)';
+                    fallbackText.textContent = data.studio.name;
+
+                    if (studioLinkEl) {
+                        studioLinkEl.appendChild(fallbackText);
+                    } else if (this.parentElement) {
+                        this.parentElement.appendChild(fallbackText);
+                    }
+                };
+            } else if (typeof data.studio === 'string') {
+                // Caso seja uma página local/estática (String com o caminho da imagem)
+                studioImg.src = data.studio;
+                
+                // Desativa o tratamento de erro para imagens locais para evitar conflitos
+                studioImg.onerror = null; 
+            }
+        }
+
+        // Ajuste preventivo para o segundo estúdio (caso possua)
+        if (this.elements.studio2 && data.studio2) {
+            if (typeof data.studio2 === 'object' && data.studio2 !== null) {
+                this.elements.studio2.src = data.studio2.url || '';
+            } else {
+                this.elements.studio2.src = data.studio2;
+            }
+        }
+
         this._setVisibility(this.elements.studioLink, data.studioLink);
         this._setVisibility(this.elements.studio2Link, data.studio2Link);
 
@@ -1053,52 +1315,127 @@ class AnimeCardManager {
     }
 }
 
-// --- CARREGAMENTO DA API DO YOUTUBE ---
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// Esta função será chamada pela API do YouTube quando estiver pronta.
-// Deixamos ela vazia pois a inicialização dos players é feita sob demanda.
 function onYouTubeIframeAPIReady() {
     // A API está pronta.
 }
 
-// --- INICIALIZAÇÃO ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Função para preencher as faixas de título automaticamente
-    function populateTitleOverlays() {
-        const animeTriggers = document.querySelectorAll('.anime-card-trigger');
-        animeTriggers.forEach(trigger => {
-            const titleOverlay = trigger.querySelector('.title-overlay');
-            if (titleOverlay) {
-                titleOverlay.textContent = trigger.dataset.title;
-            }
-        });
+// Função auxiliar para detectar temporada e ano da URL
+function getSeasonFromURL() {
+    const url = window.location.pathname;
+    
+    // Procura padrões como "Janeiro2026", "Abr2026", "Jul2026", "Outubro2026"
+    const monthMatch = url.match(/(janeiro|jan|april|abril|abr|julho|jul|outubro|out|july)/i);
+    const yearMatch = url.match(/(\d{4})/);
+    
+    if (!monthMatch || !yearMatch) {
+        console.warn('Não foi possível detectar a temporada/ano da URL');
+        return { year: 2026, season: 'summer' };
     }
+    
+    const month = monthMatch[0].toLowerCase();
+    const year = parseInt(yearMatch[1]);
+    
+    let season = 'summer';
+    if (month.includes('jan')) season = 'winter';
+    else if (month.includes('abr') || month.includes('apr')) season = 'spring';
+    else if (month.includes('jul')) season = 'summer';
+    else if (month.includes('out')) season = 'fall';
+    
+    return { year, season };
+}
 
+// --- INICIALIZAÇÃO ---
+document.addEventListener('DOMContentLoaded', async () => {
     const animeCardManager = new AnimeCardManager('.animeCard');
     const animeChart = document.getElementById('anime-chart');
 
+    // 1. Registra o evento de clique IMEDIATAMENTE
     if (animeChart) {
-        animeChart.addEventListener('click', (e) => {
-            // Encontra o link pai que aciona o card
+        animeChart.addEventListener('click', async (e) => {
             const trigger = e.target.closest('.anime-card-trigger');
             if (!trigger) return;
 
-            e.preventDefault(); // Previne o comportamento padrão do link
+            e.preventDefault();
 
-            // Coleta todos os atributos data-* e os transforma em um objeto
-            const animeData = { ...trigger.dataset };
+            const isCurrentAnime = animeCardManager.card.style.display === 'block' && 
+                                   animeCardManager.elements.title.innerHTML === trigger.dataset.title;
+            
+            if (isCurrentAnime) {
+                animeCardManager.card.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
 
-            // Popula o card com os dados coletados
+            // --- FEEDBACK INSTANTÂNEO ---
+            // Ativa o loading, exibe o card e sobe para o topo/card na hora
+            animeCardManager.setLoading(true);
+            
+            let animeData = { ...trigger.dataset };
+
+            if (animeData.animeData) {
+                const jikanId = parseInt(animeData.animeData);
+                const jikanData = await fetchAnimeFromJikan(jikanId);
+                animeData = mergeJikanData(animeData, jikanData);
+            }
+
             animeCardManager.populate(animeData);
+            animeCardManager.setLoading(false);
         });
     }
 
-    // Preenche os títulos assim que a página carrega
-    populateTitleOverlays();
+    // 2. Busca os dados da temporada em background (sem bloquear os cliques)
+    const { year, season } = getSeasonFromURL();
+    fetchSeasonAnimes(year, season).then(() => {
+        populateTitleOverlays();
+        updateAnimeCount('anime-chart');
+        
+        // Inicializa filtros após os dados estarem prontos
+        initializeTypeFilters('anime-chart', 'type-filter-container');
+        initializeGenreFilters('anime-chart', 'genre-filter-container');
+        initializeSorting('anime-chart', 'sort-select');
+        initializeClearButton('anime-chart', 'type-filter-container', 'genre-filter-container', 'sort-select');
+        console.log(`✅ Dados da temporada ${season} carregados e filtros prontos.`);
+    });
+
+    // 3. Função única para popular os títulos (removendo as duplicatas abaixo)
+    preloadAllImages();
+});
+
+async function populateTitleOverlays() {
+    const animeTriggers = document.querySelectorAll('.anime-card-trigger');
+    animeTriggers.forEach((trigger) => {
+        const titleOverlay = trigger.querySelector('.title-overlay');
+        const animeImage = trigger.querySelector('.image');
+        const jikanId = trigger.dataset.animeData;
+
+        if (jikanId) {
+            // Usa dados em cache se disponível
+            // NÃO faz requisição - isso é para carregamento inicial apenas!
+            const cachedData = jikanCache[parseInt(jikanId)];
+            
+            if (cachedData) {
+                trigger.dataset.title = cachedData.title;
+                if (!trigger.dataset.genre) trigger.dataset.genre = cachedData.genre;
+                if (!trigger.dataset.type) trigger.dataset.type = cachedData.type;
+                if (!trigger.dataset.time) trigger.dataset.time = cachedData.time
+
+                if (cachedData.thumb1 && animeImage) {
+                    animeImage.src = cachedData.thumb1;
+                }
+                if (titleOverlay) titleOverlay.textContent = cachedData.title;
+            } else if (titleOverlay && trigger.dataset.title) {
+                titleOverlay.textContent = trigger.dataset.title;
+            }
+        } else {
+            if (titleOverlay && trigger.dataset.title) {
+                titleOverlay.textContent = trigger.dataset.title;
+            }
+        }
+    });
+}
+
+// Remova as funções repetidas que estavam no final do arquivo original,
+// mantendo apenas as utilitárias de filtro e preloading
 
     // Pré‑carrega todas as imagens visíveis para popularem o cache do navegador
     function preloadAllImages() {
@@ -1287,17 +1624,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     case 'alpha-desc':
                         return triggerB.dataset.title.localeCompare(triggerA.dataset.title);
                     case 'date-desc':
-                        // Lógica aprimorada para ordenar por data considerando a virada do ano (Dezembro > Janeiro)
                         const [dayA, monthA] = triggerA.dataset.time.split('/').map(Number);
                         const [dayB, monthB] = triggerB.dataset.time.split('/').map(Number);
-
-                        // Trata Dezembro (12) como um mês "maior" que Janeiro (1) para a temporada de inverno
-                        const adjustedMonthA = monthA === 12 ? 13 : monthA;
-                        const adjustedMonthB = monthB === 12 ? 13 : monthB;
-
-                        const dateA = adjustedMonthA * 100 - dayA; // Ex: 14/12 -> 1300-14=1286 | 01/01 -> 100-1=99
-                        const dateB = adjustedMonthB * 100 - dayB; // Ex: 05/01 -> 100-5=95
-                        return dateB - dateA;
+                        
+                        let mA = monthA;
+                        let mB = monthB;
+                        
+                        // Lógica de mês circular: Se a diferença entre os meses for muito grande (ex: 1 e 12),
+                        // significa que houve uma virada de ano/temporada. Ajustamos o peso para manter a ordem.
+                        if (mA - mB > 6) mB += 12;
+                        if (mB - mA > 6) mA += 12;
+                        
+                        // Ordenação cronológica: Mês*100 + Dia garante que 30/06 venha antes de 05/07
+                        return (mA * 100 + dayA) - (mB * 100 + dayB);
                     case 'default':
                     default:
                         // Retorna à ordem original do DOM
@@ -1356,168 +1695,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSorting('anime-chart', 'sort-select');
     initializeClearButton('anime-chart', 'type-filter-container', 'genre-filter-container', 'sort-select');
 
-    // --- INICIALIZAÇÃO DO PLAYER DE VÍDEO CUSTOMIZADO ---
-    // A inicialização agora é feita pela função `initializeCustomControls`
-    // para poder lidar com players criados dinamicamente (HTML5 e YouTube).
-    window.initializeCustomControls = (container, player, type) => {
-        // Detecta se estamos no modal ou em um container inline
-        const isModal = container.id === 'video-modal';
-    const playPauseBtn = container.querySelector(isModal ? '.video-modal-controls .play-pause-btn' : '.play-pause-btn');
-    const playPauseIcon = playPauseBtn.querySelector('i');
-    const progressBar = container.querySelector(isModal ? '.video-modal-controls .progress-bar' : '.progress-bar');
-    const progressBarContainer = container.querySelector(isModal ? '.video-modal-controls .progress-bar-container' : '.progress-bar-container');
-    const timeDisplay = container.querySelector(isModal ? '.video-modal-controls .time-display' : '.time-display');
-    const volumeBtn = container.querySelector(isModal ? '.video-modal-controls .volume-btn' : '.volume-btn');
-    const volumeIcon = volumeBtn.querySelector('i');
-    const volumeSlider = container.querySelector(isModal ? '.video-modal-controls .volume-slider' : '.volume-slider');
-        let progressInterval;
-
-        // --- Funções de Controle ---
-        function togglePlayPause() {
-            if (type === 'youtube') {
-                const state = player.getPlayerState();
-                if (state === YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                } else {
-                    player.playVideo();
-                }
-            } else {
-                if (player.paused) {
-                    player.play();
-                } else {
-                    player.pause();
-                }
-            }
-        }
-
-        function updatePlayPauseIcon() {
-            let isPaused;
-            if (type === 'youtube') {
-                const state = player.getPlayerState();
-                isPaused = state !== YT.PlayerState.PLAYING;
-            } else {
-                isPaused = player.paused;
-            }
-            playPauseIcon.className = `fas ${isPaused ? 'fa-play' : 'fa-pause'}`;
-        }
-
-        function updateProgress() {
-            const currentTime = type === 'youtube' ? player.getCurrentTime() : player.currentTime;
-            const duration = type === 'youtube' ? player.getDuration() : player.duration;
-            
-            // Só atualiza se a duração for válida
-            if (duration && duration > 0 && !isNaN(currentTime)) {
-                const progressPercentage = (currentTime / duration) * 100;
-                progressBar.style.width = `${Math.min(progressPercentage, 100)}%`;
-                timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
-            } else {
-                // Se não temos duração válida, mostra apenas o tempo atual
-                timeDisplay.textContent = `${formatTime(currentTime)} / 0:00`;
-            }
-        }
-
-        function scrub(e) {
-            const duration = type === 'youtube' ? player.getDuration() : player.duration;
-            const scrubTime = (e.offsetX / progressBarContainer.offsetWidth) * duration;
-            if (type === 'youtube') {
-                player.seekTo(scrubTime, true);
-            } else {
-                player.currentTime = scrubTime;
-            }
-        }
-
-        function toggleMute() {
-            if (type === 'youtube') {
-                if (player.isMuted()) {
-                    player.unMute();
-                } else {
-                    player.mute();
-                }
-            } else {
-                player.muted = !player.muted;
-            }
-            updateVolumeIcon(); // Atualiza o ícone imediatamente
-        }
-
-        function updateVolumeIcon() {
-            const isMuted = type === 'youtube' ? player.isMuted() : player.muted;
-            const volume = type === 'youtube' ? player.getVolume() / 100 : player.volume;
-
-            volumeIcon.className = 'fas';
-            if (isMuted || volume === 0) {
-                volumeIcon.classList.add('fa-volume-mute');
-            } else if (volume < 0.5) {
-                volumeIcon.classList.add('fa-volume-down');
-            } else {
-                volumeIcon.classList.add('fa-volume-up');
-            }
-        }
-
-        function handleVolumeChange() {
-            const newVolume = volumeSlider.value;
-            if (type === 'youtube') {
-                player.setVolume(newVolume * 100);
-                if (newVolume > 0 && player.isMuted()) {
-                    player.unMute();
-                }
-            } else {
-                player.volume = newVolume;
-                if (newVolume > 0) {
-                    player.muted = false;
-                }
-            }
-        }
-
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return "0:00";
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = Math.floor(seconds % 60);
-            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
-
-        // --- Event Listeners ---
-        if (type === 'html5') {
-            player.addEventListener('click', togglePlayPause);
-            player.addEventListener('play', () => {
-                // Pausa outros players
-                window.videoPlayers.forEach(p => {
-                    if (p !== player) {
-                        if (typeof p.pauseVideo === 'function') p.pauseVideo();
-                        if (typeof p.pause === 'function') p.pause();
-                    }
-                });
-                updatePlayPauseIcon();
-            });
-            player.addEventListener('pause', updatePlayPauseIcon);
-            player.addEventListener('timeupdate', updateProgress);
-            player.addEventListener('loadedmetadata', updateProgress);
-            player.addEventListener('volumechange', updateVolumeIcon);
-        } else { // YouTube
-            // O clique é tratado pelo `playVideo` e `pauseVideo`
-            // O estado é verificado com `getPlayerState`
-            // A atualização do progresso precisa de um intervalo
-            window.currentProgressInterval = setInterval(() => {
-                // Só atualiza se o vídeo estiver carregado e tocando
-                if (player.getDuration && player.getDuration() > 0) {
-                    updateProgress();
-                }
-                updatePlayPauseIcon();
-            }, 500); // Aumentado para 500ms para reduzir flickering
-        }
-
-        playPauseBtn.addEventListener('click', togglePlayPause);
-        progressBarContainer.addEventListener('click', scrub);
-        volumeBtn.addEventListener('click', toggleMute);
-        volumeSlider.addEventListener('input', handleVolumeChange);
-
-        // Inicializa os ícones e o tempo
-        updateVolumeIcon();
-        updateProgress();
-    };
-});
-
-// Função para detectar URLs do Twitter/X
-function isTwitterUrl(url) {
+    function isTwitterUrl(url) {
     if (!url || url === "false") return false;
     try {
         const urlObj = new URL(url);
@@ -1526,122 +1704,3 @@ function isTwitterUrl(url) {
         return false;
     }
 }
-
-// Lógica para os cards de anime
-document.addEventListener('DOMContentLoaded', () => {
-    const animeCards = document.querySelectorAll('.anime-card-trigger');
-    const animeModal = document.getElementById('anime-card');
-
-    if (!animeModal) {
-        console.error('Anime modal not found');
-        return;
-    }
-
-    animeCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            e.preventDefault();
-            const data = card.dataset;
-            console.log('Card clicked, data.video2:', data.video2);
-
-            // Preenche o modal com dados básicos (adapte conforme necessário)
-            // ...
-
-            // Vídeos
-            const videoContainers = animeModal.querySelectorAll('.video-player-container');
-            const videoData = [
-                { video: data.video1, caption: data.caption1 },
-                { video: data.video2, caption: data.caption2 },
-                { video: data.video3, caption: data.caption3 }
-            ];
-
-            videoContainers.forEach((container, index) => {
-                const vData = videoData[index];
-                const playerContainer = container.querySelector('.video-player');
-                const captionEl = container.querySelector('.video-caption-text');
-
-                if (captionEl) this._formatVideoCaption(captionEl, vData);
-
-                if (vData.video && vData.video !== 'false' && playerContainer) {
-                    container.style.display = 'flex';
-
-                    // Cria thumbnail
-                    const thumbnailDiv = document.createElement('div');
-                    thumbnailDiv.className = 'video-thumbnail';
-                    thumbnailDiv.style.cursor = 'pointer';
-
-                    const videoId = getYouTubeVideoId(vData.video);
-                    if (videoId) {
-                        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-                        thumbnailDiv.innerHTML = `
-                            <img src="${thumbnailUrl}" alt="${vData.caption}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; pointer-events: none;">
-                            <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
-                                <i class="fab fa-youtube"></i> YouTube
-                            </div>
-                        `;
-                    } else if (isTwitterUrl(vData.video)) {
-                        console.log('Criando thumbnail para Twitter:', vData.video);
-                        thumbnailDiv.innerHTML = `
-                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; pointer-events: none;">
-                                <i class="fa-brands fa-x-twitter" style="font-size: 48px;"></i>
-                            </div>
-                            <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
-                                <i class="fa-brands fa-x-twitter"></i>
-                            </div>
-                        `;
-                    } else {
-                        thumbnailDiv.innerHTML = `
-                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; pointer-events: none;">
-                                <i class="fas fa-play-circle" style="font-size: 48px;"></i>
-                            </div>
-                            <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(11,18,32,0.8); padding: 4px 8px; border-radius: 6px; font-size: 12px; color: white; display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px); pointer-events: none;">
-                                <i class="fas fa-external-link-alt"></i> Link
-                            </div>
-                        `;
-                    }
-
-                    // Evento de clique
-                    thumbnailDiv.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Thumbnail clicked for video:', vData.caption, 'URL:', vData.video);
-                        if (typeof openVideoModal === 'function') {
-                            console.log('Calling openVideoModal');
-                            openVideoModal(vData, index + 1);
-                        } else {
-                            console.error('openVideoModal function not found');
-                        }
-                    });
-
-                    // Limpa e adiciona
-                    playerContainer.innerHTML = '';
-                    playerContainer.appendChild(thumbnailDiv);
-
-                    // Esconde controles
-                    const controls = container.querySelector('.video-controls');
-                    if (controls) controls.style.display = 'none';
-                } else {
-                    container.style.display = 'none';
-                }
-            });
-
-            // Mostra o modal
-            animeModal.style.display = 'block';
-            setTimeout(() => animeModal.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-        });
-    });
-
-    // Fechar modal
-    const closeBtn = animeModal.querySelector('.close');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            animeModal.style.display = 'none';
-        });
-    }
-
-    // Fechar ao clicar fora
-    window.addEventListener('click', (e) => {
-        if (e.target === animeModal) {
-            animeModal.style.display = 'none';
-        }
-    });
-});
