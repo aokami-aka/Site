@@ -501,7 +501,7 @@ function myFunction() {
 }
 
 // initialize and bind more robustly on DOM ready
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const btn = document.getElementById("phoneIcon");
   const nav = document.getElementById("banner");
   if (!btn || !nav) { console.warn('DOMContentLoaded: missing phoneIcon or banner'); return; }
@@ -1388,9 +1388,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loader = document.getElementById('loader');
     const loaderText = loader ? loader.querySelector('.loader-text') : null;
     
-    // Verifica se os dados da temporada já estão no cache persistente
+    // Verifica e valida se o cache da temporada está desatualizado comparado com a API
     const seasonKey = `${season}_${year}`;
-    const isSeasonCached = jikanCache._metadata && jikanCache._metadata[seasonKey];
+    let isSeasonCached = jikanCache._metadata && jikanCache._metadata[seasonKey];
+
+    try {
+        if (typeof validateSeasonCache === 'function') {
+            const cleared = await validateSeasonCache(year, season);
+            if (cleared) {
+                // Após limpar o cache, garantimos que o loader será exibido para recarregar dados
+                isSeasonCached = false;
+                if (loader && loaderText) loaderText.textContent = 'Cache atualizado. Recarregando lista da temporada...';
+                if (loader) loader.style.display = 'flex';
+            }
+        }
+    } catch (e) {
+        console.warn('Erro ao validar cache da temporada:', e);
+    }
 
     // Se não estiver em cache (primeira vez ou expirado), mostra o loader global
     if (!isSeasonCached && loader) {
@@ -1539,13 +1553,14 @@ async function populateTitleOverlays() {
         // Se não houver container de filtro ou animes na grade, não faz nada.
         if (!filterContainer || animeTriggers.length === 0) return;
 
-        // 1. Coletar todos os gêneros únicos
+        // 1. Coletar todos os gêneros únicos (ignorando 'N/A' e valores vazios)
         const allGenres = new Set();
         animeTriggers.forEach(trigger => {
             const genres = trigger.dataset.genre;
             if (genres) {
                 genres.split(',').forEach(genre => {
-                    allGenres.add(genre.trim());
+                    const g = genre.trim();
+                    if (g && g !== 'N/A') allGenres.add(g);
                 });
             }
         });
