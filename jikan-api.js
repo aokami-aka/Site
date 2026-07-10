@@ -1056,3 +1056,48 @@ function clearJikanCache() {
     localStorage.removeItem(CACHE_STORAGE_KEY);
     console.log('Cache da Jikan API limpo e LocalStorage removido');
 }
+
+/**
+ * Valida se os metadados da temporada no cache estão desatualizados.
+ * Se detectar diferença (ex: total de itens diferente), limpa o cache local e retorna true.
+ * Retorna false caso nada tenha sido alterado ou em caso de erro.
+ */
+async function validateSeasonCache(year, season) {
+    try {
+        const seasonKey = `${season}_${year}`;
+
+        // Faz uma requisição leve apenas para verificar o total de itens
+        const response = await fetchJikan(`https://api.jikan.moe/v4/seasons/${year}/${season}?page=1&limit=1`);
+        if (!response || !response.ok) return false;
+
+        const result = await response.json();
+        const total = result?.pagination?.items?.total || 0;
+        const cachedTotal = jikanCache._metadata && jikanCache._metadata[seasonKey] && jikanCache._metadata[seasonKey].total;
+
+        // Se não temos total em cache, não eliminamos (será populado normalmente)
+        if (typeof cachedTotal === 'undefined') return false;
+
+        if (cachedTotal !== total) {
+            console.log(`[Cache] Diferença detectada na temporada ${seasonKey} (cache=${cachedTotal} api=${total}). Limpando cache...`);
+            try {
+                localStorage.removeItem(CACHE_STORAGE_KEY);
+            } catch (e) {
+                console.warn('[Cache] Erro ao remover item do LocalStorage:', e);
+            }
+
+            // Limpa o objeto em memória sem reatribuir a const
+            Object.keys(jikanCache).forEach(k => delete jikanCache[k]);
+            jikanCache._metadata = {};
+            // Marca o tempo da limpeza global
+            jikanCache._metadata.lastGlobalCleanup = Date.now();
+            saveCacheToLocalStorage();
+
+            return true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error('[Cache] Erro ao validar metadados da temporada:', error);
+        return false;
+    }
+}
