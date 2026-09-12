@@ -815,7 +815,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                 className="overflow-hidden"
               >
                 <div className="flex flex-wrap items-center gap-1.5 pt-1 pb-1">
-                  {/* Seasonal Favorites Button (moved here and sized identical to type buttons) */}
+                  {/* Seasonal Favorites Button */}
                   <button
                     id="toggle-favorites-filter-btn"
                     onClick={() => setShowOnlyFavorites((prev) => !prev)}
@@ -928,9 +928,9 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
           </AnimatePresence>
         </div>
 
-        {/* Row 4: Dedicated Sorting & Display Format Toolbar (Clean separation, borderless container) */}
+        {/* Row 4: Dedicated Sorting & Display Format Toolbar */}
         <div className="pt-3 border-t border-white/8 flex flex-col md:flex-row md:items-center md:justify-between gap-3.5">
-          {/* Results Counter: No pulsing dot, just 'X animes' as requested */}
+          {/* Results Counter */}
           <div className="flex items-center gap-2">
             <span className="text-xs sm:text-sm font-bold text-slate-300 tracking-wide">
               {filteredAnime.length} animes
