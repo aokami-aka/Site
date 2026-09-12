@@ -731,7 +731,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
       </div>
 
       {/* Creative Filter & Navigation Hub */}
-      <div className="rounded-3xl bg-[#090e1a] md:bg-[#090e1a]/90 md:backdrop-blur-2xl border border-white/15 shadow-2xl p-4 sm:p-6 mb-7 space-y-4">
+      <div className="rounded-3xl bg-[#090e1a]/90 backdrop-blur-2xl border border-white/15 shadow-2xl p-4 sm:p-6 mb-7 space-y-4">
         {/* Row 1: Search Bar + Clear Filters */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
           <div className="relative flex-1">
