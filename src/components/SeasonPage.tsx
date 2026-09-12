@@ -304,7 +304,7 @@ const ListAnimeCardItem: React.FC<{
         },
       }}
       onClick={() => onSelectAnime(anime)}
-      className="flex flex-col sm:flex-row gap-4 p-4 rounded-2xl bg-[#0e1422]/75 backdrop-blur-xl hover:bg-[#131b2c]/90 transition-all cursor-pointer group"
+      className="flex flex-col sm:flex-row gap-4 p-4 rounded-2xl bg-[#0e1422] md:bg-[#0e1422]/75 md:backdrop-blur-xl hover:bg-[#131b2c] md:hover:bg-[#131b2c]/90 transition-all cursor-pointer group cv-auto gpu-layer"
       style={{
         border: `1px solid ${posterGlow}30`,
         boxShadow: `0 6px 20px -4px ${posterGlow}22, 0 0 12px -2px ${palette.accentHex}14`,
@@ -321,6 +321,8 @@ const ListAnimeCardItem: React.FC<{
             src={cover}
             alt={anime.title.romaji}
             referrerPolicy="no-referrer"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : null}
@@ -539,7 +541,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
   return (
     <div className="w-full min-h-screen pb-16 flex flex-col items-center">
       {/* Full-width Acrylic Frosted Glass Navbar (colada no topo e laterais, bordas inferiores arredondadas) */}
-      <header className="sticky top-0 z-40 w-full rounded-t-none rounded-b-2xl sm:rounded-b-3xl bg-[#080b11]/35 backdrop-blur-2xl backdrop-saturate-180 border-b border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all">
+      <header className="sticky top-0 z-40 w-full rounded-t-none rounded-b-2xl sm:rounded-b-3xl bg-[#080b11]/95 md:bg-[#080b11]/50 md:backdrop-blur-2xl md:backdrop-saturate-180 border-b border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all">
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 py-2.5">
           {/* Brand & Plaque Home button */}
           <div className="flex items-center gap-3">
@@ -637,7 +639,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
             animate={{ opacity: 1, height: 'auto', y: 0 }}
             exit={{ opacity: 0, height: 0, y: -14 }}
             transition={{ duration: 0.28, ease: 'easeOut' }}
-            className="md:hidden sticky top-[56px] z-30 w-full max-w-7xl mx-auto bg-[#0c121e]/80 backdrop-blur-2xl border-b border-white/15 px-4 py-4 space-y-4 shadow-2xl overflow-hidden rounded-b-2xl"
+            className="md:hidden sticky top-[56px] z-30 w-full max-w-7xl mx-auto bg-[#0c121e]/95 md:bg-[#0c121e]/80 md:backdrop-blur-2xl border-b border-white/15 px-4 py-4 space-y-4 shadow-2xl overflow-hidden rounded-b-2xl"
           >
             {/* 1. Seasons Plaque Grid placed first */}
             <div>
@@ -729,7 +731,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
       </div>
 
       {/* Creative Filter & Navigation Hub */}
-      <div className="rounded-3xl bg-[#090e1a]/90 backdrop-blur-2xl border border-white/15 shadow-2xl p-4 sm:p-6 mb-7 space-y-4">
+      <div className="rounded-3xl bg-[#090e1a] md:bg-[#090e1a]/90 md:backdrop-blur-2xl border border-white/15 shadow-2xl p-4 sm:p-6 mb-7 space-y-4">
         {/* Row 1: Search Bar + Clear Filters */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
           <div className="relative flex-1">
@@ -1093,7 +1095,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                 }}
                 onClick={() => onSelectAnime(anime)}
                 id={`anime-card-${anime.id}`}
-                className={`group relative rounded-2xl overflow-hidden bg-[#0d121c]/80 backdrop-blur-xl cursor-pointer flex flex-col justify-between aspect-[2/3] transition-all`}
+                className={`group relative rounded-2xl overflow-hidden bg-[#0d121c] md:bg-[#0d121c]/80 md:backdrop-blur-xl cursor-pointer flex flex-col justify-between aspect-[2/3] transition-all cv-auto gpu-layer`}
                 style={{
                   border: `1px solid ${posterGlow}35`,
                   boxShadow: `0 6px 20px -3px ${posterGlow}25, 0 0 14px -2px ${palette.accentHex}18`,
@@ -1107,6 +1109,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                       alt={anime.title.romaji}
                       referrerPolicy="no-referrer"
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-300"
                     />
                   ) : null}

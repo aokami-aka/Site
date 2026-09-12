@@ -352,7 +352,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 bg-black/85 md:backdrop-blur-md"
           />
 
           {/* Modal Window with Glassmorphism, Responsive Ultra-Wide Layout & Seasonal Curvature Scrollbar */}
@@ -362,7 +362,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.93, y: 16 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0a0e17] border shadow-2xl z-10 text-white my-auto season-modal-scroll"
+            className="relative w-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0a0e17] md:bg-[#0a0e17]/80 md:backdrop-blur-2xl border border-white/10 shadow-2xl z-10 text-white my-auto season-modal-scroll gpu-layer"
             style={{
               '--season-accent-color': palette.accentHex,
               '--season-thumb-hover': palette.accentHex,
@@ -371,7 +371,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
             } as React.CSSProperties}
           >
           {/* Unified Header: Title, Subtitle, Favorite and Close with Frosted Glassmorphism */}
-          <div className="sticky top-0 z-20 flex items-start justify-between gap-3 sm:gap-4 p-4 sm:p-6 pb-3 sm:pb-4 bg-[#0a0e17]/85 backdrop-blur-xl border-b border-white/10">
+          <div className="sticky top-0 z-20 flex items-start justify-between gap-3 sm:gap-4 p-4 sm:p-6 pb-3 sm:pb-4 bg-[#0a0e17]/95 md:bg-[#0a0e17]/85 md:backdrop-blur-xl border-b border-white/10">
             {/* Title and Subtitle */}
             <div className="flex-1 min-w-0 pr-1">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white font-display leading-tight">

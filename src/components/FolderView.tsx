@@ -126,6 +126,7 @@ const StampIframe: React.FC<StampIframeProps> = ({
               transition={{ duration: 1.1, ease: 'easeInOut' }}
               className="absolute inset-0 w-full h-full object-cover filter contrast-105 pointer-events-none"
               loading="lazy"
+              decoding="async"
             />
           ) : null}
         </AnimatePresence>
@@ -387,7 +388,7 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason }) => {
                           }
                           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                           style={{ transformOrigin: 'bottom center', transformStyle: 'preserve-3d' }}
-                          className="relative rounded-2xl rounded-tl-none bg-slate-900/40 backdrop-blur-2xl p-5 sm:p-6 border border-white/15 group-hover:border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all overflow-hidden"
+                          className="relative rounded-2xl rounded-tl-none bg-slate-900 md:bg-slate-900/40 md:backdrop-blur-2xl p-5 sm:p-6 border border-white/15 group-hover:border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all overflow-hidden cv-auto gpu-layer"
                         >
                           {/* Subtle gloss reflection */}
                           <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-transparent pointer-events-none" />
@@ -572,7 +573,7 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason }) => {
                           <motion.div
                             animate={isOpeningSeason ? { y: -8, scale: 1.05 } : { y: 0, scale: 1 }}
                             transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                            className={`w-24 h-4 rounded-t-xl border-t border-l border-r ml-5 transition-colors backdrop-blur-xl ${theme.tabBg}`}
+                            className={`w-24 h-4 rounded-t-xl border-t border-l border-r ml-5 transition-colors md:backdrop-blur-xl ${theme.tabBg}`}
                           />
                         )}
 
@@ -590,7 +591,7 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason }) => {
                           }
                           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                           style={{ transformOrigin: 'bottom center', transformStyle: 'preserve-3d' }}
-                          className={`relative rounded-2xl rounded-tl-none p-6 border shadow-2xl backdrop-blur-2xl transition-all overflow-hidden ${theme.bodyBg}`}
+                          className={`relative rounded-2xl rounded-tl-none p-6 border shadow-2xl md:backdrop-blur-2xl transition-all overflow-hidden cv-auto gpu-layer ${theme.bodyBg}`}
                         >
                           {/* Creative Active Neon Lip on the Folder for the Current Season with matching seasonal color */}
                           {isActualCurrentSeason && (
