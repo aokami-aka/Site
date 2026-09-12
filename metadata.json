@@ -1,0 +1,6 @@
+{
+  "name": "AnimeGuides - Animes da Temporada",
+  "description": "Guia interativo de animes por temporada com navegação por pastas cronológicas, atualização dinâmica via APIs AniList e Jikan, e detalhes técnicos completos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
