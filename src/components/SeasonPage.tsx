@@ -602,7 +602,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
               <button
                 id="season-pwa-install-btn"
                 onClick={installApp}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 text-xs font-bold transition-all shadow-sm cursor-pointer ml-1"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-cyan-300 text-xs font-bold transition-all shadow-sm cursor-pointer ml-1"
                 title="Instalar AnimeGuides como aplicativo"
               >
                 <Download className="w-3.5 h-3.5" />
