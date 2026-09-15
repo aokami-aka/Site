@@ -12,6 +12,8 @@ import {
   Loader2,
   ChevronDown,
   ChevronUp,
+  Bell,
+  Sparkles,
 } from 'lucide-react';
 import { AnimeItem, AnimeVideo, Season, ExternalLink } from '../types';
 import { SEASON_PALETTES } from './SeasonPage';
@@ -31,6 +33,13 @@ import {
 import { fetchAnimeThemesVideos } from '../services/animeThemesApi';
 import { CustomVideoPlayer } from './CustomVideoPlayer';
 import { getPlatformInfo } from '../utils/platformLogos';
+import { usePWAInstall } from '../utils/usePWAInstall';
+import {
+  isAnimeSubscribed,
+  toggleAnimeNotification,
+  simulateEpisodeRelease,
+  isPWAInstalled,
+} from '../services/notificationService';
 
 const DEFAULT_POSTER_FALLBACK =
   'https://media.kitsu.app/anime/46474/poster_image/large-23e1293e41a0b54b6621eb589c3f0d62.jpeg';
@@ -107,6 +116,44 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
   const [studioLogoFailed, setStudioLogoFailed] = useState<boolean>(false);
   const [activeLinks, setActiveLinks] = useState<ExternalLink[]>(anime?.externalLinks || []);
   const [coverTilt, setCoverTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50, isHovered: false });
+  const { isInstalled } = usePWAInstall();
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(anime ? isAnimeSubscribed(anime.id) : false);
+  const [isTogglingNotify, setIsTogglingNotify] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (anime) {
+      setIsSubscribed(isAnimeSubscribed(anime.id));
+    }
+  }, [anime]);
+ 
+  useEffect(() => {
+    const handleSubUpdate = (e: Event) => {
+      const ce = e as CustomEvent<{ animeId: number; subscribed: boolean }>;
+      if (anime && ce.detail && ce.detail.animeId === anime.id) {
+        setIsSubscribed(ce.detail.subscribed);
+      }
+    };
+    window.addEventListener('animeguides:subscription-updated', handleSubUpdate);
+    return () => {
+      window.removeEventListener('animeguides:subscription-updated', handleSubUpdate);
+    };
+  }, [anime]);
+ 
+  const handleToggleNotification = async () => {
+    if (!anime || isTogglingNotify) return;
+    setIsTogglingNotify(true);
+    try {
+      const res = await toggleAnimeNotification(anime);
+      setIsSubscribed(res.subscribed);
+    } finally {
+      setIsTogglingNotify(false);
+    }
+  };
+ 
+  const animeStatus = (anime?.status || '').toUpperCase();
+  const isReleasingOrUpcoming = animeStatus === 'RELEASING' || animeStatus === 'NOT_YET_RELEASED';
+  const isPWA = isInstalled || isPWAInstalled();
+  const shouldShowNotifyButton = isReleasingOrUpcoming && isPWA;
 
   const handleCoverMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -382,29 +429,73 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
               </p>
             </div>
 
-            {/* Right Buttons: Favorite and Close in the same row, compact and nicely spaced */}
-            <div className="flex items-center gap-2 shrink-0 pt-0.5">
-              <button
-                id="modal-favorite-btn"
-                onClick={() => onToggleFavorite(anime.id)}
-                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg border-0 transition-all cursor-pointer shadow-sm flex items-center justify-center ${
-                  isFavorite
-                    ? 'bg-amber-400 text-slate-950 font-bold scale-[1.02]'
-                    : 'bg-[#141b2c] text-slate-300 hover:text-white hover:bg-[#1f2a42]'
-                }`}
-                title={isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
-              >
-                <Star className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isFavorite ? 'fill-current text-slate-950' : 'text-amber-400 fill-current opacity-85'}`} />
-              </button>
+            {/* Right Buttons: Favorite and Close in the top row, and Bell Notification button right below them */}
+            <div className="flex flex-col items-end gap-1.5 shrink-0 pt-0.5">
+              <div className="flex items-center gap-2">
+                <button
+                  id="modal-favorite-btn"
+                  onClick={() => onToggleFavorite(anime.id)}
+                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg border-0 transition-all cursor-pointer shadow-sm flex items-center justify-center ${
+                    isFavorite
+                      ? 'bg-amber-400 text-slate-950 font-bold scale-[1.02]'
+                      : 'bg-[#141b2c] text-slate-300 hover:text-white hover:bg-[#1f2a42]'
+                  }`}
+                  title={isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+                >
+                  <Star className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isFavorite ? 'fill-current text-slate-950' : 'text-amber-400 fill-current opacity-85'}`} />
+                </button>
 
-              <button
-                id="modal-close-btn"
-                onClick={onClose}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border-0 bg-[#141b2c] text-slate-300 hover:text-white hover:bg-[#1f2a42] transition-colors cursor-pointer shadow-sm flex items-center justify-center"
-                title="Fechar detalhes (ESC)"
-              >
-                <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </button>
+                <button
+                  id="modal-close-btn"
+                  onClick={onClose}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border-0 bg-[#141b2c] text-slate-300 hover:text-white hover:bg-[#1f2a42] transition-colors cursor-pointer shadow-sm flex items-center justify-center"
+                  title="Fechar detalhes (ESC)"
+                >
+                  <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </button>
+              </div>
+          
+              {/* Bell notification button - only visible if status is RELEASING or NOT_YET_RELEASED and in installed PWA */}
+              {shouldShowNotifyButton && (
+                <div className="flex items-center gap-1 mt-0.5">
+                  <button
+                    id="modal-bell-notify-btn"
+                    onClick={handleToggleNotification}
+                    disabled={isTogglingNotify}
+                    className={`flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs transition-all cursor-pointer shadow-sm select-none ${
+                      isSubscribed
+                        ? 'bg-cyan-500 text-slate-950 font-bold border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.4)] hover:bg-cyan-400'
+                        : 'bg-[#141b2c] hover:bg-[#1f2a42] border-white/10 text-slate-300 hover:text-cyan-300'
+                    }`}
+                    title={
+                      isSubscribed
+                        ? 'Notificações ativas! Você receberá aviso push no celular quando sair novo episódio.'
+                        : 'Ativar notificações push para novos episódios deste anime.'
+                    }
+                  >
+                    <Bell
+                      className={`w-3.5 h-3.5 ${
+                        isSubscribed ? 'fill-current text-slate-950 animate-pulse' : 'text-cyan-400'
+                      }`}
+                    />
+                    <span className="text-[11px] font-semibold whitespace-nowrap">
+                      {isSubscribed ? 'Avisando novos eps' : 'Avisar episódios'}
+                    </span>
+                  </button>
+ 
+                  {/* Quick test simulation button (useful to test push notification immediately) */}
+                  {isSubscribed && (
+                    <button
+                      id="modal-simulate-push-btn"
+                      onClick={() => simulateEpisodeRelease(anime.id)}
+                      className="p-1.5 rounded-lg bg-[#141b2c] hover:bg-[#1f2a42] border border-white/10 text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer shadow-sm"
+                      title="Testar notificação push de novo episódio"
+                    >
+                      <Sparkles className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
@@ -434,7 +525,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 2xl:gap-8 items-start">
               {/* Left Column: Single High-Resolution Poster via AniList with 3D Hover Parallax Effect */}
               <div
-                className="md:col-span-5 relative group"
+                className="md:col-span-5 2xl:col-span-4 relative group"
                 style={{ perspective: '1000px' }}
               >
                 <div
@@ -479,9 +570,9 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
                 </div>
               </div>
 
-              {/* Right Column: Technical Details */}
+              {/* Right Column: Technical Details with Frosted Glassmorphism */}
               <div
-                className="md:col-span-7 rounded-2xl bg-[#0e1422]/90 p-5 sm:p-6 space-y-3.5 text-sm leading-relaxed shadow-xl"
+                className="md:col-span-7 2xl:col-span-8 rounded-2xl bg-[#0e1422]/80 backdrop-blur-xl p-5 sm:p-6 2xl:p-7 space-y-3.5 text-sm leading-relaxed shadow-xl"
                 style={{
                   border: `1px solid ${currentGlow}25`,
                   boxShadow: `0 8px 24px -4px ${currentGlow}20`,
@@ -588,7 +679,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
                       }
                     >
                       {processedStudioLogo && !studioLogoFailed ? (
-                          <img
+                        <img
                           src={processedStudioLogo}
                           alt={currentStudioName}
                           className="h-14 sm:h-15 w-auto max-w-[140px] object-contain filter drop-shadow-md brightness-110 hover:scale-105 transition-all py-0.5"

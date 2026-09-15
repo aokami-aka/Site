@@ -7,10 +7,12 @@ import { BACKGROUND_CONFIG } from './config/backgroundConfig';
 import { FolderView } from './components/FolderView';
 import { SeasonPage } from './components/SeasonPage';
 import { AnimeDetailModal } from './components/AnimeDetailModal';
+import { NewsPage } from './components/NewsPage';
+import { MobilePushNotification } from './components/MobilePushNotification';
 
 export default function App() {
-  // Navigation state: 'home' = Folder view; 'season' = Season anime page
-  const [currentView, setCurrentView] = useState<'home' | 'season'>('home');
+  // Navigation state: 'home' = Folder view; 'season' = Season anime page; 'news' = Anime newspaper
+  const [currentView, setCurrentView] = useState<'home' | 'season' | 'news'>('home');
   const [selectedYear, setSelectedYear] = useState<number>(CURRENT_SEASON_CONFIG.year);
   const [selectedSeason, setSelectedSeason] = useState<Season>(CURRENT_SEASON_CONFIG.season);
 
@@ -74,11 +76,16 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateNews = () => {
+    setCurrentView('news');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Compute posters for diagonal background
   // Home page: mix of authentic anime posters from top animes
   // Season page: posters specifically from that season's anime!
   const backgroundPosters = useMemo(() => {
-    if (currentView === 'home') {
+    if (currentView === 'home' || currentView === 'news') {
       return BACKGROUND_CONFIG.customPostersList;
     }
     // Season page: strictly this season's anime posters without any stock photos
@@ -97,13 +104,16 @@ export default function App() {
         opacity={currentView === 'home' ? BACKGROUND_CONFIG.desktopOpacity : BACKGROUND_CONFIG.desktopOpacity * 0.95}
       />
 
-      {/* Main Views: Folder View or Season Page */}
+      {/* Main Views: Folder View, News Page, or Season Page */}
       {currentView === 'home' ? (
         <FolderView
           onSelectSeason={handleSelectSeason}
+          onNavigateNews={handleNavigateNews}
           currentYear={2026}
           currentSeason={'WINTER'}
         />
+      ) : currentView === 'news' ? (
+        <NewsPage onBackToHome={handleNavigateHome} />
       ) : (
         <SeasonPage
           year={selectedYear}
@@ -125,6 +135,16 @@ export default function App() {
         onClose={() => setSelectedAnime(null)}
         isFavorite={selectedAnime ? favorites.includes(selectedAnime.id) : false}
         onToggleFavorite={handleToggleFavorite}
+      />
+
+      {/* Mobile-Style In-App Push Notification Banner */}
+      <MobilePushNotification
+        onOpenAnime={(animeId) => {
+          const found = animeList.find((a) => a.id === animeId);
+          if (found) {
+            setSelectedAnime(found);
+          }
+        }}
       />
     </div>
   );

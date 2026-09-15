@@ -12,14 +12,24 @@ export function usePWAInstall() {
 
   useEffect(() => {
     // Check if app is running in standalone mode (already installed)
-    const isStandalone =
-      window.matchMedia('(display-mode: standalone)').matches ||
-      (window.navigator as unknown as { standalone?: boolean }).standalone === true;
+    const checkIsInstalled = () => {
+      const isStandalone =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        (window.navigator as unknown as { standalone?: boolean }).standalone === true ||
+        document.referrer.includes('android-app://') ||
+        localStorage.getItem('animeguides_pwa_simulated') === 'true';
+      return isStandalone;
+    };
 
-    if (isStandalone) {
+    if (checkIsInstalled()) {
       setIsInstalled(true);
       return;
     }
+
+    const onPWAStateChange = () => {
+      setIsInstalled(checkIsInstalled());
+    };
+    window.addEventListener('animeguides:pwa-state-changed', onPWAStateChange);
 
     const handler = (e: Event) => {
       e.preventDefault();
@@ -37,6 +47,7 @@ export function usePWAInstall() {
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener('animeguides:pwa-state-changed', onPWAStateChange);
     };
   }, []);
 

@@ -6,6 +6,8 @@ import {
   ArrowLeft,
   Layers,
   Download,
+  Newspaper,
+  Flame,
 } from 'lucide-react';
 import { Season, SeasonDefinition } from '../types';
 import {
@@ -33,6 +35,7 @@ import { usePWAInstall } from '../utils/usePWAInstall';
 
 interface FolderViewProps {
   onSelectSeason: (year: number, season: Season) => void;
+  onNavigateNews?: () => void;
   currentYear: number;
   currentSeason: Season;
 }
@@ -135,7 +138,7 @@ const StampIframe: React.FC<StampIframeProps> = ({
   );
 };
 
-export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason }) => {
+export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason, onNavigateNews }) => {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [openingYear, setOpeningYear] = useState<number | null>(null);
   const [openingSeason, setOpeningSeason] = useState<Season | null>(null);
@@ -316,18 +319,34 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason }) => {
               </h1>
             </div>
 
-            {/* PWA Install Button (shown when app is installable) */}
-            {isInstallable && (
-              <button
-                id="pwa-install-header-btn"
-                onClick={installApp}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 text-xs font-bold transition-all shadow-sm cursor-pointer"
-                title="Instalar AnimeGuides como aplicativo"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>Instalar App</span>
-              </button>
-            )}
+            {/* Header Right Actions: News Page Button & PWA Install */}
+            <div className="flex items-center gap-2">
+              {onNavigateNews && (
+                <button
+                  id="pwa-news-header-btn"
+                  onClick={onNavigateNews}
+                  className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-xl hover:bg-amber-500/30 text-amber-300 text-xs font-bold transition-all shadow-sm cursor-pointer group"
+                  title="Abrir página de notícias de anime"
+                >
+                  <Newspaper className="w-3.5 h-3.5 group-hover:rotate-6 transition-transform" />
+                  <span>Notícias</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping ml-0.5 hidden sm:inline-block" />
+                </button>
+              )}
+
+              {/* PWA Install Button (shown when app is installable) */}
+              {isInstallable && (
+                <button
+                  id="pwa-install-header-btn"
+                  onClick={installApp}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 text-xs font-bold transition-all shadow-sm cursor-pointer"
+                  title="Instalar AnimeGuides como aplicativo"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Instalar App</span>
+                </button>
+              )}
+            </div>
           </div>
         </header>
 
