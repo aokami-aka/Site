@@ -8,7 +8,6 @@ import { FolderView } from './components/FolderView';
 import { SeasonPage } from './components/SeasonPage';
 import { AnimeDetailModal } from './components/AnimeDetailModal';
 import { NewsPage } from './components/NewsPage';
-import { MobilePushNotification } from './components/MobilePushNotification';
 
 export default function App() {
   // Navigation state: 'home' = Folder view; 'season' = Season anime page; 'news' = Anime newspaper
@@ -135,16 +134,6 @@ export default function App() {
         onClose={() => setSelectedAnime(null)}
         isFavorite={selectedAnime ? favorites.includes(selectedAnime.id) : false}
         onToggleFavorite={handleToggleFavorite}
-      />
-
-      {/* Mobile-Style In-App Push Notification Banner */}
-      <MobilePushNotification
-        onOpenAnime={(animeId) => {
-          const found = animeList.find((a) => a.id === animeId);
-          if (found) {
-            setSelectedAnime(found);
-          }
-        }}
       />
     </div>
   );

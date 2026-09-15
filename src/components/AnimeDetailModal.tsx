@@ -37,7 +37,6 @@ import { usePWAInstall } from '../utils/usePWAInstall';
 import {
   isAnimeSubscribed,
   toggleAnimeNotification,
-  simulateEpisodeRelease,
   isPWAInstalled,
 } from '../services/notificationService';
 
@@ -482,18 +481,6 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
                       {isSubscribed ? 'Avisando novos eps' : 'Avisar episódios'}
                     </span>
                   </button>
- 
-                  {/* Quick test simulation button (useful to test push notification immediately) */}
-                  {isSubscribed && (
-                    <button
-                      id="modal-simulate-push-btn"
-                      onClick={() => simulateEpisodeRelease(anime.id)}
-                      className="p-1.5 rounded-lg bg-[#141b2c] hover:bg-[#1f2a42] border border-white/10 text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer shadow-sm"
-                      title="Testar notificação push de novo episódio"
-                    >
-                      <Sparkles className="w-3 h-3" />
-                    </button>
-                  )}
                 </div>
               )}
             </div>

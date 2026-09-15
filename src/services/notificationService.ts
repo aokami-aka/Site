@@ -1,4 +1,4 @@
-// Service to handle episode push notifications for subscribed animes
+// Service to handle episode push notifications for subscribed animes (Native Mobile/OS Push Only)
 
 export interface SubscribedAnime {
   id: number;
@@ -15,18 +15,9 @@ export interface SubscribedAnime {
   subscribedAt: number;
 }
 
-export interface PushNotificationPayload {
-  id: string;
-  animeId: number;
-  animeTitle: string;
-  episodeNumber: number | string;
-  posterImage: string;
-  timestamp: number;
-  isSimulation?: boolean;
-}
-
 const STORAGE_KEY = 'animeguides_subscribed_animes';
 const PWA_OVERRIDE_KEY = 'animeguides_pwa_simulated';
+const iconCache = new Map<string, string>();
 
 // Detect if running as installed PWA (Standalone mode)
 export function isPWAInstalled(): boolean {
@@ -125,77 +116,122 @@ export function playNotificationSound(): void {
   }
 }
 
-// Trigger mobile push notification (Native Notification + In-App Heads-Up Banner)
+/**
+ * Creates a high-definition 1:1 square icon with proper center-cover crop
+ * so mobile push notification icons are NEVER squished or flattened.
+ */
+export async function createSquareNotificationIcon(imageUrl: string): Promise<string> {
+  if (!imageUrl || typeof window === 'undefined') {
+    return '/pwa-192x192.png';
+  }
+
+  if (iconCache.has(imageUrl)) {
+    return iconCache.get(imageUrl)!;
+  }
+
+  try {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = () => reject();
+      img.src = imageUrl;
+    });
+
+    const size = 256;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return imageUrl;
+
+    // Center-cover crop calculation
+    const imgAspect = img.width / img.height;
+    let drawWidth = size;
+    let drawHeight = size;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (imgAspect > 1) {
+      // Image is wider than square
+      drawWidth = size * imgAspect;
+      offsetX = -(drawWidth - size) / 2;
+    } else {
+      // Image is taller than square (vertical anime poster)
+      drawHeight = size / imgAspect;
+      // Focus slightly upper-center (character faces)
+      offsetY = -(drawHeight - size) * 0.22;
+    }
+
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(0, 0, size, size);
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+    const squareDataUrl = canvas.toDataURL('image/png');
+    iconCache.set(imageUrl, squareDataUrl);
+    return squareDataUrl;
+  } catch {
+    // Fallback if CORS or canvas generation fails
+    return imageUrl || '/pwa-192x192.png';
+  }
+}
+
+// Trigger mobile native push notification in phone status bar & notification tray
 export async function triggerEpisodePushNotification(
   animeTitle: string,
   episodeNumber: number | string,
   posterImage: string,
   animeId: number,
-  options: { isSimulation?: boolean; customBody?: string } = {}
+  options: { customBody?: string } = {}
 ): Promise<void> {
-  // 1. Play sound and haptic vibration (cell phone push feel)
+  // 1. Play sound and haptic vibration (cell phone push feeling)
   playNotificationSound();
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
     try {
-      navigator.vibrate([120, 60, 160]);
+      navigator.vibrate([140, 70, 160]);
     } catch {
       // Ignore vibration error
     }
   }
 
+  const cleanEp = typeof episodeNumber === 'number' ? episodeNumber : parseInt(String(episodeNumber), 10) || episodeNumber;
   const notificationTitle = `AnimeGuides • Novo Episódio!`;
   const notificationBody =
     options.customBody ||
-    `O episódio ${episodeNumber} de "${animeTitle}" acabou de ser lançado! Toque para ver detalhes.`;
+    `O episódio ${cleanEp} de "${animeTitle}" acabou de ser lançado!`;
 
-  // 2. Dispatch in-app cell phone notification banner event
-  const payload: PushNotificationPayload = {
-    id: `notif-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    animeId,
-    animeTitle,
-    episodeNumber,
-    posterImage,
-    timestamp: Date.now(),
-    isSimulation: options.isSimulation,
-  };
+  // 2. Prepare aspect-ratio-safe square icon for mobile notification avatar
+  const squareIcon = await createSquareNotificationIcon(posterImage);
 
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(
-      new CustomEvent('animeguides:show-push-notification', {
-        detail: {
-          payload,
-          title: notificationTitle,
-          body: notificationBody,
-        },
-      })
-    );
-  }
-
-  // 3. Dispatch native Web Notification (if permission granted or available)
+  // 3. Dispatch native Mobile / Web Notification ONLY to system notification tray
   if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
     try {
-      // Try service worker notification first (best for PWA)
+      // Try service worker notification first (native push on Android / PWA)
       if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
         const registration = await navigator.serviceWorker.ready;
         if (registration && registration.showNotification) {
-          registration.showNotification(notificationTitle, {
+          await registration.showNotification(notificationTitle, {
             body: notificationBody,
-            icon: posterImage || '/pwa-192x192.png',
+            icon: squareIcon,
+            image: posterImage, // Full wide banner / cover image on Android expanded notification
             badge: '/pwa-192x192.png',
-            tag: `anime-${animeId}-ep-${episodeNumber}`,
+            tag: `anime-${animeId}-ep-${cleanEp}`,
+            renotify: true,
             data: { animeId, url: window.location.href },
           } as NotificationOptions);
           return;
         }
       }
 
-      // Fallback to standard Notification API
+      // Fallback to standard native Notification API
       new Notification(notificationTitle, {
         body: notificationBody,
-        icon: posterImage || '/pwa-192x192.png',
-      });
+        icon: squareIcon,
+        image: posterImage,
+      } as NotificationOptions);
     } catch (err) {
-      console.warn('Native notification failed, in-app banner displayed:', err);
+      console.warn('Native mobile notification trigger error:', err);
     }
   }
 }
@@ -249,15 +285,14 @@ export async function toggleAnimeNotification(
   list.push(newSub);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
 
-  // Trigger immediate confirmation notification with cell phone sound and banner
-  triggerEpisodePushNotification(
+  // Trigger confirmation push notification on phone
+  await triggerEpisodePushNotification(
     titleStr,
     nextEp,
     poster,
     anime.id,
     {
-      customBody: `Notificações ativadas com sucesso! Você será avisado no celular assim que o Episódio ${nextEp} for lançado.`,
-      isSimulation: false,
+      customBody: `Notificações ativadas! Você será avisado no celular assim que o Episódio ${nextEp} for lançado.`,
     }
   );
 
@@ -265,24 +300,42 @@ export async function toggleAnimeNotification(
   return { subscribed: true, permission: perm };
 }
 
-// Simulate episode release for testing
-export function simulateEpisodeRelease(animeId: number): boolean {
+// Background checker for subscribed animes episode release
+export function checkSubscribedAnimesAiring(): void {
+  if (typeof window === 'undefined') return;
   const list = getSubscribedAnimes();
-  const sub = list.find((s) => s.id === animeId);
-  if (!sub) return false;
+  if (list.length === 0) return;
 
-  const nextNum = (sub.nextEpisodeNumber || 1) + 1;
-  sub.nextEpisodeNumber = nextNum;
-  sub.lastNotifiedEpisode = nextNum;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  let updated = false;
 
-  triggerEpisodePushNotification(
-    sub.title,
-    nextNum,
-    sub.posterImage,
-    sub.id,
-    { isSimulation: true }
-  );
+  list.forEach((sub) => {
+    if (sub.nextAiringAt && sub.nextAiringAt <= nowSeconds) {
+      const epToNotify = sub.nextEpisodeNumber || 1;
+      if (sub.lastNotifiedEpisode !== epToNotify) {
+        // Trigger push notification on phone for the exact episode
+        triggerEpisodePushNotification(
+          sub.title,
+          epToNotify,
+          sub.posterImage,
+          sub.id
+        );
+        sub.lastNotifiedEpisode = epToNotify;
+        sub.nextEpisodeNumber = epToNotify + 1;
+        // Schedule next weekly episode if unknown (7 days in future)
+        sub.nextAiringAt = sub.nextAiringAt + 7 * 24 * 60 * 60;
+        updated = true;
+      }
+    }
+  });
 
-  return true;
+  if (updated) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+}
+
+// Start periodic airing checker (every 60 seconds)
+if (typeof window !== 'undefined') {
+  setInterval(checkSubscribedAnimesAiring, 60000);
+  window.addEventListener('focus', checkSubscribedAnimesAiring);
 }
