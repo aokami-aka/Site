@@ -15,7 +15,7 @@ import {
 import { AnimeGuidesLogo } from './AnimeGuidesLogo';
 import { NewsArticle, NewsDetailModal } from './NewsDetailModal';
 import { PaperTextureOverlay } from './PaperTextureOverlay';
-import { usePWAInstall } from '../utils/usePWAInstall';
+import { PWAInstallButton } from './PWAInstallButton';
 import {
   BANNED_SOURCES_REGEX,
   fetchClientDirectNews,
@@ -54,8 +54,6 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_PAGE_SIZE);
   const [serverPage, setServerPage] = useState<number>(1);
   const [hasMoreServer, setHasMoreServer] = useState<boolean>(true);
-
-  const { isInstallable, installApp } = usePWAInstall();
 
   // Helper to filter and sanitize incoming articles array
   const sanitizeAndFilterList = (list: NewsArticle[]): NewsArticle[] => {
@@ -384,17 +382,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
                 <span className="hidden md:inline">{refreshing ? 'Atualizando...' : 'Atualizar'}</span>
               </button>
 
-              {isInstallable && (
-                <button
-                  id="news-pwa-install-btn"
-                  onClick={installApp}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 text-xs font-bold transition-all shadow-sm cursor-pointer"
-                  title="Instalar aplicativo"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Instalar App</span>
-                </button>
-              )}
+              <PWAInstallButton id="news-pwa-install-btn" />
             </div>
           </div>
         </header>

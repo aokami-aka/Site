@@ -31,7 +31,7 @@ import {
   MapleLeafMomijiIcon,
   SnowflakeIcon,
 } from './SeasonIcons';
-import { usePWAInstall } from '../utils/usePWAInstall';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface FolderViewProps {
   onSelectSeason: (year: number, season: Season) => void;
@@ -142,8 +142,6 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason, onNaviga
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [openingYear, setOpeningYear] = useState<number | null>(null);
   const [openingSeason, setOpeningSeason] = useState<Season | null>(null);
-
-  const { isInstallable, installApp } = usePWAInstall();
 
   // Set browser favicon to base logo on FolderView
   useSeasonalFavicon(null);
@@ -334,18 +332,8 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason, onNaviga
                 </button>
               )}
 
-              {/* PWA Install Button (shown when app is installable) */}
-              {isInstallable && (
-                <button
-                  id="pwa-install-header-btn"
-                  onClick={installApp}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 text-xs font-bold transition-all shadow-sm cursor-pointer"
-                  title="Instalar AnimeGuides como aplicativo"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Instalar App</span>
-                </button>
-              )}
+              {/* PWA Install Button (shown when app is installable on Android/iOS/Desktop) */}
+              <PWAInstallButton id="pwa-install-header-btn" />
             </div>
           </div>
         </header>

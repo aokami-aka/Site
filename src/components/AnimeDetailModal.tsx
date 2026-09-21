@@ -34,6 +34,7 @@ import { fetchAnimeThemesVideos } from '../services/animeThemesApi';
 import { CustomVideoPlayer } from './CustomVideoPlayer';
 import { getPlatformInfo } from '../utils/platformLogos';
 import { usePWAInstall } from '../utils/usePWAInstall';
+import { PWAInstallModal } from './PWAInstallModal';
 import {
   isAnimeSubscribed,
   toggleAnimeNotification,
@@ -115,7 +116,8 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
   const [studioLogoFailed, setStudioLogoFailed] = useState<boolean>(false);
   const [activeLinks, setActiveLinks] = useState<ExternalLink[]>(anime?.externalLinks || []);
   const [coverTilt, setCoverTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50, isHovered: false });
-  const { isInstalled } = usePWAInstall();
+  const { isInstalled, isIOS } = usePWAInstall();
+  const [showInstallGuide, setShowInstallGuide] = useState<boolean>(false);
   const [isSubscribed, setIsSubscribed] = useState<boolean>(anime ? isAnimeSubscribed(anime.id) : false);
   const [isTogglingNotify, setIsTogglingNotify] = useState<boolean>(false);
 
@@ -138,8 +140,14 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
     };
   }, [anime]);
  
+  const isPWA = isInstalled || isPWAInstalled();
+
   const handleToggleNotification = async () => {
     if (!anime || isTogglingNotify) return;
+    if (!isPWA) {
+      setShowInstallGuide(true);
+      return;
+    }
     setIsTogglingNotify(true);
     try {
       const res = await toggleAnimeNotification(anime);
@@ -151,8 +159,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
  
   const animeStatus = (anime?.status || '').toUpperCase();
   const isReleasingOrUpcoming = animeStatus === 'RELEASING' || animeStatus === 'NOT_YET_RELEASED';
-  const isPWA = isInstalled || isPWAInstalled();
-  const shouldShowNotifyButton = isReleasingOrUpcoming && isPWA;
+  const shouldShowNotifyButton = isReleasingOrUpcoming;
 
   const handleCoverMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -994,6 +1001,12 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
             }
           />
         )}
+
+        <PWAInstallModal
+          isOpen={showInstallGuide}
+          onClose={() => setShowInstallGuide(false)}
+          isIOS={isIOS}
+        />
         </div>
       )}
     </AnimatePresence>

@@ -38,7 +38,7 @@ import {
   SunHanabiIcon,
   SnowflakeIcon,
 } from './SeasonIcons';
-import { usePWAInstall } from '../utils/usePWAInstall';
+import { PWAInstallButton } from './PWAInstallButton';
 
 // Comprehensive seasonal color palettes matching earlier specifications
 export interface SeasonPalette {
@@ -415,8 +415,6 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
   const [isTypesExpanded, setIsTypesExpanded] = useState(false);
   const [isGenresExpanded, setIsGenresExpanded] = useState(false);
 
-  const { isInstallable, installApp } = usePWAInstall();
-
   // Active season color palette
   const palette = SEASON_PALETTES[season] || SEASON_PALETTES.WINTER;
 
@@ -599,18 +597,8 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
               );
             })}
 
-            {/* PWA Install Button (Desktop) */}
-            {isInstallable && (
-              <button
-                id="season-pwa-install-btn"
-                onClick={installApp}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-cyan-300 text-xs font-bold transition-all shadow-sm cursor-pointer ml-1"
-                title="Instalar AnimeGuides como aplicativo"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>Instalar App</span>
-              </button>
-            )}
+            {/* PWA Install Button (Desktop & Tablet) */}
+            <PWAInstallButton id="season-pwa-install-btn" variant="subtle" className="ml-1" />
           </nav>
 
           {/* Mobile Hamburger Toggle Button (Completely borderless as requested) */}
@@ -683,19 +671,11 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                 <span className="font-semibold">Página inicial</span>
               </PlaqueButton>
 
-              {isInstallable && (
-                <button
+              <PWAInstallButton
                   id="mobile-pwa-install-btn"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    installApp();
-                  }}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 text-xs font-bold shadow-sm"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Instalar App</span>
-                </button>
-              )}
+                  variant="pill"
+                showLabelOnMobile={true}
+              />
             </div>
           </motion.div>
         )}
