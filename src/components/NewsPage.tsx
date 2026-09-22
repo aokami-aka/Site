@@ -24,8 +24,12 @@ import {
   sanitizeNewsText,
 } from '../utils/newsFallback';
 
+import { Season } from '../types';
+import { CURRENT_SEASON_CONFIG } from '../data/animeData';
+
 interface NewsPageProps {
   onBackToHome: () => void;
+  currentSeason?: Season;
 }
 
 // Categories with "Anúncios Oficiais", "Indústria & Bilheteria", and "Novidades" completely removed
@@ -40,7 +44,10 @@ const CATEGORIES = [
 const INITIAL_PAGE_SIZE = 12;
 const PAGE_INCREMENT = 10;
 
-export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
+export const NewsPage: React.FC<NewsPageProps> = ({
+  onBackToHome,
+  currentSeason = CURRENT_SEASON_CONFIG.season,
+}) => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -78,9 +85,49 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
       }));
   };
 
+  const NEWS_CACHE_KEY = 'animeguides_news_cache_v2';
+
+  const getCachedNews = (): NewsArticle[] | null => {
+    try {
+      const saved = localStorage.getItem(NEWS_CACHE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {
+      // Ignore storage errors
+    }
+    return null;
+  };
+
+  const saveCachedNews = (list: NewsArticle[]) => {
+    try {
+      if (Array.isArray(list) && list.length > 0) {
+        localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(list));
+      }
+    } catch {
+      // Ignore storage errors
+    }
+  };
+
   const fetchNews = async (forceRefresh = false) => {
-    if (forceRefresh) setRefreshing(true);
-    else setLoading(true);
+    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
+    const cached = getCachedNews();
+
+    if (cached && cached.length > 0) {
+      setArticles(cached);
+      setLoading(false);
+      setVisibleCount(INITIAL_PAGE_SIZE);
+      if (isOffline && !forceRefresh) {
+        return;
+      }
+    } else {
+      if (forceRefresh) setRefreshing(true);
+      else setLoading(true);
+    }
+
     setError(null);
     setServerPage(1);
 
@@ -94,6 +141,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
           const safeArticles = sanitizeAndFilterList(data.data);
           setArticles(safeArticles);
+          saveCachedNews(safeArticles);
           setVisibleCount(INITIAL_PAGE_SIZE);
           setHasMoreServer(data.hasMore ?? true);
           return;
@@ -104,6 +152,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
       const directFallback = await fetchClientDirectNews(1, 40);
       const safeDirect = sanitizeAndFilterList(directFallback.articles);
       setArticles(safeDirect);
+      saveCachedNews(safeDirect);
       setVisibleCount(INITIAL_PAGE_SIZE);
       setHasMoreServer(directFallback.hasMore);
     } catch (err: any) {
@@ -112,10 +161,15 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
         const directFallback = await fetchClientDirectNews(1, 40);
         const safeDirect = sanitizeAndFilterList(directFallback.articles);
         setArticles(safeDirect);
+        saveCachedNews(safeDirect);
         setVisibleCount(INITIAL_PAGE_SIZE);
         setHasMoreServer(directFallback.hasMore);
       } catch {
-        setArticles(sanitizeAndFilterList(CURATED_FALLBACK_ARTICLES));
+        if (!cached || cached.length === 0) {
+          const fallback = sanitizeAndFilterList(CURATED_FALLBACK_ARTICLES);
+          setArticles(fallback);
+          saveCachedNews(fallback);
+        }
         setVisibleCount(INITIAL_PAGE_SIZE);
         setHasMoreServer(false);
       }
@@ -382,7 +436,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onBackToHome }) => {
                 <span className="hidden md:inline">{refreshing ? 'Atualizando...' : 'Atualizar'}</span>
               </button>
 
-              <PWAInstallButton id="news-pwa-install-btn" />
+              <PWAInstallButton id="news-pwa-install-btn" season={currentSeason} />
             </div>
           </div>
         </header>

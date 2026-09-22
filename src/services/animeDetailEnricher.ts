@@ -43,9 +43,19 @@ export async function translateSynopsisToPt(rawText: string): Promise<string> {
     return translationCache.get(clean)!;
   }
 
-  // Check sessionStorage
+  // Check localStorage and sessionStorage
+  const sessionKey = `trans_pt_${clean.slice(0, 40).replace(/\W/g, '_')}`;
   try {
-    const sessionKey = `trans_pt_${clean.slice(0, 40).replace(/\W/g, '_')}`;
+    const localCached = localStorage.getItem(sessionKey);
+    if (localCached) {
+      translationCache.set(clean, localCached);
+      return localCached;
+    }
+  } catch {
+    // ignore
+  }
+
+  try {
     const cached = sessionStorage.getItem(sessionKey);
     if (cached) {
       translationCache.set(clean, cached);
@@ -58,7 +68,11 @@ export async function translateSynopsisToPt(rawText: string): Promise<string> {
   const saveToCache = (translated: string) => {
     translationCache.set(clean, translated);
     try {
-      const sessionKey = `trans_pt_${clean.slice(0, 40).replace(/\W/g, '_')}`;
+      localStorage.setItem(sessionKey, translated);
+    } catch {
+      // ignore
+    }
+    try {
       sessionStorage.setItem(sessionKey, translated);
     } catch {
       // ignore

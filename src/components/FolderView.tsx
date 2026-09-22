@@ -138,7 +138,12 @@ const StampIframe: React.FC<StampIframeProps> = ({
   );
 };
 
-export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason, onNavigateNews }) => {
+export const FolderView: React.FC<FolderViewProps> = ({
+  onSelectSeason,
+  onNavigateNews,
+  currentYear = CURRENT_SEASON_CONFIG.year,
+  currentSeason = CURRENT_SEASON_CONFIG.season,
+}) => {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [openingYear, setOpeningYear] = useState<number | null>(null);
   const [openingSeason, setOpeningSeason] = useState<Season | null>(null);
@@ -333,7 +338,7 @@ export const FolderView: React.FC<FolderViewProps> = ({ onSelectSeason, onNaviga
               )}
 
               {/* PWA Install Button (shown when app is installable on Android/iOS/Desktop) */}
-              <PWAInstallButton id="pwa-install-header-btn" />
+              <PWAInstallButton id="pwa-install-header-btn" season={currentSeason || CURRENT_SEASON_CONFIG.season} />
             </div>
           </div>
         </header>

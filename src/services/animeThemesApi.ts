@@ -87,6 +87,22 @@ export async function fetchAnimeThemesVideos(
     return memoryThemesCache.get(cacheKey)!;
   }
 
+  // Check persistent storage
+  try {
+    const saved = localStorage.getItem(cacheKey);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        memoryThemesCache.set(cacheKey, parsed);
+        if (typeof navigator !== 'undefined' && !navigator.onLine) {
+          return parsed;
+        }
+      }
+    }
+  } catch {
+    // Ignore
+  }
+
   const results: AnimeVideo[] = [];
 
   try {
@@ -201,5 +217,12 @@ export async function fetchAnimeThemesVideos(
   }
 
   memoryThemesCache.set(cacheKey, results);
+  try {
+    if (results.length > 0) {
+      localStorage.setItem(cacheKey, JSON.stringify(results));
+    }
+  } catch {
+    // Ignore storage quota errors
+  }
   return results;
 }

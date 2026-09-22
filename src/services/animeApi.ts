@@ -2,10 +2,10 @@ import { AnimeItem, AnimeType, AnimeVideo, ExternalLink, Season } from '../types
 
 // In-memory cache for storing fetched seasonal data
 const memoryCache = new Map<string, { timestamp: number; data: AnimeItem[] }>();
-const CACHE_TTL_MS = 1000 * 60 * 30; // 30 minutes
-const CURRENT_CACHE_VERSION = 'v13_accurate_types_translations';
+const CACHE_TTL_MS = 1000 * 60 * 15; // 15 minutes fresh threshold for auto-revalidation
+const CURRENT_CACHE_VERSION = 'v14_pwa_swr';
 
-// Proactively clear old caches that may contain 18+ items
+// Proactively clear old caches that may contain outdated formats
 try {
   if (typeof window !== 'undefined') {
     // Clear all old anime cache keys from sessionStorage
@@ -23,6 +23,83 @@ try {
   }
 } catch {
   // Ignore storage access errors
+}
+
+/**
+ * Retrieves cached season data instantly from Memory Cache or persistent LocalStorage.
+ * Returns null if no cache is available.
+ */
+export function getCachedSeasonData(year: number, season: Season): AnimeItem[] | null {
+  const cacheKey = `anime_season_data_${CURRENT_CACHE_VERSION}_${year}_${season}`;
+  const mem = memoryCache.get(cacheKey);
+  if (mem && Array.isArray(mem.data) && mem.data.length > 0) {
+    return mem.data;
+  }
+
+  if (typeof window !== 'undefined') {
+    // 1. Check persistent localStorage (survives offline app restarts in PWA)
+    try {
+      const localItem = localStorage.getItem(cacheKey);
+      if (localItem) {
+        const parsed = JSON.parse(localItem);
+        if (Array.isArray(parsed?.data) && parsed.data.length > 0) {
+          memoryCache.set(cacheKey, parsed);
+          return parsed.data;
+        }
+      }
+    } catch {
+      // Ignore quota/storage error
+    }
+
+    // 2. Check sessionStorage
+    try {
+      const sessionItem = sessionStorage.getItem(cacheKey);
+      if (sessionItem) {
+        const parsed = JSON.parse(sessionItem);
+        if (Array.isArray(parsed?.data) && parsed.data.length > 0) {
+          memoryCache.set(cacheKey, parsed);
+          return parsed.data;
+        }
+      }
+    } catch {
+      // Ignore storage error
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Persists seasonal anime data to memory, localStorage, and sessionStorage.
+ */
+export function saveSeasonDataToCache(year: number, season: Season, data: AnimeItem[]) {
+  if (!data || data.length === 0) return;
+  const cacheKey = `anime_season_data_${CURRENT_CACHE_VERSION}_${year}_${season}`;
+  const cacheEntry = { timestamp: Date.now(), data };
+  memoryCache.set(cacheKey, cacheEntry);
+
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
+    } catch (e) {
+      // If quota exceeded, clean older season cache keys
+      try {
+        const keys = Object.keys(localStorage).filter((k) => k.startsWith('anime_season_data_'));
+        if (keys.length > 4) {
+          localStorage.removeItem(keys[0]);
+          localStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
+        }
+      } catch {
+        // Ignore fallback
+      }
+    }
+
+    try {
+      sessionStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
+    } catch {
+      // Ignore
+    }
+  }
 }
 
 const GENRE_MAP: Record<string, string> = {
@@ -328,27 +405,28 @@ async function queryAniListGraphQL(query: string, variables: Record<string, any>
 }
 
 /**
- * Fetch anime data using AniList GraphQL API with local fallback and caching
+ * Fetch anime data using AniList GraphQL API with local fallback and caching.
+ * Supports Stale-While-Revalidate pattern:
+ * - If offline, returns cached data immediately.
+ * - If online, updates cache in background and returns fresh data.
+ * - If network fails, falls back gracefully to last cached version.
  */
-export async function fetchAniListSeason(year: number, season: Season): Promise<AnimeItem[]> {
-  const cacheKey = `anime_season_data_${CURRENT_CACHE_VERSION}_${year}_${season}`;
-  const cached = memoryCache.get(cacheKey);
-  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
-    return cached.data;
+export async function fetchAniListSeason(
+  year: number,
+  season: Season,
+  options?: { forceRefresh?: boolean }
+): Promise<AnimeItem[]> {
+  const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
+  const cachedData = getCachedSeasonData(year, season);
+
+  // If user is offline, return the last cached version immediately
+  if (isOffline && cachedData && cachedData.length > 0) {
+    return cachedData;
   }
 
-  // Check sessionStorage
-  try {
-    const sessionItem = sessionStorage.getItem(cacheKey);
-    if (sessionItem) {
-      const parsed = JSON.parse(sessionItem);
-      if (Date.now() - parsed.timestamp < CACHE_TTL_MS && Array.isArray(parsed.data) && parsed.data.length > 0) {
-        memoryCache.set(cacheKey, parsed);
-        return parsed.data;
-      }
-    }
-  } catch (err) {
-    // Ignore storage errors
+  // If we have cached data and not explicitly forced to re-fetch
+  if (!options?.forceRefresh && cachedData && cachedData.length > 0) {
+    return cachedData;
   }
 
   // 1. Try AniList GraphQL (Strictly filtered by season and year, fetching all pages)
@@ -595,13 +673,7 @@ export async function fetchAniListSeason(year: number, season: Season): Promise<
         });
 
       const deduplicated = deduplicateAnime(mapped);
-      const cacheEntry = { timestamp: Date.now(), data: deduplicated };
-      memoryCache.set(cacheKey, cacheEntry);
-      try {
-        sessionStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
-      } catch (e) {
-        // storage quota exceeded fallback
-      }
+      saveSeasonDataToCache(year, season, deduplicated);
       return deduplicated;
     }
   } catch (error) {
@@ -613,13 +685,7 @@ export async function fetchAniListSeason(year: number, season: Season): Promise<
     const kitsuResult = await fetchKitsuSeason(year, season);
     if (kitsuResult.length > 0) {
       const deduplicated = deduplicateAnime(kitsuResult);
-      const cacheEntry = { timestamp: Date.now(), data: deduplicated };
-      memoryCache.set(cacheKey, cacheEntry);
-      try {
-        sessionStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
-      } catch (e) {
-        // ignore
-      }
+      saveSeasonDataToCache(year, season, deduplicated);
       return deduplicated;
     }
   } catch (kitsuError) {
@@ -631,17 +697,16 @@ export async function fetchAniListSeason(year: number, season: Season): Promise<
     const jikanResult = await fetchJikanSeason(year, season);
     if (jikanResult.length > 0) {
       const deduplicated = deduplicateAnime(jikanResult);
-      const cacheEntry = { timestamp: Date.now(), data: deduplicated };
-      memoryCache.set(cacheKey, cacheEntry);
-      try {
-        sessionStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
-      } catch (e) {
-        // ignore
-      }
+      saveSeasonDataToCache(year, season, deduplicated);
       return deduplicated;
     }
   } catch (jikanError) {
     console.warn(`Jikan API failed for ${year}/${season}:`, jikanError);
+  }
+
+  // If network queries failed, fallback to any available cached version
+  if (cachedData && cachedData.length > 0) {
+    return cachedData;
   }
 
   return [];

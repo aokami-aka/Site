@@ -1006,6 +1006,7 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
           isOpen={showInstallGuide}
           onClose={() => setShowInstallGuide(false)}
           isIOS={isIOS}
+          season={season}
         />
         </div>
       )}

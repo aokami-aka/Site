@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { AnimeItem, Season } from './types';
-import { fetchAniListSeason } from './services/animeApi';
+import { fetchAniListSeason, getCachedSeasonData } from './services/animeApi';
 import { CURRENT_SEASON_CONFIG } from './data/animeData';
 import { DiagonalPosterBackground } from './components/DiagonalPosterBackground';
 import { BACKGROUND_CONFIG } from './config/backgroundConfig';
@@ -45,14 +45,37 @@ export default function App() {
     });
   }, []);
 
-  // Fetch season data dynamically whenever year or season changes
+  // Fetch season data with instant cache-first and online background revalidation
   const loadSeasonData = useCallback(async (year: number, season: Season) => {
-    setLoading(true);
+    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
+    const cached = getCachedSeasonData(year, season);
+
+    if (cached && cached.length > 0) {
+      setAnimeList(cached);
+      setLoading(false);
+      // If offline, preserve the cached data with no network call
+      if (isOffline) {
+        return;
+      }
+    } else {
+      setLoading(true);
+    }
+
+    // When online, fetch and update the current content from AniList & APIs in the background
     try {
-      const data = await fetchAniListSeason(year, season);
-      setAnimeList(data);
+      const freshData = await fetchAniListSeason(year, season, { forceRefresh: true });
+      if (freshData && freshData.length > 0) {
+        setAnimeList(freshData);
+      }
     } catch (err) {
-      console.error('Error loading season data:', err);
+      console.warn('Background season data refresh failed, maintaining cached version:', err);
+      // Ensure we keep cached version if available
+      if (!cached || cached.length === 0) {
+        const fallback = getCachedSeasonData(year, season);
+        if (fallback && fallback.length > 0) {
+          setAnimeList(fallback);
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -108,11 +131,11 @@ export default function App() {
         <FolderView
           onSelectSeason={handleSelectSeason}
           onNavigateNews={handleNavigateNews}
-          currentYear={2026}
-          currentSeason={'WINTER'}
+          currentYear={selectedYear}
+          currentSeason={selectedSeason}
         />
       ) : currentView === 'news' ? (
-        <NewsPage onBackToHome={handleNavigateHome} />
+        <NewsPage onBackToHome={handleNavigateHome} currentSeason={selectedSeason} />
       ) : (
         <SeasonPage
           year={selectedYear}

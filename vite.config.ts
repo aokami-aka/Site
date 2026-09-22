@@ -93,8 +93,94 @@ export default defineConfig(() => {
               options: {
                 cacheName: 'anilist-images-cache',
                 expiration: {
-                  maxEntries: 120,
+                  maxEntries: 200,
                   maxAgeSeconds: 60 * 60 * 24 * 30,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/cdn\.myanimelist\.net\/.*/i,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheName: 'mal-images-cache',
+                expiration: {
+                  maxEntries: 150,
+                  maxAgeSeconds: 60 * 60 * 24 * 30,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/img\.youtube\.com\/.*/i,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheName: 'youtube-thumbnails-cache',
+                expiration: {
+                  maxEntries: 100,
+                  maxAgeSeconds: 60 * 60 * 24 * 30,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/(?:images\.unsplash\.com|i\d?\.wp\.com)\/.*/i,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheName: 'external-news-images-cache',
+                expiration: {
+                  maxEntries: 100,
+                  maxAgeSeconds: 60 * 60 * 24 * 14,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/api\.jikan\.moe\/.*/i,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'jikan-api-cache',
+                networkTimeoutSeconds: 5,
+                expiration: {
+                  maxEntries: 50,
+                  maxAgeSeconds: 60 * 60 * 24 * 7,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/api\.animethemes\.moe\/.*/i,
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheName: 'animethemes-api-cache',
+                expiration: {
+                  maxEntries: 80,
+                  maxAgeSeconds: 60 * 60 * 24 * 14,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^\/api\/(?:news|translate|animethemes-proxy|anilist-proxy).*/i,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'app-api-cache',
+                networkTimeoutSeconds: 4,
+                expiration: {
+                  maxEntries: 60,
+                  maxAgeSeconds: 60 * 60 * 24 * 7,
                 },
                 cacheableResponse: {
                   statuses: [0, 200],

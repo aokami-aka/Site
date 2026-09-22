@@ -598,7 +598,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
             })}
 
             {/* PWA Install Button (Desktop & Tablet) */}
-            <PWAInstallButton id="season-pwa-install-btn" variant="subtle" className="ml-1" />
+            <PWAInstallButton id="season-pwa-install-btn" variant="subtle" className="ml-1" season={season} />
           </nav>
 
           {/* Mobile Hamburger Toggle Button (Completely borderless as requested) */}
@@ -672,9 +672,10 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
               </PlaqueButton>
 
               <PWAInstallButton
-                  id="mobile-pwa-install-btn"
-                  variant="pill"
+                id="mobile-pwa-install-btn"
+                variant="pill"
                 showLabelOnMobile={true}
+                season={season}
               />
             </div>
           </motion.div>
