@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
+
 Sitemap: https://animeguides.vercel.app/sitemap.xml
