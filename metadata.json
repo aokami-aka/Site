@@ -1,6 +1,6 @@
 {
   "name": "AnimeGuides - Animes da Temporada",
-  "description": "Guia interativo de animes por temporada com pastas cronológicas, notícias de anime com estilo jornal, notificações push para novos episódios em PWA e detalhes técnicos completos.",
+  "description": "Guia completo e interativo de animes da temporada: lançamentos, calendário de episódios, trailers, notícias do mundo otaku e notificações em tempo real.",
   "requestFramePermissions": ["notifications"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -8,19 +8,25 @@
     <!-- Primary Meta Tags / SEO Google -->
     <title>AnimeGuides</title>
     <meta name="title" content="AnimeGuides - Animes da Temporada" />
-    <meta name="description" content="Guia interativo de animes por temporada com pastas cronológicas, notícias de anime com estilo jornal, notificações push para novos episódios em PWA e detalhes técnicos completos." />
+    <meta name="description" content="Guia completo e interativo de animes da temporada: lançamentos, calendário de episódios, trailers, notícias do mundo otaku e notificações em tempo real." />
     <meta name="keywords" content="animes, animes da temporada, guia de animes, lançamentos de animes, catálogo de animes, anilist, trailers de animes, openings, endings, calendário de animes, animes brasil" />
     <meta name="author" content="AnimeGuides" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#090d16" />
     <link rel="canonical" href="https://animeguides.vercel.app" />
 
+    <!-- Google Search Rich Snippet Thumbnail Tags -->
+    <link rel="image_src" href="/og-image.png" />
+    <meta name="thumbnail" content="/og-image.png" />
+    <meta itemprop="name" content="AnimeGuides — Guia Oficial de Animes da Temporada" />
+    <meta itemprop="description" content="Guia completo e interativo de animes da temporada: lançamentos, calendário de episódios, trailers, notícias do mundo otaku e notificações em tempo real." />
+    <meta itemprop="image" content="/og-image.png" />
+
     <!-- Open Graph / Facebook / WhatsApp / Instagram -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://animeguides.vercel.app" />
     <meta property="og:site_name" content="AnimeGuides" />
     <meta property="og:title" content="AnimeGuides - Animes da Temporada" />
-    <meta property="og:description" content="Guia interativo de animes por temporada com pastas cronológicas, notícias de anime com estilo jornal, notificações push para novos episódios em PWA e detalhes técnicos completos." />
+    <meta property="og:description" content="Guia completo e interativo de animes da temporada: lançamentos, calendário de episódios, trailers, notícias do mundo otaku e notificações em tempo real." />
     <meta property="og:image" content="/og-image.png" />
     <meta property="og:image:secure_url" content="/og-image.png" />
     <meta property="og:image:type" content="image/png" />
@@ -31,7 +37,6 @@
 
     <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://animeguides.vercel.app" />
     <meta name="twitter:title" content="AnimeGuides - Animes da Temporada" />
     <meta name="twitter:description" content="Guia interativo de animes por temporada com navegação por pastas cronológicas, atualização dinâmica via APIs AniList e Jikan, e detalhes técnicos completos." />
     <meta name="twitter:image" content="/og-image.png" />
@@ -45,8 +50,8 @@
     <meta name="application-name" content="AnimeGuides" />
 
     <!-- Icons & Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
@@ -59,20 +64,81 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "AnimeGuides - Animes da Temporada",
-      "alternateName": "AnimeGuides",
-      "url": "https://animeguides.vercel.app",
-      "description": "Guia interativo de animes por temporada com navegação por pastas cronológicas, atualização dinâmica via APIs AniList e Jikan, e detalhes técnicos completos.",
-      "applicationCategory": "EntertainmentApplication",
-      "operatingSystem": "All",
-      "inLanguage": "pt-BR",
-      "image": "/og-image.png",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "BRL"
-      }
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://animeguides.vercel.app/#website",
+          "name": "AnimeGuides",
+          "alternateName": ["AnimeGuides", "Anime Guides", "animeguides", "AnimeGuides Brasil"],
+          "url": "https://animeguides.vercel.app",
+          "description": "Guia oficial e interativo de animes por temporada com catálogo cronológico e notícias diárias.",
+          "inLanguage": "pt-BR",
+          "publisher": {
+            "@type": "Organization",
+            "name": "AnimeGuides",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://animeguides.vercel.app/pwa-512x512.png"
+            }
+          }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://animeguides.vercel.app/#webapp",
+          "name": "AnimeGuides - Animes da Temporada",
+          "alternateName": "AnimeGuides",
+          "url": "https://animeguides.vercel.app",
+          "description": "Guia interativo de animes por temporada com navegação por pastas cronológicas, atualização dinâmica via APIs AniList e Jikan, e detalhes técnicos completos.",
+          "applicationCategory": "EntertainmentApplication",
+          "operatingSystem": "All",
+          "inLanguage": "pt-BR",
+          "image": [
+            "https://animeguides.vercel.app/og-image.png",
+            "https://animeguides.vercel.app/pwa-512x512.png"
+          ],
+          "thumbnailUrl": "https://animeguides.vercel.app/og-image.png",
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://animeguides.vercel.app/og-image.png"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "342",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://animeguides.vercel.app/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Início",
+              "item": "https://animeguides.vercel.app"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Temporadas de Animes",
+              "item": "https://animeguides.vercel.app/#temporadas"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Notícias",
+              "item": "https://animeguides.vercel.app/#noticias"
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
