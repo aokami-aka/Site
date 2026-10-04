@@ -150,7 +150,11 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
     }
     setIsTogglingNotify(true);
     try {
-      const res = await toggleAnimeNotification(anime);
+      const res = await toggleAnimeNotification({
+        ...anime,
+        season,
+        seasonYear: anime.seasonYear,
+      });
       setIsSubscribed(res.subscribed);
     } finally {
       setIsTogglingNotify(false);
@@ -160,6 +164,67 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
   const animeStatus = (anime?.status || '').toUpperCase();
   const isReleasingOrUpcoming = animeStatus === 'RELEASING' || animeStatus === 'NOT_YET_RELEASED';
   const shouldShowNotifyButton = isReleasingOrUpcoming;
+
+  // Countdown timer toggle and text beside status
+  const [showCountdown, setShowCountdown] = useState<boolean>(false);
+  const [countdownText, setCountdownText] = useState<string>('');
+
+  // Reset countdown state when changing anime
+  useEffect(() => {
+    setShowCountdown(false);
+    setCountdownText('');
+  }, [anime?.id]);
+
+  // Live countdown to next episode for RELEASING and NOT_YET_RELEASED animes
+  useEffect(() => {
+    if (!showCountdown || !anime || !isReleasingOrUpcoming) return;
+
+    const updateCountdown = () => {
+      let targetTimeMs: number | null = null;
+
+      if (anime.nextAiringEpisode?.airingAt) {
+        targetTimeMs = anime.nextAiringEpisode.airingAt * 1000;
+      } else if (anime.startDate?.year && anime.startDate?.month) {
+        targetTimeMs = new Date(
+          anime.startDate.year,
+          anime.startDate.month - 1,
+          anime.startDate.day || 1,
+          0,
+          0,
+          0
+        ).getTime();
+      }
+
+      if (!targetTimeMs) {
+        setCountdownText('data a confirmar');
+        return;
+      }
+
+      const diff = targetTimeMs - Date.now();
+      if (diff <= 0) {
+        setCountdownText('disponível agora');
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const pad = (n: number) => String(n).padStart(2, '0');
+
+      if (days > 0) {
+        setCountdownText(`${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
+      } else {
+        setCountdownText(`${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [showCountdown, anime, isReleasingOrUpcoming]);
 
   const handleCoverMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -259,9 +324,20 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
         anime.title.romaji
       )}`
     )
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) return null;
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) return null;
+        const text = await res.text();
+        if (!text || text.trim().startsWith('<')) return null;
+        try {
+          return JSON.parse(text);
+        } catch {
+          return null;
+        }
+      })
       .then((data) => {
-        if (!isCurrent) return;
+        if (!isCurrent || !data) return;
         if (data?.links && Array.isArray(data.links) && data.links.length > 0) {
           setActiveLinks((prev) => {
             const map = new Map<string, ExternalLink>();
@@ -713,12 +789,30 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
                   <span className="text-slate-200">{anime.episodes}</span>
                 </div>
                 
-                {/* Status */}
-                <div>
-                  <span className="font-bold mr-2" style={{ color: palette.accentHex }}>Status:</span>
-                  <span className="text-slate-200 font-medium">
+                {/* Status: Clickable when RELEASING or NOT_YET_RELEASED to show subtle fading countdown */}
+                <div className="flex items-center flex-wrap gap-x-2">
+                  <span className="font-bold mr-1" style={{ color: palette.accentHex }}>Status:</span>
+                  <span
+                    onClick={isReleasingOrUpcoming ? () => setShowCountdown((v) => !v) : undefined}
+                    className={`text-slate-200 font-medium select-none ${
+                      isReleasingOrUpcoming ? 'cursor-pointer' : ''
+                    }`}
+                  >
                     {getAnimeStatusText(anime)}
                   </span>
+                  <AnimatePresence>
+                    {showCountdown && isReleasingOrUpcoming && countdownText && (
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35, ease: 'easeInOut' }}
+                        className="text-xs text-slate-400 font-normal italic select-none"
+                      >
+                        ({countdownText})
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Type */}

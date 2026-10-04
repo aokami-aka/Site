@@ -19,6 +19,8 @@ import {
   ChevronUp,
   Layers,
   Download,
+  Bell,
+  Calendar,
 } from 'lucide-react';
 import {
   AnimeItem,
@@ -27,11 +29,25 @@ import {
   Season,
   SeasonDefinition,
 } from '../types';
-import { GENRES_LIST, SEASONS_LIST, TYPES_LIST, getActiveSeasonsForYear } from '../data/animeData';
+import {
+  GENRES_LIST,
+  SEASONS_LIST,
+  TYPES_LIST,
+  getActiveSeasonsForYear,
+  CURRENT_SEASON_CONFIG,
+} from '../data/animeData';
 import { AnimeGuidesLogo } from './AnimeGuidesLogo';
 import { useSeasonalFavicon } from '../utils/useSeasonalFavicon';
 import { translateSynopsisToPt } from '../services/animeDetailEnricher';
 import { AnimeLoadingState } from './AnimeLoadingState';
+import {
+  toggleAnimeNotification,
+  getSubscribedAnimes,
+} from '../services/notificationService';
+import {
+  ScheduleDateNavbar,
+  SeasonScheduleView,
+} from './SeasonScheduleView';
 import {
   MapleLeafMomijiIcon,
   SakuraIcon,
@@ -269,9 +285,20 @@ const ListAnimeCardItem: React.FC<{
   index: number;
   palette: SeasonPalette;
   isFav: boolean;
+  isSubscribed: boolean;
   onSelectAnime: (anime: AnimeItem) => void;
   onToggleFavorite: (id: number) => void;
-}> = ({ anime, index, palette, isFav, onSelectAnime, onToggleFavorite }) => {
+  onToggleNotification: (anime: AnimeItem) => void;
+}> = ({
+  anime,
+  index,
+  palette,
+  isFav,
+  isSubscribed,
+  onSelectAnime,
+  onToggleFavorite,
+  onToggleNotification,
+}) => {
   const [translatedSynopsis, setTranslatedSynopsis] = useState<string>(
     anime.synopsisPt || anime.synopsisEn || ''
   );
@@ -361,19 +388,43 @@ const ListAnimeCardItem: React.FC<{
                 {anime.title.portuguese || anime.title.english}
               </p>
             </div>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleFavorite(anime.id);
-              }}
-              className={`p-2 rounded-full border transition-colors cursor-pointer ${
-                isFav
-                  ? 'bg-amber-400 text-slate-950 border-amber-300'
-                  : 'bg-black/50 text-slate-300 border-white/15 hover:text-white'
-              }`}
-            >
-              <Star className={`w-4 h-4 ${isFav ? 'fill-current' : ''}`} />
-            </button>
+
+            {/* Actions: Favorite Star and Notification Bell placed right below it */}
+            <div className="flex flex-col items-center gap-1.5 shrink-0">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleFavorite(anime.id);
+                }}
+                className={`p-2 rounded-full border transition-colors cursor-pointer ${
+                  isFav
+                    ? 'bg-amber-400 text-slate-950 border-amber-300'
+                    : 'bg-black/50 text-slate-300 border-white/15 hover:text-white'
+                }`}
+                title={isFav ? 'Remover favorito' : 'Favoritar anime'}
+              >
+                <Star className={`w-4 h-4 ${isFav ? 'fill-current' : ''}`} />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleNotification(anime);
+                }}
+                className={`p-2 rounded-full border transition-colors cursor-pointer ${
+                  isSubscribed
+                    ? 'bg-cyan-500 text-slate-950 border-cyan-400'
+                    : 'bg-black/50 text-slate-300 border-white/15 hover:text-cyan-300 hover:border-cyan-500/40'
+                }`}
+                title={
+                  isSubscribed
+                    ? 'Notificações ativadas para este anime'
+                    : 'Ativar notificações push para este anime'
+                }
+              >
+                <Bell className={`w-4 h-4 ${isSubscribed ? 'fill-current text-slate-950' : ''}`} />
+              </button>
+            </div>
           </div>
 
           <p className="text-xs text-slate-300 line-clamp-2 mt-2 leading-relaxed">
@@ -423,6 +474,75 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
 
   // Update browser tab favicon to match active season
   useSeasonalFavicon(season);
+
+  // Subscribed anime notifications state
+  const [subscribedIds, setSubscribedIds] = useState<number[]>(() => {
+    return getSubscribedAnimes().map((s) => s.id);
+  });
+
+  useEffect(() => {
+    const handleSubUpdated = () => {
+      setSubscribedIds(getSubscribedAnimes().map((s) => s.id));
+    };
+    window.addEventListener('animeguides:subscription-updated', handleSubUpdated);
+    return () => {
+      window.removeEventListener('animeguides:subscription-updated', handleSubUpdated);
+    };
+  }, []);
+
+  const handleToggleNotification = async (anime: AnimeItem) => {
+    const res = await toggleAnimeNotification({
+      ...anime,
+      season: season,
+      seasonYear: year,
+    });
+    setSubscribedIds((prev) =>
+      res.subscribed ? [...prev, anime.id] : prev.filter((id) => id !== anime.id)
+    );
+  };
+
+  // Check if viewing the currently airing season with releasing animes
+  const isCurrentSeason = year === CURRENT_SEASON_CONFIG.year && season === CURRENT_SEASON_CONFIG.season;
+  const hasReleasingAnimes = useMemo(() => {
+    return animeList.some(
+      (a) =>
+        (a.status || '').toUpperCase() === 'RELEASING' ||
+        (a.status || '').toUpperCase() === 'NOT_YET_RELEASED' ||
+        Boolean(a.nextAiringEpisode)
+    );
+  }, [animeList]);
+  const showScheduleView = isCurrentSeason && hasReleasingAnimes;
+
+  // Selected date offset for cronograma view (-7 to +7 days, default 0 for today)
+  const [scheduleDateOffset, setScheduleDateOffset] = useState<number>(0);
+
+  // If viewing past seasons and was in schedule view, reset to grid-standard
+  useEffect(() => {
+    if (!showScheduleView && displayFormat === 'schedule') {
+      setDisplayFormat('grid-standard');
+    }
+  }, [showScheduleView, displayFormat]);
+
+  // Reset date offset when season/year changes
+  useEffect(() => {
+    setScheduleDateOffset(0);
+  }, [year, season]);
+
+  // Display Format Modes: In current season with releasing animes, remove compact and add Cronograma. In past seasons, keep compact in middle.
+  const displayModes = useMemo(() => {
+    if (showScheduleView) {
+      return [
+        { id: 'grid-standard', label: 'Padrão', icon: Grid3X3 },
+        { id: 'list-detailed', label: 'Lista', icon: List },
+        { id: 'schedule', label: 'Cronograma', icon: Calendar },
+      ];
+    }
+    return [
+      { id: 'grid-standard', label: 'Padrão', icon: Grid3X3 },
+      { id: 'grid-compact', label: 'Compacta', icon: LayoutGrid },
+      { id: 'list-detailed', label: 'Lista', icon: List },
+    ];
+  }, [showScheduleView]);
 
   // Compute favorites count specifically for the current season / active anime list
   // Fixes user issue: "No botão de favoritos fala que tem 2 marcados, mas na verdade não tem nenhum marcado"
@@ -957,11 +1077,7 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                 <span>Exibição:</span>
               </span>
               <div className="relative flex items-center gap-1 bg-[#161d2e] p-1 rounded-xl border border-white/20 shadow-inner">
-                {[
-                  { id: 'grid-standard', label: 'Padrão', icon: Grid3X3 },
-                  { id: 'grid-compact', label: 'Compacta', icon: LayoutGrid },
-                  { id: 'list-detailed', label: 'Lista', icon: List },
-                ].map((mode) => {
+                {displayModes.map((mode) => {
                   const isActive = displayFormat === mode.id;
                   const Icon = mode.icon;
                   return (
@@ -992,9 +1108,29 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
         </div>
       </div>
 
+      {/* Schedule Mode Sticky Date Navigation Bar (appears expanded below view modes as sticky subdivision) */}
+      {displayFormat === 'schedule' && showScheduleView && (
+        <ScheduleDateNavbar
+          dateOffset={scheduleDateOffset}
+          setDateOffset={setScheduleDateOffset}
+          palette={palette}
+        />
+      )}
+
       {/* Loading Animation */}
       {loading ? (
         <AnimeLoadingState season={season} year={year} palette={palette} />
+      ) : displayFormat === 'schedule' && showScheduleView ? (
+        <SeasonScheduleView
+          animeList={filteredAnime}
+          palette={palette}
+          favorites={favorites}
+          subscribedIds={subscribedIds}
+          onSelectAnime={onSelectAnime}
+          onToggleFavorite={onToggleFavorite}
+          onToggleNotification={handleToggleNotification}
+          dateOffset={scheduleDateOffset}
+        />
       ) : filteredAnime.length === 0 ? (
         /* Empty State */
         <div className="py-16 text-center rounded-2xl bg-[#0f1420]/70 backdrop-blur-xl border border-white/10 max-w-md mx-auto my-8">
@@ -1042,6 +1178,8 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                 : 'https://media.kitsu.app/anime/46474/poster_image/medium-23e1293e41a0b54b6621eb589c3f0d62.jpeg';
             const posterGlow = anime.coverColor || palette.accentHex;
 
+            const isSubscribed = subscribedIds.includes(anime.id);
+
             if (displayFormat === 'list-detailed') {
               return (
                 <ListAnimeCardItem
@@ -1050,8 +1188,10 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                   index={index}
                   palette={palette}
                   isFav={isFav}
+                  isSubscribed={isSubscribed}
                   onSelectAnime={onSelectAnime}
                   onToggleFavorite={onToggleFavorite}
+                  onToggleNotification={handleToggleNotification}
                 />
               );
             }
@@ -1098,11 +1238,11 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                   <div className="absolute inset-0 bg-gradient-to-t from-[#080c14] via-[#080c14]/40 to-transparent" />
                 </div>
 
-                {/* Top Action & Plaque: Score and Type on top-left in frosted glass style, Favorite on top-right */}
+                {/* Top Action & Plaque: Score and Type on top-left, Favorite and Bell on top-right */}
                 <div className="relative z-10 p-2 sm:p-2.5 flex items-start justify-between gap-1">
                   {/* Score & Type Plaque Badge (Frosted Glass with seasonal tint - responsive and robust on mobile compact) */}
                   <div
-                    className="flex items-center gap-1 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md text-[9px] sm:text-[10px] md:text-[11px] font-bold backdrop-blur-md backdrop-saturate-150 select-none border whitespace-nowrap min-w-0 max-w-[76%]"
+                    className="flex items-center gap-1 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md text-[9px] sm:text-[10px] md:text-[11px] font-bold backdrop-blur-md backdrop-saturate-150 select-none border whitespace-nowrap min-w-0 max-w-[72%]"
                     style={{
                       background: `linear-gradient(135deg, ${palette.accentHex}1f 0%, rgba(10, 15, 26, 0.78) 100%)`,
                       borderColor: `${palette.accentHex}40`,
@@ -1125,21 +1265,44 @@ export const SeasonPage: React.FC<SeasonPageProps> = ({
                     </span>
                   </div>
 
-                  <button
-                    id={`fav-btn-${anime.id}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onToggleFavorite(anime.id);
-                    }}
-                    className={`p-1 sm:p-1.5 rounded-full transition-all cursor-pointer shrink-0 ${
-                      isFav
-                        ? 'text-amber-400 bg-black/60 drop-shadow'
-                        : 'text-white/80 hover:text-white bg-black/40 hover:bg-black/70 backdrop-blur-sm'
-                    }`}
-                    title={isFav ? 'Remover favorito' : 'Favoritar anime'}
-                  >
-                    <Star className={`w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ${isFav ? 'fill-current text-amber-400' : ''}`} />
-                  </button>
+                  {/* Top-Right Buttons: Favorite on top, Bell notification right below it */}
+                  <div className="flex flex-col items-center gap-1 shrink-0">
+                    <button
+                      id={`fav-btn-${anime.id}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleFavorite(anime.id);
+                      }}
+                      className={`p-1 sm:p-1.5 rounded-full transition-all cursor-pointer ${
+                        isFav
+                          ? 'text-amber-400 bg-black/70 drop-shadow'
+                          : 'text-white/80 hover:text-white bg-black/45 hover:bg-black/70 backdrop-blur-sm'
+                      }`}
+                      title={isFav ? 'Remover favorito' : 'Favoritar anime'}
+                    >
+                      <Star className={`w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ${isFav ? 'fill-current text-amber-400' : ''}`} />
+                    </button>
+
+                    <button
+                      id={`notif-btn-${anime.id}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleNotification(anime);
+                      }}
+                      className={`p-1 sm:p-1.5 rounded-full transition-all cursor-pointer ${
+                        isSubscribed
+                          ? 'text-cyan-400 bg-black/70 drop-shadow shadow-[0_0_8px_rgba(6,182,212,0.4)]'
+                          : 'text-white/80 hover:text-cyan-300 bg-black/45 hover:bg-black/70 backdrop-blur-sm'
+                      }`}
+                      title={
+                        isSubscribed
+                          ? 'Notificações ativadas para este anime'
+                          : 'Ativar notificações push para este anime'
+                      }
+                    >
+                      <Bell className={`w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ${isSubscribed ? 'fill-current text-cyan-400' : ''}`} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Bottom Title Bar with Frosted Glass Touch */}

@@ -3,7 +3,7 @@ import { AnimeItem, AnimeType, AnimeVideo, ExternalLink, Season } from '../types
 // In-memory cache for storing fetched seasonal data
 const memoryCache = new Map<string, { timestamp: number; data: AnimeItem[] }>();
 const CACHE_TTL_MS = 1000 * 60 * 15; // 15 minutes fresh threshold for auto-revalidation
-const CURRENT_CACHE_VERSION = 'v14_pwa_swr';
+const CURRENT_CACHE_VERSION = 'v15_airing_schedule';
 
 // Proactively clear old caches that may contain outdated formats
 try {
@@ -220,6 +220,12 @@ query ($year: Int, $season: MediaSeason, $page: Int, $perPage: Int) {
         episode
         airingAt
         timeUntilAiring
+      }
+      airingSchedule(page: 1, perPage: 25) {
+        nodes {
+          episode
+          airingAt
+        }
       }
       season
       seasonYear
@@ -652,6 +658,7 @@ export async function fetchAniListSeason(
                   timeUntilAiring: m.nextAiringEpisode.timeUntilAiring,
                 }
               : undefined,
+            airingSchedule: m.airingSchedule?.nodes || [],
             season,
             seasonYear: year,
             startDate: {

@@ -533,14 +533,20 @@ export async function fetchMalMetadata(malId?: number): Promise<MalMetadataResul
   try {
     const res = await fetch(`/api/anime-mal-metadata?malId=${malId}`);
     if (res.ok) {
-      const data = await res.json();
-      return {
-        studios: Array.isArray(data.studios) ? data.studios : [],
-        directors: Array.isArray(data.directors) ? data.directors : [],
-      };
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const text = await res.text();
+        if (text && !text.trim().startsWith('<')) {
+          const data = JSON.parse(text);
+          return {
+            studios: Array.isArray(data.studios) ? data.studios : [],
+            directors: Array.isArray(data.directors) ? data.directors : [],
+          };
+        }
+      }
     }
   } catch (err) {
-    console.warn('Failed to fetch MAL metadata:', err);
+    console.warn('Failed to fetch MAL metadata from server endpoint:', err);
   }
 
   // Client-side fallback to Jikan API v4 if server endpoint was unreachable
@@ -554,44 +560,64 @@ export async function fetchMalMetadata(malId?: number): Promise<MalMetadataResul
     const directors: Array<{ malId?: number; name: string; url: string; role?: string }> = [];
 
     if (jikanAnime.status === 'fulfilled' && jikanAnime.value.ok) {
-      const data = await jikanAnime.value.json();
-      for (const st of data?.data?.studios || []) {
-        if (st.name && st.url) {
-          studios.push({ malId: st.mal_id, name: st.name.trim(), url: st.url });
+      const contentType = jikanAnime.value.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const text = await jikanAnime.value.text();
+        if (text && !text.trim().startsWith('<')) {
+          try {
+            const data = JSON.parse(text);
+            for (const st of data?.data?.studios || []) {
+              if (st.name && st.url) {
+                studios.push({ malId: st.mal_id, name: st.name.trim(), url: st.url });
+              }
+            }
+          } catch {
+            // ignore JSON parse error
+          }
         }
       }
     }
 
     if (jikanStaff.status === 'fulfilled' && jikanStaff.value.ok) {
-      const data = await jikanStaff.value.json();
-      for (const item of data?.data || []) {
-        const positions: string[] = item.positions || [];
-        const isDir = positions.some((p) => {
-          const lp = p.toLowerCase();
-          return (
-            lp === 'director' ||
-            lp === 'series director' ||
-            lp === 'chief director' ||
-            lp === 'general director' ||
-            lp === 'main director' ||
-            lp === 'co-director'
-          );
-        });
+      const contentType = jikanStaff.value.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const text = await jikanStaff.value.text();
+        if (text && !text.trim().startsWith('<')) {
+          try {
+            const staffData = JSON.parse(text);
+            for (const item of staffData?.data || []) {
+              const positions: string[] = item.positions || [];
+              const isDir = positions.some((p) => {
+                const lp = p.toLowerCase();
+                return (
+                  lp === 'director' ||
+                  lp === 'series director' ||
+                  lp === 'chief director' ||
+                  lp === 'general director' ||
+                  lp === 'main director' ||
+                  lp === 'co-director'
+                );
+              });
 
-        if (isDir && item.person?.name) {
-          let westernName = item.person.name.trim();
-          if (westernName.includes(',')) {
-            const parts = westernName.split(',').map((p: string) => p.trim());
-            if (parts.length >= 2) {
-              westernName = `${parts[1]} ${parts[0]}`;
+              if (isDir && item.person?.name) {
+                let westernName = item.person.name.trim();
+                if (westernName.includes(',')) {
+                  const parts = westernName.split(',').map((p: string) => p.trim());
+                  if (parts.length >= 2) {
+                    westernName = `${parts[1]} ${parts[0]}`;
+                  }
+                }
+                directors.push({
+                  malId: item.person.mal_id,
+                  name: westernName,
+                  url: item.person.url || `https://myanimelist.net/people/${item.person.mal_id}`,
+                  role: positions.join(', '),
+                });
+              }
             }
+          } catch {
+            // ignore JSON parse error
           }
-          directors.push({
-            malId: item.person.mal_id,
-            name: westernName,
-            url: item.person.url || `https://myanimelist.net/people/${item.person.mal_id}`,
-            role: positions.join(', '),
-          });
         }
       }
     }
@@ -1028,14 +1054,20 @@ export async function fetchDirectorAndWorksFromAniList(
         `/api/anime-director?malId=${malId || ''}&title=${encodeURIComponent(currentAnimeTitle)}`
       );
       if (serverRes.ok) {
-        const sData = await serverRes.json();
-        if (sData?.directors && Array.isArray(sData.directors)) {
-          for (const d of sData.directors) {
-            if (d.name && !rawDirectors.some((rd) => rd.name.toLowerCase() === d.name.toLowerCase())) {
-              rawDirectors.push({
-                id: null,
-                name: d.name,
-              });
+        const contentType = serverRes.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const text = await serverRes.text();
+          if (text && !text.trim().startsWith('<')) {
+            const sData = JSON.parse(text);
+            if (sData?.directors && Array.isArray(sData.directors)) {
+              for (const d of sData.directors) {
+                if (d.name && !rawDirectors.some((rd) => rd.name.toLowerCase() === d.name.toLowerCase())) {
+                  rawDirectors.push({
+                    id: null,
+                    name: d.name,
+                  });
+                }
+              }
             }
           }
         }

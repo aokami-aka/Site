@@ -21,6 +21,7 @@ export default function App() {
 
   // Expanded anime modal state
   const [selectedAnime, setSelectedAnime] = useState<AnimeItem | null>(null);
+  const [pendingAnimeId, setPendingAnimeId] = useState<number | null>(null);
 
   // Favorites state persisted in localStorage
   const [favorites, setFavorites] = useState<number[]>(() => {
@@ -38,11 +39,109 @@ export default function App() {
       const next = exists ? prev.filter((id) => id !== animeId) : [...prev, animeId];
       try {
         localStorage.setItem('animeguides_favorites', JSON.stringify(next));
-      } catch (e) {
+      } catch {
         // Ignore storage error
       }
       return next;
     });
+  }, []);
+
+  // Parse URL search parameters on load or notification click navigation
+  useEffect(() => {
+    const handleUrlNavigation = () => {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(window.location.search);
+      const animeIdStr = params.get('animeId');
+      const viewParam = params.get('view');
+      const yearParam = params.get('year');
+      const seasonParam = params.get('season');
+
+      if (yearParam) {
+        const y = parseInt(yearParam, 10);
+        if (!isNaN(y)) setSelectedYear(y);
+      }
+      if (seasonParam) {
+        setSelectedSeason(seasonParam.toUpperCase() as Season);
+      }
+
+      if (viewParam === 'season' || animeIdStr) {
+        setCurrentView('season');
+      } else if (viewParam === 'news') {
+        setCurrentView('news');
+      }
+
+      if (animeIdStr) {
+        const id = parseInt(animeIdStr, 10);
+        if (!isNaN(id)) {
+          setPendingAnimeId(id);
+        }
+      }
+    };
+
+    handleUrlNavigation();
+
+    // Listen for Service Worker postMessages when notification is clicked while app is already open
+    const handleServiceWorkerMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'OPEN_ANIME_DETAILS') {
+        const id = Number(event.data.animeId);
+        const y = event.data.year ? Number(event.data.year) : undefined;
+        const s = event.data.season ? (event.data.season.toUpperCase() as Season) : undefined;
+
+        setCurrentView('season');
+        if (y) setSelectedYear(y);
+        if (s) setSelectedSeason(s);
+        if (!isNaN(id)) {
+          setPendingAnimeId(id);
+        }
+      }
+    };
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('message', handleServiceWorkerMessage);
+    }
+    window.addEventListener('popstate', handleUrlNavigation);
+
+    return () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.removeEventListener('message', handleServiceWorkerMessage);
+      }
+      window.removeEventListener('popstate', handleUrlNavigation);
+    };
+  }, []);
+
+  // Match pendingAnimeId against current animeList or cached season data
+  useEffect(() => {
+    if (!pendingAnimeId) return;
+
+    // 1. Check current active anime list
+    const foundInList = animeList.find((a) => a.id === pendingAnimeId);
+    if (foundInList) {
+      setSelectedAnime(foundInList);
+      setPendingAnimeId(null);
+      return;
+    }
+
+    // 2. Check local season cache
+    const cached = getCachedSeasonData(selectedYear, selectedSeason);
+    if (cached) {
+      const foundInCache = cached.find((a) => a.id === pendingAnimeId);
+      if (foundInCache) {
+        setSelectedAnime(foundInCache);
+        setPendingAnimeId(null);
+      }
+    }
+  }, [pendingAnimeId, animeList, selectedYear, selectedSeason]);
+
+  const handleCloseDetailModal = useCallback(() => {
+    setSelectedAnime(null);
+    setPendingAnimeId(null);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('animeId')) {
+        url.searchParams.delete('animeId');
+        window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+      }
+    }
   }, []);
 
   // Fetch season data with instant cache-first and online background revalidation
@@ -154,7 +253,7 @@ export default function App() {
       <AnimeDetailModal
         anime={selectedAnime}
         season={selectedSeason}
-        onClose={() => setSelectedAnime(null)}
+        onClose={handleCloseDetailModal}
         isFavorite={selectedAnime ? favorites.includes(selectedAnime.id) : false}
         onToggleFavorite={handleToggleFavorite}
       />

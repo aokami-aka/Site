@@ -2,8 +2,10 @@ import express from 'express';
 import path from 'path';
 import https from 'https';
 import http from 'http';
+import fs from 'fs';
 import { spawn } from 'child_process';
 import sharp from 'sharp';
+import webpush from 'web-push';
 import { createServer as createViteServer } from 'vite';
 
 async function startServer() {
@@ -495,18 +497,379 @@ async function startServer() {
     });
   });
 
+  // =========================================================================
+  // WEB PUSH NOTIFICATION BACKEND (Background delivery when app is closed)
+  // =========================================================================
+  const VAPID_KEYS_PATH = path.join(process.cwd(), '.vapid-keys.json');
+  const PUSH_SUBS_PATH = path.join(process.cwd(), '.push-subscriptions.json');
+
+  let vapidKeys: { publicKey: string; privateKey: string };
+  try {
+    if (fs.existsSync(VAPID_KEYS_PATH)) {
+      vapidKeys = JSON.parse(fs.readFileSync(VAPID_KEYS_PATH, 'utf-8'));
+    } else {
+      vapidKeys = webpush.generateVAPIDKeys();
+      fs.writeFileSync(VAPID_KEYS_PATH, JSON.stringify(vapidKeys, null, 2));
+    }
+  } catch {
+    vapidKeys = webpush.generateVAPIDKeys();
+  }
+
+  webpush.setVapidDetails(
+    'mailto:notifications@animeguides.app',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+  );
+
+  interface ServerAnimeItem {
+    id: number;
+    malId?: number;
+    anilistId?: number;
+    title: string;
+    posterImage: string;
+    status: string;
+    season?: string;
+    seasonYear?: number;
+    currentEpisode?: number | string;
+    totalEpisodes?: number | string;
+    nextEpisodeNumber?: number;
+    nextAiringAt?: number;
+    lastNotifiedEpisode?: number;
+    lastDayNotifiedEpisode?: number;
+    lastAirNotifiedEpisode?: number;
+    subscribedAt: number;
+  }
+
+  interface StoredPushDevice {
+    endpoint: string;
+    keys: {
+      p256dh: string;
+      auth: string;
+    };
+    subscribedAnimes: ServerAnimeItem[];
+    updatedAt: number;
+    userAgent?: string;
+  }
+
+  const activePushDevices = new Map<string, StoredPushDevice>();
+
+  function loadPushSubscriptions() {
+    try {
+      if (fs.existsSync(PUSH_SUBS_PATH)) {
+        const data: StoredPushDevice[] = JSON.parse(fs.readFileSync(PUSH_SUBS_PATH, 'utf-8'));
+        if (Array.isArray(data)) {
+          for (const item of data) {
+            if (item && item.endpoint && item.keys?.p256dh && item.keys?.auth) {
+              activePushDevices.set(item.endpoint, item);
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to load push subscriptions:', err);
+    }
+  }
+
+  function savePushSubscriptions() {
+    try {
+      const list = Array.from(activePushDevices.values());
+      fs.writeFileSync(PUSH_SUBS_PATH, JSON.stringify(list, null, 2));
+    } catch (err) {
+      console.warn('Failed to save push subscriptions:', err);
+    }
+  }
+
+  loadPushSubscriptions();
+
+  function formatBrazilAirTime(airingEpochSeconds: number) {
+    const date = new Date(airingEpochSeconds * 1000);
+    const timeFormatter = new Intl.DateTimeFormat('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+    const timeStr = timeFormatter.format(date);
+
+    const dateFormatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    const dateStr = dateFormatter.format(date);
+    const todayInBrazil = dateFormatter.format(new Date());
+
+    return {
+      timeStr,
+      dateStr,
+      isTodayInBrazil: dateStr === todayInBrazil,
+    };
+  }
+
+  async function checkAndSendPushNotifications() {
+    if (activePushDevices.size === 0) return;
+
+    const nowSeconds = Math.floor(Date.now() / 1000);
+    let hasChanges = false;
+    const deadEndpoints: string[] = [];
+
+    for (const [endpoint, device] of activePushDevices.entries()) {
+      if (!device.subscribedAnimes || device.subscribedAnimes.length === 0) continue;
+
+      const pushSubscription = {
+        endpoint: device.endpoint,
+        keys: {
+          p256dh: device.keys.p256dh,
+          auth: device.keys.auth,
+        },
+      };
+
+      for (const anime of device.subscribedAnimes) {
+        if (!anime.nextAiringAt) continue;
+
+        const epToNotify = anime.nextEpisodeNumber || 1;
+        const brazilAir = formatBrazilAirTime(anime.nextAiringAt);
+
+        // Notification 1: On the date of the release (before exact launch time)
+        if (brazilAir.isTodayInBrazil && nowSeconds < anime.nextAiringAt) {
+          if (anime.lastDayNotifiedEpisode !== epToNotify) {
+            const payload = JSON.stringify({
+              title: 'AnimeGuides • Lançamento Hoje!',
+              body: `Hoje tem episódio novo de "${anime.title}"! O episódio ${epToNotify} será lançado às ${brazilAir.timeStr} (horário de Brasília).`,
+              icon: anime.posterImage || '/pwa-192x192.png',
+              badge: '/pwa-192x192.png',
+              tag: `anime-${anime.id}-ep-${epToNotify}-day`,
+              data: {
+                animeId: anime.id,
+                year: anime.seasonYear,
+                season: anime.season,
+                url: `/?view=season&year=${anime.seasonYear || 2026}&season=${anime.season || 'FALL'}&animeId=${anime.id}`,
+              },
+            });
+
+            try {
+              await webpush.sendNotification(pushSubscription, payload);
+              anime.lastDayNotifiedEpisode = epToNotify;
+              hasChanges = true;
+            } catch (err: any) {
+              console.warn(`Web push day notification failed for ${anime.title}:`, err?.statusCode || err?.message);
+              if (err?.statusCode === 404 || err?.statusCode === 410) {
+                deadEndpoints.push(endpoint);
+                break;
+              }
+            }
+          }
+        }
+
+        // Notification 2: Exactly when the launch time arrives
+        if (nowSeconds >= anime.nextAiringAt) {
+          if (anime.lastAirNotifiedEpisode !== epToNotify) {
+            const payload = JSON.stringify({
+              title: 'AnimeGuides • Episódio Lançado!',
+              body: `O episódio ${epToNotify} de "${anime.title}" acabou de ser lançado! Assista agora.`,
+              icon: anime.posterImage || '/pwa-192x192.png',
+              badge: '/pwa-192x192.png',
+              tag: `anime-${anime.id}-ep-${epToNotify}-air`,
+              data: {
+                animeId: anime.id,
+                year: anime.seasonYear,
+                season: anime.season,
+                url: `/?view=season&year=${anime.seasonYear || 2026}&season=${anime.season || 'FALL'}&animeId=${anime.id}`,
+              },
+            });
+
+            try {
+              await webpush.sendNotification(pushSubscription, payload);
+              anime.lastAirNotifiedEpisode = epToNotify;
+              anime.lastNotifiedEpisode = epToNotify;
+              anime.nextEpisodeNumber = epToNotify + 1;
+              // Schedule next weekly episode
+              anime.nextAiringAt = anime.nextAiringAt + 7 * 24 * 60 * 60;
+              hasChanges = true;
+            } catch (err: any) {
+              console.warn(`Web push air notification failed for ${anime.title}:`, err?.statusCode || err?.message);
+              if (err?.statusCode === 404 || err?.statusCode === 410) {
+                deadEndpoints.push(endpoint);
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (deadEndpoints.length > 0) {
+      for (const ep of deadEndpoints) {
+        activePushDevices.delete(ep);
+      }
+      hasChanges = true;
+    }
+
+    if (hasChanges) {
+      savePushSubscriptions();
+    }
+  }
+
+  // Periodic server-side check every 30 seconds (runs 24/7 independently of client tabs!)
+  setInterval(checkAndSendPushNotifications, 30000);
+
+  // Return Public VAPID Key for browser client registration
+  app.get('/api/push/vapid-public-key', (req, res) => {
+    return res.json({ publicKey: vapidKeys.publicKey });
+  });
+
+  // Subscribe/Register device for Web Push notifications
+  app.post('/api/push/subscribe', (req, res) => {
+    try {
+      const { subscription, subscribedAnimes } = req.body || {};
+      if (!subscription?.endpoint || !subscription?.keys?.p256dh || !subscription?.keys?.auth) {
+        return res.status(400).json({ error: 'Invalid push subscription payload' });
+      }
+
+      const endpoint = subscription.endpoint;
+      const existing = activePushDevices.get(endpoint);
+
+      activePushDevices.set(endpoint, {
+        endpoint,
+        keys: {
+          p256dh: subscription.keys.p256dh,
+          auth: subscription.keys.auth,
+        },
+        subscribedAnimes: Array.isArray(subscribedAnimes)
+          ? subscribedAnimes
+          : (existing?.subscribedAnimes || []),
+        updatedAt: Date.now(),
+        userAgent: req.headers['user-agent'] as string,
+      });
+
+      savePushSubscriptions();
+      return res.json({ success: true, count: activePushDevices.size });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Synchronize user's subscribed anime list with backend
+  app.post('/api/push/sync-subscriptions', (req, res) => {
+    try {
+      const { endpoint, subscription, subscribedAnimes } = req.body || {};
+      const targetEndpoint = endpoint || subscription?.endpoint;
+
+      if (!targetEndpoint) {
+        return res.status(400).json({ error: 'Endpoint is required' });
+      }
+
+      const existing = activePushDevices.get(targetEndpoint);
+      if (existing) {
+        if (Array.isArray(subscribedAnimes)) {
+          existing.subscribedAnimes = subscribedAnimes;
+        }
+        if (subscription?.keys) {
+          existing.keys = subscription.keys;
+        }
+        existing.updatedAt = Date.now();
+        activePushDevices.set(targetEndpoint, existing);
+      } else if (subscription?.keys?.p256dh && subscription?.keys?.auth) {
+        activePushDevices.set(targetEndpoint, {
+          endpoint: targetEndpoint,
+          keys: {
+            p256dh: subscription.keys.p256dh,
+            auth: subscription.keys.auth,
+          },
+          subscribedAnimes: Array.isArray(subscribedAnimes) ? subscribedAnimes : [],
+          updatedAt: Date.now(),
+        });
+      }
+
+      savePushSubscriptions();
+      return res.json({ success: true, count: activePushDevices.size });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Unsubscribe device or remove specific anime from push notifications
+  app.post('/api/push/unsubscribe', (req, res) => {
+    try {
+      const { endpoint, animeId } = req.body || {};
+      if (!endpoint) {
+        return res.status(400).json({ error: 'Endpoint is required' });
+      }
+
+      if (animeId) {
+        const dev = activePushDevices.get(endpoint);
+        if (dev) {
+          dev.subscribedAnimes = dev.subscribedAnimes.filter((a) => a.id !== animeId);
+          dev.updatedAt = Date.now();
+          activePushDevices.set(endpoint, dev);
+          savePushSubscriptions();
+        }
+      } else {
+        activePushDevices.delete(endpoint);
+        savePushSubscriptions();
+      }
+
+      return res.json({ success: true });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Send a test push notification to verify push delivery
+  app.post('/api/push/test', async (req, res) => {
+    try {
+      const { endpoint } = req.body || {};
+      let targetDevice: StoredPushDevice | undefined;
+
+      if (endpoint) {
+        targetDevice = activePushDevices.get(endpoint);
+      } else if (activePushDevices.size > 0) {
+        targetDevice = Array.from(activePushDevices.values())[activePushDevices.size - 1];
+      }
+
+      if (!targetDevice) {
+        return res.status(404).json({ error: 'Nenhum dispositivo cadastrado para teste' });
+      }
+
+      const payload = JSON.stringify({
+        title: 'AnimeGuides • Notificações Ativas!',
+        body: 'As notificações para o seu celular em segundo plano estão funcionando perfeitamente mesmo com o aplicativo fechado!',
+        icon: '/pwa-192x192.png',
+        badge: '/pwa-192x192.png',
+        tag: `test-push-${Date.now()}`,
+        data: {
+          url: '/?view=season',
+        },
+      });
+
+      await webpush.sendNotification(
+        {
+          endpoint: targetDevice.endpoint,
+          keys: targetDevice.keys,
+        },
+        payload
+      );
+
+      return res.json({ success: true, message: 'Notificação de teste enviada com sucesso!' });
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
   // API to resolve anime MAL metadata (Studio & Director official MyAnimeList URLs via Jikan API with MAL scraper fallback)
   app.get('/api/anime-mal-metadata', async (req, res) => {
-    const malId = req.query.malId as string;
+    try {
+      const malId = req.query.malId as string;
 
-    if (!malId || !/^\d+$/.test(malId)) {
-      return res.status(400).json({ error: 'Valid numeric malId is required', studios: [], directors: [] });
-    }
+      if (!malId || !/^\d+$/.test(malId)) {
+        return res.status(400).json({ error: 'Valid numeric malId is required', studios: [], directors: [] });
+      }
 
-    const cacheKey = `mal_meta_${malId}`;
-    if (malMetadataCache.has(cacheKey)) {
-      return res.json(malMetadataCache.get(cacheKey));
-    }
+      const cacheKey = `mal_meta_${malId}`;
+      if (malMetadataCache.has(cacheKey)) {
+        return res.json(malMetadataCache.get(cacheKey));
+      }
 
     const studios: Array<{ malId?: number; name: string; url: string; logoUrl?: string }> = [];
     const directors: Array<{ malId?: number; name: string; url: string; role?: string }> = [];
@@ -680,17 +1043,22 @@ async function startServer() {
       malMetadataCache.set(cacheKey, result);
     }
     return res.json(result);
+  } catch (err: any) {
+    console.warn('Unhandled error in /api/anime-mal-metadata:', err);
+    return res.status(500).json({ error: err?.message || 'Server error', studios: [], directors: [] });
+  }
   });
 
   // API to resolve anime Director(s) strictly from MyAnimeList characters/staff
   app.get('/api/anime-director', async (req, res) => {
-    const malId = req.query.malId as string;
-    const title = (req.query.title as string) || '';
+    try {
+      const malId = req.query.malId as string;
+      const title = (req.query.title as string) || '';
 
-    const cacheKey = `director_${malId || title}`;
-    if (directorCache.has(cacheKey)) {
-      return res.json(directorCache.get(cacheKey));
-    }
+      const cacheKey = `director_${malId || title}`;
+      if (directorCache.has(cacheKey)) {
+        return res.json(directorCache.get(cacheKey));
+      }
 
     const directors: Array<{ name: string; anidbUrl: string; anidbName: string }> = [];
 
@@ -758,18 +1126,23 @@ async function startServer() {
       directorCache.set(cacheKey, result);
     }
     return res.json(result);
+  } catch (err: any) {
+    console.warn('Unhandled error in /api/anime-director:', err);
+    return res.status(500).json({ error: err?.message || 'Server error', directors: [] });
+  }
   });
 
   // API to aggregate official external streaming & info links (AniDB, MAL, Crunchyroll, Netflix, Disney+, Max, Prime) directly
   app.get('/api/anime-external-links', async (req, res) => {
-    const malId = req.query.malId as string;
-    const anilistId = req.query.anilistId as string;
-    const title = (req.query.title as string) || '';
+    try {
+      const malId = req.query.malId as string;
+      const anilistId = req.query.anilistId as string;
+      const title = (req.query.title as string) || '';
 
-    const cacheKey = `links_${malId || ''}_${anilistId || ''}_${title}`;
-    if (linksCache.has(cacheKey)) {
-      return res.json(linksCache.get(cacheKey));
-    }
+      const cacheKey = `links_${malId || ''}_${anilistId || ''}_${title}`;
+      if (linksCache.has(cacheKey)) {
+        return res.json(linksCache.get(cacheKey));
+      }
 
     const links: Array<{ site: string; url: string; type: string }> = [];
 
@@ -943,6 +1316,10 @@ async function startServer() {
     const result = { links };
     linksCache.set(cacheKey, result);
     return res.json(result);
+  } catch (err: any) {
+    console.warn('Unhandled error in /api/anime-external-links:', err);
+    return res.status(500).json({ error: err?.message || 'Server error', links: [] });
+  }
   });
 
   // ==========================================
@@ -1945,6 +2322,11 @@ async function startServer() {
     } catch (err: any) {
       return res.status(500).json({ success: false, error: err.message });
     }
+  });
+
+  // 404 handler for unmatched API routes to prevent falling through into Vite SPA index.html
+  app.all('/api/*', (req, res) => {
+    res.status(404).json({ error: `API route not found: ${req.method} ${req.path}` });
   });
 
   // Vite middleware in dev or static files in production

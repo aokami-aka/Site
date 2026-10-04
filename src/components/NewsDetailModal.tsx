@@ -71,8 +71,20 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
     if (article.link && article.link.startsWith('http')) {
       setLoadingBody(true);
       fetch(`/api/anime-news/article?url=${encodeURIComponent(article.link)}&title=${encodeURIComponent(article.title)}`)
-        .then((res) => res.json())
+        .then(async (res) => {
+          if (!res.ok) return null;
+          const contentType = res.headers.get('content-type') || '';
+          if (!contentType.includes('application/json')) return null;
+          const text = await res.text();
+          if (!text || text.trim().startsWith('<')) return null;
+          try {
+            return JSON.parse(text);
+          } catch {
+            return null;
+          }
+        })
         .then((data) => {
+          if (!data) return;
           if (data?.success && Array.isArray(data.paragraphs) && data.paragraphs.length > 0) {
             const cleaned = data.paragraphs
               .map((p: string) => sanitizeNewsText(p))

@@ -10,7 +10,7 @@ export interface SeasonDefinition {
   order: number;
 }
 
-export type DisplayFormat = 'grid-standard' | 'grid-compact' | 'list-detailed';
+export type DisplayFormat = 'grid-standard' | 'grid-compact' | 'list-detailed' | 'schedule';
 
 export type AnimeType =
   | 'Todos os Tipos'
@@ -76,6 +76,10 @@ export interface AnimeItem {
     airingAt?: number;
     timeUntilAiring?: number;
   };
+  airingSchedule?: {
+    episode: number;
+    airingAt: number;
+  }[];
   season: Season;
   seasonYear: number;
   startDate?: {

@@ -57,6 +57,8 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
+          importScripts: ['/sw-push.js'],
+          navigateFallbackDenylist: [/^\/api/],
           globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2}'],
           runtimeCaching: [
             {
@@ -173,13 +175,13 @@ export default defineConfig(() => {
               },
             },
             {
-              urlPattern: /^\/api\/(?:news|translate|animethemes-proxy|anilist-proxy).*/i,
+              urlPattern: /^\/api\/.*/i,
               handler: 'NetworkFirst',
               options: {
                 cacheName: 'app-api-cache',
                 networkTimeoutSeconds: 4,
                 expiration: {
-                  maxEntries: 60,
+                  maxEntries: 100,
                   maxAgeSeconds: 60 * 60 * 24 * 7,
                 },
                 cacheableResponse: {
