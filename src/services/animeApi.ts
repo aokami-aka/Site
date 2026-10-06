@@ -378,10 +378,10 @@ function cleanDescription(desc?: string): string {
 }
 
 /**
- * Execute GraphQL request to AniList (trying proxy first, then direct endpoint with headers)
+ * Execute GraphQL request to AniList (Direct GraphQL API first for instant response and static/Vercel support)
  */
 async function queryAniListGraphQL(query: string, variables: Record<string, any>): Promise<any> {
-  const endpoints = ['/api/anilist-proxy', 'https://graphql.anilist.co'];
+  const endpoints = ['https://graphql.anilist.co', '/api/anilist-proxy'];
 
   for (const endpoint of endpoints) {
     try {
@@ -390,8 +390,6 @@ async function queryAniListGraphQL(query: string, variables: Record<string, any>
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          Referer: 'https://anilist.co/',
-          Origin: 'https://anilist.co',
         },
         body: JSON.stringify({ query, variables }),
       });
@@ -684,34 +682,10 @@ export async function fetchAniListSeason(
       return deduplicated;
     }
   } catch (error) {
-    console.warn(`AniList API failed for ${year}/${season}, falling back to Kitsu:`, error);
+    console.warn(`AniList API failed for ${year}/${season}:`, error);
   }
 
-  // 2. Fallback: Kitsu API (With strict season & month filtering)
-  try {
-    const kitsuResult = await fetchKitsuSeason(year, season);
-    if (kitsuResult.length > 0) {
-      const deduplicated = deduplicateAnime(kitsuResult);
-      saveSeasonDataToCache(year, season, deduplicated);
-      return deduplicated;
-    }
-  } catch (kitsuError) {
-    console.warn(`Kitsu API failed for ${year}/${season}:`, kitsuError);
-  }
-
-  // 3. Fallback: Jikan API
-  try {
-    const jikanResult = await fetchJikanSeason(year, season);
-    if (jikanResult.length > 0) {
-      const deduplicated = deduplicateAnime(jikanResult);
-      saveSeasonDataToCache(year, season, deduplicated);
-      return deduplicated;
-    }
-  } catch (jikanError) {
-    console.warn(`Jikan API failed for ${year}/${season}:`, jikanError);
-  }
-
-  // If network queries failed, fallback to any available cached version
+  // If network query failed, fallback to any available cached version (stale-while-revalidate)
   if (cachedData && cachedData.length > 0) {
     return cachedData;
   }

@@ -25,8 +25,6 @@ import {
   getStudioWorks,
   getStudioAniDbUrl,
   buildAniDbCreatorUrl,
-  getStudioLogoUrl,
-  fetchStudioLogoFromAnimeThemes,
   DirectorInfo,
   StudioInfo,
 } from '../services/animeDetailEnricher';
@@ -112,8 +110,6 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
   const [combinedWorks, setCombinedWorks] = useState<string>('carregando...');
   const [studioInfo, setStudioInfo] = useState<StudioInfo | null>(null);
   const [studioWorks, setStudioWorks] = useState<string>('carregando...');
-  const [studioLogoUrl, setStudioLogoUrl] = useState<string | null>(null);
-  const [studioLogoFailed, setStudioLogoFailed] = useState<boolean>(false);
   const [activeLinks, setActiveLinks] = useState<ExternalLink[]>(anime?.externalLinks || []);
   const [coverTilt, setCoverTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50, isHovered: false });
   const { isInstalled, isIOS } = usePWAInstall();
@@ -271,7 +267,6 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
     setCombinedWorks('carregando...');
     setStudioWorks('carregando...');
     setStudioInfo(null);
-    setStudioLogoFailed(false);
 
     // 1. Initial video list: First is always AniList Official Trailer
     const initialVideos: AnimeVideo[] = [];
@@ -418,32 +413,6 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
     };
   }, [anime?.id]);
 
-  // Resolve studio logo dynamically via AnimeThemes API & MAL CDN
-  useEffect(() => {
-    let isMounted = true;
-    const name = (studioInfo?.name || anime?.studio?.name || '').trim();
-    if (!name) {
-      setStudioLogoUrl(null);
-      return;
-    }
-
-    const initialLogo = studioInfo?.logoUrl || getStudioLogoUrl(name) || (studioInfo?.malId ? `https://cdn.myanimelist.net/images/company/${studioInfo.malId}.png` : null);
-    if (initialLogo) {
-      setStudioLogoUrl(initialLogo);
-    }
-
-    fetchStudioLogoFromAnimeThemes(name, studioInfo?.malId).then((url) => {
-      if (!isMounted) return;
-      if (url) {
-        setStudioLogoUrl(url);
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [studioInfo, anime?.studio?.name]);
-
   // Handle ESC key to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -462,13 +431,6 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
   const currentGlow = posterGlowColor || palette.accentHex;
   const currentPoster = posterUrl || DEFAULT_POSTER_FALLBACK;
   const currentStudioName = (studioInfo?.name || anime?.studio?.name || '').trim();
-  const currentStudioLogo = getStudioLogoUrl(currentStudioName);
-  const activeStudioLogo = studioLogoUrl || studioInfo?.logoUrl || currentStudioLogo;
-  const processedStudioLogo = activeStudioLogo
-    ? (activeStudioLogo.startsWith('data:') || activeStudioLogo.endsWith('.svg')
-        ? activeStudioLogo
-        : `/api/clean-studio-logo?url=${encodeURIComponent(activeStudioLogo)}`)
-    : null;
 
   return (
     <AnimatePresence>
@@ -726,39 +688,24 @@ export const AnimeDetailModal: React.FC<AnimeDetailModalProps> = ({
                   )}
                 </div>
 
-                {/* Studio (Animation Work / Produção de Animação resolved with direct MyAnimeList link via Jikan with AniList fallback + Logo image rendering) */}
+                {/* Studio (Animation Work / Produção de Animação resolved as text with AniList direct link) */}
                 <div>
                   <span className="font-bold mr-2" style={{ color: palette.accentHex }}>Estúdio:</span>
                   {currentStudioName ? (
                     <a
                       href={
                         studioInfo?.url ||
-                        studioInfo?.malUrl ||
-                        studioInfo?.siteUrl ||
                         studioInfo?.anilistUrl ||
+                        studioInfo?.siteUrl ||
                         (studioInfo?.id ? `https://anilist.co/studio/${studioInfo.id}` : `https://anilist.co/search/anime?studios=${encodeURIComponent(currentStudioName)}`)
                       }
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: palette.accentHex }}
-                      className="font-bold hover:brightness-125 transition-all cursor-pointer inline-flex items-center gap-1.5 align-middle"
-                      title={
-                        studioInfo?.malUrl
-                          ? `Ver estúdio ${currentStudioName} no MyAnimeList`
-                          : `Ver estúdio ${currentStudioName} no AniList`
-                      }
+                      className="font-bold hover:underline hover:brightness-125 transition-all cursor-pointer inline-flex items-center align-middle"
+                      title={`Ver estúdio ${currentStudioName} no AniList`}
                     >
-                      {processedStudioLogo && !studioLogoFailed ? (
-                        <img
-                          src={processedStudioLogo}
-                          alt={currentStudioName}
-                          className="h-14 sm:h-15 w-auto max-w-[140px] object-contain filter drop-shadow-md brightness-110 hover:scale-105 transition-all py-0.5"
-                          referrerPolicy="no-referrer"
-                          onError={() => setStudioLogoFailed(true)}
-                        />
-                      ) : (
-                        <span>{currentStudioName}</span>
-                      )}
+                      {currentStudioName}
                     </a>
                   ) : (
                     <span className="text-slate-400 italic">Estúdio Desconhecido</span>

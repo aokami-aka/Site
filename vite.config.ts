@@ -146,21 +146,6 @@ export default defineConfig(() => {
               },
             },
             {
-              urlPattern: /^https:\/\/api\.jikan\.moe\/.*/i,
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'jikan-api-cache',
-                networkTimeoutSeconds: 5,
-                expiration: {
-                  maxEntries: 50,
-                  maxAgeSeconds: 60 * 60 * 24 * 7,
-                },
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-            {
               urlPattern: /^https:\/\/api\.animethemes\.moe\/.*/i,
               handler: 'StaleWhileRevalidate',
               options: {

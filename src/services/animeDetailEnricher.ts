@@ -184,7 +184,7 @@ export async function fetchAniListHighResPoster(
     posterUrl: fallbackPoster || 'https://media.kitsu.app/anime/46474/poster_image/large-23e1293e41a0b54b6621eb589c3f0d62.jpeg',
   };
 
-  const endpoints = ['/api/anilist-proxy', 'https://graphql.anilist.co'];
+  const endpoints = ['https://graphql.anilist.co', '/api/anilist-proxy'];
 
   // 1. If we have AniList ID
   if (anilistId) {
@@ -196,8 +196,6 @@ export async function fetchAniListHighResPoster(
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
-            Referer: 'https://anilist.co/',
-            Origin: 'https://anilist.co',
           },
           body: JSON.stringify({ query, variables: { id: anilistId } }),
         });
@@ -477,7 +475,7 @@ const ANIME_METADATA_FALLBACK: Record<string, { director?: string; studio?: stri
  * Helper to query AniList GraphQL
  */
 async function queryAniListEnricher(query: string, variables: Record<string, any>): Promise<any> {
-  const endpoints = ['/api/anilist-proxy', 'https://graphql.anilist.co'];
+  const endpoints = ['https://graphql.anilist.co', '/api/anilist-proxy'];
   for (const endpoint of endpoints) {
     try {
       const res = await fetch(endpoint, {
@@ -485,8 +483,6 @@ async function queryAniListEnricher(query: string, variables: Record<string, any
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          Referer: 'https://anilist.co/',
-          Origin: 'https://anilist.co',
         },
         body: JSON.stringify({ query, variables }),
       });
@@ -526,106 +522,10 @@ export interface MalMetadataResult {
 }
 
 /**
- * Fetches official MAL studio and director metadata via server proxy (which queries Jikan API with fallback to direct MAL scraping)
+ * Empty MAL metadata resolution (AniList GraphQL is primary, Jikan is used only for filmography)
  */
 export async function fetchMalMetadata(malId?: number): Promise<MalMetadataResult> {
-  if (!malId) return { studios: [], directors: [] };
-  try {
-    const res = await fetch(`/api/anime-mal-metadata?malId=${malId}`);
-    if (res.ok) {
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        const text = await res.text();
-        if (text && !text.trim().startsWith('<')) {
-          const data = JSON.parse(text);
-          return {
-            studios: Array.isArray(data.studios) ? data.studios : [],
-            directors: Array.isArray(data.directors) ? data.directors : [],
-          };
-        }
-      }
-    }
-  } catch (err) {
-    console.warn('Failed to fetch MAL metadata from server endpoint:', err);
-  }
-
-  // Client-side fallback to Jikan API v4 if server endpoint was unreachable
-  try {
-    const [jikanAnime, jikanStaff] = await Promise.allSettled([
-      fetch(`https://api.jikan.moe/v4/anime/${malId}`),
-      fetch(`https://api.jikan.moe/v4/anime/${malId}/staff`),
-    ]);
-
-    const studios: Array<{ malId?: number; name: string; url: string }> = [];
-    const directors: Array<{ malId?: number; name: string; url: string; role?: string }> = [];
-
-    if (jikanAnime.status === 'fulfilled' && jikanAnime.value.ok) {
-      const contentType = jikanAnime.value.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        const text = await jikanAnime.value.text();
-        if (text && !text.trim().startsWith('<')) {
-          try {
-            const data = JSON.parse(text);
-            for (const st of data?.data?.studios || []) {
-              if (st.name && st.url) {
-                studios.push({ malId: st.mal_id, name: st.name.trim(), url: st.url });
-              }
-            }
-          } catch {
-            // ignore JSON parse error
-          }
-        }
-      }
-    }
-
-    if (jikanStaff.status === 'fulfilled' && jikanStaff.value.ok) {
-      const contentType = jikanStaff.value.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        const text = await jikanStaff.value.text();
-        if (text && !text.trim().startsWith('<')) {
-          try {
-            const staffData = JSON.parse(text);
-            for (const item of staffData?.data || []) {
-              const positions: string[] = item.positions || [];
-              const isDir = positions.some((p) => {
-                const lp = p.toLowerCase();
-                return (
-                  lp === 'director' ||
-                  lp === 'series director' ||
-                  lp === 'chief director' ||
-                  lp === 'general director' ||
-                  lp === 'main director' ||
-                  lp === 'co-director'
-                );
-              });
-
-              if (isDir && item.person?.name) {
-                let westernName = item.person.name.trim();
-                if (westernName.includes(',')) {
-                  const parts = westernName.split(',').map((p: string) => p.trim());
-                  if (parts.length >= 2) {
-                    westernName = `${parts[1]} ${parts[0]}`;
-                  }
-                }
-                directors.push({
-                  malId: item.person.mal_id,
-                  name: westernName,
-                  url: item.person.url || `https://myanimelist.net/people/${item.person.mal_id}`,
-                  role: positions.join(', '),
-                });
-              }
-            }
-          } catch {
-            // ignore JSON parse error
-          }
-        }
-      }
-    }
-
-    return { studios, directors };
-  } catch {
-    return { studios: [], directors: [] };
-  }
+  return { studios: [], directors: [] };
 }
 
 export function isStrictDirectorRole(role?: string): boolean {
@@ -1125,14 +1025,11 @@ export async function fetchDirectorAndWorksFromAniList(
     const anilistUrl = dir.id
       ? `https://anilist.co/staff/${dir.id}`
       : `https://anilist.co/search/staff?search=${encodeURIComponent(dir.name)}`;
-    const malUrl = dir.malUrl || (dir.malId ? `https://myanimelist.net/people/${dir.malId}` : undefined);
-    const activeUrl = malUrl || anilistUrl; // MAL (via Jikan) is primary; AniList is fallback
+    const activeUrl = anilistUrl;
 
     directorsList.push({
       id: dir.id,
       name: dir.name,
-      malId: dir.malId,
-      malUrl,
       anilistUrl,
       url: activeUrl,
       anidbUrl: buildAniDbCreatorUrl(dir.name, false),
@@ -1448,36 +1345,7 @@ export async function fetchStudioAndWorksFromAniList(
     }
   }
 
-  const malMeta = await malMetaPromise;
-
-  // Find matching MAL studio from Jikan / MAL
-  let directMalStudioUrl: string | undefined;
-  let directMalStudioId: number | undefined;
-
-  if (malMeta.studios && malMeta.studios.length > 0) {
-    const malMatch = malMeta.studios.find(
-      (ms) =>
-        (resolvedStudioName && ms.name.toLowerCase() === resolvedStudioName.toLowerCase()) ||
-        (resolvedStudioName && ms.name.toLowerCase().includes(resolvedStudioName.toLowerCase())) ||
-        (resolvedStudioName && resolvedStudioName.toLowerCase().includes(ms.name.toLowerCase()))
-    );
-
-    if (malMatch) {
-      directMalStudioUrl = malMatch.url;
-      directMalStudioId = malMatch.malId;
-      if (!resolvedStudioName) {
-        resolvedStudioName = malMatch.name;
-      }
-    } else if (malMeta.studios.length === 1) {
-      directMalStudioUrl = malMeta.studios[0].url;
-      directMalStudioId = malMeta.studios[0].malId;
-      if (!resolvedStudioName) {
-        resolvedStudioName = malMeta.studios[0].name;
-      }
-    }
-  }
-
-  // Fallback AniList studio URL if MAL/Jikan is down or unavailable
+  // Fallback AniList studio URL
   const anilistStudioUrl =
     resolvedStudioSiteUrl ||
     (resolvedStudioId ? `https://anilist.co/studio/${resolvedStudioId}` : undefined) ||
@@ -1485,16 +1353,8 @@ export async function fetchStudioAndWorksFromAniList(
       ? `https://anilist.co/search/anime?studios=${encodeURIComponent(resolvedStudioName)}`
       : 'https://anilist.co');
 
-  // Direct active URL: MAL is primary (via Jikan); AniList is fallback
-  const finalActiveUrl = directMalStudioUrl || anilistStudioUrl;
-
-  // Direct AniDB Creator URL for studio
+  const finalActiveUrl = anilistStudioUrl;
   const directAnidbUrl = getStudioAniDbUrl(resolvedStudioName);
-
-  // Resolved logo URL: MAL CDN image or static logo
-  const resolvedLogoUrl = directMalStudioId
-    ? `https://cdn.myanimelist.net/images/company/${directMalStudioId}.png`
-    : getStudioLogoUrl(resolvedStudioName) || undefined;
 
   // 3. If we found works from AniList, format and return
   if (resolvedStudioName && candidateWorks.length > 0) {
@@ -1503,34 +1363,28 @@ export async function fetchStudioAndWorksFromAniList(
       studio: {
         id: resolvedStudioId,
         name: resolvedStudioName,
-        malId: directMalStudioId,
-        malUrl: directMalStudioUrl,
         anilistUrl: anilistStudioUrl,
         siteUrl: finalActiveUrl,
         url: finalActiveUrl,
         anidbUrl: directAnidbUrl,
         works: worksText || 'primeiro trabalho',
-        logoUrl: resolvedLogoUrl,
       },
       worksText: worksText || 'primeiro trabalho',
     };
   }
 
-  // 4. If studio name is known, fallback to getStudioWorks (Curated DB / Jikan)
+  // 4. If studio name is known, fallback to getStudioWorks (Curated DB / AnimeThemes)
   if (resolvedStudioName && !resolvedStudioName.includes('Desconhecido')) {
     const worksText = await getStudioWorks(resolvedStudioName, currentAnimeTitle);
     return {
       studio: {
         id: resolvedStudioId,
         name: resolvedStudioName,
-        malId: directMalStudioId,
-        malUrl: directMalStudioUrl,
         anilistUrl: anilistStudioUrl,
         siteUrl: finalActiveUrl,
         url: finalActiveUrl,
         anidbUrl: directAnidbUrl,
         works: worksText || 'primeiro trabalho',
-        logoUrl: resolvedLogoUrl,
       },
       worksText: worksText || 'primeiro trabalho',
     };
@@ -1541,14 +1395,11 @@ export async function fetchStudioAndWorksFromAniList(
       ? {
           id: resolvedStudioId,
           name: resolvedStudioName,
-          malId: directMalStudioId,
-          malUrl: directMalStudioUrl,
           anilistUrl: anilistStudioUrl,
           siteUrl: finalActiveUrl,
           url: finalActiveUrl,
           anidbUrl: directAnidbUrl,
           works: 'primeiro trabalho',
-          logoUrl: resolvedLogoUrl,
         }
       : null,
     worksText: 'primeiro trabalho',
